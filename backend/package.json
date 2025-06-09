@@ -1,24 +1,56 @@
 {
-  "name": "backend",
+  "name": "lovenote",
   "version": "1.0.0",
+  "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon index.js",
+    "start": "nodemon src/server.js",
     "format:check": "prettier --check .",
-    "format:write": "prettier --write ."
+    "format:write": "prettier --write .",
+    "fresh:db": "npx sequelize-cli db:migrate:undo:all && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all"
   },
-  "author": "ngdtai2k2",
+  "keywords": [],
+  "author": "",
   "license": "ISC",
-  "description": "",
   "dependencies": {
-    "body-parser": "^2.2.0",
+    "axios": "^1.7.4",
+    "bcrypt": "^5.1.1",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.2",
+    "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
-    "dotenv": "^16.5.0",
-    "express": "^5.1.0",
-    "nodemon": "^3.1.10"
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "fs": "^0.0.1-security",
+    "i18next": "^23.12.2",
+    "i18next-fs-backend": "^2.3.2",
+    "i18next-http-middleware": "^3.6.0",
+    "jsonwebtoken": "^9.0.2",
+    "module-alias": "^2.2.3",
+    "multer": "^1.4.5-lts.1",
+    "mysql2": "^3.11.0",
+    "nodemon": "^3.1.4",
+    "path": "^0.12.7",
+    "process": "^0.11.10",
+    "sequelize": "^6.37.3",
+    "sequelize-cli": "^6.6.2",
+    "short-unique-id": "^5.2.0",
+    "uuid": "^10.0.0"
+  },
+  "_moduleAliases": {
+    "@root": ".",
+    "@config": "src/config",
+    "@controllers": "src/controllers",
+    "@models": "src/models",
+    "@routes": "src/routes",
+    "@middlewares": "src/middlewares",
+    "@helpers": "src/helpers",
+    "@utils": "src/utils",
+    "@services": "src/services"
   },
   "devDependencies": {
-    "prettier": "^3.5.3"
+    "cross-env": "^7.0.3",
+    "globals": "^15.8.0",
+    "prettier": "^3.3.3"
   }
 }
