@@ -5,6 +5,7 @@ const jwt = require('jsonwebtoken');
 
 const { User, RefreshToken } = require('@models');
 const authService = require('@services/auth');
+const jwtService = require('@services/jwt');
 
 const authController = {
   signUp: async (req, res) => {
@@ -85,9 +86,9 @@ const authController = {
               .json({ message: req.t('validate:invalid_refresh_token') });
           }
 
-          const accessToken = authController.generateAccessToken(decodedToken);
+          const accessToken = jwtService.generateAccessToken(decodedToken);
           const refreshToken =
-            authController.generateRefreshToken(decodedToken);
+            jwtService.generateRefreshToken(decodedToken);
 
           // update refresh token in database
           const newRefreshTokenData = await RefreshToken.update(
