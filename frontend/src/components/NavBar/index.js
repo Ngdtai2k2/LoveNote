@@ -45,7 +45,7 @@ export default function NavBar() {
 
   return (
     <Navbar
-      className="dark:bg-gray-900 bg-blue-900 border-none md:mt-2 mx-auto max-w-screen-xl p-2 
+      className="dark:bg-gray-900 bg-pink-300 border-none md:mt-2 mx-auto max-w-screen-xl p-2 
       rounded-none md:rounded-full lg:pl-6"
     >
       <div className="relative mx-auto flex items-center justify-between dark:text-gray-200">

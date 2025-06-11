@@ -72,7 +72,7 @@ export function ProfileMenu() {
         </Button>
       </MenuHandler>
 
-      <MenuList className="p-1 dark:bg-gray-900 bg-blue-800 dark:border-gray-700">
+      <MenuList className="p-1 dark:bg-gray-900 bg-pink-300 dark:border-gray-700">
         {isAuthenticated ? (
           profileMenu.map(({ label, icon }, key) => (
             <MenuItem
@@ -83,8 +83,8 @@ export function ProfileMenu() {
                   dispatch(signOut(axiosJWT, navigate));
                 }
               }}
-              className="flex items-center gap-2 rounded hover:bg-light-blue-900 
-            active:bg-light-blue-900 focus:bg-light-blue-900 dark:hover:bg-gray-700 
+              className="flex items-center gap-2 rounded hover:bg-pink-500 
+            active:bg-pink-500 focus:bg-pink-500 dark:hover:bg-gray-700 
             dark:active:bg-gray-700 dark:focus:bg-gray-700"
             >
               {createElement(icon, {
