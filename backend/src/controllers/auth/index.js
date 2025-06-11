@@ -3,7 +3,7 @@ require('dotenv').config();
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
-const { User, RefreshToken } = require('@models');
+const { User } = require('@models');
 const authService = require('@services/auth');
 const jwtService = require('@services/jwt');
 
@@ -55,68 +55,33 @@ const authController = {
           .json({ message: req.t('notfound:refresh_token') });
       }
 
-      const refreshTokenData = await RefreshToken.findOne({
-        where: { token: refreshToken },
-      });
-
-      if (!refreshTokenData) {
-        return res
-          .status(401)
-          .json({ message: req.t('validate:invalid_refresh_token') });
-      }
-
-      if (refreshTokenData.expiresAt < new Date()) {
-        return res
-          .status(401)
-          .json({ message: req.t('validate:refresh_token_expired') });
-      }
-
-      const user = await User.findByPk(refreshTokenData.user_id);
-      if (!user) {
-        return res.status(404).json({ message: req.t('notfound:user') });
-      }
-
       jwt.verify(
         refreshToken,
         process.env.JWT_REFRESH_KEY,
-        async (err, decodedToken) => {
+        (err, decodedToken) => {
           if (err) {
             return res
               .status(401)
               .json({ message: req.t('validate:invalid_refresh_token') });
           }
 
-          const accessToken = jwtService.generateAccessToken(decodedToken);
-          const refreshToken =
-            jwtService.generateRefreshToken(decodedToken);
+          const { id, role, device_id } = decodedToken;
 
-          // update refresh token in database
-          const newRefreshTokenData = await RefreshToken.update(
-            { token: refreshToken },
-            {
-              where: {
-                user_id: user.id,
-                device_id: refreshTokenData.device_id,
-              },
-            }
+          const accessToken = jwtService.generateAccessToken({ id, role });
+          const newRefreshToken = jwtService.generateRefreshToken(
+            { id, role },
+            device_id
           );
 
-          if (!newRefreshTokenData)
-            return res
-              .status(401)
-              .json({ message: req.t('notfound:refresh_token') });
-
-          // set new cookie to refresh token
-          res.cookie('rf', refreshToken, {
+          res.cookie('rf', newRefreshToken, {
             httpOnly: true,
             secure: true,
             path: '/',
             sameSite: 'strict',
-            maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+            maxAge: 7 * 24 * 60 * 60 * 1000,
           });
-          return res.json({
-            token: accessToken,
-          });
+
+          return res.json({ token: accessToken });
         }
       );
     } catch (error) {
@@ -127,36 +92,19 @@ const authController = {
   signOut: async (req, res) => {
     try {
       const refreshToken = req.cookies.rf;
-      const { deviceId } = req.body;
 
       if (!refreshToken) {
         return res
-          .status(401)
-          .json({ message: req.t('notfound:refresh_token') });
+          .status(200)
+          .json({ message: req.t('auth:sign_out_success') });
       }
 
-      const refreshTokenData = await RefreshToken.findOne({
-        where: { token: refreshToken, device_id: deviceId },
+      res.clearCookie('rf', {
+        httpOnly: true,
+        secure: true,
+        path: '/',
+        sameSite: 'strict',
       });
-
-      if (!refreshTokenData) {
-        return res
-          .status(401)
-          .json({ message: req.t('validate:invalid_refresh_token') });
-      }
-
-      await RefreshToken.destroy({ where: { token: refreshToken } });
-      res.clearCookie('rf');
-
-      await User.update(
-        {
-          last_sign_in_ip: req.ip_address,
-          sign_in_ip: null,
-        },
-        {
-          where: { id: refreshTokenData.user_id },
-        }
-      );
 
       return res.status(200).json({ message: req.t('auth:sign_out_success') });
     } catch (error) {

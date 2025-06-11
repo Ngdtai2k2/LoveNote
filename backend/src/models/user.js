@@ -5,12 +5,7 @@ const ShortUniqueId = require('short-unique-id');
 module.exports = (sequelize, DataTypes) => {
   const uid = new ShortUniqueId({ length: 10 });
   class User extends Model {
-    static associate(models) {
-      User.hasMany(models.RefreshToken, {
-        foreignKey: 'user_id',
-        as: 'refreshTokens',
-      });
-    }
+    static associate() {}
   }
   User.init(
     {

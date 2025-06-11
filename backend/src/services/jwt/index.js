@@ -9,9 +9,9 @@ const jwtService = {
     );
   },
 
-  generateRefreshToken: (user) => {
+  generateRefreshToken: (user, deviceId) => {
     return jwt.sign(
-      { id: user.id, role: user.role },
+      { id: user.id, role: user.role, device_id: deviceId },
       process.env.JWT_REFRESH_KEY,
       { expiresIn: '7d' }
     );

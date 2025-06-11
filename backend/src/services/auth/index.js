@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt');
 const { v4: uuidv4 } = require('uuid');
 
-const { User, RefreshToken } = require('@models');
+const { User } = require('@models');
 const jwtService = require('@services/jwt');
 
 const authService = {
@@ -39,17 +39,6 @@ const authService = {
     const accessToken = jwtService.generateAccessToken(user);
     const refreshToken = jwtService.generateRefreshToken(user);
     const deviceId = uuidv4();
-
-    const refreshTokenData = await RefreshToken.create({
-      user_id: user.id,
-      device_id: deviceId,
-      token: refreshToken,
-      expires_at: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
-    });
-
-    if (!refreshTokenData) {
-      throw { code: 500, messageKey: 'message:server_error' };
-    }
 
     return {
       user,
