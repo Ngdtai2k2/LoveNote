@@ -6,7 +6,7 @@ const AppRoutes = isAuthenticated => {
   return (
     <Routes>
       {publicRoute.map(({ path, element, hideWhenAuthenticated }, index) => {
-        if (isAuthenticated && hideWhenAuthenticated) {
+        if (!isAuthenticated && hideWhenAuthenticated) {
           return <Route key={index} path={path} element={<Navigate to="/" replace />} />;
         }
         return <Route key={index} path={path} element={element} />;
