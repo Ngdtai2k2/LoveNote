@@ -8,7 +8,9 @@ export default function LayoutUser({ children, className }) {
   return (
     <div className={`mt-2 px-2 dark:text-white ${className}`}>
       <div>{children}</div>
-      <div className="mt-5 text-center font-light text-[13px]">&#169; {currentYear} LoveNote</div>
+      <div className="mt-5 text-center font-light text-[13px] text-pink-500 dark:text-gray-300">
+        &#169; {currentYear} LoveNote
+      </div>
     </div>
   );
 }
