@@ -23,8 +23,8 @@ function NavList() {
           className="font-medium text-blue-gray-500"
         >
           <MenuItem
-            className="flex items-center gap-2 md:rounded-full hover:bg-light-blue-900 
-            active:bg-light-blue-900 focus:bg-light-blue-900 dark:hover:bg-gray-700 
+            className="flex items-center gap-2 md:rounded-full hover:bg-pink-500 
+            active:bg-pink-500 focus:bg-pink-500 dark:hover:bg-gray-700 
             dark:active:bg-gray-700 dark:focus:bg-gray-700"
           >
             <span className="text-white dark:text-gray-300"> {t(nav.label)}</span>
@@ -54,7 +54,7 @@ export default function NavBar() {
           href="/"
           className="mr-4 ml-2 cursor-pointer py-1.5 font-medium dark:text-gray-200"
         >
-          NoteLove
+          LoveNote
         </Typography>
         <div className="hidden md:block">
           <NavList />
