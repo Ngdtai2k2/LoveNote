@@ -53,7 +53,7 @@ export const signIn = (data, navigate) => async dispatch => {
       }
     );
     toast.success(response.data.message, {
-      position: 'bottom-right',
+      position: 'top-right',
     });
     dispatch(signInSuccess(response.data));
     navigate(ROUTES.HOME);
@@ -61,7 +61,7 @@ export const signIn = (data, navigate) => async dispatch => {
   } catch (error) {
     dispatch(signInError(error.response?.data));
     toast.error(error.response?.data.message, {
-      position: 'bottom-right',
+      position: 'top-right',
     });
   }
 };
@@ -77,14 +77,14 @@ export const signOut = (axiosJWT, navigate) => async dispatch => {
     });
     dispatch(signOutSuccess());
     toast.success(response.data.message, {
-      position: 'bottom-right',
+      position: 'top-right',
     });
     navigate(ROUTES.HOME);
     window.location.reload();
   } catch (error) {
     dispatch(signOutError());
     toast.error(error.response?.data.message, {
-      position: 'bottom-right',
+      position: 'top-right',
     });
   }
 };
