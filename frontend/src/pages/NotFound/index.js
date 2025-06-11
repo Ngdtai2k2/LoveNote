@@ -1,5 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import ROUTES from '@constants/routes';
 
 export default function NotFound() {
   const { t } = useTranslation('notfound');
@@ -13,7 +14,7 @@ export default function NotFound() {
         {t('page_not_found_title')}
       </p>
       <a
-        href="/"
+        href={ROUTES.HOME}
         className="px-6 py-2 bg-pink-300 hover:bg-pink-500 dark:bg-gray-600 text-white rounded dark:hover:bg-gray-900 transition"
       >
         {t('go_home')}
