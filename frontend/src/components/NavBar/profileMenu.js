@@ -37,8 +37,8 @@ export function ProfileMenu() {
   const renderMenuItem = (label, Icon, path) => (
     <MenuItem
       onClick={() => handleNavigate(path)}
-      className="flex items-center gap-2 rounded hover:bg-light-blue-900 
-        active:bg-light-blue-900 focus:bg-light-blue-900 dark:hover:bg-gray-700 
+      className="flex items-center gap-2 rounded hover:bg-pink-500 
+        active:bg-pink-500 focus:bg-pink-500 dark:hover:bg-gray-700 
         dark:active:bg-gray-700 dark:focus:bg-gray-700"
     >
       <Icon className="h-4 w-4 text-white dark:text-gray-300" />
