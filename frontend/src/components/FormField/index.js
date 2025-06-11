@@ -14,12 +14,17 @@ export default function FormField({
   required,
   value,
   onChange,
+  labelColor,
 }) {
   return (
     <div className="w-full">
       <div className="flex items-start">
-        <h6 className="text-bold text-[16px] leading-normal first-letter:uppercase">{label}</h6>
-        {required && <h6 className="text-[11px] leading-tight text-red-500">*</h6>}
+        <h6
+          className={`${labelColor} placeholder:text-bold text-[16px] leading-normal first-letter:uppercase`}
+        >
+          {label}
+        </h6>
+        {required && <h6 className="text-[15px] leading-tight text-red-500">*</h6>}
       </div>
       <Field
         as="input"
@@ -53,4 +58,5 @@ FormField.propTypes = {
   required: PropTypes.bool,
   value: PropTypes.any,
   onChange: PropTypes.func,
+  labelColor: PropTypes.string,
 };
