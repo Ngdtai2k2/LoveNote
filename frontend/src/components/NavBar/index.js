@@ -5,8 +5,9 @@ import { Navbar, Typography, MenuItem, IconButton, Collapse } from '@material-ta
 import { Bars2Icon } from '@heroicons/react/24/solid';
 
 import { navbar } from '@constants/navbar';
-import ToggleMode from '@components/ToggleMode';
+import CONSTANTS from '@constants';
 import ROUTES from '@constants/routes';
+import ToggleMode from '@components/ToggleMode';
 import { ProfileMenu } from './profileMenu';
 
 function NavList() {
@@ -55,7 +56,7 @@ export default function NavBar() {
           href={ROUTES.HOME}
           className="mr-4 ml-2 cursor-pointer py-1.5 font-medium dark:text-gray-200"
         >
-          LoveNote
+          {CONSTANTS.SITE_NAME}
         </Typography>
         <div className="hidden md:block">
           <NavList />

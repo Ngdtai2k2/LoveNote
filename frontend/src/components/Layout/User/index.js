@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import CONSTANTS from '@constants';
 
 export default function LayoutUser({ children, className }) {
   const today = new Date();
@@ -9,7 +10,7 @@ export default function LayoutUser({ children, className }) {
     <div className={`mt-2 px-2 dark:text-white ${className}`}>
       <div>{children}</div>
       <div className="mt-5 text-center font-light text-[13px] text-pink-500 dark:text-gray-300">
-        &#169; {currentYear} LoveNote
+        &#169; {currentYear} {CONSTANTS.SITE_NAME}
       </div>
     </div>
   );
