@@ -118,7 +118,7 @@ const authController = {
 
       const userData = await User.findOne({
         where: { id: user.id },
-        attributes: { exclude: ['password'] },
+        attributes: { exclude: ['password', 'role'] },
       });
 
       if (!userData) {
