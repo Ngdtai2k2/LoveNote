@@ -114,9 +114,9 @@ export default function SignUp() {
               <div className="flex justify-center">
                 <button
                   type="submit"
-                  className="w-full text-white py-2 rounded transition duration-200 bg-blue-700 hover:bg-light-blue-900 
-                        active:bg-light-blue-900 focus:bg-light-blue-900 dark:bg-gray-600 dark:hover:bg-gray-800 dark:active:bg-gray-800 
-                        dark:focus:bg-gray-800"
+                  className="w-full text-white py-2 rounded transition duration-200 bg-pink-300 hover:bg-pink-700 
+                active:bg-pink-700 focus:bg-pink-700 dark:bg-gray-600 dark:hover:bg-gray-800 dark:active:bg-gray-800 
+                dark:focus:bg-gray-800"
                 >
                   {t('auth.sign_up')}
                 </button>
