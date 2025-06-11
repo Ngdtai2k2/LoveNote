@@ -3,7 +3,6 @@ import { useDispatch } from 'react-redux';
 import { ToastContainer } from 'react-fox-toast';
 import { useTranslation } from 'react-i18next';
 
-import './App.css';
 import NavBar from '@components/NavBar';
 import LayoutUser from '@components/Layout/User';
 import AppRoutes from './routes';
