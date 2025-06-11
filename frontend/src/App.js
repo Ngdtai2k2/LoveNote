@@ -9,6 +9,7 @@ import LayoutUser from '@components/Layout/User';
 import AppRoutes from './routes';
 import { useAxios } from '@hooks/useAxiosJWT';
 import { getCurrentUser } from '@api/user';
+import { useCurrentUser } from '@hooks/useCurrentUser';
 
 function App() {
   const dispatch = useDispatch();
@@ -24,7 +25,7 @@ function App() {
     <LayoutUser>
       <ToastContainer />
       <NavBar />
-      <AppRoutes />
+      <AppRoutes isAuthenticated={useCurrentUser()} />
     </LayoutUser>
   );
 }

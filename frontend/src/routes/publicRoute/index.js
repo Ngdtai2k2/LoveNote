@@ -6,14 +6,17 @@ const publicRoute = [
   {
     path: '/sign-in',
     element: <SignIn />,
+    hideWhenAuthenticated: true,
   },
   {
     path: '/sign-up',
     element: <SignUp />,
+    hideWhenAuthenticated: true,
   },
   {
     path: '/',
     element: <Home />,
+    hideWhenAuthenticated: false,
   },
 ];
 
