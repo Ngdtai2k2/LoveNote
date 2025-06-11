@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { Navbar, Typography, MenuItem, IconButton, Collapse } from '@material-tailwind/react';
@@ -36,10 +36,10 @@ function NavList() {
 }
 
 export default function NavBar() {
-  const [isNavOpen, setIsNavOpen] = React.useState(false);
+  const [isNavOpen, setIsNavOpen] = useState(false);
   const toggleIsNavOpen = () => setIsNavOpen(cur => !cur);
 
-  React.useEffect(() => {
+  useEffect(() => {
     window.addEventListener('resize', () => window.innerWidth >= 960 && setIsNavOpen(false));
   }, []);
 
@@ -51,7 +51,7 @@ export default function NavBar() {
       <div className="relative mx-auto flex items-center justify-between dark:text-gray-200">
         <Typography
           as="a"
-          href="#"
+          href="/"
           className="mr-4 ml-2 cursor-pointer py-1.5 font-medium dark:text-gray-200"
         >
           NoteLove

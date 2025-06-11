@@ -1,4 +1,8 @@
 import React, { createElement, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+
 import {
   Typography,
   Button,
@@ -11,16 +15,38 @@ import {
 import { ChevronDownIcon, ArrowRightEndOnRectangleIcon, PlusIcon } from '@heroicons/react/24/solid';
 
 import { profileMenu } from '@constants/navbar';
-import { useTranslation } from 'react-i18next';
+import { useCurrentUser } from '@hooks/useCurrentUser';
+import { useAxios } from '@hooks/useAxiosJWT';
+import { signOut } from '@api/auth';
 
 export function ProfileMenu() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  //data for authentication status
-  const auth = true;
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { t, i18n } = useTranslation('navbar');
+  const { axiosJWT } = useAxios(i18n.language);
 
-  const { t } = useTranslation('navbar');
-  const closeMenu = () => setIsMenuOpen(false);
+  const isAuthenticated = useCurrentUser();
+
+  const handleNavigate = path => {
+    setIsMenuOpen(false);
+    navigate(path);
+  };
+
+  const renderMenuItem = (label, Icon, path) => (
+    <MenuItem
+      onClick={() => handleNavigate(path)}
+      className="flex items-center gap-2 rounded hover:bg-light-blue-900 
+        active:bg-light-blue-900 focus:bg-light-blue-900 dark:hover:bg-gray-700 
+        dark:active:bg-gray-700 dark:focus:bg-gray-700"
+    >
+      <Icon className="h-4 w-4 text-white dark:text-gray-300" />
+      <Typography as="span" variant="small" className="font-normal text-white dark:text-gray-300">
+        {t(label)}
+      </Typography>
+    </MenuItem>
+  );
 
   return (
     <Menu open={isMenuOpen} handler={setIsMenuOpen} placement="bottom-end">
@@ -33,54 +59,51 @@ export function ProfileMenu() {
           <Avatar
             variant="circular"
             size="sm"
-            alt="tania andrew"
+            alt="User Avatar"
             className="border border-gray-300 p-0.5"
-            src={{}}
+            src="" // TODO: add avatar URL
           />
           <ChevronDownIcon
             strokeWidth={2.5}
-            className={`h-3 w-3 text-white dark:text-gray-300 transition-transform ${isMenuOpen ? 'rotate-180' : ''}`}
+            className={`h-3 w-3 text-white dark:text-gray-300 transition-transform ${
+              isMenuOpen ? 'rotate-180' : ''
+            }`}
           />
         </Button>
       </MenuHandler>
+
       <MenuList className="p-1 dark:bg-gray-900 bg-blue-800 dark:border-gray-700">
-        {auth ? (
-          profileMenu.map(({ label, icon }, key) => {
-            return (
-              <MenuItem
-                key={key}
-                onClick={closeMenu}
-                className="flex items-center gap-2 rounded hover:bg-light-blue-900 
-              active:bg-light-blue-900 focus:bg-light-blue-900 dark:hover:bg-gray-700 dark:active:bg-gray-700 dark:focus:bg-gray-700"
+        {isAuthenticated ? (
+          profileMenu.map(({ label, icon }, key) => (
+            <MenuItem
+              key={key}
+              onClick={() => {
+                setIsMenuOpen(false);
+                if (key === profileMenu.length - 1) {
+                  dispatch(signOut(axiosJWT, navigate));
+                }
+              }}
+              className="flex items-center gap-2 rounded hover:bg-light-blue-900 
+            active:bg-light-blue-900 focus:bg-light-blue-900 dark:hover:bg-gray-700 
+            dark:active:bg-gray-700 dark:focus:bg-gray-700"
+            >
+              {createElement(icon, {
+                className: 'h-4 w-4 text-white dark:text-gray-300',
+                strokeWidth: 2,
+              })}
+              <Typography
+                as="span"
+                variant="small"
+                className="font-normal text-white dark:text-gray-300"
               >
-                {createElement(icon, {
-                  className: 'h-4 w-4 text-white dark:text-gray-300',
-                  strokeWidth: 2,
-                })}
-                <Typography
-                  as="span"
-                  variant="small"
-                  className="font-normal text-white dark:text-gray-300"
-                >
-                  {t(label)}
-                </Typography>
-              </MenuItem>
-            );
-          })
+                {t(label)}
+              </Typography>
+            </MenuItem>
+          ))
         ) : (
           <>
-            <MenuItem onClick={closeMenu} className="flex items-center gap-2 rounded">
-              <ArrowRightEndOnRectangleIcon className="h-4 w-4" />
-              <Typography as="span" variant="small" className="font-normal" color="inherit">
-                {t('login')}
-              </Typography>
-            </MenuItem>
-            <MenuItem onClick={closeMenu} className="flex items-center gap-2 rounded">
-              <PlusIcon className="h-4 w-4" />
-              <Typography as="span" variant="small" className="font-normal" color="inherit">
-                {t('register')}
-              </Typography>
-            </MenuItem>
+            {renderMenuItem('login', ArrowRightEndOnRectangleIcon, '/sign-in')}
+            {renderMenuItem('register', PlusIcon, '/sign-up')}
           </>
         )}
       </MenuList>

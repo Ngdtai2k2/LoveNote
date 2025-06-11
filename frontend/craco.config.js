@@ -8,6 +8,10 @@ module.exports = {
       '@i18n': path.resolve(__dirname, './src/i18n'),
       '@locales': path.resolve(__dirname, './src/locales'),
       '@constants': path.resolve(__dirname, './src/constants'),
+      '@pages': path.resolve(__dirname, './src/pages'),
+      '@redux': path.resolve(__dirname, './src/redux'),
+      '@hooks': path.resolve(__dirname, './src/hooks'),
+      '@api': path.resolve(__dirname, './src/api'),
     },
   },
 };
