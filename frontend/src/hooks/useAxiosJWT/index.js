@@ -78,7 +78,7 @@ export const createAxios = (lng, auth, dispatch, stateSuccess) => {
 
 export const useAxios = (lng, stateSuccess) => {
   const dispatch = useDispatch();
-  const auth = useSelector(state => state.auth.user);
+  const auth = useSelector(state => state.auth);
 
   const axiosJWT = useMemo(() => {
     if (auth) {

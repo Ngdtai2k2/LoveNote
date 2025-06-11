@@ -4,7 +4,8 @@ const auth = createSlice({
   name: 'auth',
   initialState: {
     isFetching: false,
-    user: null,
+    token: null,
+    device_id: null,
     error: false,
   },
   reducers: {
@@ -13,7 +14,8 @@ const auth = createSlice({
     },
     signInSuccess(state, action) {
       state.isFetching = false;
-      state.user = action.payload;
+      state.token = action.payload.token;
+      state.device_id = action.payload.device_id;
     },
     signInError(state) {
       state.isFetching = false;
@@ -24,7 +26,8 @@ const auth = createSlice({
     },
     signOutSuccess(state) {
       state.isFetching = false;
-      state.user = null;
+      state.token = null;
+      state.device_id = null;
       state.error = false;
     },
     signOutError(state) {
