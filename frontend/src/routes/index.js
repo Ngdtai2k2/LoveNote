@@ -5,19 +5,25 @@ import NotFound from '@pages/NotFound';
 import publicRoute from './publicRoute';
 import protectedRoutes from './protectedRoute';
 import ProtectedRoute from './protectedRoute/protectedRoute';
-import ROUTES from '@constants/routes';
-import CONSTANTS from '@constants';
 
 import LayoutUser from '@components/Layout/User';
 import LayoutAdmin from '@components/Layout/Admin';
+import ROUTES from '@constants/routes';
+import CONSTANTS from '@constants';
 
 const AppRoutes = () => {
   const token = useSelector(state => state.auth?.token);
   const isAuthenticated = !!token;
 
+  const adminRoutes = protectedRoutes.filter(route =>
+    route.path.startsWith(CONSTANTS.ADMIN_PREFIX)
+  );
+  const userRoutes = protectedRoutes.filter(
+    route => !route.path.startsWith(CONSTANTS.ADMIN_PREFIX)
+  );
+
   return (
     <Routes>
-      {/* Public routes */}
       {publicRoute.map(({ path, element, hideWhenAuthenticated }, index) => {
         if (isAuthenticated && hideWhenAuthenticated) {
           return <Route key={index} path={path} element={<Navigate to={ROUTES.HOME} replace />} />;
@@ -25,23 +31,49 @@ const AppRoutes = () => {
         return <Route key={index} path={path} element={<LayoutUser>{element}</LayoutUser>} />;
       })}
 
-      {/* Private routes */}
-      {protectedRoutes.map(({ path, element, requiredRole }, index) => {
-        const Layout = requiredRole === CONSTANTS.ADMIN ? LayoutAdmin : LayoutUser;
+      {adminRoutes.map(({ path, element, requiredRole }, index) => (
+        <Route
+          key={index}
+          path={path}
+          element={
+            <ProtectedRoute
+              requiredRole={requiredRole}
+              element={<LayoutAdmin>{element}</LayoutAdmin>}
+            />
+          }
+        />
+      ))}
 
-        return (
-          <Route
-            key={index}
-            path={path}
-            element={
-              <ProtectedRoute requiredRole={requiredRole} element={<Layout>{element}</Layout>} />
-            }
-          />
-        );
-      })}
+      <Route
+        path={`${CONSTANTS.ADMIN_PREFIX}/*`}
+        element={
+          <LayoutAdmin>
+            <NotFound isAdmin={true} />
+          </LayoutAdmin>
+        }
+      />
 
-      <Route path="*" element={<NotFound />} />
-      <Route path={ROUTES.NOT_FOUND} element={<NotFound />} />
+      {userRoutes.map(({ path, element, requiredRole }, index) => (
+        <Route
+          key={index}
+          path={path}
+          element={
+            <ProtectedRoute
+              requiredRole={requiredRole}
+              element={<LayoutUser>{element}</LayoutUser>}
+            />
+          }
+        />
+      ))}
+
+      <Route
+        path={`${CONSTANTS.ADMIN_PREFIX}/*`}
+        element={
+          <LayoutUser>
+            <NotFound />
+          </LayoutUser>
+        }
+      />
     </Routes>
   );
 };

@@ -14,7 +14,7 @@ import {
 } from '@material-tailwind/react';
 import { ChevronDownIcon, ArrowRightEndOnRectangleIcon, PlusIcon } from '@heroicons/react/24/solid';
 
-import { profileMenu } from '@constants/navbar';
+import { profileMenu } from '@constants/navigation';
 import { useCurrentUser } from '@hooks/useCurrentUser';
 import { useAxios } from '@hooks/useAxiosJWT';
 import { signOut } from '@api/auth';

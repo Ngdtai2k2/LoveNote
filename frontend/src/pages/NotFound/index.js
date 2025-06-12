@@ -1,8 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+
 import ROUTES from '@constants/routes';
 
-export default function NotFound() {
+export default function NotFound({ isAdmin = false }) {
   const { t } = useTranslation('notfound');
   return (
     <div className="flex flex-col items-center justify-center mt-10 pt-10 dark:bg-gray-800">
@@ -13,12 +16,16 @@ export default function NotFound() {
       <p className="text-center text-pink-600 dark:text-gray-200 mb-6">
         {t('page_not_found_title')}
       </p>
-      <a
-        href={ROUTES.HOME}
+      <Link
+        to={isAdmin ? ROUTES.ADMIN.DASHBOARD : ROUTES.HOME}
         className="px-6 py-2 bg-pink-300 hover:bg-pink-500 dark:bg-gray-600 text-white rounded dark:hover:bg-gray-900 transition"
       >
         {t('go_home')}
-      </a>
+      </Link>
     </div>
   );
 }
+
+NotFound.propTypes = {
+  isAdmin: PropTypes.bool,
+};

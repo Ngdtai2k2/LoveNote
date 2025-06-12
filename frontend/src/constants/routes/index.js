@@ -5,6 +5,7 @@ const ROUTES = {
   },
   ADMIN: {
     DASHBOARD: '/admin/dashboard',
+    USERS: '/admin/users',
   },
   HOME: '/',
   NOT_FOUND: '/404',
