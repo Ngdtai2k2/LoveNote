@@ -37,12 +37,16 @@ export function ProfileMenu() {
   const renderMenuItem = (label, Icon, path) => (
     <MenuItem
       onClick={() => handleNavigate(path)}
-      className="flex items-center gap-2 rounded hover:bg-pink-500 
-        active:bg-pink-500 focus:bg-pink-500 dark:hover:bg-gray-700 
-        dark:active:bg-gray-700 dark:focus:bg-gray-700"
+      className="flex items-center gap-2 rounded hover:bg-gray-300 
+            active:bg-gray-300 focus:bg-gray-300 dark:hover:bg-gray-700 
+            dark:active:bg-gray-700 dark:focus:bg-gray-700"
     >
-      <Icon className="h-4 w-4 text-white dark:text-gray-300" />
-      <Typography as="span" variant="small" className="font-normal text-white dark:text-gray-300">
+      <Icon className="h-4 w-4 text-gray-900 dark:text-gray-200" />
+      <Typography
+        as="span"
+        variant="small"
+        className="font-normal text-gray-900 dark:text-gray-200"
+      >
         {t(label)}
       </Typography>
     </MenuItem>
@@ -65,14 +69,14 @@ export function ProfileMenu() {
           />
           <ChevronDownIcon
             strokeWidth={2.5}
-            className={`h-3 w-3 text-white dark:text-gray-300 transition-transform ${
+            className={`h-3 w-3 text-white dark:text-gray-200 transition-transform ${
               isMenuOpen ? 'rotate-180' : ''
             }`}
           />
         </Button>
       </MenuHandler>
 
-      <MenuList className="p-1 dark:bg-gray-900 bg-pink-300 dark:border-gray-700">
+      <MenuList className="p-1 dark:bg-gray-900 bg-white dark:border-gray-700">
         {isAuthenticated ? (
           profileMenu.map(({ label, icon }, key) => (
             <MenuItem
@@ -83,18 +87,18 @@ export function ProfileMenu() {
                   dispatch(signOut(axiosJWT, navigate));
                 }
               }}
-              className="flex items-center gap-2 rounded hover:bg-pink-500 
-            active:bg-pink-500 focus:bg-pink-500 dark:hover:bg-gray-700 
+              className="flex items-center gap-2 rounded hover:bg-gray-300 
+            active:bg-gray-300 focus:bg-gray-300 dark:hover:bg-gray-700 
             dark:active:bg-gray-700 dark:focus:bg-gray-700"
             >
               {createElement(icon, {
-                className: 'h-4 w-4 text-white dark:text-gray-300',
+                className: 'h-4 w-4 text-gray-800 dark:text-gray-200',
                 strokeWidth: 2,
               })}
               <Typography
                 as="span"
                 variant="small"
-                className="font-normal text-white dark:text-gray-300"
+                className="font-normal text-gray-800 dark:text-gray-200"
               >
                 {t(label)}
               </Typography>
