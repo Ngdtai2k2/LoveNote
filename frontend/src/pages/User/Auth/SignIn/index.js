@@ -31,7 +31,7 @@ export default function SignIn() {
   return (
     <div className="flex mt-10 pt-5 justify-center items-center">
       <div className="dark:bg-gray-900 bg-white p-8 rounded-lg shadow-md w-96">
-        <h2 className="text-2xl font-bold mb-6 text-center text-pink-400 dark:text-gray-200">
+        <h2 className="text-2xl font-bold mb-6 text-center text-gray-800 dark:text-gray-200">
           {t('auth.sign_in')}
         </h2>
         <Formik
@@ -52,7 +52,7 @@ export default function SignIn() {
                   required
                   value={values.email}
                   onChange={handleChange}
-                  labelColor="text-pink-400 dark:text-gray-200"
+                  labelColor="text-gray-800 dark:text-gray-200"
                   className="focus:outline-none rounded px-2 py-2 dark:bg-white/10 bg-black/10 text-[16px] w-full"
                 />
               </div>
@@ -68,18 +68,18 @@ export default function SignIn() {
                   required
                   value={values.password}
                   onChange={handleChange}
-                  labelColor="text-pink-400 dark:text-gray-200"
+                  labelColor="text-gray-800 dark:text-gray-200"
                   className="focus:outline-none rounded px-2 py-2 dark:bg-white/10 bg-black/10 text-[16px] w-full"
                 />
               </div>
 
               <div className="mb-5 px-1 flex justify-between">
-                <h6 className="text-[12px] text-pink-500 dark:text-gray-200 italic cursor-pointer underline hover:no-underline">
+                <h6 className="text-[12px] text-gray-800 dark:text-gray-200 italic cursor-pointer underline hover:no-underline">
                   {t('auth.forgot_password')}
                 </h6>
                 <h6
                   onClick={() => navigate(ROUTES.AUTH.SIGN_UP)}
-                  className="text-[12px] text-pink-500 dark:text-gray-200 italic cursor-pointer underline hover:no-underline"
+                  className="text-[12px] text-gray-800 dark:text-gray-200 italic cursor-pointer underline hover:no-underline"
                 >
                   {t('auth.sign_up_now')}
                 </h6>
@@ -88,8 +88,8 @@ export default function SignIn() {
               <div className="flex justify-center">
                 <button
                   type="submit"
-                  className="w-full text-white py-2 rounded transition duration-200 bg-pink-300 hover:bg-pink-700 
-                active:bg-pink-700 focus:bg-pink-700 dark:bg-gray-600 dark:hover:bg-gray-800 dark:active:bg-gray-800 
+                  className="w-full text-white py-2 rounded transition duration-200 bg-gray-600 hover:bg-gray-800 
+                active:bg-gray-800 focus:bg-gray-800 dark:bg-gray-600 dark:hover:bg-gray-800 dark:active:bg-gray-800 
                 dark:focus:bg-gray-800"
                 >
                   {t('auth.sign_in')}
