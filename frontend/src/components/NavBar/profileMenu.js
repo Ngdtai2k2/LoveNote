@@ -57,7 +57,7 @@ export function ProfileMenu() {
       <MenuHandler>
         <Button
           variant="text"
-          color="blue-gray"
+          color="gray"
           className="flex items-center gap-1 rounded-full py-0.5 pr-2 pl-0.5 md:ml-auto"
         >
           <Avatar
@@ -69,7 +69,7 @@ export function ProfileMenu() {
           />
           <ChevronDownIcon
             strokeWidth={2.5}
-            className={`h-3 w-3 text-white dark:text-gray-200 transition-transform ${
+            className={`h-3 w-3 text-gray-700 dark:text-gray-200 transition-transform ${
               isMenuOpen ? 'rotate-180' : ''
             }`}
           />
