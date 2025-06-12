@@ -3,12 +3,9 @@ import { useDispatch } from 'react-redux';
 import { ToastContainer } from 'react-fox-toast';
 import { useTranslation } from 'react-i18next';
 
-import NavBar from '@components/NavBar';
-import LayoutUser from '@components/Layout/User';
 import AppRoutes from './routes';
 import { useAxios } from '@hooks/useAxiosJWT';
 import { getCurrentUser } from '@api/user';
-import { useCurrentUser } from '@hooks/useCurrentUser';
 
 function App() {
   const dispatch = useDispatch();
@@ -21,11 +18,10 @@ function App() {
   }, []);
 
   return (
-    <LayoutUser>
+    <>
       <ToastContainer />
-      <NavBar />
-      <AppRoutes isAuthenticated={useCurrentUser()} />
-    </LayoutUser>
+      <AppRoutes />
+    </>
   );
 }
 
