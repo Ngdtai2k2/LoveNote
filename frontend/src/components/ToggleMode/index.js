@@ -15,9 +15,9 @@ export default function ToggleMode() {
         onChange={toggleMode}
       />
       <div
-        className={`group peer ring-0 bg-gray-50 dark:bg-gray-500 border-none border-pink-200 rounded-full 
+        className={`group peer ring-0 bg-gray-300 dark:bg-gray-500 border-gray-800 rounded-full 
         outline-none duration-700 after:duration-200 w-14 h-7 shadow-sm peer-checked:bg-gradient-to-r 
-        peer-focus:outline-none after:content-[''] after:rounded-full after:absolute after:bg-pink-200 
+        peer-focus:outline-none after:content-[''] after:rounded-full after:absolute after:bg-gray-800 
         dark:after:bg-gray-900 after:outline-none after:h-5 after:w-5 after:top-1 after:left-1 
         peer-checked:after:translate-x-7 peer-hover:after:scale-95 relative`}
       >
