@@ -10,14 +10,17 @@ import {
   Collapse,
   Drawer,
 } from '@material-tailwind/react';
+import { Link } from 'react-router-dom';
 import { Bars2Icon, Bars3Icon, XMarkIcon } from '@heroicons/react/24/solid';
 
 import { navbar, tabbar } from '@constants/navigation';
 import CONSTANTS from '@constants';
 import ROUTES from '@constants/routes';
+import { LANG_LIST } from '@constants/lang';
+
 import ToggleMode from '@components/ToggleMode';
+import ChangeLang from '@components/ChangeLang';
 import { ProfileMenu } from './profileMenu';
-import { Link } from 'react-router-dom';
 
 function NavList() {
   const { t } = useTranslation('navbar');
@@ -124,8 +127,9 @@ export default function NavBar({ isAdmin }) {
             </>
           )}
 
-          <div className="flex gap-2">
+          <div className="flex gap-2 items-center">
             <ToggleMode />
+            <ChangeLang langList={LANG_LIST} />
             <ProfileMenu />
           </div>
         </div>
