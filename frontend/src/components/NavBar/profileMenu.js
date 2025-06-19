@@ -60,7 +60,7 @@ export function ProfileMenu() {
         <Button
           variant="text"
           color="gray"
-          className="flex items-center gap-1 rounded-full py-0.5 pr-2 pl-0.5 md:ml-auto"
+          className="flex border-none items-center gap-1 rounded-full py-0.5 pr-2 pl-0.5 md:ml-auto"
         >
           <Avatar
             variant="circular"

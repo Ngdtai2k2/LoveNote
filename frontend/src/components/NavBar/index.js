@@ -105,7 +105,7 @@ export default function NavBar({ isAdmin }) {
             <Typography
               as="a"
               href={ROUTES.HOME}
-              className="mr-4 ml-2 cursor-pointer py-1.5 font-medium text-black dark:text-gray-200"
+              className="mr-4 ml-2 cursor-pointer py-1.5 font-medium text-black dark:text-gray-200 border-none"
             >
               {CONSTANTS.SITE_NAME}
             </Typography>
