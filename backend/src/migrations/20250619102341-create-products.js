@@ -13,6 +13,11 @@ module.exports = {
       slug: { type: Sequelize.STRING, allowNull: false, unique: true },
       description: { type: Sequelize.TEXT },
       price: { type: Sequelize.DECIMAL(10, 2), allowNull: false },
+      discount: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        defaultValue: 0,
+      },
       thumbnail_url: { type: Sequelize.STRING },
       demo_video_url: { type: Sequelize.STRING },
       rating: {
