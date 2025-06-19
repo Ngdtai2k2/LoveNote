@@ -12,6 +12,8 @@ module.exports = {
       '@redux': path.resolve(__dirname, './src/redux'),
       '@hooks': path.resolve(__dirname, './src/hooks'),
       '@api': path.resolve(__dirname, './src/api'),
+      '@helpers': path.resolve(__dirname, './src/helpers'),
+      '@routes': path.resolve(__dirname, './src/routes'),
     },
   },
 };

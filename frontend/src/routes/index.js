@@ -4,12 +4,12 @@ import { useSelector } from 'react-redux';
 import NotFound from '@pages/NotFound';
 import publicRoute from './publicRoute';
 import protectedRoutes from './protectedRoute';
-import ProtectedRoute from './protectedRoute/protectedRoute';
 
 import LayoutUser from '@components/Layout/User';
 import LayoutAdmin from '@components/Layout/Admin';
 import ROUTES from '@constants/routes';
 import CONSTANTS from '@constants';
+import { renderRoutes } from '@helpers/renderRoutes';
 
 const AppRoutes = () => {
   const token = useSelector(state => state.auth?.token);
@@ -24,50 +24,36 @@ const AppRoutes = () => {
 
   return (
     <Routes>
-      {publicRoute.map(({ path, element, hideWhenAuthenticated }, index) => {
-        if (isAuthenticated && hideWhenAuthenticated) {
-          return <Route key={index} path={path} element={<Navigate to={ROUTES.HOME} replace />} />;
-        }
-        return <Route key={index} path={path} element={<LayoutUser>{element}</LayoutUser>} />;
-      })}
-
-      {adminRoutes.map(({ path, element, requiredRole }, index) => (
+      {publicRoute.map(({ path, element, hideWhenAuthenticated }, index) => (
         <Route
           key={index}
           path={path}
           element={
-            <ProtectedRoute
-              requiredRole={requiredRole}
-              element={<LayoutAdmin>{element}</LayoutAdmin>}
-            />
+            isAuthenticated && hideWhenAuthenticated ? (
+              <Navigate to={ROUTES.HOME} replace />
+            ) : (
+              <LayoutUser>{element}</LayoutUser>
+            )
           }
         />
       ))}
 
+      {renderRoutes(adminRoutes, LayoutAdmin)}
+      {renderRoutes(userRoutes, LayoutUser)}
+
+      {/* Admin NotFound */}
       <Route
         path={`${CONSTANTS.ADMIN_PREFIX}/*`}
         element={
           <LayoutAdmin>
-            <NotFound isAdmin={true} />
+            <NotFound isAdmin />
           </LayoutAdmin>
         }
       />
 
-      {userRoutes.map(({ path, element, requiredRole }, index) => (
-        <Route
-          key={index}
-          path={path}
-          element={
-            <ProtectedRoute
-              requiredRole={requiredRole}
-              element={<LayoutUser>{element}</LayoutUser>}
-            />
-          }
-        />
-      ))}
-
+      {/* General NotFound */}
       <Route
-        path={`${CONSTANTS.ADMIN_PREFIX}/*`}
+        path="*"
         element={
           <LayoutUser>
             <NotFound />
