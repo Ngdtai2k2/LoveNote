@@ -130,21 +130,19 @@ export default function NavBar({ isAdmin }) {
           )}
 
           {/* Admin or Mobile Logo */}
-          <div className="md:hidden">
-            {isAdmin ? (
-              <IconButton className="bg-gray-100 dark:bg-gray-700" onClick={openTabBar}>
-                <Bars3Icon className="size-6 text-black dark:text-gray-200" />
-              </IconButton>
-            ) : (
-              <Typography
-                as="a"
-                href={ROUTES.HOME}
-                className="block mr-4 ml-2 cursor-pointer py-1.5 font-medium text-black dark:text-gray-200 border-none"
-              >
-                {CONSTANTS.SITE_NAME}
-              </Typography>
-            )}
-          </div>
+          {isAdmin ? (
+            <IconButton className="bg-gray-100 dark:bg-gray-700" onClick={openTabBar}>
+              <Bars3Icon className="size-6 text-black dark:text-gray-200" />
+            </IconButton>
+          ) : (
+            <Typography
+              as="a"
+              href={ROUTES.HOME}
+              className="md:hidden block mr-4 ml-2 cursor-pointer py-1.5 font-medium text-black dark:text-gray-200 border-none"
+            >
+              {CONSTANTS.SITE_NAME}
+            </Typography>
+          )}
 
           {/* Right section */}
           <div className="flex gap-2 items-center">
