@@ -18,6 +18,8 @@ import { profileMenu } from '@constants/navigation';
 import { useCurrentUser } from '@hooks/useCurrentUser';
 import { useAxios } from '@hooks/useAxiosJWT';
 import { signOut } from '@api/auth';
+import ROUTES from '@constants/routes';
+import CONSTANTS from '@constants';
 
 export function ProfileMenu() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -27,7 +29,7 @@ export function ProfileMenu() {
   const { t, i18n } = useTranslation('navbar');
   const { axiosJWT } = useAxios(i18n.language);
 
-  const isAuthenticated = useCurrentUser();
+  const user = useCurrentUser();
 
   const handleNavigate = path => {
     setIsMenuOpen(false);
@@ -65,7 +67,7 @@ export function ProfileMenu() {
             size="sm"
             alt="User Avatar"
             className="border border-gray-300 p-0.5"
-            src="" // TODO: add avatar URL
+            src={user?.avatar ? user.avatar : CONSTANTS.DEFAULT_AVATAR}
           />
           <ChevronDownIcon
             strokeWidth={2.5}
@@ -77,7 +79,7 @@ export function ProfileMenu() {
       </MenuHandler>
 
       <MenuList className="p-1 dark:bg-gray-900 bg-white dark:border-gray-700">
-        {isAuthenticated ? (
+        {user ? (
           profileMenu.map(({ label, icon }, key) => (
             <MenuItem
               key={key}
@@ -106,8 +108,8 @@ export function ProfileMenu() {
           ))
         ) : (
           <>
-            {renderMenuItem('login', ArrowRightEndOnRectangleIcon, '/sign-in')}
-            {renderMenuItem('register', PlusIcon, '/sign-up')}
+            {renderMenuItem('login', ArrowRightEndOnRectangleIcon, ROUTES.AUTH.SIGN_IN)}
+            {renderMenuItem('register', PlusIcon, ROUTES.AUTH.SIGN_UP)}
           </>
         )}
       </MenuList>
