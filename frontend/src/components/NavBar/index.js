@@ -14,9 +14,9 @@ import { Link } from 'react-router-dom';
 import { Bars2Icon, Bars3Icon, XMarkIcon } from '@heroicons/react/24/solid';
 
 import { navbar, tabbar } from '@constants/navigation';
-import CONSTANTS from '@constants';
 import ROUTES from '@constants/routes';
 import { LANG_LIST } from '@constants/lang';
+import CONSTANTS from '@constants';
 
 import ToggleMode from '@components/ToggleMode';
 import ChangeLang from '@components/ChangeLang';
@@ -46,6 +46,7 @@ function NavList() {
 
 function TabBar({ openTabBar, closeTabBar }) {
   const { t } = useTranslation('tabbar');
+
   return (
     <Drawer open={openTabBar} onClose={closeTabBar} className="p-4 dark:bg-gray-700">
       <div className="mb-6 flex items-center justify-between">
@@ -97,11 +98,26 @@ export default function NavBar({ isAdmin }) {
     rounded-none md:rounded-full lg:pl-6"
       >
         <div className="relative mx-auto flex items-center justify-between dark:text-gray-200">
+          {/* Logo */}
+          {!isAdmin && (
+            <Typography
+              as="a"
+              href={ROUTES.HOME}
+              className="mr-4 ml-2 cursor-pointer py-1.5 font-medium text-black dark:text-gray-200 border-none 
+            hidden md:block"
+            >
+              {CONSTANTS.SITE_NAME}
+            </Typography>
+          )}
+
+          {/* User Nav */}
           {!isAdmin && (
             <>
               <div className="hidden md:block">
                 <NavList />
               </div>
+
+              {/* Mobile menu toggle */}
               <IconButton
                 size="sm"
                 variant="text"
@@ -113,20 +129,24 @@ export default function NavBar({ isAdmin }) {
             </>
           )}
 
-          {isAdmin ? (
-            <IconButton className="bg-gray-100 dark:bg-gray-700" onClick={openTabBar}>
-              <Bars3Icon className="size-6 text-black dark:text-gray-200" />
-            </IconButton>
-          ) : (
-            <Typography
-              as="a"
-              href={ROUTES.HOME}
-              className="mr-4 ml-2 cursor-pointer py-1.5 font-medium text-black dark:text-gray-200 border-none"
-            >
-              {CONSTANTS.SITE_NAME}
-            </Typography>
-          )}
+          {/* Admin or Mobile Logo */}
+          <div className="md:hidden">
+            {isAdmin ? (
+              <IconButton className="bg-gray-100 dark:bg-gray-700" onClick={openTabBar}>
+                <Bars3Icon className="size-6 text-black dark:text-gray-200" />
+              </IconButton>
+            ) : (
+              <Typography
+                as="a"
+                href={ROUTES.HOME}
+                className="block mr-4 ml-2 cursor-pointer py-1.5 font-medium text-black dark:text-gray-200 border-none"
+              >
+                {CONSTANTS.SITE_NAME}
+              </Typography>
+            )}
+          </div>
 
+          {/* Right section */}
           <div className="flex gap-2 items-center">
             <ToggleMode />
             <ChangeLang langList={LANG_LIST} />
@@ -134,6 +154,7 @@ export default function NavBar({ isAdmin }) {
           </div>
         </div>
 
+        {/* Collapse NavList (Mobile) */}
         {!isAdmin && (
           <Collapse open={isNavOpen} className="overflow-scroll">
             <NavList />
