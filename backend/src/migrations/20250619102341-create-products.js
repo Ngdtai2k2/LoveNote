@@ -15,6 +15,11 @@ module.exports = {
       price: { type: Sequelize.DECIMAL(10, 2), allowNull: false },
       thumbnail_url: { type: Sequelize.STRING },
       demo_video_url: { type: Sequelize.STRING },
+      rating: {
+        type: Sequelize.DECIMAL(2, 1),
+        allowNull: false,
+        defaultValue: 0.0,
+      },
       created_at: {
         type: Sequelize.DATE,
         allowNull: false,

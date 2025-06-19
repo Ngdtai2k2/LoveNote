@@ -16,6 +16,15 @@ module.exports = (sequelize, DataTypes) => {
       price: { type: DataTypes.DECIMAL(10, 2), allowNull: false },
       thumbnail_url: { type: DataTypes.STRING },
       demo_video_url: { type: DataTypes.STRING },
+      rating: {
+        type: DataTypes.DECIMAL(2, 1),
+        allowNull: false,
+        defaultValue: 0.0,
+        validate: {
+          min: 0,
+          max: 5,
+        },
+      },
       created_at: {
         type: DataTypes.DATE,
         allowNull: false,
