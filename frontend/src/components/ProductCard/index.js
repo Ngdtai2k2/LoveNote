@@ -25,7 +25,7 @@ export function ProductCard({
   return (
     <Card className="w-full max-w-[20rem] shadow-lg dark:bg-gray-900 bg-white">
       <CardHeader floated={false} color="blue-gray">
-        <img src={image} alt={title} />
+        <img src={image} alt={title} className="w-full h-60 object-cover object-center" />
         <div className="to-bg-black-10 absolute inset-0 h-full w-full bg-gradient-to-tr from-transparent via-transparent to-black/60" />
         <IconButton
           size="sm"
