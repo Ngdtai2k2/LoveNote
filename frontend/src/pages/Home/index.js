@@ -1,15 +1,35 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Typography } from '@material-tailwind/react';
 
 import { BannerSlider } from '@components/BannerSlider';
 import { ProductCard } from '@components/ProductCard';
 import { useDocumentTitle } from '@hooks/useDocumentTitle';
+import { getAll } from '@api/product';
+import CONSTANTS from '@constants';
 
 export default function Home() {
-  const { t } = useTranslation(['product', 'navbar']);
+  const { t } = useTranslation(['product', 'navbar', 'notfound']);
 
   useDocumentTitle(t('navbar:home'));
+
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const res = await getAll(CONSTANTS.PAGE, CONSTANTS.LIMIT);
+        setProducts(res.data);
+      } catch (error) {
+        setProducts([]);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProducts();
+  }, []);
 
   // data test
   const imageList = [
@@ -37,14 +57,22 @@ export default function Home() {
           {t('product:products')}
         </Typography>
         <div className="flex flex-wrap gap-2 justify-center">
-          {/* data test */}
-          <ProductCard
-            image="https://images.unsplash.com/photo-1499696010180-025ef6e1a8f9?auto=format&fit=crop&w=1470&q=80"
-            title="Wooden House, Florida"
-            description="Enter a freshly updated and thoughtfully furnished peaceful home surrounded by ancient trees, stone walls, and open meadows."
-            rating={5.0}
-            isFavorite={true}
-          />
+          {loading ? (
+            <div className="w-8 h-8 border-4 border-t-gray-800 border-gray-300 rounded-full animate-spin"></div>
+          ) : products?.length > 0 ? (
+            products.map(product => (
+              <ProductCard
+                key={product.id}
+                image={product.thumbnail_url}
+                title={product.name}
+                description={product.description}
+                rating={product.rating}
+                // isFavorite={}
+              />
+            ))
+          ) : (
+            <p className="text-gray-500">{t('notfound:product')}</p>
+          )}
         </div>
       </div>
     </div>

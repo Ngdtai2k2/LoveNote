@@ -8,6 +8,9 @@ const API_ENDPOINTS = {
     REFRESH_TOKEN: `${BASE_URL}/auth/refresh-token`,
     ME: `${BASE_URL}/auth/me`,
   },
+  PRODUCT: {
+    GET_ALL: `${BASE_URL}/product/all`,
+  },
 };
 
 export default API_ENDPOINTS;
