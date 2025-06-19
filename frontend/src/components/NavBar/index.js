@@ -97,6 +97,22 @@ export default function NavBar({ isAdmin }) {
     rounded-none md:rounded-full lg:pl-6"
       >
         <div className="relative mx-auto flex items-center justify-between dark:text-gray-200">
+          {!isAdmin && (
+            <>
+              <div className="hidden md:block">
+                <NavList />
+              </div>
+              <IconButton
+                size="sm"
+                variant="text"
+                onClick={toggleIsNavOpen}
+                className="mr-2 text-gray-900 dark:text-gray-200 md:hidden"
+              >
+                <Bars2Icon className="h-6 w-6" />
+              </IconButton>
+            </>
+          )}
+
           {isAdmin ? (
             <IconButton className="bg-gray-100 dark:bg-gray-700" onClick={openTabBar}>
               <Bars3Icon className="size-6 text-black dark:text-gray-200" />
@@ -109,22 +125,6 @@ export default function NavBar({ isAdmin }) {
             >
               {CONSTANTS.SITE_NAME}
             </Typography>
-          )}
-
-          {!isAdmin && (
-            <>
-              <div className="hidden md:block">
-                <NavList />
-              </div>
-              <IconButton
-                size="sm"
-                variant="text"
-                onClick={toggleIsNavOpen}
-                className="ml-auto mr-2 text-gray-900 dark:text-gray-200 md:hidden"
-              >
-                <Bars2Icon className="h-6 w-6" />
-              </IconButton>
-            </>
           )}
 
           <div className="flex gap-2 items-center">
