@@ -24,19 +24,23 @@ export default function ChangeLang({ langList }) {
           />
         </Button>
       </MenuHandler>
-      <MenuList>
+      <MenuList className="p-1 dark:bg-gray-900 bg-white dark:border-gray-700">
         {langList.map(item => (
-          <MenuItem key={item.value} onClick={() => changeLanguage(item.value)}>
-            <div className="flex items-center gap-2">
-              <img src={item.flag} alt={item.label} className="object-cover rounded-full size-6" />
-              <h6
-                className={`text-[14px] text-black dark:text-white hover:underline ${
-                  language === item.value ? 'font-bold' : ''
-                }`}
-              >
-                {item.label}
-              </h6>
-            </div>
+          <MenuItem
+            key={item.value}
+            onClick={() => changeLanguage(item.value)}
+            className="flex items-center gap-2 rounded hover:bg-gray-300 
+            active:bg-gray-300 focus:bg-gray-300 dark:hover:bg-gray-700 
+            dark:active:bg-gray-700 dark:focus:bg-gray-700"
+          >
+            <img src={item.flag} alt={item.label} className="object-cover rounded-full size-6" />
+            <h6
+              className={`text-[14px] text-gray-800 dark:text-gray-200 ${
+                language === item.value ? 'font-bold underline' : ''
+              }`}
+            >
+              {item.label}
+            </h6>
           </MenuItem>
         ))}
       </MenuList>
