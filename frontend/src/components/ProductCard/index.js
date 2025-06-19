@@ -23,8 +23,8 @@ export function ProductCard({
   const { t } = useTranslation('product');
 
   return (
-    <Card className="w-full max-w-[20rem] shadow-lg dark:bg-gray-900 bg-white">
-      <CardHeader floated={false} color="blue-gray">
+    <Card className="w-full max-w-[20rem] h-full flex flex-col shadow-lg dark:bg-gray-900 bg-white">
+      <CardHeader floated={false} color="blue-gray" className="relative">
         <img src={image} alt={title} className="w-full h-60 object-cover object-center" />
         <div className="to-bg-black-10 absolute inset-0 h-full w-full bg-gradient-to-tr from-transparent via-transparent to-black/60" />
         <IconButton
@@ -37,10 +37,10 @@ export function ProductCard({
         </IconButton>
       </CardHeader>
 
-      <CardBody>
+      <CardBody className="flex-1 flex flex-col">
         <div className="mb-2 flex items-center justify-between">
           <Typography
-            variant="h5"
+            variant="h6"
             className="text-gray-800 dark:text-gray-200 font-bold line-clamp-1"
           >
             {title}
@@ -50,23 +50,22 @@ export function ProductCard({
             {rating}
           </Typography>
         </div>
-        <Typography className="text-gray-800 dark:text-gray-200 line-clamp-2">
+        <Typography className="text-sm text-gray-800 dark:text-gray-200 line-clamp-2 min-h-[3rem]">
           {description}
         </Typography>
+        <div className="mt-auto pt-4">
+          <Button
+            size="lg"
+            fullWidth
+            onClick={onReadMore}
+            className="text-white rounded transition duration-200 bg-gray-600 hover:bg-gray-800 
+          active:bg-gray-800 focus:bg-gray-800 dark:bg-gray-600 dark:hover:bg-gray-800 
+          dark:active:bg-gray-800 dark:focus:bg-gray-800"
+          >
+            {t('card.read_more')}
+          </Button>
+        </div>
       </CardBody>
-
-      <CardFooter className="pt-2">
-        <Button
-          size="lg"
-          fullWidth
-          onClick={onReadMore}
-          className="text-white rounded transition duration-200 bg-gray-600 hover:bg-gray-800 
-            active:bg-gray-800 focus:bg-gray-800 dark:bg-gray-600 dark:hover:bg-gray-800 
-            dark:active:bg-gray-800 dark:focus:bg-gray-800"
-        >
-          {t('card.read_more')}
-        </Button>
-      </CardFooter>
     </Card>
   );
 }
