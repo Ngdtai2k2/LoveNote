@@ -15,7 +15,7 @@ const authService = {
       throw { code: 400, messageKey: 'validate:email_exists' };
     }
 
-    const hashedPassword = await bcrypt.hash(password, 8);
+    const hashedPassword = await bcrypt.hash(password, 12);
     await User.create({ full_name: fullName, email, password: hashedPassword });
 
     return 'auth:sign_up_success';
