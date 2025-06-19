@@ -7,9 +7,13 @@ import * as Yup from 'yup';
 import FormField from '@components/FormField';
 import ROUTES from '@constants/routes';
 import { signUp } from '@api/auth';
+import { useDocumentTitle } from '@hooks/useDocumentTitle';
 
 export default function SignUp() {
   const { t } = useTranslation('form');
+
+  useDocumentTitle(t('auth.sign_up'));
+
   const navigate = useNavigate();
 
   const initialValues = {

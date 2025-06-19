@@ -8,9 +8,13 @@ import * as Yup from 'yup';
 import FormField from '@components/FormField';
 import ROUTES from '@constants/routes';
 import { signIn } from '@api/auth';
+import { useDocumentTitle } from '@hooks/useDocumentTitle';
 
 export default function SignIn() {
   const { t } = useTranslation('form');
+
+  useDocumentTitle(t('auth.sign_in'));
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 

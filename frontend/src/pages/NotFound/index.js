@@ -4,9 +4,12 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 import ROUTES from '@constants/routes';
+import { useDocumentTitle } from '@hooks/useDocumentTitle';
 
 export default function NotFound({ isAdmin = false }) {
   const { t } = useTranslation('notfound');
+
+  useDocumentTitle(t('page_not_found'));
 
   return (
     <div className="flex flex-col items-center justify-center mt-10 pt-10 dark:bg-gray-800">
