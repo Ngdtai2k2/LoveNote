@@ -10,7 +10,6 @@ module.exports = (sequelize, DataTypes) => {
       image: DataTypes.STRING,
       link: DataTypes.STRING,
       is_active: DataTypes.BOOLEAN,
-      sort_order: DataTypes.INTEGER,
     },
     {
       sequelize,
