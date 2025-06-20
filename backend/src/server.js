@@ -4,7 +4,7 @@ require('dotenv').config();
 const app = require('@root/src/app');
 const { connectDB } = require('@config/connectDB');
 
-const PORT = process.env.PORT;
+const PORT = process.env.APP_PORT;
 
 const server = require('http').Server(app);
 
