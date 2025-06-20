@@ -3,12 +3,15 @@ import PropTypes from 'prop-types';
 
 import { LanguageProvider } from './language';
 import { InterfaceModeProvider } from './interfaceMode';
+import { SocketProvider } from './socket';
 
 export const AppProviders = ({ children }) => {
   return (
-    <LanguageProvider>
-      <InterfaceModeProvider>{children}</InterfaceModeProvider>
-    </LanguageProvider>
+    <SocketProvider>
+      <LanguageProvider>
+        <InterfaceModeProvider>{children}</InterfaceModeProvider>
+      </LanguageProvider>
+    </SocketProvider>
   );
 };
 
