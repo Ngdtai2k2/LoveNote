@@ -8,7 +8,8 @@
     "dev": "nodemon --legacy-watch src/server.js",
     "format:check": "prettier --check .",
     "format:write": "prettier --write .",
-    "fresh:db": "npx sequelize-cli db:migrate:undo:all && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all"
+    "fresh:db": "npx sequelize-cli db:migrate:undo:all && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all",
+    "migrate": "npx sequelize-cli db:migrate"
   },
   "keywords": [],
   "author": "",
