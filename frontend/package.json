@@ -29,7 +29,7 @@
     "yup": "^1.6.1"
   },
   "scripts": {
-    "start": "craco start",
+    "start": "npx craco start --legacy-watch",
     "build": "craco build",
     "lint": "eslint . --ext .js,.jsx --fix"
   },

@@ -1,0 +1,18 @@
+services:
+  react-app:
+    container_name: react_craco_dev
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: development
+    ports:
+      - '${DEV_PORT}:${DEV_PORT}'
+    volumes:
+      - .:/app
+      - /app/node_modules
+    env_file:
+      - .env
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+      - WATCHPACK_POLLING=true
+    command: npm run start
