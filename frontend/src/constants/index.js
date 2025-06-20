@@ -8,7 +8,7 @@ const CONSTANTS = {
   ADMIN_PREFIX: '/admin',
   // pagination
   PAGE: 1,
-  LIMIT: 10,
+  LIMIT: 12,
 };
 
 export default CONSTANTS;
