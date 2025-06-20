@@ -1,4 +1,4 @@
-import API_ENDPOINTS from '@constants/api';
+import API_ENDPOINTS from '@utils/api';
 import { removeUser, setUser } from '@redux/slice/user';
 
 export const getCurrentUser = async (dispatch, axiosJWT) => {

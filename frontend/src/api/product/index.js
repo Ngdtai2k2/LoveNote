@@ -1,4 +1,4 @@
-import API_ENDPOINTS from '@constants/api';
+import API_ENDPOINTS from '@utils/api';
 import fetchPaginatedData from '@helpers/fetchPaginatedData';
 
 export const getAll = async (page, limit) => {

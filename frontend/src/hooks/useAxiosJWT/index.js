@@ -4,7 +4,7 @@ import { jwtDecode } from 'jwt-decode';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { signInSuccess } from '@redux/slice/auth';
-import API_ENDPOINTS from '@constants/api';
+import API_ENDPOINTS from '@utils/api';
 
 const refreshToken = async lng => {
   try {

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { toast } from 'react-fox-toast';
-import API_ENDPOINTS from '@constants/api';
+import API_ENDPOINTS from '@utils/api';
 import ROUTES from '@constants/routes';
 import {
   signInError,
