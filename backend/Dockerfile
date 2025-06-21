@@ -14,6 +14,7 @@ RUN chmod +x scripts/entrypoint.sh
 
 EXPOSE 8000
 
+ENTRYPOINT ["sh", "./scripts/entrypoint.sh"]
 CMD ["npm", "run", "dev"]
 
 ### Stage 2: Production
