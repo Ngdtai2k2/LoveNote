@@ -1,12 +1,5 @@
 const { Banner } = require('@models');
-
-const parseBoolean = (value) => {
-  return value === 'true' || value === '1'
-    ? true
-    : value === 'false' || value === '0'
-      ? false
-      : undefined;
-};
+const { parseBoolean } = require('@helpers');
 
 const bannerController = {
   getAll: async (req) => {
