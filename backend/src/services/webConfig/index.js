@@ -1,8 +1,11 @@
 const { WebConfig } = require('@models');
 
 const webConfigServices = {
-  getAll: async () => {
-    const data = await WebConfig.findAll();
+  getAll: async ({ raw = false } = {}) => {
+    const data = await WebConfig.findAll({
+      raw,
+      attributes: raw ? { exclude: ['created_at', 'updated_at'] } : undefined,
+    });
 
     if (!data || data.length === 0) {
       throw { code: 404, messageKey: 'not_found:data' };

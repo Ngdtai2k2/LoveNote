@@ -1,11 +1,14 @@
-const webConfigServices = require("@services/webConfig");
-const handleError = require("@utils/handleError");
+const webConfigServices = require('@services/webConfig');
+const handleError = require('@utils/handleError');
+const { parseBoolean } = require('@helpers');
 
 const webConfigController = {
   getAll: async (req, res) => {
     try {
-      const result = await webConfigServices.getAll();
-      res.status(200).json(result);
+      const raw = parseBoolean(req.query.raw);
+      const data = await webConfigServices.getAll({ raw });
+
+      res.status(200).json(data);
     } catch (error) {
       handleError(res, req, error);
     }
