@@ -3,7 +3,7 @@ const path = require('path');
 
 const { User } = require('@models');
 const uploadMiddleware = require('@middlewares/upload');
-const helpers = require('@helpers/helpers');
+const helpers = require('@helpers');
 
 const userController = {
   updateProfile: async (req, res) => {
