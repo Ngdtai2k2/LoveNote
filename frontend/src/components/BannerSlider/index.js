@@ -1,18 +1,54 @@
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+
 import { Carousel } from '@material-tailwind/react';
 
-export function BannerSlider({ images, carouselStyles = '', imgStyles = '', ...carouselProps }) {
+export function BannerSlider({
+  banners,
+  loading,
+  carouselStyles = '',
+  imgStyles = '',
+  ...carouselProps
+}) {
   return (
     <Carousel className={carouselStyles} {...carouselProps}>
-      {images.map((src, index) => (
-        <img key={index} src={src} alt={`slide ${index + 1}`} className={imgStyles} />
-      ))}
+      {loading ? (
+        <div className="w-8 h-8 border-4 border-t-gray-800 border-gray-300 rounded-full animate-spin"></div>
+      ) : (
+        banners.map(banner => {
+          const imageElement = (
+            <img
+              key={banner.id}
+              src={banner.image}
+              alt={banner.title || `banner-${banner.id}`}
+              className={imgStyles}
+            />
+          );
+
+          return banner.link ? (
+            <Link to={banner.link} key={banner.id}>
+              {imageElement}
+            </Link>
+          ) : (
+            <div key={banner.id}>{imageElement}</div>
+          );
+        })
+      )}
     </Carousel>
   );
 }
 
 BannerSlider.propTypes = {
-  images: PropTypes.arrayOf(PropTypes.string).isRequired,
+  banners: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      title: PropTypes.string,
+      image: PropTypes.string.isRequired,
+      link: PropTypes.string,
+      is_active: PropTypes.bool,
+    })
+  ).isRequired,
+  loading: PropTypes.bool,
   imgStyles: PropTypes.string,
   carouselStyles: PropTypes.string,
 };
