@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react';
 
-import { getCachedBanners, setCachedBanners } from '@helpers/bannerCache';
 import { bannerAPI } from '@api/banner';
+import { getCachedData, setCachedData } from '@helpers/cacheSession';
 
 const useBanner = () => {
   const [banners, setBanners] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const cache = getCachedBanners();
+    const cache = getCachedData('banners', 5 * 60 * 1000);
     if (cache) {
       setBanners(cache);
       setLoading(false);
@@ -20,7 +20,7 @@ const useBanner = () => {
         setLoading(true);
         const res = await bannerAPI.getAll(true);
         setBanners(res.data);
-        setCachedBanners(res.data);
+        setCachedData('banners', res.data);
       } catch (error) {
         setBanners([]);
       } finally {
