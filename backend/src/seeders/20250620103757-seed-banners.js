@@ -1,32 +1,35 @@
 'use strict';
+require('dotenv').config();
 
 /** @type {import('sequelize-cli').Seeder} */
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.bulkDelete('banners', null, {});
 
+    const SERVER_URL = process.env.SERVER_URL;
+
     await queryInterface.bulkInsert('banners', [
       {
-        title: 'Chào mừng đến với shop!',
-        image: '/img/banner1.jpg',
-        link: '/',
+        title: 'Write a special note to someone you love',
+        image: `${SERVER_URL}/assets/images/banner-1.PNG`,
+        link: '#',
         is_active: true,
         created_at: new Date(),
         updated_at: new Date(),
       },
       {
-        title: 'Giảm giá mùa hè',
-        image: '/img/banner2.jpg',
-        link: '/summer-sale',
+        title: 'Send a special message to a loved one',
+        image: `${SERVER_URL}/assets/images/banner-2.PNG`,
+        link: '#',
         is_active: true,
         created_at: new Date(),
         updated_at: new Date(),
       },
       {
-        title: 'Sắp ra mắt',
-        image: '/img/banner3.jpg',
-        link: null,
-        is_active: false,
+        title: 'Create a love note and share it',
+        image: `${SERVER_URL}/assets/images/banner-1.PNG`,
+        link: '#',
+        is_active: true,
         created_at: new Date(),
         updated_at: new Date(),
       },
