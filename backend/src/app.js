@@ -1,5 +1,6 @@
 require('dotenv').config();
 
+const path = require('path');
 const cors = require('cors');
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -24,6 +25,7 @@ app.use(bodyParser.json());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+app.use('/assets', express.static(path.join(__dirname, 'assets')));
 app.use('/api/v1', routes);
 
 module.exports = app;
