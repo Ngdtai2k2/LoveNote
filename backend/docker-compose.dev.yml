@@ -1,9 +1,11 @@
+version: '3.8'
+
 services:
   app:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: node_app_dev
+    container_name: love_note_prod_dev
     ports:
       - '${APP_PORT}:${APP_PORT}'
     volumes:
@@ -11,13 +13,14 @@ services:
       - /usr/src/app/node_modules
     env_file:
       - .env
-    command: sh -c "npx wait-on tcp:db:${DB_PORT} && npm run dev"
+    entrypoint: sh -c "./scripts/entrypoint.sh"
+    restart: 'unless-stopped'
     depends_on:
       - db
 
   db:
     image: mysql
-    container_name: mysql_container
+    container_name: mysql_love_note
     ports:
       - '${DB_PORT}:${DB_PORT}'
     environment:
@@ -25,6 +28,9 @@ services:
       MYSQL_DATABASE: ${DB_NAME}
     volumes:
       - db_data:/var/lib/mysql
+    env_file:
+      - .env
+    restart: 'unless-stopped'
 
 volumes:
   db_data:

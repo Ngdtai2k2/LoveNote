@@ -1,11 +1,13 @@
+version: "3.8"
+
 services:
   app:
-    build: .
-    container_name: node_app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: love_note_prod
     ports:
-      - '${APP_PORT}:${APP_PORT}'
-    volumes:
-      - app_data:/usr/src/app
+      - "80:3000"
     env_file:
       - .env
     depends_on:
@@ -14,16 +16,15 @@ services:
 
   db:
     image: mysql
-    container_name: mysql_container
+    container_name: mysql_love_note
     environment:
       MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
       MYSQL_DATABASE: ${DB_NAME}
-    ports:
-      - '${DB_PORT}:${DB_PORT}'
     volumes:
       - db_data:/var/lib/mysql
+    ports:
+      - "${DB_PORT}:${DB_PORT}"
     restart: always
 
 volumes:
-  app_data:
   db_data:
