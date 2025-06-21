@@ -13,7 +13,9 @@ export function BannerSlider({
   return (
     <Carousel className={carouselStyles} {...carouselProps}>
       {loading ? (
-        <div className="w-8 h-8 border-4 border-t-gray-800 border-gray-300 rounded-full animate-spin"></div>
+        <div className="mt-2 flex justify-center">
+          <div className="w-8 h-8 border-4 border-t-gray-800 border-gray-300 rounded-full animate-spin"></div>
+        </div>
       ) : (
         banners.map(banner => {
           const imageElement = (
