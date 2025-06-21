@@ -1,5 +1,5 @@
 const CACHE_KEY = 'banners';
-const TTL = 5 * 60 * 1000;
+const TTL = 10 * 60 * 1000;
 
 export const getCachedBanners = () => {
   const raw = sessionStorage.getItem(CACHE_KEY);
