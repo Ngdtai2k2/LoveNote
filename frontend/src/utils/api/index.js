@@ -11,6 +11,9 @@ const API_ENDPOINTS = {
   PRODUCT: {
     GET_ALL: `${BASE_URL}/product/all`,
   },
+  BANNER: {
+    GET_ALL: `${BASE_URL}/banner/all`,
+  },
 };
 
 export default API_ENDPOINTS;
