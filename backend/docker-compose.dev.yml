@@ -13,7 +13,6 @@ services:
       - /usr/src/app/node_modules
     env_file:
       - .env
-    entrypoint: sh -c "./scripts/entrypoint.sh"
     restart: 'unless-stopped'
     depends_on:
       - db
