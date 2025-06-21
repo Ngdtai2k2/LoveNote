@@ -3,6 +3,8 @@
 /** @type {import('sequelize-cli').Seeder} */
 module.exports = {
   async up(queryInterface, Sequelize) {
+    await queryInterface.bulkDelete('products', null, {});
+
     await queryInterface.bulkInsert('products', [
       {
         id: 'PRODUCT-01',

@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
       id: {
         type: DataTypes.STRING(10),
         primaryKey: true,
-        defaultValue: uid.rnd(),
+        defaultValue: () => uid.rnd(),
       },
       full_name: DataTypes.STRING,
       phone_number: DataTypes.STRING,
