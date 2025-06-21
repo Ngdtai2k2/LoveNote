@@ -8,6 +8,7 @@ export const getCachedBanners = () => {
   try {
     const { data, timestamp } = JSON.parse(raw);
     const isExpired = Date.now() - timestamp > TTL;
+    if (isExpired) sessionStorage.removeItem(CACHE_KEY);
     return isExpired ? null : data;
   } catch {
     sessionStorage.removeItem(CACHE_KEY);
