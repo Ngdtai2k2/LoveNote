@@ -5,6 +5,7 @@ import { Typography } from '@material-tailwind/react';
 import { BannerSlider } from '@components/BannerSlider';
 import { ProductCard } from '@components/ProductCard';
 import { useDocumentTitle } from '@hooks/useDocumentTitle';
+import useBanner from '@hooks/useBanner';
 import { getAll } from '@api/product';
 import CONSTANTS from '@constants';
 
@@ -15,6 +16,8 @@ export default function Home() {
 
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  const { banners, loading: bannerLoading } = useBanner();
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -31,19 +34,13 @@ export default function Home() {
     fetchProducts();
   }, []);
 
-  // data test
-  const imageList = [
-    'https://images.unsplash.com/photo-1497436072909-60f360e1d4b1?auto=format&fit=crop&w=2560&q=80',
-    'https://images.unsplash.com/photo-1493246507139-91e8fad9978e?auto=format&fit=crop&w=2940&q=80',
-    'https://images.unsplash.com/photo-1518623489648-a173ef7824f3?auto=format&fit=crop&w=2762&q=80',
-  ];
-
   return (
     //  carousel
     <div className="mt-2 mx-auto max-w-screen-xl">
       <BannerSlider
-        images={imageList}
-        imgStyles="h-96 w-full object-cover"
+        banners={banners}
+        loading={bannerLoading}
+        imgStyles="md:h-96 w-full object-cover"
         carouselStyles="rounded-xl"
         autoplay
         loop
