@@ -43,7 +43,6 @@ module.exports = {
         key: 'socials',
         value: JSON.stringify({
           facebook: 'https://fb.me/ngdtai2k2',
-          x: '#',
           instagram: '#',
         }),
         created_at: new Date(),
