@@ -5,6 +5,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      target: development   
     container_name: love_note_prod_dev
     ports:
       - '${APP_PORT}:${APP_PORT}'
