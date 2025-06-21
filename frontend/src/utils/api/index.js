@@ -9,10 +9,13 @@ const API_ENDPOINTS = {
     ME: `${BASE_URL}/auth/me`,
   },
   PRODUCT: {
-    GET_ALL: `${BASE_URL}/product/all`,
+    GET_ALL: `${BASE_URL}/product`,
   },
   BANNER: {
-    GET_ALL: `${BASE_URL}/banner/all`,
+    GET_ALL: `${BASE_URL}/banner`,
+  },
+  WEB_CONFIG: {
+    GET_ALL: `${BASE_URL}/web-config`,
   },
 };
 
