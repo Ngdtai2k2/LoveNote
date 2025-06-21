@@ -1,37 +1,19 @@
-import { useEffect, useState } from 'react';
-
+import { useCallback } from 'react';
 import { bannerAPI } from '@api/banner';
-import { getCachedData, setCachedData } from '@helpers/cacheSession';
+import useCachedApi from '@hooks/useCachedApi';
 
 const useBanner = () => {
-  const [banners, setBanners] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const cache = getCachedData('banners', 5 * 60 * 1000);
-    if (cache) {
-      setBanners(cache);
-      setLoading(false);
-      return;
-    }
-
-    const getBanners = async () => {
-      try {
-        setLoading(true);
-        const res = await bannerAPI.getAll(true);
-        setBanners(res.data);
-        setCachedData('banners', res.data);
-      } catch (error) {
-        setBanners([]);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    getBanners();
+  const fetchBanners = useCallback(() => {
+    return bannerAPI.getAll(true).then(res => res.data);
   }, []);
 
-  return { banners, loading };
+  const { data: banners, loading } = useCachedApi({
+    cacheKey: 'banners',
+    ttl: 5 * 60 * 1000,
+    fetcher: fetchBanners,
+  });
+
+  return { banners: banners || [], loading };
 };
 
 export default useBanner;
