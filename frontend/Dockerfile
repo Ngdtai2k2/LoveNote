@@ -1,17 +1,34 @@
-# Stage 1: Build React app
-FROM node:22-alpine AS builder
+# Stage 1: Development
+FROM node:22-alpine AS development
 WORKDIR /app
 
-# Copy source
 COPY package*.json ./
+RUN npm install
+
 COPY . .
 
-COPY .env .env
-RUN npm install && npm run build
+ENV NODE_ENV=development
 
-# Stage 2: Serve with Nginx
-FROM nginx:alpine
-COPY --from=builder /app/build /usr/share/nginx/html
+EXPOSE 3000
+
+CMD ["npm", "start"]
+
+# Stage 2: Build (used for production)
+FROM node:22-alpine AS build
+WORKDIR /app
+
+COPY package*.json ./
+RUN npm install
+
+COPY . .
+
+RUN npm run build
+
+
+# Stage 3: Production - Serve with nginx
+FROM nginx:alpine AS production
+COPY --from=build /app/build /usr/share/nginx/html
 
 EXPOSE 80
+
 CMD ["nginx", "-g", "daemon off;"]
