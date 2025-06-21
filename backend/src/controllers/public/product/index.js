@@ -1,4 +1,5 @@
 const productServices = require('@services/product');
+const handleError = require('@utils/handleError');
 
 const productController = {
   getAll: async (req, res) => {
@@ -6,9 +7,7 @@ const productController = {
       const result = await productServices.getAll(req);
       res.status(200).json(result);
     } catch (error) {
-      const code = error.code || 500;
-      const messageKey = error.messageKey || 'message:server_error';
-      res.status(code).json({ message: req.t(messageKey) });
+      handleError(res, req, error);
     }
   },
 };

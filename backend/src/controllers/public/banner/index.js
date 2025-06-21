@@ -1,4 +1,5 @@
 const bannerServices = require('@services/banner');
+const handleError = require('@utils/handleError');
 
 const bannerController = {
   getAll: async (req, res) => {
@@ -6,9 +7,7 @@ const bannerController = {
       const result = await bannerServices.getAll(req);
       res.status(200).json(result);
     } catch (error) {
-      const code = error.code || 500;
-      const messageKey = error.messageKey || 'message:server_error';
-      res.status(code).json({ message: req.t(messageKey) });
+      handleError(res, req, error);
     }
   },
 };

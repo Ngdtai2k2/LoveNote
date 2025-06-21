@@ -6,6 +6,7 @@ const jwt = require('jsonwebtoken');
 const { User } = require('@models');
 const authService = require('@services/auth');
 const jwtService = require('@services/jwt');
+const handleError = require('@utils/handleError');
 
 const authController = {
   signUp: async (req, res) => {
@@ -13,9 +14,7 @@ const authController = {
       const messageKey = await authService.signUp(req.body);
       res.status(201).json({ message: req.t(messageKey) });
     } catch (error) {
-      const code = error.code || 500;
-      const messageKey = error.messageKey || 'message:server_error';
-      res.status(code).json({ message: req.t(messageKey) });
+      handleError(res, req, error);
     }
   },
 
@@ -39,9 +38,7 @@ const authController = {
         device_id: deviceId,
       });
     } catch (error) {
-      const code = error.code || 500;
-      const messageKey = error.messageKey || 'message:server_error';
-      res.status(code).json({ message: req.t(messageKey) });
+      handleError(res, req, error);
     }
   },
 
