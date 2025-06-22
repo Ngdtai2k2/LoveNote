@@ -49,7 +49,7 @@ export function ProductCard({
             {rating}
           </Typography>
         </div>
-        <Typography className="text-sm text-gray-800 dark:text-gray-200 line-clamp-2 min-h-[3rem]">
+        <Typography className="text-sm text-gray-800 dark:text-gray-200 line-clamp-2 min-h-[2rem]">
           {description}
         </Typography>
         <div className="mt-auto pt-4">
