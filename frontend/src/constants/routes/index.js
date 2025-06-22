@@ -3,6 +3,9 @@ const ROUTES = {
     SIGN_IN: '/sign-in',
     SIGN_UP: '/sign-up',
   },
+  USER: {
+    ME: '/me',
+  },
   ADMIN: {
     DASHBOARD: '/admin/dashboard',
     USERS: '/admin/users',

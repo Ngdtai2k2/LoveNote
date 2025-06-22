@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import NotFound from '@pages/NotFound';
 import publicRoute from './publicRoute';
 import protectedRoutes from './protectedRoute';
+import privateRoutes from './privateRoute';
 import templateRoutes from './templateRoute';
 
 import LayoutUser from '@components/Layout/User';
@@ -42,6 +43,7 @@ const AppRoutes = () => {
       {renderRoutes(adminRoutes, LayoutAdmin)}
       {renderRoutes(userRoutes, LayoutUser)}
       {renderRoutes(templateRoutes)}
+      {renderRoutes(privateRoutes, LayoutUser, isAuthenticated)}
 
       {/* Admin NotFound */}
       <Route
