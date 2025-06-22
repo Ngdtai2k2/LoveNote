@@ -101,12 +101,10 @@ export default function NavBar({ isAdmin }) {
           {/* Logo */}
           {!isAdmin && (
             <Typography
-              as="a"
-              href={ROUTES.HOME}
               className="mr-4 ml-2 cursor-pointer py-1.5 font-medium text-black dark:text-gray-200 border-none 
-            hidden md:block"
+              hidden md:block"
             >
-              {CONSTANTS.SITE_NAME}
+              <Link to={ROUTES.HOME}>{CONSTANTS.SITE_NAME}</Link>
             </Typography>
           )}
 
