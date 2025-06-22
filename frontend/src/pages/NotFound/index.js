@@ -6,12 +6,15 @@ import { useTranslation } from 'react-i18next';
 import ROUTES from '@constants/routes';
 import { useDocumentTitle } from '@hooks/useDocumentTitle';
 
+import LayoutAdmin from '@components/Layout/Admin';
+import LayoutUser from '@components/Layout/User';
+
 export default function NotFound({ isAdmin = false }) {
   const { t } = useTranslation('notfound');
 
   useDocumentTitle(t('page_not_found'));
 
-  return (
+  const content = (
     <div className="flex flex-col items-center justify-center mt-10 pt-10 dark:bg-gray-800">
       <h1 className="text-8xl font-bold text-gray-900 dark:text-gray-200 mb-4">404</h1>
       <h2 className="text-2xl font-semibold text-gray-700 dark:text-gray-200 mb-2">
@@ -28,6 +31,8 @@ export default function NotFound({ isAdmin = false }) {
       </Link>
     </div>
   );
+
+  return isAdmin ? <LayoutAdmin>{content}</LayoutAdmin> : <LayoutUser>{content}</LayoutUser>;
 }
 
 NotFound.propTypes = {
