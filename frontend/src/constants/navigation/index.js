@@ -5,6 +5,7 @@ import {
   AdjustmentsHorizontalIcon,
   UsersIcon,
 } from '@heroicons/react/24/solid';
+
 import ROUTES from '../routes';
 
 export const navbar = [
@@ -23,6 +24,7 @@ export const profileMenu = [
   {
     label: 'profile',
     icon: UserCircleIcon,
+    href: ROUTES.USER.ME,
   },
   {
     label: 'settings',

@@ -1,6 +1,6 @@
 import React, { createElement, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
 import {
@@ -80,7 +80,7 @@ export function ProfileMenu() {
 
       <MenuList className="p-1 dark:bg-gray-900 bg-white dark:border-gray-700">
         {user ? (
-          profileMenu.map(({ label, icon }, key) => (
+          profileMenu.map(({ label, icon, href }, key) => (
             <MenuItem
               key={key}
               onClick={() => {
@@ -97,13 +97,15 @@ export function ProfileMenu() {
                 className: 'h-4 w-4 text-gray-800 dark:text-gray-200',
                 strokeWidth: 2,
               })}
-              <Typography
-                as="span"
-                variant="small"
-                className="font-normal text-gray-800 dark:text-gray-200"
-              >
-                {t(label)}
-              </Typography>
+              <Link to={href}>
+                <Typography
+                  as="span"
+                  variant="small"
+                  className="font-normal text-gray-800 dark:text-gray-200"
+                >
+                  {t(label)}
+                </Typography>
+              </Link>
             </MenuItem>
           ))
         ) : (
