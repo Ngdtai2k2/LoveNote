@@ -1,26 +1,44 @@
 import { useEffect, useState } from 'react';
-import { getCachedData, setCachedData } from '@helpers/cacheSession';
+import { setCachedData } from '@helpers/cacheSession';
+import { useSocketContext } from '@providers/socket';
 
 /**
  * @param {Object} options
  * @param {string} options.cacheKey
  * @param {number} [options.ttl=600000]
- * @param {Function} options.fetcher - fetch func
+ * @param {Function} options.fetcher
  */
-
 const useCachedApi = ({ cacheKey, ttl = 10 * 60 * 1000, fetcher }) => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const { isConnected } = useSocketContext();
 
   useEffect(() => {
-    const cache = getCachedData(cacheKey, ttl);
-    if (cache) {
-      setData(cache);
-      setLoading(false);
+    const raw = sessionStorage.getItem(cacheKey);
+
+    if (!raw) {
+      fetchAndCache();
       return;
     }
 
-    const fetchData = async () => {
+    try {
+      const { data: cachedData, timestamp } = JSON.parse(raw);
+      const isExpired = Date.now() - timestamp > ttl;
+
+      if (!isExpired) {
+        setData(cachedData);
+        setLoading(false);
+      } else if (!isConnected) {
+        setData(cachedData);
+        setLoading(false);
+      } else {
+        fetchAndCache();
+      }
+    } catch {
+      fetchAndCache();
+    }
+
+    async function fetchAndCache() {
       try {
         setLoading(true);
         const result = await fetcher();
@@ -31,10 +49,8 @@ const useCachedApi = ({ cacheKey, ttl = 10 * 60 * 1000, fetcher }) => {
       } finally {
         setLoading(false);
       }
-    };
-
-    fetchData();
-  }, [cacheKey, ttl, fetcher]);
+    }
+  }, [cacheKey, ttl, fetcher, isConnected]);
 
   return { data, loading };
 };
