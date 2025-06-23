@@ -49,7 +49,7 @@ export default function Home() {
       <div className="mx-auto mt-3 max-w-screen-xl md:mt-5">
         <Typography
           variant="h4"
-          className="mb-3 flex justify-center text-gray-800 dark:text-gray-200 md:mb-5"
+          className="mb-3 flex justify-center text-gray-800 dark:text-gray-200"
         >
           {t("product:products")}
         </Typography>
