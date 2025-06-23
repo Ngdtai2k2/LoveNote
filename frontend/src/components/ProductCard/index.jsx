@@ -8,7 +8,7 @@ import {
   Button,
   IconButton,
 } from "@material-tailwind/react";
-import { useTranslation } from "../../../node_modules/react-i18next";
+import { useTranslation } from "react-i18next";
 
 export function ProductCard({
   image,

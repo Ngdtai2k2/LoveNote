@@ -98,7 +98,7 @@ export default function NavBar({ isAdmin }) {
   useEffect(() => {
     window.addEventListener(
       "resize",
-      () => window.innerWidth >= 960 && setIsNavOpen(false)
+      () => window.innerWidth >= 960 && setIsNavOpen(false),
     );
   }, []);
 

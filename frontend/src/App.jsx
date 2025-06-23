@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { ToastContainer } from "react-fox-toast";
-import { useTranslation } from "../node_modules/react-i18next";
+import { useTranslation } from "react-i18next";
 
 import AppRoutes from "./routes";
 import { useAxios } from "@hooks/useAxiosJWT";
