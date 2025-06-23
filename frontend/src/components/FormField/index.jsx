@@ -1,6 +1,6 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Field, ErrorMessage } from 'formik';
+import React from "react";
+import PropTypes from "prop-types";
+import { Field, ErrorMessage } from "formik";
 
 export default function FormField({
   name,
@@ -24,14 +24,16 @@ export default function FormField({
         >
           {label}
         </h6>
-        {required && <h6 className="text-[15px] leading-tight text-red-500">*</h6>}
+        {required && (
+          <h6 className="text-[15px] leading-tight text-red-500">*</h6>
+        )}
       </div>
       <Field
         as="input"
         name={name}
         type={type}
         placeholder={placeholder}
-        className={`${className} ${errors[name] && touched[name] ? 'border border-red-500' : ''}`}
+        className={`${className} ${errors[name] && touched[name] ? "border border-red-500" : ""}`}
         autoComplete={name}
         disabled={disabled}
         value={value}

@@ -1,12 +1,12 @@
-import axios from 'axios';
-import { useMemo } from 'react';
-import { jwtDecode } from 'jwt-decode';
-import { useDispatch, useSelector } from 'react-redux';
+import axios from "axios";
+import { useMemo } from "react";
+import { jwtDecode } from "jwt-decode";
+import { useDispatch, useSelector } from "react-redux";
 
-import { signInSuccess } from '@redux/slice/auth';
-import API_ENDPOINTS from '@utils/api';
+import { signInSuccess } from "@redux/slice/auth";
+import API_ENDPOINTS from "@utils/api";
 
-const refreshToken = async lng => {
+const refreshToken = async (lng) => {
   try {
     const res = await axios.post(
       API_ENDPOINTS.AUTH.REFRESH_TOKEN,
@@ -14,9 +14,9 @@ const refreshToken = async lng => {
       {
         withCredentials: true,
         headers: {
-          'Accept-Language': lng,
+          "Accept-Language": lng,
         },
-      }
+      },
     );
     return res.data;
   } catch (err) {
@@ -30,13 +30,13 @@ export const createAxios = (lng, auth, dispatch, stateSuccess) => {
   const newInstance = axios.create({
     withCredentials: true,
     headers: {
-      'Accept-Language': lng,
-      Authorization: auth ? `Bearer ${auth.token}` : '',
+      "Accept-Language": lng,
+      Authorization: auth ? `Bearer ${auth.token}` : "",
     },
   });
 
   newInstance.interceptors.request.use(
-    async config => {
+    async (config) => {
       const decodedToken = jwtDecode(auth?.token);
       const currentTime = Math.floor(Date.now() / 1000);
       const isExpired = currentTime > decodedToken.exp;
@@ -59,7 +59,7 @@ export const createAxios = (lng, auth, dispatch, stateSuccess) => {
           } else {
             dispatch(signInSuccess(refreshUser));
           }
-          config.headers['Authorization'] = `Bearer ${data.token}`;
+          config.headers["Authorization"] = `Bearer ${data.token}`;
         } else {
           if (stateSuccess) {
             dispatch(stateSuccess(null));
@@ -68,9 +68,9 @@ export const createAxios = (lng, auth, dispatch, stateSuccess) => {
       }
       return config;
     },
-    err => {
+    (err) => {
       return Promise.reject(err);
-    }
+    },
   );
 
   return newInstance;
@@ -78,7 +78,7 @@ export const createAxios = (lng, auth, dispatch, stateSuccess) => {
 
 export const useAxios = (lng, stateSuccess) => {
   const dispatch = useDispatch();
-  const auth = useSelector(state => state.auth);
+  const auth = useSelector((state) => state.auth);
 
   const axiosJWT = useMemo(() => {
     if (auth) {

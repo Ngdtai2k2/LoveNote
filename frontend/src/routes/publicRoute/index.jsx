@@ -1,7 +1,7 @@
-import SignIn from '@pages/User/Auth/SignIn';
-import SignUp from '@pages/User/Auth/SignUp';
-import Home from '@pages/Home';
-import ROUTES from '@constants/routes';
+import SignIn from "@pages/User/Auth/SignIn";
+import SignUp from "@pages/User/Auth/SignUp";
+import Home from "@pages/Home";
+import ROUTES from "@constants/routes";
 
 const publicRoute = [
   {

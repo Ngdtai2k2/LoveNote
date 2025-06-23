@@ -1,13 +1,13 @@
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
-import { Carousel } from '@material-tailwind/react';
+import { Carousel } from "@material-tailwind/react";
 
 export function BannerSlider({
   banners,
   loading,
-  carouselStyles = '',
-  imgStyles = '',
+  carouselStyles = "",
+  imgStyles = "",
   ...carouselProps
 }) {
   return (
@@ -17,7 +17,7 @@ export function BannerSlider({
           <div className="h-8 w-8 animate-spin rounded-full border-4 border-gray-300 border-t-gray-800"></div>
         </div>
       ) : (
-        banners.map(banner => {
+        banners.map((banner) => {
           const imageElement = (
             <img
               key={banner.id}
@@ -48,7 +48,7 @@ BannerSlider.propTypes = {
       image: PropTypes.string.isRequired,
       link: PropTypes.string,
       is_active: PropTypes.bool,
-    })
+    }),
   ).isRequired,
   loading: PropTypes.bool,
   imgStyles: PropTypes.string,

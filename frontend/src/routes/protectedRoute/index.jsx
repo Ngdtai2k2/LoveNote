@@ -1,6 +1,6 @@
-import Dashboard from '@pages/Admin/Dashboard';
-import ROUTES from '@constants/routes';
-import CONSTANTS from '@constants';
+import Dashboard from "@pages/Admin/Dashboard";
+import ROUTES from "@constants/routes";
+import CONSTANTS from "@constants";
 
 const protectedRoutes = [
   {

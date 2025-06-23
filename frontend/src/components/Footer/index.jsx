@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
-import { MapPinIcon } from '@heroicons/react/24/solid';
+import { MapPinIcon } from "@heroicons/react/24/solid";
 
-import CONSTANTS from '@constants';
-import ROUTES from '@constants/routes';
-import useWebConfig from '@hooks/useWebConfig';
-import { renderWebConfigsToDOM } from '@helpers/renderWebConfigsToDOM';
+import CONSTANTS from "@constants";
+import ROUTES from "@constants/routes";
+import useWebConfig from "@hooks/useWebConfig";
+import { renderWebConfigsToDOM } from "@helpers/renderWebConfigsToDOM";
 
 export default function Footer() {
-  const { t, i18n } = useTranslation('footer');
+  const { t, i18n } = useTranslation("footer");
 
   const [webData, setWebData] = useState({
     contacts: null,
@@ -28,11 +28,12 @@ export default function Footer() {
   useEffect(() => {
     if (configLoading || !webConfigs.length) return;
 
-    const getValue = key => webConfigs.find(item => item.key === key)?.value;
+    const getValue = (key) =>
+      webConfigs.find((item) => item.key === key)?.value;
 
     setWebData({
-      contacts: getValue('contacts'),
-      socials: getValue('socials'),
+      contacts: getValue("contacts"),
+      socials: getValue("socials"),
     });
   }, [webConfigs, configLoading]);
 
@@ -40,49 +41,62 @@ export default function Footer() {
     <div className="mx-auto mt-10 border-t px-4 pt-10 sm:max-w-xl md:max-w-full md:px-24 lg:max-w-screen-xl lg:px-8">
       <div className="row-gap-6 mb-8 grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
         <div className="sm:col-span-2">
-          <Link to={ROUTES.HOME} aria-label="Go home" className="inline-flex items-center">
+          <Link
+            to={ROUTES.HOME}
+            aria-label="Go home"
+            className="inline-flex items-center"
+          >
             <span className="text-xl font-bold uppercase tracking-wide text-gray-800 dark:text-gray-100">
               {CONSTANTS.SITE_NAME}
             </span>
           </Link>
           <div className="mt-6 lg:max-w-sm">
-            <p className="text-sm text-gray-800 dark:text-gray-100" data-key="description_site"></p>
+            <p
+              className="text-sm text-gray-800 dark:text-gray-100"
+              data-key="description_site"
+            ></p>
           </div>
         </div>
         <div className="space-y-2 text-sm" data-key="contacts">
           <p className="text-base font-bold tracking-wide text-gray-900 dark:text-white">
-            {t('contacts')}
+            {t("contacts")}
           </p>
           <div className="flex">
-            <p className="mr-1 text-gray-800 dark:text-gray-100">{t('phone')}:</p>
+            <p className="mr-1 text-gray-800 dark:text-gray-100">
+              {t("phone")}:
+            </p>
             <a
               href={`tel:${webData.contacts?.phone}`}
-              aria-label={t('phone')}
-              title={t('phone')}
+              aria-label={t("phone")}
+              title={t("phone")}
               className="text-deep-purple-accent-400 transition-colors duration-300 hover:underline"
             >
               {webData.contacts?.phone}
             </a>
           </div>
           <div className="flex">
-            <p className="mr-1 text-gray-800 dark:text-gray-100">{t('email')}:</p>
+            <p className="mr-1 text-gray-800 dark:text-gray-100">
+              {t("email")}:
+            </p>
             <a
               href={`mailto:${webData.contacts?.email}`}
-              aria-label={t('email')}
-              title={t('email')}
+              aria-label={t("email")}
+              title={t("email")}
               className="text-deep-purple-accent-400 transition-colors duration-300 hover:underline"
             >
               {webData.contacts?.email}
             </a>
           </div>
           <div className="flex">
-            <p className="mr-1 text-gray-800 dark:text-gray-100">{t('address')}:</p>
+            <p className="mr-1 text-gray-800 dark:text-gray-100">
+              {t("address")}:
+            </p>
             <Link
               to={webData.contacts?.google_map}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label={t('address')}
-              title={t('address')}
+              aria-label={t("address")}
+              title={t("address")}
               className="text-deep-purple-accent-400 flex items-center transition-colors duration-300 hover:underline"
             >
               <MapPinIcon className="size-4" />
@@ -93,7 +107,7 @@ export default function Footer() {
         <div>
           {/* social */}
           <span className="text-base font-bold tracking-wide text-gray-900 dark:text-white">
-            {t('social')}
+            {t("social")}
           </span>
           <div className="mt-1 flex items-center space-x-3">
             <Link
@@ -117,18 +131,24 @@ export default function Footer() {
             </Link>
           </div>
           {/* end social */}
-          <p className="mt-4 text-sm text-gray-500 dark:text-gray-200" data-key="contacts_note"></p>
+          <p
+            className="mt-4 text-sm text-gray-500 dark:text-gray-200"
+            data-key="contacts_note"
+          ></p>
         </div>
       </div>
       <div className="flex flex-col-reverse justify-between border-t pb-10 pt-5 lg:flex-row">
-        <p className="text-sm text-gray-600 dark:text-gray-200" data-key="copyright"></p>
+        <p
+          className="text-sm text-gray-600 dark:text-gray-200"
+          data-key="copyright"
+        ></p>
         <ul className="mb-3 flex flex-col space-y-2 sm:flex-row sm:space-x-5 sm:space-y-0 lg:mb-0">
           <li>
             <Link
               to="/"
               className="text-sm text-gray-600 transition-colors duration-300 hover:underline dark:text-gray-200"
             >
-              {t('faq')}
+              {t("faq")}
             </Link>
           </li>
           <li>
@@ -136,7 +156,7 @@ export default function Footer() {
               to="/"
               className="text-sm text-gray-600 transition-colors duration-300 hover:underline dark:text-gray-200"
             >
-              {t('privacy_policy')}
+              {t("privacy_policy")}
             </Link>
           </li>
           <li>
@@ -144,7 +164,7 @@ export default function Footer() {
               to="/"
               className="text-sm text-gray-600 transition-colors duration-300 hover:underline dark:text-gray-200"
             >
-              {t('terms_and_conditions')}
+              {t("terms_and_conditions")}
             </Link>
           </li>
         </ul>
