@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from '../../../node_modules/react-i18next';
 import { Typography } from '@material-tailwind/react';
 
 import { BannerSlider } from '@components/BannerSlider';

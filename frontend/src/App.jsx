@@ -1,11 +1,11 @@
-import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { ToastContainer } from 'react-fox-toast';
-import { useTranslation } from 'react-i18next';
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { ToastContainer } from "react-fox-toast";
+import { useTranslation } from "../node_modules/react-i18next";
 
-import AppRoutes from './routes';
-import { useAxios } from '@hooks/useAxiosJWT';
-import { getCurrentUser } from '@api/user';
+import AppRoutes from "./routes";
+import { useAxios } from "@hooks/useAxiosJWT";
+import { getCurrentUser } from "@api/user";
 
 function App() {
   const dispatch = useDispatch();

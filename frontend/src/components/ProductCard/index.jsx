@@ -1,5 +1,5 @@
-import PropTypes from 'prop-types';
-import { HeartIcon, StarIcon } from '@heroicons/react/24/solid';
+import PropTypes from "prop-types";
+import { HeartIcon, StarIcon } from "@heroicons/react/24/solid";
 import {
   Card,
   CardHeader,
@@ -7,8 +7,8 @@ import {
   Typography,
   Button,
   IconButton,
-} from '@material-tailwind/react';
-import { useTranslation } from 'react-i18next';
+} from "@material-tailwind/react";
+import { useTranslation } from "../../../node_modules/react-i18next";
 
 export function ProductCard({
   image,
@@ -19,12 +19,16 @@ export function ProductCard({
   isFavorite = false,
   onToggleFavorite,
 }) {
-  const { t } = useTranslation('product');
+  const { t } = useTranslation("product");
 
   return (
     <Card className="w-full max-w-[20rem] h-full flex flex-col shadow-lg dark:bg-gray-900 bg-white">
       <CardHeader floated={false} color="blue-gray" className="relative">
-        <img src={image} alt={title} className="w-full h-60 object-cover object-center" />
+        <img
+          src={image}
+          alt={title}
+          className="w-full h-60 object-cover object-center"
+        />
         <div className="to-bg-black-10 absolute inset-0 h-full w-full bg-gradient-to-tr from-transparent via-transparent to-black/60" />
         <IconButton
           size="sm"
@@ -32,7 +36,11 @@ export function ProductCard({
           className="!absolute top-4 right-4 rounded-full"
           onClick={onToggleFavorite}
         >
-          <HeartIcon className={`h-6 w-6 ${isFavorite ? 'text-red-500' : 'text-red-300'}`} />
+          <HeartIcon
+            className={`h-6 w-6 ${
+              isFavorite ? "text-red-500" : "text-red-300"
+            }`}
+          />
         </IconButton>
       </CardHeader>
 
@@ -61,7 +69,7 @@ export function ProductCard({
           active:bg-gray-800 focus:bg-gray-800 dark:bg-gray-600 dark:hover:bg-gray-800 
           dark:active:bg-gray-800 dark:focus:bg-gray-800"
           >
-            {t('card.read_more')}
+            {t("card.read_more")}
           </Button>
         </div>
       </CardBody>

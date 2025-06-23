@@ -6,7 +6,7 @@ services:
       dockerfile: Dockerfile
       target: development
     ports:
-      - '${DEV_PORT}:${DEV_PORT}'
+      - "${DEV_PORT}:${DEV_PORT}"
     volumes:
       - .:/app
       - /app/node_modules
