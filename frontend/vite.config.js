@@ -9,7 +9,11 @@ const __dirname = path.dirname(__filename);
 export default defineConfig({
   plugins: [react()],
   server: {
+    host: true,
     port: 3000,
+    watch: {
+      usePolling: true,
+    },
   },
   resolve: {
     alias: {

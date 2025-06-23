@@ -11,7 +11,7 @@ ENV NODE_ENV=development
 
 EXPOSE 3000
 
-CMD ["npm", "start"]
+CMD ["npm", "run", "dev"]
 
 # Stage 2: Build (used for production)
 FROM node:22-alpine AS build
