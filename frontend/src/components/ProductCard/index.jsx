@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { HeartIcon, StarIcon } from "@heroicons/react/24/solid";
+import { StarIcon } from "@heroicons/react/24/solid";
 import {
   Card,
   CardHeader,
@@ -10,15 +10,7 @@ import {
 } from "@material-tailwind/react";
 import { useTranslation } from "react-i18next";
 
-export function ProductCard({
-  image,
-  title,
-  description,
-  rating,
-  onReadMore,
-  isFavorite = false,
-  onToggleFavorite,
-}) {
+export function ProductCard({ image, title, description, rating, onReadMore }) {
   const { t } = useTranslation("product");
 
   return (
@@ -30,18 +22,6 @@ export function ProductCard({
           className="h-60 w-full object-cover object-center"
         />
         <div className="to-bg-black-10 absolute inset-0 h-full w-full bg-gradient-to-tr from-transparent via-transparent to-black/60" />
-        <IconButton
-          size="sm"
-          variant="text"
-          className="!absolute right-4 top-4 rounded-full"
-          onClick={onToggleFavorite}
-        >
-          <HeartIcon
-            className={`h-6 w-6 ${
-              isFavorite ? "text-red-500" : "text-red-300"
-            }`}
-          />
-        </IconButton>
       </CardHeader>
 
       <CardBody className="flex flex-1 flex-col">
@@ -53,7 +33,7 @@ export function ProductCard({
             {title}
           </Typography>
           <Typography className="flex items-center gap-1.5 font-normal text-gray-800 dark:text-gray-200">
-            <StarIcon className="-mt-0.5 h-5 w-5 text-yellow-700" />
+            <StarIcon className="-mt-0.5 h-5 w-5 text-yellow-300" />
             {rating}
           </Typography>
         </div>
@@ -83,6 +63,4 @@ ProductCard.propTypes = {
   description: PropTypes.string.isRequired,
   rating: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   onReadMore: PropTypes.func,
-  isFavorite: PropTypes.bool,
-  onToggleFavorite: PropTypes.func,
 };

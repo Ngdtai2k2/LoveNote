@@ -64,7 +64,6 @@ export default function Home() {
                 title={product.name}
                 description={product.description}
                 rating={product.rating}
-                // isFavorite={}
               />
             ))
           ) : (
