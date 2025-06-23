@@ -147,13 +147,11 @@ export default function NavBar({ isAdmin }) {
               <Bars3Icon className="size-6 text-black dark:text-gray-200" />
             </IconButton>
           ) : (
-            <Typography
-              as="a"
-              href={ROUTES.HOME}
-              className="ml-2 mr-4 block cursor-pointer border-none py-1.5 font-medium text-black dark:text-gray-200 md:hidden"
-            >
-              {CONSTANTS.SITE_NAME}
-            </Typography>
+            <Link to={ROUTES.HOME}>
+              <Typography className="ml-2 mr-4 block cursor-pointer border-none py-1.5 font-medium text-black dark:text-gray-200 md:hidden">
+                {CONSTANTS.SITE_NAME}
+              </Typography>
+            </Link>
           )}
 
           {/* Right section */}
