@@ -39,3 +39,8 @@ export const profileMenu = [
     icon: PowerIcon,
   },
 ];
+
+export const profileTabMenu = [
+  { label: "my_website", value: "0" },
+  { label: "my_order", value: "1" },
+];

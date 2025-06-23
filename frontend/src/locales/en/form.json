@@ -21,6 +21,8 @@
         "confirm_password_mismatch": "Passwords do not match",
         "forgot_password": "Forgot Password?",
         "sign_in_now": "Sign In Now",
-        "sign_up_now": "Sign Up Now"
-    }
+        "sign_up_now": "Sign Up Now",
+        "joined": "Joined"
+    },
+    "update": "Update"
 }

@@ -1,5 +1,140 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import {
+  Avatar,
+  Button,
+  Card,
+  CardBody,
+  Tabs,
+  TabsHeader,
+  TabsBody,
+  Tab,
+  TabPanel,
+  Typography,
+} from "@material-tailwind/react";
+import { useTranslation } from "react-i18next";
+
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+import "dayjs/locale/en";
+import "dayjs/locale/vi";
+
+import { useCurrentUser } from "@hooks/useCurrentUser";
+import { useDocumentTitle } from "@hooks/useDocumentTitle";
+import { profileTabMenu } from "@constants/navigation";
+import CONSTANTS from "@constants";
+
+dayjs.extend(relativeTime);
 
 export default function Profile() {
-  return <div>index</div>;
+  const [createdAt, setCreatedAt] = useState();
+
+  const { t, i18n } = useTranslation(["navbar", "form"]);
+  const user = useCurrentUser();
+
+  useDocumentTitle(t("profile"));
+
+  useEffect(() => {
+    dayjs.locale(i18n.language);
+    const createdAt = user?.created_at
+      ? dayjs(user.created_at).fromNow()
+      : "--";
+
+    setCreatedAt(createdAt);
+  }, [i18n.language, user?.created_at]);
+
+  return (
+    <Card className="mt-5 overflow-hidden border-t shadow-md dark:border-gray-900 dark:bg-gray-900">
+      <CardBody className="p-4">
+        <div className="grid grid-cols-12 gap-4">
+          <div className="md:col-span-4 col-span-12 pr-2">
+            <Avatar
+              src={user?.avatar || CONSTANTS.DEFAULT_AVATAR}
+              alt={user?.full_name}
+              variant="rounded"
+              className="h-56 w-full object-contain"
+            />
+            <div className="border-t p-2 dark:border-slate-500 gap-4">
+              <div className="flex gap-2">
+                <Typography
+                  variant="h6"
+                  className="dark:text-gray-200 font-medium"
+                >
+                  {t("form:auth.full_name")}:
+                </Typography>
+                <Typography
+                  variant="h6"
+                  className="dark:text-gray-200 font-light"
+                >
+                  {user?.full_name}
+                </Typography>
+              </div>
+              <div className="flex gap-2">
+                <Typography
+                  variant="h6"
+                  className="dark:text-gray-200 font-medium"
+                >
+                  {t("form:auth.email")}:
+                </Typography>
+                <Typography
+                  variant="h6"
+                  className="dark:text-gray-200 font-light"
+                >
+                  {user?.email}
+                </Typography>
+              </div>
+              <div className="flex gap-2">
+                <Typography
+                  variant="h6"
+                  className="dark:text-gray-200 font-medium"
+                >
+                  {t("form:auth.joined")}:
+                </Typography>
+                <Typography
+                  variant="h6"
+                  className="dark:text-gray-200 font-light"
+                >
+                  {createdAt}
+                </Typography>
+              </div>
+            </div>
+            <div className="md:border-b-0 border-b flex justify-end">
+              <Button
+                className="my-4 dark:text-gray-200 dark:border-gray-200 focus:outline-none
+                focus:ring-0 active:outline-none active:ring-0"
+                variant="outlined"
+                size="sm"
+              >
+                {t("form:update")}
+              </Button>
+            </div>
+          </div>
+          <div className="md:col-span-8 col-span-12">
+            <Tabs value="0">
+              <TabsHeader
+                className="bg-transparent dark:bg-gray-700"
+                indicatorProps={{
+                  className:
+                    "bg-gray-900/10 dark:bg-gray-500 shadow-none !text-gray-900",
+                }}
+              >
+                {profileTabMenu.map(({ label, value }) => (
+                  <Tab
+                    key={value}
+                    value={value.toString()}
+                    className="dark:text-gray-200 font-bold"
+                  >
+                    {t(label)}
+                  </Tab>
+                ))}
+              </TabsHeader>
+              <TabsBody>
+                <TabPanel value="0">Tab 0 content</TabPanel>
+                <TabPanel value="1">Tab 1 content</TabPanel>
+              </TabsBody>
+            </Tabs>
+          </div>
+        </div>
+      </CardBody>
+    </Card>
+  );
 }
