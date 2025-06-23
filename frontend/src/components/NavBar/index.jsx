@@ -1,5 +1,5 @@
 import React, { createElement, useEffect, useState } from "react";
-import { useTranslation } from "../../../node_modules/react-i18next";
+import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
 
 import {
