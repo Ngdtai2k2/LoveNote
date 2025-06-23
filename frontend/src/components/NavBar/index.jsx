@@ -1,6 +1,6 @@
-import React, { createElement, useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
-import PropTypes from "prop-types";
+import React, { createElement, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import PropTypes from 'prop-types';
 
 import {
   Navbar,
@@ -9,21 +9,21 @@ import {
   IconButton,
   Collapse,
   Drawer,
-} from "@material-tailwind/react";
-import { Link } from "react-router-dom";
-import { Bars2Icon, Bars3Icon, XMarkIcon } from "@heroicons/react/24/solid";
+} from '@material-tailwind/react';
+import { Link } from 'react-router-dom';
+import { Bars2Icon, Bars3Icon, XMarkIcon } from '@heroicons/react/24/solid';
 
-import { navbar, tabbar } from "@constants/navigation";
-import ROUTES from "@constants/routes";
-import { LANG_LIST } from "@constants/lang";
-import CONSTANTS from "@constants";
+import { navbar, tabbar } from '@constants/navigation';
+import ROUTES from '@constants/routes';
+import { LANG_LIST } from '@constants/lang';
+import CONSTANTS from '@constants';
 
-import ToggleMode from "@components/ToggleMode";
-import ChangeLang from "@components/ChangeLang";
-import { ProfileMenu } from "./profileMenu";
+import ToggleMode from '@components/ToggleMode';
+import ChangeLang from '@components/ChangeLang';
+import { ProfileMenu } from './profileMenu';
 
 function NavList() {
-  const { t } = useTranslation("navbar");
+  const { t } = useTranslation('navbar');
 
   return (
     <ul className="mb-4 mt-2 flex flex-col gap-2 md:mb-0 md:mt-0 md:flex-row md:items-center">
@@ -35,9 +35,7 @@ function NavList() {
           active:bg-gray-300 dark:hover:bg-gray-800 dark:focus:bg-gray-800 
           dark:active:bg-gray-800 md:rounded-full"
             >
-              <span className="text-black dark:text-gray-200">
-                {t(nav.label)}
-              </span>
+              <span className="text-black dark:text-gray-200">{t(nav.label)}</span>
             </MenuItem>
           </Link>
         </li>
@@ -47,14 +45,10 @@ function NavList() {
 }
 
 function TabBar({ openTabBar, closeTabBar }) {
-  const { t } = useTranslation("tabbar");
+  const { t } = useTranslation('tabbar');
 
   return (
-    <Drawer
-      open={openTabBar}
-      onClose={closeTabBar}
-      className="p-4 dark:bg-gray-700"
-    >
+    <Drawer open={openTabBar} onClose={closeTabBar} className="p-4 dark:bg-gray-700">
       <div className="mb-6 flex items-center justify-between">
         <Typography variant="h5" className="text-black dark:text-gray-200">
           {CONSTANTS.SITE_NAME}
@@ -72,12 +66,10 @@ function TabBar({ openTabBar, closeTabBar }) {
             dark:active:bg-gray-800 md:rounded-full"
             >
               {createElement(tab.icon, {
-                className: "h-6 w-6 text-gray-800 dark:text-gray-200",
+                className: 'h-6 w-6 text-gray-800 dark:text-gray-200',
                 strokeWidth: 2,
               })}
-              <span className="text-black dark:text-gray-200">
-                {t(tab.label)}
-              </span>
+              <span className="text-black dark:text-gray-200">{t(tab.label)}</span>
             </MenuItem>
           </Link>
         ))}
@@ -96,10 +88,7 @@ export default function NavBar({ isAdmin }) {
   const closeTabBar = () => setIsTabBarOpen(false);
 
   useEffect(() => {
-    window.addEventListener(
-      "resize",
-      () => window.innerWidth >= 960 && setIsNavOpen(false),
-    );
+    window.addEventListener('resize', () => window.innerWidth >= 960 && setIsNavOpen(false));
   }, []);
 
   return (
@@ -140,10 +129,7 @@ export default function NavBar({ isAdmin }) {
 
           {/* Admin or Mobile Logo */}
           {isAdmin ? (
-            <IconButton
-              className="bg-gray-100 dark:bg-gray-700"
-              onClick={openTabBar}
-            >
+            <IconButton className="bg-gray-100 dark:bg-gray-700" onClick={openTabBar}>
               <Bars3Icon className="size-6 text-black dark:text-gray-200" />
             </IconButton>
           ) : (
@@ -171,9 +157,7 @@ export default function NavBar({ isAdmin }) {
       </Navbar>
 
       {/* TabBar for admin */}
-      {isAdmin && (
-        <TabBar openTabBar={isTabBarOpen} closeTabBar={closeTabBar} />
-      )}
+      {isAdmin && <TabBar openTabBar={isTabBarOpen} closeTabBar={closeTabBar} />}
     </>
   );
 }

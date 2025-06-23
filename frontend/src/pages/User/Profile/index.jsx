@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 import {
   Avatar,
   Button,
@@ -10,34 +10,32 @@ import {
   Tab,
   TabPanel,
   Typography,
-} from "@material-tailwind/react";
-import { useTranslation } from "react-i18next";
+} from '@material-tailwind/react';
+import { useTranslation } from 'react-i18next';
 
-import dayjs from "dayjs";
-import relativeTime from "dayjs/plugin/relativeTime";
-import "dayjs/locale/en";
-import "dayjs/locale/vi";
+import dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
+import 'dayjs/locale/en';
+import 'dayjs/locale/vi';
 
-import { useCurrentUser } from "@hooks/useCurrentUser";
-import { useDocumentTitle } from "@hooks/useDocumentTitle";
-import { profileTabMenu } from "@constants/navigation";
-import CONSTANTS from "@constants";
+import { useCurrentUser } from '@hooks/useCurrentUser';
+import { useDocumentTitle } from '@hooks/useDocumentTitle';
+import { profileTabMenu } from '@constants/navigation';
+import CONSTANTS from '@constants';
 
 dayjs.extend(relativeTime);
 
 export default function Profile() {
   const [createdAt, setCreatedAt] = useState();
 
-  const { t, i18n } = useTranslation(["navbar", "form"]);
+  const { t, i18n } = useTranslation(['navbar', 'form']);
   const user = useCurrentUser();
 
-  useDocumentTitle(t("profile"));
+  useDocumentTitle(t('profile'));
 
   useEffect(() => {
     dayjs.locale(i18n.language);
-    const createdAt = user?.created_at
-      ? dayjs(user.created_at).fromNow()
-      : "--";
+    const createdAt = user?.created_at ? dayjs(user.created_at).fromNow() : '--';
 
     setCreatedAt(createdAt);
   }, [i18n.language, user?.created_at]);
@@ -55,44 +53,26 @@ export default function Profile() {
             />
             <div className="border-t p-2 dark:border-slate-500 gap-4">
               <div className="flex gap-2">
-                <Typography
-                  variant="h6"
-                  className="dark:text-gray-200 font-medium"
-                >
-                  {t("form:auth.full_name")}:
+                <Typography variant="h6" className="dark:text-gray-200 font-medium">
+                  {t('form:auth.full_name')}:
                 </Typography>
-                <Typography
-                  variant="h6"
-                  className="dark:text-gray-200 font-light"
-                >
+                <Typography variant="h6" className="dark:text-gray-200 font-light">
                   {user?.full_name}
                 </Typography>
               </div>
               <div className="flex gap-2">
-                <Typography
-                  variant="h6"
-                  className="dark:text-gray-200 font-medium"
-                >
-                  {t("form:auth.email")}:
+                <Typography variant="h6" className="dark:text-gray-200 font-medium">
+                  {t('form:auth.email')}:
                 </Typography>
-                <Typography
-                  variant="h6"
-                  className="dark:text-gray-200 font-light"
-                >
+                <Typography variant="h6" className="dark:text-gray-200 font-light">
                   {user?.email}
                 </Typography>
               </div>
               <div className="flex gap-2">
-                <Typography
-                  variant="h6"
-                  className="dark:text-gray-200 font-medium"
-                >
-                  {t("form:auth.joined")}:
+                <Typography variant="h6" className="dark:text-gray-200 font-medium">
+                  {t('form:auth.joined')}:
                 </Typography>
-                <Typography
-                  variant="h6"
-                  className="dark:text-gray-200 font-light"
-                >
+                <Typography variant="h6" className="dark:text-gray-200 font-light">
                   {createdAt}
                 </Typography>
               </div>
@@ -104,7 +84,7 @@ export default function Profile() {
                 variant="outlined"
                 size="sm"
               >
-                {t("form:update")}
+                {t('form:update')}
               </Button>
             </div>
           </div>
@@ -113,8 +93,7 @@ export default function Profile() {
               <TabsHeader
                 className="bg-transparent dark:bg-gray-700"
                 indicatorProps={{
-                  className:
-                    "bg-gray-900/10 dark:bg-gray-500 shadow-none !text-gray-900",
+                  className: 'bg-gray-900/10 dark:bg-gray-500 shadow-none !text-gray-900',
                 }}
               >
                 {profileTabMenu.map(({ label, value }) => (

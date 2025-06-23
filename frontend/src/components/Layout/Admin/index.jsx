@@ -1,7 +1,7 @@
-import React from "react";
-import PropTypes from "prop-types";
-import CONSTANTS from "@constants";
-import NavBar from "@components/NavBar";
+import React from 'react';
+import PropTypes from 'prop-types';
+import CONSTANTS from '@constants';
+import NavBar from '@components/NavBar';
 
 export default function LayoutAdmin({ children, className }) {
   const today = new Date();

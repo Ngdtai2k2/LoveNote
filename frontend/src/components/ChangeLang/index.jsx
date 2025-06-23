@@ -1,15 +1,8 @@
-import React from "react";
-import PropTypes from "prop-types";
-import {
-  Menu,
-  MenuHandler,
-  MenuList,
-  MenuItem,
-  Button,
-  Avatar,
-} from "@material-tailwind/react";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Menu, MenuHandler, MenuList, MenuItem, Button, Avatar } from '@material-tailwind/react';
 
-import useLanguage from "@contexts/language/useLanguage";
+import useLanguage from '@contexts/language/useLanguage';
 
 export default function ChangeLang({ langList }) {
   const { language, changeLanguage } = useLanguage();
@@ -41,14 +34,10 @@ export default function ChangeLang({ langList }) {
             focus:bg-gray-300 active:bg-gray-300 dark:hover:bg-gray-700 
             dark:focus:bg-gray-700 dark:active:bg-gray-700"
           >
-            <img
-              src={item.flag}
-              alt={item.label}
-              className="size-6 rounded-full object-cover"
-            />
+            <img src={item.flag} alt={item.label} className="size-6 rounded-full object-cover" />
             <h6
               className={`text-[14px] text-gray-800 dark:text-gray-200 ${
-                language === item.value ? "font-bold underline" : ""
+                language === item.value ? 'font-bold underline' : ''
               }`}
             >
               {item.label}

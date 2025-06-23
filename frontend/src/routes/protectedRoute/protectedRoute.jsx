@@ -1,9 +1,9 @@
-import { Navigate } from "react-router-dom";
-import PropTypes from "prop-types";
+import { Navigate } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
-import { useCurrentUser } from "@hooks/useCurrentUser";
-import ROUTES from "@constants/routes";
-import CONSTANTS from "@constants";
+import { useCurrentUser } from '@hooks/useCurrentUser';
+import ROUTES from '@constants/routes';
+import CONSTANTS from '@constants';
 
 const ProtectedRoute = ({ element, requiredRole }) => {
   const user = useCurrentUser();

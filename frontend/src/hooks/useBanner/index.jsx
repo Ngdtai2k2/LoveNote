@@ -1,6 +1,6 @@
-import { useCallback } from "react";
-import { bannerAPI } from "@api/banner";
-import useCachedApi from "@hooks/useCachedApi";
+import { useCallback } from 'react';
+import { bannerAPI } from '@api/banner';
+import useCachedApi from '@hooks/useCachedApi';
 
 const useBanner = () => {
   const fetchBanners = useCallback(() => {
@@ -8,7 +8,7 @@ const useBanner = () => {
   }, []);
 
   const { data: banners, loading } = useCachedApi({
-    cacheKey: "banners",
+    cacheKey: 'banners',
     ttl: 5 * 60 * 1000,
     fetcher: fetchBanners,
   });

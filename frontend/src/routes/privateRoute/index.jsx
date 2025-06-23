@@ -1,5 +1,5 @@
-import ROUTES from "@constants/routes";
-import Profile from "@pages/User/Profile";
+import ROUTES from '@constants/routes';
+import Profile from '@pages/User/Profile';
 
 const privateRoutes = [
   {

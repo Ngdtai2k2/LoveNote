@@ -1,19 +1,19 @@
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate } from 'react-router-dom';
 
-import NotFound from "@pages/NotFound";
-import publicRoute from "./publicRoute";
-import protectedRoutes from "./protectedRoute";
-import privateRoutes from "./privateRoute";
-import templateRoutes from "./templateRoute";
+import NotFound from '@pages/NotFound';
+import publicRoute from './publicRoute';
+import protectedRoutes from './protectedRoute';
+import privateRoutes from './privateRoute';
+import templateRoutes from './templateRoute';
 
-import LayoutUser from "@components/Layout/User";
-import LayoutAdmin from "@components/Layout/Admin";
+import LayoutUser from '@components/Layout/User';
+import LayoutAdmin from '@components/Layout/Admin';
 
-import ROUTES from "@constants/routes";
-import CONSTANTS from "@constants";
+import ROUTES from '@constants/routes';
+import CONSTANTS from '@constants';
 
-import { renderRoutes } from "@helpers/renderRoutes";
-import { useCurrentUser } from "@hooks/useCurrentUser";
+import { renderRoutes } from '@helpers/renderRoutes';
+import { useCurrentUser } from '@hooks/useCurrentUser';
 
 const AppRoutes = () => {
   const user = useCurrentUser();
@@ -23,10 +23,10 @@ const AppRoutes = () => {
   const isAdmin = user?.role === CONSTANTS.ADMIN;
 
   const adminRoutes = protectedRoutes.filter((route) =>
-    route.path.startsWith(CONSTANTS.ADMIN_PREFIX),
+    route.path.startsWith(CONSTANTS.ADMIN_PREFIX)
   );
   const userRoutes = protectedRoutes.filter(
-    (route) => !route.path.startsWith(CONSTANTS.ADMIN_PREFIX),
+    (route) => !route.path.startsWith(CONSTANTS.ADMIN_PREFIX)
   );
 
   return (
@@ -55,10 +55,7 @@ const AppRoutes = () => {
       })}
 
       {/* 404 fallback */}
-      <Route
-        path={`${CONSTANTS.ADMIN_PREFIX}/*`}
-        element={<NotFound isAdmin={isAdmin} />}
-      />
+      <Route path={`${CONSTANTS.ADMIN_PREFIX}/*`} element={<NotFound isAdmin={isAdmin} />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

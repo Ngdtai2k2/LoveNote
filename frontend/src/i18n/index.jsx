@@ -1,23 +1,23 @@
-import i18n from "i18next";
-import { initReactI18next } from "react-i18next";
+import i18n from 'i18next';
+import { initReactI18next } from 'react-i18next';
 
-import NAVBAR_EN from "@locales/en/navbar.json";
-import NAVBAR_VI from "@locales/vi/navbar.json";
+import NAVBAR_EN from '@locales/en/navbar.json';
+import NAVBAR_VI from '@locales/vi/navbar.json';
 
-import TABBAR_EN from "@locales/en/tabbar.json";
-import TABBAR_VI from "@locales/vi/tabbar.json";
+import TABBAR_EN from '@locales/en/tabbar.json';
+import TABBAR_VI from '@locales/vi/tabbar.json';
 
-import FORM_EN from "@locales/en/form.json";
-import FORM_VI from "@locales/vi/form.json";
+import FORM_EN from '@locales/en/form.json';
+import FORM_VI from '@locales/vi/form.json';
 
-import NOTFOUND_EN from "@locales/en/notfound.json";
-import NOTFOUND_VI from "@locales/vi/notfound.json";
+import NOTFOUND_EN from '@locales/en/notfound.json';
+import NOTFOUND_VI from '@locales/vi/notfound.json';
 
-import PRODUCT_EN from "@locales/en/product.json";
-import PRODUCT_VI from "@locales/vi/product.json";
+import PRODUCT_EN from '@locales/en/product.json';
+import PRODUCT_VI from '@locales/vi/product.json';
 
-import FOOTER_EN from "@locales/en/footer.json";
-import FOOTER_VI from "@locales/vi/footer.json";
+import FOOTER_EN from '@locales/en/footer.json';
+import FOOTER_VI from '@locales/vi/footer.json';
 
 const resources = {
   vi: {
@@ -38,13 +38,13 @@ const resources = {
   },
 };
 
-const defaultLanguage = localStorage.getItem("language") || "vi";
+const defaultLanguage = localStorage.getItem('language') || 'vi';
 
 i18n.use(initReactI18next).init({
   resources,
   lng: defaultLanguage,
-  ns: ["navbar", "form", "notfound", "tabbar", "product", "footer"],
-  fallbackLng: "en",
+  ns: ['navbar', 'form', 'notfound', 'tabbar', 'product', 'footer'],
+  fallbackLng: 'en',
   interpolation: { escapeValue: false },
 });
 

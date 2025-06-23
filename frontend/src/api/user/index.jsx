@@ -1,6 +1,6 @@
-import API_ENDPOINTS from "@utils/api";
-import { removeUser, setUser } from "@redux/slice/user";
-import { signOutSuccess } from "@redux/slice/auth";
+import API_ENDPOINTS from '@utils/api';
+import { removeUser, setUser } from '@redux/slice/user';
+import { signOutSuccess } from '@redux/slice/auth';
 
 export const getCurrentUser = async (dispatch, axiosJWT) => {
   try {

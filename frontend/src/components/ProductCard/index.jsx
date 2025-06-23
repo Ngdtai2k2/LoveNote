@@ -1,5 +1,5 @@
-import PropTypes from "prop-types";
-import { StarIcon } from "@heroicons/react/24/solid";
+import PropTypes from 'prop-types';
+import { StarIcon } from '@heroicons/react/24/solid';
 import {
   Card,
   CardHeader,
@@ -7,20 +7,16 @@ import {
   Typography,
   Button,
   IconButton,
-} from "@material-tailwind/react";
-import { useTranslation } from "react-i18next";
+} from '@material-tailwind/react';
+import { useTranslation } from 'react-i18next';
 
 export function ProductCard({ image, title, description, rating, onReadMore }) {
-  const { t } = useTranslation("product");
+  const { t } = useTranslation('product');
 
   return (
     <Card className="flex h-full w-full max-w-[20rem] flex-col bg-white shadow-lg dark:bg-gray-900">
       <CardHeader floated={false} color="blue-gray" className="relative">
-        <img
-          src={image}
-          alt={title}
-          className="h-60 w-full object-cover object-center"
-        />
+        <img src={image} alt={title} className="h-60 w-full object-cover object-center" />
         <div className="to-bg-black-10 absolute inset-0 h-full w-full bg-gradient-to-tr from-transparent via-transparent to-black/60" />
       </CardHeader>
 
@@ -49,7 +45,7 @@ export function ProductCard({ image, title, description, rating, onReadMore }) {
           focus:bg-gray-800 active:bg-gray-800 dark:bg-gray-600 dark:hover:bg-gray-800 
           dark:focus:bg-gray-800 dark:active:bg-gray-800"
           >
-            {t("card.read_more")}
+            {t('card.read_more')}
           </Button>
         </div>
       </CardBody>

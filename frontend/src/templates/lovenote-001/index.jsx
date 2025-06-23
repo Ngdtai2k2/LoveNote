@@ -1,12 +1,12 @@
-import { useEffect, useRef, useState } from "react";
-import PropTypes from "prop-types";
+import { useEffect, useRef, useState } from 'react';
+import PropTypes from 'prop-types';
 
 export default function LoveNoteTemplate({
-  text = "DEMO",
-  color = "#ff69b4",
-  backgroundColor = "black",
+  text = 'DEMO',
+  color = '#ff69b4',
+  backgroundColor = 'black',
   fontSize = 16,
-  title = "DEMO",
+  title = 'DEMO',
 }) {
   const canvasRef = useRef(null);
   const [canvasSize, setCanvasSize] = useState({
@@ -16,7 +16,7 @@ export default function LoveNoteTemplate({
 
   useEffect(() => {
     const canvas = canvasRef.current;
-    const ctx = canvas.getContext("2d");
+    const ctx = canvas.getContext('2d');
     let animationId;
 
     const columns = Math.floor(canvasSize.width / (fontSize * 4));
@@ -27,7 +27,7 @@ export default function LoveNoteTemplate({
     let frameCount = 0;
 
     const drawMatrix = () => {
-      ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
       ctx.fillRect(0, 0, canvasSize.width, canvasSize.height);
       ctx.fillStyle = color;
 
@@ -95,13 +95,13 @@ export default function LoveNoteTemplate({
       }
     };
 
-    window.addEventListener("resize", handleResize);
-    canvas.addEventListener("click", handleClick);
+    window.addEventListener('resize', handleResize);
+    canvas.addEventListener('click', handleClick);
 
     return () => {
       cancelAnimationFrame(animationId);
-      window.removeEventListener("resize", handleResize);
-      canvas.removeEventListener("click", handleClick);
+      window.removeEventListener('resize', handleResize);
+      canvas.removeEventListener('click', handleClick);
     };
   }, [canvasSize, text, color, fontSize]);
 

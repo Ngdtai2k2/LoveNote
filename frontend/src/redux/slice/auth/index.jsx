@@ -1,7 +1,7 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 const auth = createSlice({
-  name: "auth",
+  name: 'auth',
   initialState: {
     isFetching: false,
     token: null,

@@ -1,4 +1,4 @@
-import { createContext } from "react";
+import { createContext } from 'react';
 
 // Context for Interface Mode (light/dark)
 export const ModeContext = createContext(null);

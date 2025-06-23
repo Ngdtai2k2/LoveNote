@@ -1,6 +1,6 @@
-import { useCallback } from "react";
-import { webConfigAPI } from "@api/webConfig";
-import useCachedApi from "@hooks/useCachedApi";
+import { useCallback } from 'react';
+import { webConfigAPI } from '@api/webConfig';
+import useCachedApi from '@hooks/useCachedApi';
 
 const useWebConfig = () => {
   const fetcher = useCallback(() => {
@@ -8,7 +8,7 @@ const useWebConfig = () => {
   }, []);
 
   const { data: webConfigs, loading } = useCachedApi({
-    cacheKey: "web_configs",
+    cacheKey: 'web_configs',
     ttl: 10 * 60 * 1000,
     fetcher,
   });

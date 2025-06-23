@@ -1,13 +1,13 @@
 {
-    "home": "Trang chủ",
-    "about": "Giới thiệu",
-    "contact": "Liên hệ",
-    "login": "Đăng nhập",
-    "logout": "Đăng xuất",
-    "register": "Đăng ký",
-    "profile": "Hồ sơ cá nhân",
-    "settings": "Cài đặt",
-    "help": "Trợ giúp",
-    "my_website": "Website của tôi",
-    "my_order": "Đơn hàng"
+  "home": "Trang chủ",
+  "about": "Giới thiệu",
+  "contact": "Liên hệ",
+  "login": "Đăng nhập",
+  "logout": "Đăng xuất",
+  "register": "Đăng ký",
+  "profile": "Hồ sơ cá nhân",
+  "settings": "Cài đặt",
+  "help": "Trợ giúp",
+  "my_website": "Website của tôi",
+  "my_order": "Đơn hàng"
 }

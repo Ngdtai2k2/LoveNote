@@ -1,10 +1,10 @@
-import axios from "axios";
-import { useMemo } from "react";
-import { jwtDecode } from "jwt-decode";
-import { useDispatch, useSelector } from "react-redux";
+import axios from 'axios';
+import { useMemo } from 'react';
+import { jwtDecode } from 'jwt-decode';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { signInSuccess } from "@redux/slice/auth";
-import API_ENDPOINTS from "@utils/api";
+import { signInSuccess } from '@redux/slice/auth';
+import API_ENDPOINTS from '@utils/api';
 
 const refreshToken = async (lng) => {
   try {
@@ -14,9 +14,9 @@ const refreshToken = async (lng) => {
       {
         withCredentials: true,
         headers: {
-          "Accept-Language": lng,
+          'Accept-Language': lng,
         },
-      },
+      }
     );
     return res.data;
   } catch (err) {
@@ -30,8 +30,8 @@ export const createAxios = (lng, auth, dispatch, stateSuccess) => {
   const newInstance = axios.create({
     withCredentials: true,
     headers: {
-      "Accept-Language": lng,
-      Authorization: auth ? `Bearer ${auth.token}` : "",
+      'Accept-Language': lng,
+      Authorization: auth ? `Bearer ${auth.token}` : '',
     },
   });
 
@@ -59,7 +59,7 @@ export const createAxios = (lng, auth, dispatch, stateSuccess) => {
           } else {
             dispatch(signInSuccess(refreshUser));
           }
-          config.headers["Authorization"] = `Bearer ${data.token}`;
+          config.headers['Authorization'] = `Bearer ${data.token}`;
         } else {
           if (stateSuccess) {
             dispatch(stateSuccess(null));
@@ -70,7 +70,7 @@ export const createAxios = (lng, auth, dispatch, stateSuccess) => {
     },
     (err) => {
       return Promise.reject(err);
-    },
+    }
   );
 
   return newInstance;

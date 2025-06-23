@@ -1,10 +1,10 @@
-import React from "react";
-import { useInterfaceMode } from "@contexts/interfaceMode/useInterfaceMode";
-import { MoonIcon, SunIcon } from "@heroicons/react/24/solid";
+import React from 'react';
+import { useInterfaceMode } from '@contexts/interfaceMode/useInterfaceMode';
+import { MoonIcon, SunIcon } from '@heroicons/react/24/solid';
 
 export default function ToggleMode() {
   const { mode, toggleMode } = useInterfaceMode();
-  const isDark = mode === "dark";
+  const isDark = mode === 'dark';
 
   return (
     <label className="relative inline-flex cursor-pointer items-center">

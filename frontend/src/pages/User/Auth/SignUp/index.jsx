@@ -1,42 +1,38 @@
-import React from "react";
-import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
-import { Form, Formik } from "formik";
-import * as Yup from "yup";
+import React from 'react';
+import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
+import { Form, Formik } from 'formik';
+import * as Yup from 'yup';
 
-import FormField from "@components/FormField";
-import ROUTES from "@constants/routes";
-import { signUp } from "@api/auth";
-import { useDocumentTitle } from "@hooks/useDocumentTitle";
+import FormField from '@components/FormField';
+import ROUTES from '@constants/routes';
+import { signUp } from '@api/auth';
+import { useDocumentTitle } from '@hooks/useDocumentTitle';
 
 export default function SignUp() {
-  const { t } = useTranslation("form");
+  const { t } = useTranslation('form');
 
-  useDocumentTitle(t("auth.sign_up"));
+  useDocumentTitle(t('auth.sign_up'));
 
   const navigate = useNavigate();
 
   const initialValues = {
-    fullName: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
+    fullName: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
   };
 
   const validationSchema = Yup.object({
     fullName: Yup.string()
-      .min(2, t("auth.full_name_min"))
-      .max(50, t("auth.full_name_max"))
-      .required(t("auth.full_name_required")),
-    email: Yup.string()
-      .email(t("auth.email_invalid"))
-      .required(t("auth.email_required")),
-    password: Yup.string()
-      .min(6, t("auth.password_min"))
-      .required(t("auth.password_required")),
+      .min(2, t('auth.full_name_min'))
+      .max(50, t('auth.full_name_max'))
+      .required(t('auth.full_name_required')),
+    email: Yup.string().email(t('auth.email_invalid')).required(t('auth.email_required')),
+    password: Yup.string().min(6, t('auth.password_min')).required(t('auth.password_required')),
     confirmPassword: Yup.string()
-      .oneOf([Yup.ref("password"), null], t("auth.confirm_password_mismatch"))
-      .required(t("auth.confirm_password_required")),
+      .oneOf([Yup.ref('password'), null], t('auth.confirm_password_mismatch'))
+      .required(t('auth.confirm_password_required')),
   });
 
   const onSubmit = (values) => {
@@ -47,7 +43,7 @@ export default function SignUp() {
     <div className="mt-5 flex items-center justify-center">
       <div className="w-96 rounded-lg bg-white p-8 shadow-md dark:bg-gray-900">
         <h2 className="mb-6 text-center text-2xl font-bold text-gray-800 dark:text-gray-200">
-          {t("auth.sign_up")}
+          {t('auth.sign_up')}
         </h2>
         <Formik
           initialValues={initialValues}
@@ -60,8 +56,8 @@ export default function SignUp() {
                 <FormField
                   name="fullName"
                   type="text"
-                  label={t("auth.full_name")}
-                  placeholder={t("auth.full_name_placeholder")}
+                  label={t('auth.full_name')}
+                  placeholder={t('auth.full_name_placeholder')}
                   errors={errors}
                   touched={touched}
                   required
@@ -75,8 +71,8 @@ export default function SignUp() {
                 <FormField
                   name="email"
                   type="email"
-                  label={t("auth.email")}
-                  placeholder={t("auth.email_placeholder")}
+                  label={t('auth.email')}
+                  placeholder={t('auth.email_placeholder')}
                   errors={errors}
                   touched={touched}
                   required
@@ -90,8 +86,8 @@ export default function SignUp() {
                 <FormField
                   type="password"
                   name="password"
-                  label={t("auth.password")}
-                  placeholder={t("auth.password_placeholder")}
+                  label={t('auth.password')}
+                  placeholder={t('auth.password_placeholder')}
                   errors={errors}
                   touched={touched}
                   required
@@ -105,8 +101,8 @@ export default function SignUp() {
                 <FormField
                   type="password"
                   name="confirmPassword"
-                  label={t("auth.confirm_password")}
-                  placeholder={t("auth.confirm_password_placeholder")}
+                  label={t('auth.confirm_password')}
+                  placeholder={t('auth.confirm_password_placeholder')}
                   errors={errors}
                   touched={touched}
                   required
@@ -121,7 +117,7 @@ export default function SignUp() {
                   onClick={() => navigate(ROUTES.AUTH.SIGN_IN)}
                   className="cursor-pointer text-[12px] italic text-gray-800 underline hover:no-underline dark:text-gray-200"
                 >
-                  {t("auth.sign_in_now")}
+                  {t('auth.sign_in_now')}
                 </h6>
               </div>
 
@@ -132,7 +128,7 @@ export default function SignUp() {
                 focus:bg-gray-800 active:bg-gray-800 dark:bg-gray-600 dark:hover:bg-gray-800 dark:focus:bg-gray-800 
                 dark:active:bg-gray-800"
                 >
-                  {t("auth.sign_up")}
+                  {t('auth.sign_up')}
                 </button>
               </div>
             </Form>

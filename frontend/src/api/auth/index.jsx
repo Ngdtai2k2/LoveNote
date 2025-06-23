@@ -1,7 +1,7 @@
-import axios from "axios";
-import { toast } from "react-fox-toast";
-import API_ENDPOINTS from "@utils/api";
-import ROUTES from "@constants/routes";
+import axios from 'axios';
+import { toast } from 'react-fox-toast';
+import API_ENDPOINTS from '@utils/api';
+import ROUTES from '@constants/routes';
 import {
   signInError,
   signInStart,
@@ -9,7 +9,7 @@ import {
   signOutStart,
   signOutSuccess,
   signOutError,
-} from "@redux/slice/auth";
+} from '@redux/slice/auth';
 
 export const signUp = async (data, navigate) => {
   try {
@@ -23,17 +23,17 @@ export const signUp = async (data, navigate) => {
       {
         withCredentials: true,
         headers: {
-          "Accept-Language": "vi",
+          'Accept-Language': 'vi',
         },
-      },
+      }
     );
     toast.success(response.data.message, {
-      position: "bottom-right",
+      position: 'bottom-right',
     });
     navigate(ROUTES.AUTH.SIGN_IN);
   } catch (error) {
     toast.error(error.response?.data.message, {
-      position: "bottom-right",
+      position: 'bottom-right',
     });
   }
 };
@@ -48,12 +48,12 @@ export const signIn = (data, navigate) => async (dispatch) => {
       {
         withCredentials: true,
         headers: {
-          "Accept-Language": "vi",
+          'Accept-Language': 'vi',
         },
-      },
+      }
     );
     toast.success(response.data.message, {
-      position: "top-right",
+      position: 'top-right',
     });
     dispatch(signInSuccess(response.data));
     navigate(ROUTES.HOME);
@@ -61,7 +61,7 @@ export const signIn = (data, navigate) => async (dispatch) => {
   } catch (error) {
     dispatch(signInError(error.response?.data));
     toast.error(error.response?.data.message, {
-      position: "top-right",
+      position: 'top-right',
     });
   }
 };
@@ -72,19 +72,19 @@ export const signOut = (axiosJWT, navigate) => async (dispatch) => {
     const response = await axiosJWT.post(API_ENDPOINTS.AUTH.SIGN_OUT, {
       withCredentials: true,
       headers: {
-        "Accept-Language": "vi",
+        'Accept-Language': 'vi',
       },
     });
     dispatch(signOutSuccess());
     toast.success(response.data.message, {
-      position: "top-right",
+      position: 'top-right',
     });
     navigate(ROUTES.HOME);
     window.location.reload();
   } catch (error) {
     dispatch(signOutError());
     toast.error(error.response?.data.message, {
-      position: "top-right",
+      position: 'top-right',
     });
   }
 };

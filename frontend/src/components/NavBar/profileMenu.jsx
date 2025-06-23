@@ -1,8 +1,8 @@
-import React, { createElement, useState } from "react";
+import React, { createElement, useState } from 'react';
 
-import { Link, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { useTranslation } from "react-i18next";
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 
 import {
   Typography,
@@ -12,26 +12,22 @@ import {
   MenuList,
   MenuItem,
   Avatar,
-} from "@material-tailwind/react";
-import {
-  ChevronDownIcon,
-  ArrowRightEndOnRectangleIcon,
-  PlusIcon,
-} from "@heroicons/react/24/solid";
+} from '@material-tailwind/react';
+import { ChevronDownIcon, ArrowRightEndOnRectangleIcon, PlusIcon } from '@heroicons/react/24/solid';
 
-import { profileMenu } from "@constants/navigation";
-import { useCurrentUser } from "@hooks/useCurrentUser";
-import { useAxios } from "@hooks/useAxiosJWT";
-import { signOut } from "@api/auth";
-import ROUTES from "@constants/routes";
-import CONSTANTS from "@constants";
+import { profileMenu } from '@constants/navigation';
+import { useCurrentUser } from '@hooks/useCurrentUser';
+import { useAxios } from '@hooks/useAxiosJWT';
+import { signOut } from '@api/auth';
+import ROUTES from '@constants/routes';
+import CONSTANTS from '@constants';
 
 export function ProfileMenu() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { t, i18n } = useTranslation("navbar");
+  const { t, i18n } = useTranslation('navbar');
   const { axiosJWT } = useAxios(i18n.language);
 
   const user = useCurrentUser();
@@ -77,7 +73,7 @@ export function ProfileMenu() {
           <ChevronDownIcon
             strokeWidth={2.5}
             className={`h-3 w-3 text-gray-700 transition-transform dark:text-gray-200 ${
-              isMenuOpen ? "rotate-180" : ""
+              isMenuOpen ? 'rotate-180' : ''
             }`}
           />
         </Button>
@@ -99,7 +95,7 @@ export function ProfileMenu() {
             dark:focus:bg-gray-700 dark:active:bg-gray-700"
             >
               {createElement(icon, {
-                className: "h-4 w-4 text-gray-800 dark:text-gray-200",
+                className: 'h-4 w-4 text-gray-800 dark:text-gray-200',
                 strokeWidth: 2,
               })}
               <Link to={href}>
@@ -115,12 +111,8 @@ export function ProfileMenu() {
           ))
         ) : (
           <>
-            {renderMenuItem(
-              "login",
-              ArrowRightEndOnRectangleIcon,
-              ROUTES.AUTH.SIGN_IN,
-            )}
-            {renderMenuItem("register", PlusIcon, ROUTES.AUTH.SIGN_UP)}
+            {renderMenuItem('login', ArrowRightEndOnRectangleIcon, ROUTES.AUTH.SIGN_IN)}
+            {renderMenuItem('register', PlusIcon, ROUTES.AUTH.SIGN_UP)}
           </>
         )}
       </MenuList>
