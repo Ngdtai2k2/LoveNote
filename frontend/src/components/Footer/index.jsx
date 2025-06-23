@@ -38,7 +38,7 @@ export default function Footer() {
   }, [webConfigs, configLoading]);
 
   return (
-    <div className="mx-auto mt-10 border-t px-4 pt-10 sm:max-w-xl md:max-w-full md:px-24 lg:max-w-screen-xl lg:px-8">
+    <div className="mx-auto mt-5 border-t px-4 pt-5 sm:max-w-xl md:max-w-full md:px-24 lg:max-w-screen-xl lg:px-8">
       <div className="row-gap-6 mb-8 grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
         <div className="sm:col-span-2">
           <Link
