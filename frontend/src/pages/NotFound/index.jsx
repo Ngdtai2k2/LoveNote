@@ -15,17 +15,17 @@ export default function NotFound({ isAdmin = false }) {
   useDocumentTitle(t('page_not_found'));
 
   const content = (
-    <div className="flex flex-col items-center justify-center mt-10 pt-10 dark:bg-gray-800">
-      <h1 className="text-8xl font-bold text-gray-900 dark:text-gray-200 mb-4">404</h1>
-      <h2 className="text-2xl font-semibold text-gray-700 dark:text-gray-200 mb-2">
+    <div className="mt-10 flex flex-col items-center justify-center pt-10 dark:bg-gray-800">
+      <h1 className="mb-4 text-8xl font-bold text-gray-900 dark:text-gray-200">404</h1>
+      <h2 className="mb-2 text-2xl font-semibold text-gray-700 dark:text-gray-200">
         {t('page_not_found')}
       </h2>
-      <p className="text-center text-gray-700 dark:text-gray-200 mb-6">
+      <p className="mb-6 text-center text-gray-700 dark:text-gray-200">
         {t('page_not_found_title')}
       </p>
       <Link
         to={isAdmin ? ROUTES.ADMIN.DASHBOARD : ROUTES.HOME}
-        className="px-6 py-2 bg-gray-600 hover:bg-gray-800 dark:bg-gray-600 text-white rounded dark:hover:bg-gray-900 transition"
+        className="rounded bg-gray-600 px-6 py-2 text-white transition hover:bg-gray-800 dark:bg-gray-600 dark:hover:bg-gray-900"
       >
         {t('go_home')}
       </Link>

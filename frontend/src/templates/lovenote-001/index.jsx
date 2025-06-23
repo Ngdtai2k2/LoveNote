@@ -107,16 +107,16 @@ export default function LoveNoteTemplate({
 
   return (
     <div
-      className="w-screen h-screen overflow-hidden relative cursor-pointer"
+      className="relative h-screen w-screen cursor-pointer overflow-hidden"
       style={{ backgroundColor }}
     >
       <canvas
         ref={canvasRef}
         width={canvasSize.width}
         height={canvasSize.height}
-        className="absolute top-0 left-0 z-0"
+        className="absolute left-0 top-0 z-0"
       />
-      <div className="absolute top-0 left-0 w-full h-full z-10 flex items-center justify-center pointer-events-none">
+      <div className="pointer-events-none absolute left-0 top-0 z-10 flex h-full w-full items-center justify-center">
         <h1 className="font-mono text-4xl opacity-80" style={{ color }}>
           {title}
         </h1>

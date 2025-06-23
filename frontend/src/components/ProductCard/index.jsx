@@ -22,18 +22,18 @@ export function ProductCard({
   const { t } = useTranslation("product");
 
   return (
-    <Card className="w-full max-w-[20rem] h-full flex flex-col shadow-lg dark:bg-gray-900 bg-white">
+    <Card className="flex h-full w-full max-w-[20rem] flex-col bg-white shadow-lg dark:bg-gray-900">
       <CardHeader floated={false} color="blue-gray" className="relative">
         <img
           src={image}
           alt={title}
-          className="w-full h-60 object-cover object-center"
+          className="h-60 w-full object-cover object-center"
         />
         <div className="to-bg-black-10 absolute inset-0 h-full w-full bg-gradient-to-tr from-transparent via-transparent to-black/60" />
         <IconButton
           size="sm"
           variant="text"
-          className="!absolute top-4 right-4 rounded-full"
+          className="!absolute right-4 top-4 rounded-full"
           onClick={onToggleFavorite}
         >
           <HeartIcon
@@ -44,11 +44,11 @@ export function ProductCard({
         </IconButton>
       </CardHeader>
 
-      <CardBody className="flex-1 flex flex-col">
+      <CardBody className="flex flex-1 flex-col">
         <div className="mb-2 flex items-center justify-between">
           <Typography
             variant="h6"
-            className="text-gray-800 dark:text-gray-200 font-bold line-clamp-1"
+            className="line-clamp-1 font-bold text-gray-800 dark:text-gray-200"
           >
             {title}
           </Typography>
@@ -57,7 +57,7 @@ export function ProductCard({
             {rating}
           </Typography>
         </div>
-        <Typography className="text-sm text-gray-800 dark:text-gray-200 line-clamp-2 min-h-[2rem]">
+        <Typography className="line-clamp-2 min-h-[2rem] text-sm text-gray-800 dark:text-gray-200">
           {description}
         </Typography>
         <div className="mt-auto pt-4">
@@ -65,9 +65,9 @@ export function ProductCard({
             size="lg"
             fullWidth
             onClick={onReadMore}
-            className="text-white rounded transition duration-200 bg-gray-600 hover:bg-gray-800 
-          active:bg-gray-800 focus:bg-gray-800 dark:bg-gray-600 dark:hover:bg-gray-800 
-          dark:active:bg-gray-800 dark:focus:bg-gray-800"
+            className="rounded bg-gray-600 text-white transition duration-200 hover:bg-gray-800 
+          focus:bg-gray-800 active:bg-gray-800 dark:bg-gray-600 dark:hover:bg-gray-800 
+          dark:focus:bg-gray-800 dark:active:bg-gray-800"
           >
             {t("card.read_more")}
           </Button>

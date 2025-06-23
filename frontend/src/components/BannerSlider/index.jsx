@@ -14,7 +14,7 @@ export function BannerSlider({
     <Carousel className={carouselStyles} {...carouselProps}>
       {loading ? (
         <div className="mt-2 flex justify-center">
-          <div className="w-8 h-8 border-4 border-t-gray-800 border-gray-300 rounded-full animate-spin"></div>
+          <div className="h-8 w-8 animate-spin rounded-full border-4 border-gray-300 border-t-gray-800"></div>
         </div>
       ) : (
         banners.map(banner => {

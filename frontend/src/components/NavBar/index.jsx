@@ -26,14 +26,14 @@ function NavList() {
   const { t } = useTranslation("navbar");
 
   return (
-    <ul className="mt-2 mb-4 flex flex-col gap-2 md:mb-0 md:mt-0 md:flex-row md:items-center">
+    <ul className="mb-4 mt-2 flex flex-col gap-2 md:mb-0 md:mt-0 md:flex-row md:items-center">
       {navbar.map((nav, index) => (
         <li key={index}>
           <Link to={nav.href}>
             <MenuItem
-              className="flex items-center gap-2 md:rounded-full hover:bg-gray-300 
-          active:bg-gray-300 focus:bg-gray-300 dark:hover:bg-gray-800 
-          dark:active:bg-gray-800 dark:focus:bg-gray-800"
+              className="flex items-center gap-2 hover:bg-gray-300 focus:bg-gray-300 
+          active:bg-gray-300 dark:hover:bg-gray-800 dark:focus:bg-gray-800 
+          dark:active:bg-gray-800 md:rounded-full"
             >
               <span className="text-black dark:text-gray-200">
                 {t(nav.label)}
@@ -63,13 +63,13 @@ function TabBar({ openTabBar, closeTabBar }) {
           <XMarkIcon className="size-6 text-black dark:text-gray-200" />
         </IconButton>
       </div>
-      <ul className="mt-2 mb-4 flex flex-col gap-2">
+      <ul className="mb-4 mt-2 flex flex-col gap-2">
         {tabbar.map((tab, index) => (
           <Link key={index} to={tab.href}>
             <MenuItem
-              className="flex items-center gap-2 md:rounded-full hover:bg-gray-300 
-            active:bg-gray-300 focus:bg-gray-300 dark:hover:bg-gray-800 
-            dark:active:bg-gray-800 dark:focus:bg-gray-800"
+              className="flex items-center gap-2 hover:bg-gray-300 focus:bg-gray-300 
+            active:bg-gray-300 dark:hover:bg-gray-800 dark:focus:bg-gray-800 
+            dark:active:bg-gray-800 md:rounded-full"
             >
               {createElement(tab.icon, {
                 className: "h-6 w-6 text-gray-800 dark:text-gray-200",
@@ -105,15 +105,15 @@ export default function NavBar({ isAdmin }) {
   return (
     <>
       <Navbar
-        className="bg-white dark:bg-gray-900 border-none md:mt-2 mx-auto max-w-screen-xl p-2 
-        rounded-none md:rounded-full lg:pl-6"
+        className="mx-auto max-w-screen-xl rounded-none border-none bg-white p-2 dark:bg-gray-900 
+        md:mt-2 md:rounded-full lg:pl-6"
       >
         <div className="relative mx-auto flex items-center justify-between dark:text-gray-200">
           {/* Logo */}
           {!isAdmin && (
             <Typography
-              className="mr-4 ml-2 cursor-pointer py-1.5 font-medium text-black dark:text-gray-200 border-none 
-              hidden md:block"
+              className="ml-2 mr-4 hidden cursor-pointer border-none py-1.5 font-medium text-black 
+              dark:text-gray-200 md:block"
             >
               <Link to={ROUTES.HOME}>{CONSTANTS.SITE_NAME}</Link>
             </Typography>
@@ -150,14 +150,14 @@ export default function NavBar({ isAdmin }) {
             <Typography
               as="a"
               href={ROUTES.HOME}
-              className="md:hidden block mr-4 ml-2 cursor-pointer py-1.5 font-medium text-black dark:text-gray-200 border-none"
+              className="ml-2 mr-4 block cursor-pointer border-none py-1.5 font-medium text-black dark:text-gray-200 md:hidden"
             >
               {CONSTANTS.SITE_NAME}
             </Typography>
           )}
 
           {/* Right section */}
-          <div className="flex gap-2 items-center">
+          <div className="flex items-center gap-2">
             <ToggleMode />
             <ChangeLang langList={LANG_LIST} />
             <ProfileMenu />

@@ -40,7 +40,7 @@ export default function FormField({
       <ErrorMessage
         name={name}
         component="div"
-        className="text-red-500 text-[12px] font-light italic p-0 leading-tight pt-1 first-letter:uppercase"
+        className="p-0 pt-1 text-[12px] font-light italic leading-tight text-red-500 first-letter:uppercase"
       />
     </div>
   );

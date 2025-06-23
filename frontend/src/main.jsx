@@ -7,7 +7,7 @@ import { ThemeProvider } from "@material-tailwind/react";
 
 import App from "./App";
 import "./index.css";
-import { AppProviders } from "@providers";
+import { AppProviders } from "@contexts";
 import { store, persistor } from "@redux/store";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
@@ -23,6 +23,5 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         </ThemeProvider>
       </PersistGate>
     </Provider>
-  </React.StrictMode>
+  </React.StrictMode>,
 );
-

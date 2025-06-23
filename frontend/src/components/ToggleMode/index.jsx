@@ -1,13 +1,13 @@
-import React from 'react';
-import { useInterfaceMode } from '@providers/interfaceMode';
-import { MoonIcon, SunIcon } from '@heroicons/react/24/solid';
+import React from "react";
+import { useInterfaceMode } from "@contexts/interfaceMode/useInterfaceMode";
+import { MoonIcon, SunIcon } from "@heroicons/react/24/solid";
 
 export default function ToggleMode() {
   const { mode, toggleMode } = useInterfaceMode();
-  const isDark = mode === 'dark';
+  const isDark = mode === "dark";
 
   return (
-    <label className="relative inline-flex items-center cursor-pointer">
+    <label className="relative inline-flex cursor-pointer items-center">
       <input
         className="peer hidden border-none"
         type="checkbox"
@@ -15,14 +15,14 @@ export default function ToggleMode() {
         onChange={toggleMode}
       />
       <div
-        className={`group peer ring-0 bg-gray-300 dark:bg-gray-500 border-gray-800 rounded-full 
-        outline-none duration-700 after:duration-200 w-14 h-7 shadow-sm peer-checked:bg-gradient-to-r 
-        peer-focus:outline-none after:content-[''] after:rounded-full after:absolute after:bg-gray-800 
-        dark:after:bg-gray-900 after:outline-none after:h-5 after:w-5 after:top-1 after:left-1 
-        peer-checked:after:translate-x-7 peer-hover:after:scale-95 relative`}
+        className={`group peer relative h-7 w-14 rounded-full border-gray-800 
+        bg-gray-300 shadow-sm outline-none ring-0 duration-700 after:absolute after:left-1 
+        after:top-1 after:h-5 after:w-5 after:rounded-full after:bg-gray-800 
+        after:outline-none after:duration-200 after:content-[''] peer-checked:bg-gradient-to-r peer-checked:after:translate-x-7 peer-hover:after:scale-95 
+        peer-focus:outline-none dark:bg-gray-500 dark:after:bg-gray-900`}
       >
-        <MoonIcon className="absolute top-[4.5px] left-[2.5px] fill-gray-200 w-5 h-5" />
-        <SunIcon className="absolute top-[4.5px] right-[2.5px] fill-yellow-700 w-5 h-5" />
+        <MoonIcon className="absolute left-[2.5px] top-[4.5px] h-5 w-5 fill-gray-200" />
+        <SunIcon className="absolute right-[2.5px] top-[4.5px] h-5 w-5 fill-yellow-700" />
       </div>
     </label>
   );

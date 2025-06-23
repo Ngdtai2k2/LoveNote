@@ -1,12 +1,20 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { useLanguage } from '@providers/language';
-import { Menu, MenuHandler, MenuList, MenuItem, Button, Avatar } from '@material-tailwind/react';
+import React from "react";
+import PropTypes from "prop-types";
+import {
+  Menu,
+  MenuHandler,
+  MenuList,
+  MenuItem,
+  Button,
+  Avatar,
+} from "@material-tailwind/react";
+
+import useLanguage from "@contexts/language/useLanguage";
 
 export default function ChangeLang({ langList }) {
   const { language, changeLanguage } = useLanguage();
 
-  const currentLang = langList.find(item => item.value === language);
+  const currentLang = langList.find((item) => item.value === language);
 
   return (
     <Menu>
@@ -14,29 +22,33 @@ export default function ChangeLang({ langList }) {
         <Button
           variant="text"
           color="gray"
-          className="rounded-full h-8 w-8 p-0.5 md:ml-auto d-flex items-center justify-center"
+          className="d-flex h-8 w-8 items-center justify-center rounded-full p-0.5 md:ml-auto"
         >
           <Avatar
             variant="circular"
             src={currentLang?.flag}
             alt={currentLang?.label}
-            className="rounded-full h-7 w-7 p-0.5"
+            className="h-7 w-7 rounded-full p-0.5"
           />
         </Button>
       </MenuHandler>
-      <MenuList className="p-1 dark:bg-gray-900 bg-white dark:border-gray-700">
-        {langList.map(item => (
+      <MenuList className="bg-white p-1 dark:border-gray-700 dark:bg-gray-900">
+        {langList.map((item) => (
           <MenuItem
             key={item.value}
             onClick={() => changeLanguage(item.value)}
             className="flex items-center gap-2 rounded hover:bg-gray-300 
-            active:bg-gray-300 focus:bg-gray-300 dark:hover:bg-gray-700 
-            dark:active:bg-gray-700 dark:focus:bg-gray-700"
+            focus:bg-gray-300 active:bg-gray-300 dark:hover:bg-gray-700 
+            dark:focus:bg-gray-700 dark:active:bg-gray-700"
           >
-            <img src={item.flag} alt={item.label} className="object-cover rounded-full size-6" />
+            <img
+              src={item.flag}
+              alt={item.label}
+              className="size-6 rounded-full object-cover"
+            />
             <h6
               className={`text-[14px] text-gray-800 dark:text-gray-200 ${
-                language === item.value ? 'font-bold underline' : ''
+                language === item.value ? "font-bold underline" : ""
               }`}
             >
               {item.label}

@@ -6,7 +6,7 @@ import PrivateRoute from '@routes/privateRoute/privateRoute';
 
 export const renderRoutes = (routes, LayoutComponent = React.Fragment, isAuthenticated = false) =>
   routes.map(({ path, element, isPrivate, requiredRole }, index) => {
-    let content = <LayoutComponent>{element}</LayoutComponent>;
+    let content = React.createElement(LayoutComponent, null, element);
 
     if (requiredRole) {
       content = <ProtectedRoute requiredRole={requiredRole} element={content} />;

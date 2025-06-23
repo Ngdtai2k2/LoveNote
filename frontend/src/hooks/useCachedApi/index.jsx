@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
-import { setCachedData } from '@helpers/cacheSession';
-import { useSocketContext } from '@providers/socket';
+import { useEffect, useState } from "react";
+import { setCachedData } from "@helpers/cacheSession";
+import { useSocketContext } from "@contexts/socket/useSocketContext";
 
 /**
  * @param {Object} options
@@ -44,7 +44,7 @@ const useCachedApi = ({ cacheKey, ttl = 10 * 60 * 1000, fetcher }) => {
         const result = await fetcher();
         setData(result);
         setCachedData(cacheKey, result);
-      } catch (err) {
+      } catch {
         setData(null);
       } finally {
         setLoading(false);

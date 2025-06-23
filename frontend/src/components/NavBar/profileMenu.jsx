@@ -40,8 +40,8 @@ export function ProfileMenu() {
     <MenuItem
       onClick={() => handleNavigate(path)}
       className="flex items-center gap-2 rounded hover:bg-gray-300 
-            active:bg-gray-300 focus:bg-gray-300 dark:hover:bg-gray-700 
-            dark:active:bg-gray-700 dark:focus:bg-gray-700"
+            focus:bg-gray-300 active:bg-gray-300 dark:hover:bg-gray-700 
+            dark:focus:bg-gray-700 dark:active:bg-gray-700"
     >
       <Icon className="h-4 w-4 text-gray-900 dark:text-gray-200" />
       <Typography
@@ -60,7 +60,7 @@ export function ProfileMenu() {
         <Button
           variant="text"
           color="gray"
-          className="flex border-none items-center gap-1 rounded-full py-0.5 pr-2 pl-0.5 md:ml-auto"
+          className="flex items-center gap-1 rounded-full border-none py-0.5 pl-0.5 pr-2 md:ml-auto"
         >
           <Avatar
             variant="circular"
@@ -71,14 +71,14 @@ export function ProfileMenu() {
           />
           <ChevronDownIcon
             strokeWidth={2.5}
-            className={`h-3 w-3 text-gray-700 dark:text-gray-200 transition-transform ${
+            className={`h-3 w-3 text-gray-700 transition-transform dark:text-gray-200 ${
               isMenuOpen ? 'rotate-180' : ''
             }`}
           />
         </Button>
       </MenuHandler>
 
-      <MenuList className="p-1 dark:bg-gray-900 bg-white dark:border-gray-700">
+      <MenuList className="bg-white p-1 dark:border-gray-700 dark:bg-gray-900">
         {user ? (
           profileMenu.map(({ label, icon, href }, key) => (
             <MenuItem
@@ -90,8 +90,8 @@ export function ProfileMenu() {
                 }
               }}
               className="flex items-center gap-2 rounded hover:bg-gray-300 
-            active:bg-gray-300 focus:bg-gray-300 dark:hover:bg-gray-700 
-            dark:active:bg-gray-700 dark:focus:bg-gray-700"
+            focus:bg-gray-300 active:bg-gray-300 dark:hover:bg-gray-700 
+            dark:focus:bg-gray-700 dark:active:bg-gray-700"
             >
               {createElement(icon, {
                 className: 'h-4 w-4 text-gray-800 dark:text-gray-200',

@@ -33,9 +33,9 @@ export default function SignIn() {
   };
 
   return (
-    <div className="flex mt-10 pt-5 justify-center items-center">
-      <div className="dark:bg-gray-900 bg-white p-8 rounded-lg shadow-md w-96">
-        <h2 className="text-2xl font-bold mb-6 text-center text-gray-800 dark:text-gray-200">
+    <div className="mt-10 flex items-center justify-center pt-5">
+      <div className="w-96 rounded-lg bg-white p-8 shadow-md dark:bg-gray-900">
+        <h2 className="mb-6 text-center text-2xl font-bold text-gray-800 dark:text-gray-200">
           {t('auth.sign_in')}
         </h2>
         <Formik
@@ -57,7 +57,7 @@ export default function SignIn() {
                   value={values.email}
                   onChange={handleChange}
                   labelColor="text-gray-800 dark:text-gray-200"
-                  className="focus:outline-none rounded px-2 py-2 dark:bg-white/10 bg-black/10 text-[16px] w-full"
+                  className="w-full rounded bg-black/10 px-2 py-2 text-[16px] focus:outline-none dark:bg-white/10"
                 />
               </div>
 
@@ -73,17 +73,17 @@ export default function SignIn() {
                   value={values.password}
                   onChange={handleChange}
                   labelColor="text-gray-800 dark:text-gray-200"
-                  className="focus:outline-none rounded px-2 py-2 dark:bg-white/10 bg-black/10 text-[16px] w-full"
+                  className="w-full rounded bg-black/10 px-2 py-2 text-[16px] focus:outline-none dark:bg-white/10"
                 />
               </div>
 
-              <div className="mb-5 px-1 flex justify-between">
-                <h6 className="text-[12px] text-gray-800 dark:text-gray-200 italic cursor-pointer underline hover:no-underline">
+              <div className="mb-5 flex justify-between px-1">
+                <h6 className="cursor-pointer text-[12px] italic text-gray-800 underline hover:no-underline dark:text-gray-200">
                   {t('auth.forgot_password')}
                 </h6>
                 <h6
                   onClick={() => navigate(ROUTES.AUTH.SIGN_UP)}
-                  className="text-[12px] text-gray-800 dark:text-gray-200 italic cursor-pointer underline hover:no-underline"
+                  className="cursor-pointer text-[12px] italic text-gray-800 underline hover:no-underline dark:text-gray-200"
                 >
                   {t('auth.sign_up_now')}
                 </h6>
@@ -92,9 +92,9 @@ export default function SignIn() {
               <div className="flex justify-center">
                 <button
                   type="submit"
-                  className="w-full text-white py-2 rounded transition duration-200 bg-gray-600 hover:bg-gray-800 
-                active:bg-gray-800 focus:bg-gray-800 dark:bg-gray-600 dark:hover:bg-gray-800 dark:active:bg-gray-800 
-                dark:focus:bg-gray-800"
+                  className="w-full rounded bg-gray-600 py-2 text-white transition duration-200 hover:bg-gray-800 
+                focus:bg-gray-800 active:bg-gray-800 dark:bg-gray-600 dark:hover:bg-gray-800 dark:focus:bg-gray-800 
+                dark:active:bg-gray-800"
                 >
                   {t('auth.sign_in')}
                 </button>

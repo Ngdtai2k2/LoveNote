@@ -13,7 +13,7 @@ export default function LayoutAdmin({ children, className }) {
         <NavBar isAdmin={true} />
         {children}
       </div>
-      <div className="mt-5 text-center font-light text-[13px] text-gray-900 dark:text-gray-200">
+      <div className="mt-5 text-center text-[13px] font-light text-gray-900 dark:text-gray-200">
         &#169; {currentYear} {CONSTANTS.SITE_NAME}
       </div>
     </div>
