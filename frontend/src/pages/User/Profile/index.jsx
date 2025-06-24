@@ -23,6 +23,8 @@ import { useDocumentTitle } from '@hooks/useDocumentTitle';
 import { profileTabMenu } from '@constants/navigation';
 import CONSTANTS from '@constants';
 
+import UpdateModal from './updateModal';
+
 dayjs.extend(relativeTime);
 
 export default function Profile() {
@@ -78,14 +80,7 @@ export default function Profile() {
               </div>
             </div>
             <div className="md:border-b-0 border-b flex justify-end">
-              <Button
-                className="my-4 dark:text-gray-200 dark:border-gray-200 focus:outline-none
-                focus:ring-0 active:outline-none active:ring-0"
-                variant="outlined"
-                size="sm"
-              >
-                {t('form:update')}
-              </Button>
+              <UpdateModal />
             </div>
           </div>
           <div className="md:col-span-8 col-span-12">
