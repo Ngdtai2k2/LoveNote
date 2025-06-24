@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 
 import AppRoutes from './routes';
 import { useAxios } from '@hooks/useAxiosJWT';
-import { getCurrentUser } from '@api/user';
+import { userAPI } from '@api/user';
 
 function App() {
   const dispatch = useDispatch();
@@ -13,7 +13,7 @@ function App() {
   const { axiosJWT } = useAxios(i18n.language);
 
   useEffect(() => {
-    getCurrentUser(dispatch, axiosJWT);
+    userAPI.getCurrentUser(dispatch, axiosJWT);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
