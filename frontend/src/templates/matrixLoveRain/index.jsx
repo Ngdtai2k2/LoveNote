@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 
-export default function LoveNoteTemplate({
+export default function MatrixLoveRain({
   text = 'DEMO',
   color = '#ff69b4',
   backgroundColor = 'black',
@@ -125,7 +125,7 @@ export default function LoveNoteTemplate({
   );
 }
 
-LoveNoteTemplate.propTypes = {
+MatrixLoveRain.propTypes = {
   text: PropTypes.string,
   color: PropTypes.string,
   backgroundColor: PropTypes.string,

@@ -1,8 +1,8 @@
-import LoveNoteTemplate from '@templates/lovenote-001';
+import LoveNoteTemplate from '@templates/matrixLoveRain';
 
 const templateRoutes = [
   {
-    path: '/template/lovenote-001',
+    path: '/matrix-love-rain',
     element: <LoveNoteTemplate />,
   },
 ];
