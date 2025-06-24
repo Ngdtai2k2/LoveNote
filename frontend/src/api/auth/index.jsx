@@ -28,12 +28,12 @@ export const signUp = async (data, navigate) => {
       }
     );
     toast.success(response.data.message, {
-      position: 'bottom-right',
+      position: 'top-right',
     });
     navigate(ROUTES.AUTH.SIGN_IN);
   } catch (error) {
     toast.error(error.response?.data.message, {
-      position: 'bottom-right',
+      position: 'top-right',
     });
   }
 };
