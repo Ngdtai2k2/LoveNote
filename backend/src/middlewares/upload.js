@@ -6,7 +6,7 @@ const fs = require('fs');
 const createStorage = (folder) => {
   return multer.diskStorage({
     destination: (req, file, callBack) => {
-      const dir = path.join(__dirname, '../public/images', folder);
+      const dir = path.join(__dirname, '../assets/avatar', folder);
       fs.mkdirSync(dir, { recursive: true }); // Ensure the directory exists
       callBack(null, dir); // Set the destination folder
     },
