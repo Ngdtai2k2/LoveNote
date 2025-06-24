@@ -11,6 +11,7 @@ const ROUTES = {
     USERS: '/admin/users',
   },
   HOME: '/',
+  CONTACTS: '/contacts',
   NOT_FOUND: '/404',
 };
 

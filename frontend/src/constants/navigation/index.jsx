@@ -11,7 +11,7 @@ import ROUTES from '../routes';
 export const navbar = [
   { label: 'home', href: ROUTES.HOME },
   { label: 'about', href: '#' },
-  { label: 'contact', href: '#' },
+  { label: 'contact', href: ROUTES.CONTACTS },
   { label: 'help', href: '#' },
 ];
 
