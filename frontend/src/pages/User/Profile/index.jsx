@@ -53,7 +53,7 @@ export default function Profile() {
               variant="rounded"
               className="h-56 w-full object-contain"
             />
-            <div className="border-t p-2 dark:border-slate-500 gap-4">
+            <div className="border-t mt-2 p-2 dark:border-slate-500 gap-4">
               <div className="flex gap-2">
                 <Typography variant="h6" className="dark:text-gray-200 font-medium">
                   {t('form:auth.full_name')}:
