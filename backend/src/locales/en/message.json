@@ -1,3 +1,4 @@
 {
-  "server_error": "An error occurred please try again later!"
+  "server_error": "An error occurred please try again later!",
+  "profile_update_success": "Successfully updated personal information!"
 }

@@ -8,7 +8,7 @@ const helpers = require('@helpers');
 const userController = {
   updateProfile: async (req, res) => {
     const { userId } = req.params;
-    const upload = uploadMiddleware(`avatar/${userId}`).single('file');
+    const upload = uploadMiddleware(`${userId}`).single('file');
 
     upload(req, res, async (err) => {
       if (err && err.code !== 'LIMIT_UNEXPECTED_FILE') {
@@ -19,8 +19,7 @@ const userController = {
 
       try {
         helpers.trimRequestBody(req.body);
-
-        let fullName = req.body;
+        const { fullName, phoneNumber } = req.body;
 
         if (!fullName)
           return res
@@ -34,13 +33,13 @@ const userController = {
 
         let fileUrl = null;
         if (req.file) {
-          fileUrl = `${process.env.SERVER_URL}/images/avatar/${userId}/${req.file.filename}`;
+          fileUrl = `${process.env.SERVER_URL}/assets/avatar/${userId}/${req.file.filename}`;
 
           // Delete the old avatar file if it exists
           if (user.avatar) {
             const oldAvatarPath = path.join(
               __dirname,
-              '../../../public/images/avatar',
+              '../../../assets/avatar',
               userId.toString(),
               path.basename(user.avatar)
             );
@@ -55,9 +54,10 @@ const userController = {
 
         await user.update({
           full_name: fullName,
+          phone_number: phoneNumber
         });
 
-        return res.json({ message: req.t('user:profile_update_success') });
+        return res.json({ message: req.t('message:profile_update_success') });
       } catch (error) {
         return res.status(500).json({ message: req.t('message:server_error') });
       }
