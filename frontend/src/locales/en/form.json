@@ -22,7 +22,15 @@
     "forgot_password": "Forgot Password?",
     "sign_in_now": "Sign In Now",
     "sign_up_now": "Sign Up Now",
-    "joined": "Joined"
+    "joined": "Joined",
+    "phone_number": "Phone number",
+    "phone_number_placeholder": "Enter your phone number",
+    "phone_number_validate": "Phone number must be 10 or 11 digits"
   },
-  "update": "Update"
+  "update": "Update",
+  "save": "Save",
+  "cancel": "Cancel",
+  "update_profile": "Update profile",
+  "click_to_upload": "Click to upload",
+  "clear_file": "Clear file"
 }

@@ -22,7 +22,15 @@
     "forgot_password": "Quên mật khẩu?",
     "sign_in_now": "Đăng nhập ngay",
     "sign_up_now": "Đăng ký ngay",
-    "joined": "Đã tham gia"
+    "joined": "Đã tham gia",
+    "phone_number": "Số điện thoại",
+    "phone_number_placeholder": "Nhập số điện thoại của bạn",
+    "phone_number_validate": "Số điện thoại phải có 10 hoặc 11 chữ số"
   },
-  "update": "Cập nhật"
+  "update": "Cập nhập",
+  "save": "Lưu",
+  "cancel": "Hủy",
+  "update_profile": "Cập nhập thông tin",
+  "click_to_upload": "Click để tải lên",
+  "clear_file": "Xóa file"
 }
