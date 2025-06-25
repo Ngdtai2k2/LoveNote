@@ -1,52 +1,94 @@
-import { useEffect, useRef, useState } from 'react';
-import PropTypes from 'prop-types';
+import { useEffect, useRef, useState, useCallback } from 'react';
 
-export default function MatrixLoveRain({
-  text = 'DEMO',
-  color = '#ff69b4',
-  backgroundColor = 'black',
-  fontSize = 16,
-  title = 'DEMO',
-}) {
+import MenuSettings from './menuSettings';
+import helperFunctions from '@helpers';
+
+export default function MatrixLoveRain() {
   const canvasRef = useRef(null);
   const [canvasSize, setCanvasSize] = useState({
     width: window.innerWidth,
     height: window.innerHeight,
   });
 
+  // configs default
+  const [settings, setSettings] = useState({
+    textRain: 'DEMO',
+    title: 'DEMO',
+    fontSize: 16,
+    textColor: '#ff69b4',
+    backgroundHex: '#000000',
+    backgroundOpacity: 0.05,
+    titleColor: '#ff69b4',
+    rainSpeed: 1,
+    textPerClick: 8,
+    autoBurst: false,
+  });
+
+  const updateSetting = (key, value) => {
+    setSettings((prev) => ({
+      ...prev,
+      [key]: value,
+    }));
+  };
+
+  const textClick = useCallback(
+    (particles, x, y) => {
+      const particleCount = Number(settings.textPerClick) || 8;
+
+      for (let i = 0; i < particleCount; i++) {
+        particles.push({
+          x,
+          y,
+          vx: (Math.random() - 0.5) * 4,
+          vy: (Math.random() - 0.5) * 4,
+          alpha: 1,
+          size: settings.fontSize + Math.random() * 8,
+        });
+      }
+    },
+    [settings.textPerClick, settings.fontSize]
+  );
+
   useEffect(() => {
+    const backgroundColor = helperFunctions.hexToRgba(
+      settings.backgroundHex,
+      settings.backgroundOpacity
+    );
+    const rainSpeed = Number(settings.rainSpeed) || 1;
+
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
     let animationId;
 
-    const columns = Math.floor(canvasSize.width / (fontSize * 4));
+    const safeFontSize = Number(settings.fontSize) > 0 ? Number(settings.fontSize) : 16;
+    const columns = Math.floor(canvasSize.width / (safeFontSize * 4));
     const drops = new Array(columns).fill(1);
     let particles = [];
 
-    ctx.font = `${fontSize}px monospace`;
+    ctx.font = `${settings.fontSize}px monospace`;
     let frameCount = 0;
 
     const drawMatrix = () => {
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+      ctx.fillStyle = backgroundColor;
       ctx.fillRect(0, 0, canvasSize.width, canvasSize.height);
-      ctx.fillStyle = color;
+      ctx.fillStyle = settings.textColor;
 
       if (frameCount % 2 === 0) {
         for (let i = 0; i < drops.length; i++) {
-          const x = i * fontSize * 4;
-          const y = drops[i] * fontSize;
-          ctx.fillText(text, x, y);
+          const x = i * settings.fontSize * 4;
+          const y = drops[i] * settings.fontSize;
+          ctx.fillText(settings.textRain, x, y);
 
           if (y > canvasSize.height && Math.random() > 0.975) {
             drops[i] = 0;
           }
-          drops[i]++;
+          drops[i] += rainSpeed;
         }
       } else {
         for (let i = 0; i < drops.length; i++) {
-          const x = i * fontSize * 4;
-          const y = drops[i] * fontSize;
-          ctx.fillText(text, x, y);
+          const x = i * settings.fontSize * 4;
+          const y = drops[i] * settings.fontSize;
+          ctx.fillText(settings.textRain, x, y);
         }
       }
 
@@ -57,8 +99,8 @@ export default function MatrixLoveRain({
       particles.forEach((p, index) => {
         ctx.globalAlpha = p.alpha;
         ctx.font = `${p.size}px monospace`;
-        ctx.fillStyle = color;
-        ctx.fillText(text, p.x, p.y);
+        ctx.fillStyle = settings.textColor;
+        ctx.fillText(settings.textRain, p.x, p.y);
         p.x += p.vx;
         p.y += p.vy;
         p.alpha -= 0.01;
@@ -75,6 +117,17 @@ export default function MatrixLoveRain({
 
     animate();
 
+    let autoBurstInterval = null;
+
+    if (settings.autoBurst) {
+      autoBurstInterval = setInterval(() => {
+        const x = Math.random() * canvasSize.width;
+        const y = Math.random() * canvasSize.height;
+
+        textClick(particles, x, y);
+      }, 1000);
+    }
+
     const handleResize = () => {
       setCanvasSize({
         width: window.innerWidth,
@@ -83,16 +136,7 @@ export default function MatrixLoveRain({
     };
 
     const handleClick = (e) => {
-      for (let i = 0; i < 8; i++) {
-        particles.push({
-          x: e.clientX,
-          y: e.clientY,
-          vx: (Math.random() - 0.5) * 4,
-          vy: (Math.random() - 0.5) * 4,
-          alpha: 1,
-          size: fontSize + Math.random() * 8,
-        });
-      }
+      textClick(particles, e.clientX, e.clientY);
     };
 
     window.addEventListener('resize', handleResize);
@@ -102,14 +146,12 @@ export default function MatrixLoveRain({
       cancelAnimationFrame(animationId);
       window.removeEventListener('resize', handleResize);
       canvas.removeEventListener('click', handleClick);
+      if (autoBurstInterval) clearInterval(autoBurstInterval);
     };
-  }, [canvasSize, text, color, fontSize]);
+  }, [canvasSize, settings, textClick]);
 
   return (
-    <div
-      className="relative h-screen w-screen cursor-pointer overflow-hidden"
-      style={{ backgroundColor }}
-    >
+    <div className="relative h-screen w-screen cursor-pointer overflow-hidden">
       <canvas
         ref={canvasRef}
         width={canvasSize.width}
@@ -117,18 +159,11 @@ export default function MatrixLoveRain({
         className="absolute left-0 top-0 z-0"
       />
       <div className="pointer-events-none absolute left-0 top-0 z-10 flex h-full w-full items-center justify-center">
-        <h1 className="font-mono text-4xl opacity-80" style={{ color }}>
-          {title}
+        <h1 className="font-mono text-4xl opacity-80" style={{ color: `${settings.titleColor}` }}>
+          {settings.title}
         </h1>
       </div>
+      <MenuSettings settings={settings} onUpdate={(key, value) => updateSetting(key, value)} />
     </div>
   );
 }
-
-MatrixLoveRain.propTypes = {
-  text: PropTypes.string,
-  color: PropTypes.string,
-  backgroundColor: PropTypes.string,
-  fontSize: PropTypes.number,
-  title: PropTypes.string,
-};
