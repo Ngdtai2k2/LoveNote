@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
 import { IconButton, Tooltip } from '@material-tailwind/react';
-import { Cog6ToothIcon, HomeIcon } from '@heroicons/react/24/solid';
+import {
+  ArrowsPointingInIcon,
+  ArrowsPointingOutIcon,
+  Cog6ToothIcon,
+  HomeIcon,
+} from '@heroicons/react/24/solid';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
@@ -12,6 +17,14 @@ export default function MenuSettings({ settings, onUpdate }) {
 
   const [openSettings, setOpenSettings] = useState(false);
 
+  const onFullScreen = () => {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen();
+    } else {
+      document.exitFullscreen();
+    }
+  };
+
   return (
     <>
       <IconButton
@@ -22,13 +35,26 @@ export default function MenuSettings({ settings, onUpdate }) {
         <Cog6ToothIcon className="h-6 w-6 text-white" />
       </IconButton>
 
-      <IconButton
-        onClick={() => navigate(ROUTES.HOME)}
-        className="absolute top-4 left-4 z-20 bg-white/10 hover:bg-white/20"
-        ripple={false}
-      >
-        <HomeIcon className="h-6 w-6 text-white" />
-      </IconButton>
+      <div className="absolute top-4 left-4 flex gap-2">
+        <IconButton
+          onClick={() => navigate(ROUTES.HOME)}
+          className="z-20 bg-white/10 hover:bg-white/20"
+          ripple={false}
+        >
+          <HomeIcon className="h-6 w-6 text-white" />
+        </IconButton>
+        <IconButton
+          onClick={onFullScreen}
+          className="z-20 bg-white/10 hover:bg-white/20"
+          ripple={false}
+        >
+          {!document.fullscreenElement ? (
+            <ArrowsPointingOutIcon className="h-6 w-6 text-white" />
+          ) : (
+            <ArrowsPointingInIcon className="h-6 w-6 text-white" />
+          )}
+        </IconButton>
+      </div>
 
       {openSettings && (
         <div className="fixed right-0 top-0 z-30 h-full w-[350px] bg-black bg-opacity-90 text-white shadow-lg border-l border-white/20 transition-all overflow-scroll">
