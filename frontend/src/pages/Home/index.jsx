@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Typography } from '@material-tailwind/react';
 
@@ -11,6 +12,7 @@ import CONSTANTS from '@constants';
 
 export default function Home() {
   const { t } = useTranslation(['product', 'navbar', 'notfound']);
+  const navigate = useNavigate();
 
   useDocumentTitle(t('navbar:home'));
 
@@ -33,6 +35,10 @@ export default function Home() {
 
     fetchProducts();
   }, []);
+
+  const onReadMore = (slug) => {
+    navigate(`/${slug}`);
+  };
 
   return (
     //  carousel
@@ -64,6 +70,7 @@ export default function Home() {
                 title={product.name}
                 description={product.description}
                 rating={product.rating}
+                onReadMore={() => onReadMore(product.slug)}
               />
             ))
           ) : (
