@@ -4,10 +4,14 @@
     "title_color": "Màu chữ tiêu đề",
     "text_rain": "Mưa chữ",
     "font_size_text_rain": "Kích thước (mưa chữ)",
+    "font_size_title": "Kích thước (tiêu đề)",
     "text_color": "Màu chữ",
     "background_color": "Màu nền",
     "color_spread": "Loang màu",
     "rain_speed": "Tốc độ rơi",
     "auto_random_click": "Tự động click ngẫu nhiên",
-    "text_per_click": "Số lượng chữ 1 click"
+    "text_per_click": "Số lượng chữ 1 click",
+    "background_sound": "Âm thanh nền",
+    "volume": "Âm lượng",
+    "upload": "Tải file"
 }

@@ -31,7 +31,7 @@ export default function MenuSettings({ settings, onUpdate }) {
       </IconButton>
 
       {openSettings && (
-        <div className="fixed right-0 top-0 z-30 h-full w-[300px] bg-black bg-opacity-90 text-white shadow-lg border-l border-white/20 transition-all overflow-scroll">
+        <div className="fixed right-0 top-0 z-30 h-full w-[350px] bg-black bg-opacity-90 text-white shadow-lg border-l border-white/20 transition-all overflow-scroll">
           <div className="flex items-center justify-between p-4 border-b border-white/10">
             <h2 className="text-lg font-semibold">{t('settings')}</h2>
             <button
@@ -97,6 +97,22 @@ export default function MenuSettings({ settings, onUpdate }) {
                 className="w-full cursor-pointer"
               />
             </div>
+            {/* font size title */}
+            <div>
+              <label className="block text-sm text-white mt-4">{t('font_size_title')}</label>
+              <Tooltip content={`Font Size: ${settings.fontSizeTitle}`} placement="top">
+                <input
+                  type="range"
+                  min="16"
+                  max="200"
+                  step="1"
+                  value={settings.fontSizeTitle}
+                  onChange={(e) => onUpdate('fontSizeTitle', parseInt(e.target.value))}
+                  className="w-full accent-pink-500 cursor-pointer"
+                />
+              </Tooltip>
+            </div>
+
             {/* Opacity */}
             <div>
               <label className="block mb-1 text-sm">{t('color_spread')}</label>
@@ -166,6 +182,51 @@ export default function MenuSettings({ settings, onUpdate }) {
                 />
                 {t('auto_random_click')}
               </label>
+            </div>
+            {/* Toggle music */}
+            <div>
+              <label className="flex items-center gap-2 text-sm text-white">
+                <input
+                  type="checkbox"
+                  checked={settings.playAudio}
+                  onChange={(e) => onUpdate('playAudio', e.target.checked)}
+                  className="accent-pink-500 cursor-pointer w-4 h-4"
+                />
+                {t('background_sound')}
+              </label>
+            </div>
+            {/* Volume */}
+            <div>
+              <label className="block mt-2 text-sm text-white">{t('volume')}</label>
+              <Tooltip content={`${Math.round(settings.audioVolume * 100)}%`} placement="top">
+                <input
+                  type="range"
+                  min="0"
+                  max="1"
+                  step="0.01"
+                  value={settings.audioVolume}
+                  onChange={(e) => onUpdate('audioVolume', parseFloat(e.target.value))}
+                  className="w-full accent-pink-500 cursor-pointer"
+                />
+              </Tooltip>
+            </div>
+
+            {/* Upload file */}
+            <div>
+              <label className="block mt-2 text-sm text-white">{t('upload')}</label>
+              <input
+                type="file"
+                accept="audio/*"
+                onChange={(e) => {
+                  const file = e.target.files?.[0];
+                  if (file) {
+                    const audioURL = URL.createObjectURL(file);
+                    onUpdate('audioFile', audioURL);
+                    onUpdate('playAudio', true);
+                  }
+                }}
+                className="mt-1 text-white"
+              />
             </div>
           </div>
         </div>

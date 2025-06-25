@@ -3,8 +3,12 @@ import { useEffect, useRef, useState, useCallback } from 'react';
 import MenuSettings from './menuSettings';
 import helperFunctions from '@helpers';
 
+import MUSIC_BACKGROUND_001 from '../assets/musics/music_background_001.mp3';
+
 export default function MatrixLoveRain() {
   const canvasRef = useRef(null);
+  const audioRef = useRef(null);
+
   const [canvasSize, setCanvasSize] = useState({
     width: window.innerWidth,
     height: window.innerHeight,
@@ -15,6 +19,7 @@ export default function MatrixLoveRain() {
     textRain: 'DEMO',
     title: 'DEMO',
     fontSize: 16,
+    fontSizeTitle: 50,
     textColor: '#ff69b4',
     backgroundHex: '#000000',
     backgroundOpacity: 0.05,
@@ -22,6 +27,9 @@ export default function MatrixLoveRain() {
     rainSpeed: 1,
     textPerClick: 8,
     autoBurst: false,
+    playAudio: false,
+    audioVolume: 0.5,
+    audioFile: MUSIC_BACKGROUND_001,
   });
 
   const updateSetting = (key, value) => {
@@ -150,6 +158,18 @@ export default function MatrixLoveRain() {
     };
   }, [canvasSize, settings, textClick]);
 
+  // audio
+  useEffect(() => {
+    if (!audioRef.current) return;
+    audioRef.current.volume = settings.audioVolume;
+
+    if (settings.playAudio) {
+      audioRef.current.play();
+    } else {
+      audioRef.current.pause();
+    }
+  }, [settings.playAudio, settings.audioVolume, settings.audioFile]);
+
   return (
     <div className="relative h-screen w-screen cursor-pointer overflow-hidden">
       <canvas
@@ -158,8 +178,20 @@ export default function MatrixLoveRain() {
         height={canvasSize.height}
         className="absolute left-0 top-0 z-0"
       />
+      <audio
+        ref={audioRef}
+        src={settings.audioFile || MUSIC_BACKGROUND_001}
+        loop
+        style={{ display: 'none' }}
+      />
       <div className="pointer-events-none absolute left-0 top-0 z-10 flex h-full w-full items-center justify-center">
-        <h1 className="font-mono text-4xl opacity-80" style={{ color: `${settings.titleColor}` }}>
+        <h1
+          className="font-mono opacity-80"
+          style={{
+            color: settings.titleColor,
+            fontSize: `${settings.fontSizeTitle}px`,
+          }}
+        >
           {settings.title}
         </h1>
       </div>

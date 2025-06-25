@@ -4,10 +4,14 @@
     "title_color": "Title color",
     "text_rain": "Text rain",
     "font_size_text_rain": "Font size (rain)",
+    "font_size_title": "Font size (title)",
     "text_color": "Text color",
     "background_color": "Background color",
     "color_spread": "Color spread",
     "rain_speed": "Rain speed",
     "auto_random_click": "Auto random click",
-    "text_per_click": "Text per click"
+    "text_per_click": "Text per click",
+    "background_sound": "Background sound",
+    "volume": "Volume",
+    "upload": "Upload file"
 }
