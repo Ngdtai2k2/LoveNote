@@ -43,7 +43,7 @@ export function ProductCard({ image, title, description, rating, onReadMore }) {
           focus:bg-gray-800 active:bg-gray-800 dark:bg-gray-600 dark:hover:bg-gray-800 
           dark:focus:bg-gray-800 dark:active:bg-gray-800"
           >
-            {t('card.read_more')}
+            {t('card.create_web')}
           </Button>
         </div>
       </CardBody>

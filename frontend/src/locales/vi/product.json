@@ -1,6 +1,7 @@
 {
   "products": "Sản phẩm",
   "card": {
-    "read_more": "Chi tiết"
+    "read_more": "Chi tiết",
+    "create_web": "Tạo web"
   }
 }
