@@ -1,6 +1,5 @@
 import React, { createElement, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import PropTypes from 'prop-types';
 
 import {
   Navbar,
@@ -161,12 +160,3 @@ export default function NavBar({ isAdmin }) {
     </>
   );
 }
-
-NavBar.propTypes = {
-  isAdmin: PropTypes.any,
-};
-
-TabBar.propTypes = {
-  openTabBar: PropTypes.bool.isRequired,
-  closeTabBar: PropTypes.func.isRequired,
-};

@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import { StarIcon } from '@heroicons/react/24/solid';
 import {
   Card,
@@ -6,7 +5,6 @@ import {
   CardBody,
   Typography,
   Button,
-  IconButton,
 } from '@material-tailwind/react';
 import { useTranslation } from 'react-i18next';
 
@@ -52,11 +50,3 @@ export function ProductCard({ image, title, description, rating, onReadMore }) {
     </Card>
   );
 }
-
-ProductCard.propTypes = {
-  image: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
-  rating: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  onReadMore: PropTypes.func,
-};

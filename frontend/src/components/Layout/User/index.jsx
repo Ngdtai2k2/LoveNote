@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import NavBar from '@components/NavBar';
 import Footer from '@components/Footer';
@@ -16,7 +15,3 @@ export default function LayoutUser({ children, className }) {
   );
 }
 
-LayoutUser.propTypes = {
-  children: PropTypes.node,
-  className: PropTypes.string,
-};

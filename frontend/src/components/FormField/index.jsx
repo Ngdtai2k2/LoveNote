@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Field, ErrorMessage } from 'formik';
 
 export default function FormField({
@@ -45,18 +44,3 @@ export default function FormField({
     </div>
   );
 }
-
-FormField.propTypes = {
-  name: PropTypes.string.isRequired,
-  label: PropTypes.string,
-  type: PropTypes.string,
-  placeholder: PropTypes.string,
-  errors: PropTypes.object,
-  touched: PropTypes.object,
-  className: PropTypes.string,
-  disabled: PropTypes.bool,
-  required: PropTypes.bool,
-  value: PropTypes.any,
-  onChange: PropTypes.func,
-  labelColor: PropTypes.string,
-};

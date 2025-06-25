@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 import { Carousel } from '@material-tailwind/react';
@@ -39,18 +38,3 @@ export function BannerSlider({
     </Carousel>
   );
 }
-
-BannerSlider.propTypes = {
-  banners: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      title: PropTypes.string,
-      image: PropTypes.string.isRequired,
-      link: PropTypes.string,
-      is_active: PropTypes.bool,
-    })
-  ).isRequired,
-  loading: PropTypes.bool,
-  imgStyles: PropTypes.string,
-  carouselStyles: PropTypes.string,
-};

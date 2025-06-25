@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import CONSTANTS from '@constants';
 import NavBar from '@components/NavBar';
 
@@ -19,8 +18,3 @@ export default function LayoutAdmin({ children, className }) {
     </div>
   );
 }
-
-LayoutAdmin.propTypes = {
-  children: PropTypes.node,
-  className: PropTypes.string,
-};

@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Menu, MenuHandler, MenuList, MenuItem, Button, Avatar } from '@material-tailwind/react';
 
 import useLanguage from '@contexts/language/useLanguage';
@@ -48,7 +47,3 @@ export default function ChangeLang({ langList }) {
     </Menu>
   );
 }
-
-ChangeLang.propTypes = {
-  langList: PropTypes.array.isRequired,
-};
