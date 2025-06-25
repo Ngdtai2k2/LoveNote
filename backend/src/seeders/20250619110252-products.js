@@ -10,13 +10,13 @@ module.exports = {
       {
         id: 'love-001',
         name: 'Mưa Chữ Yêu Thương',
-        slug: 'love-001',
+        slug: 'matrix-love-rain',
         description: `Gửi đến người bạn yêu những dòng chữ ngọt ngào rơi như mưa trên màn hình, 
             kết hợp hiệu ứng chạm tạo pháo hoa chữ lung linh.
             Một cách đầy cảm xúc để thể hiện tình yêu của bạn, nhẹ nhàng mà sâu lắng.`,
         price: 0,
         discount: 0,
-        thumbnail_url: `${SERVER_URL}/assets/images/love-001.png`,
+        thumbnail_url: `${SERVER_URL}/assets/images/matrix-love-rain.png`,
         demo_video_url: '#',
         rating: 0,
         created_at: new Date(),
