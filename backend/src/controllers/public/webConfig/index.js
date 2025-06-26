@@ -8,7 +8,7 @@ const webConfigController = {
       const raw = parseBoolean(req.query.raw);
       const data = await webConfigServices.getAll({ raw });
 
-      res.status(200).json(data);
+      return res.status(200).json(data);
     } catch (error) {
       handleError(res, req, error);
     }
