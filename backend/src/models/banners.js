@@ -10,6 +10,16 @@ module.exports = (sequelize, DataTypes) => {
       image: DataTypes.STRING,
       link: DataTypes.STRING,
       is_active: DataTypes.BOOLEAN,
+      created_at: {
+        type: DataTypes.DATE,
+        allowNull: false,
+        defaultValue: DataTypes.NOW,
+      },
+      updated_at: {
+        type: DataTypes.DATE,
+        allowNull: false,
+        defaultValue: DataTypes.NOW,
+      },
     },
     {
       sequelize,
