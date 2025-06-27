@@ -26,11 +26,7 @@ module.exports = {
         allowNull: false,
         unique: true,
       },
-      title: { type: Sequelize.STRING },
-      description: { type: Sequelize.TEXT },
-      logo_url: { type: Sequelize.STRING },
-      cover_image: { type: Sequelize.STRING },
-      data: { type: Sequelize.JSON },
+      configs: { type: Sequelize.JSON },
       created_at: {
         type: Sequelize.DATE,
         allowNull: false,
