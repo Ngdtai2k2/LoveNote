@@ -20,6 +20,10 @@ const API_ENDPOINTS = {
   WEB_CONFIG: {
     GET_ALL: `${BASE_URL}/web-config`,
   },
+  USER_SITES: {
+    CREATE: `${BASE_URL}/site/configs`,
+    GET_CONFIGS: `${BASE_URL}/site/configs`,
+  },
 };
 
 export default API_ENDPOINTS;
