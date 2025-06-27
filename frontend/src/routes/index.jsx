@@ -14,6 +14,7 @@ import CONSTANTS from '@constants';
 
 import { renderRoutes } from '@helpers/renderRoutes';
 import { useCurrentUser } from '@hooks/useCurrentUser';
+import UserTemplateRouter from './userTemplateRoute';
 
 const AppRoutes = () => {
   const user = useCurrentUser();
@@ -56,6 +57,10 @@ const AppRoutes = () => {
 
       {/* 404 fallback */}
       <Route path={`${CONSTANTS.ADMIN_PREFIX}/*`} element={<NotFound isAdmin={isAdmin} />} />
+
+      {/* Template with configs */}
+      <Route path="/:slug" element={<UserTemplateRouter />} />
+
       <Route path="*" element={<NotFound />} />
     </Routes>
   );
