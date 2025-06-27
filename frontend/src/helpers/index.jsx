@@ -5,6 +5,17 @@ const helperFunctions = {
     const b = parseInt(hex.slice(5, 7), 16);
     return `rgba(${r}, ${g}, ${b}, ${alpha})`;
   },
+
+  toggleFullscreen: () => {
+    const doc = document;
+    const el = document.documentElement;
+
+    if (!doc.fullscreenElement) {
+      el.requestFullscreen?.();
+    } else {
+      doc.exitFullscreen?.();
+    }
+  },
 };
 
 export default helperFunctions;
