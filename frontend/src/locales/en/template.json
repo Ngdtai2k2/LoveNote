@@ -20,5 +20,6 @@
     "successfully_created_web": "Successfully created the website!",
     "copy_success": "The path has been copied!",
     "copy_fail": "Failed to copy the link!",
-    "hint_db_click": "👆 Double tap on the screen to turn music on/off."
+    "hint_db_click": "👆 Double tap on the screen to turn music on/off.",
+    "hint_click_player": "♫ Click on the musical note to play or stop the music ♫"
 }

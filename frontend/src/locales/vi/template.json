@@ -20,6 +20,6 @@
     "successfully_created_web": "Tạo web thành công!",
     "copy_success": "Đã sao chép đường dẫn!",
     "copy_fail": "Sao chép đường dẫn thất bại!",
-    "hint_db_click": "👆 Nhấp đôi vào màn hình để bật / tắt nhạc."
-
+    "hint_db_click": "👆 Nhấp đôi vào màn hình để bật / tắt nhạc.",
+    "hint_click_player": "♫ Click vào hình nốt nhạc để phát hoặc dừng nhạc ♫"
 }
