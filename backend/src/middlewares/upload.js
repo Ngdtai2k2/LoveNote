@@ -2,35 +2,51 @@ const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
 
-// Function to create the storage configuration
 const createStorage = (folder) => {
   return multer.diskStorage({
     destination: (req, file, callBack) => {
-      const dir = path.join(__dirname, '../assets/avatar', folder);
-      fs.mkdirSync(dir, { recursive: true }); // Ensure the directory exists
-      callBack(null, dir); // Set the destination folder
+      const imageTypes = /jpg|jpeg|png|gif/;
+      const audioTypes = /mp3/;
+
+      const ext = path.extname(file.originalname).toLowerCase();
+
+      let baseDir = '';
+      if (imageTypes.test(ext)) {
+        baseDir = path.join(__dirname, '../assets/avatar', folder);
+      } else if (audioTypes.test(ext)) {
+        baseDir = path.join(__dirname, '../assets/audio', folder);
+      } else {
+        return callBack(new Error('Unsupported file type'), false);
+      }
+
+      fs.mkdirSync(baseDir, { recursive: true });
+      callBack(null, baseDir);
     },
     filename: (req, file, callBack) => {
-      // Create a unique filename
-      callBack(null, `${file.fieldname}-${Date.now()}${path.extname(file.originalname)}`); 
-    }
+      const uniqueName = `${file.fieldname}-${Date.now()}${path.extname(file.originalname)}`;
+      callBack(null, uniqueName);
+    },
   });
 };
 
-// Function to create the upload middleware with file type validation
 const upload = (folder) => {
   const storage = createStorage(folder);
 
   const fileFilter = (req, file, callBack) => {
-    const allowedTypes = /jpg|jpeg|png|gif/;
-    const extname = allowedTypes.test(path.extname(file.originalname).toLowerCase());
-    const mimetype = allowedTypes.test(file.mimetype);
+    const allowedImageTypes = /jpg|jpeg|png|gif/;
+    const allowedAudioTypes = /mp3/;
 
-    if (extname && mimetype) {
+    const ext = path.extname(file.originalname).toLowerCase();
+    const mime = file.mimetype;
+
+    if (allowedImageTypes.test(ext) && allowedImageTypes.test(mime)) {
       return callBack(null, true);
-    } else {
-      return callBack(new Error('Only image files are allowed!'), false);
     }
+    if (allowedAudioTypes.test(ext) && mime === 'audio/mpeg') {
+      return callBack(null, true);
+    }
+
+    return callBack(new Error('Only image and MP3 files are allowed!'), false);
   };
 
   return multer({ storage: storage, fileFilter: fileFilter });
