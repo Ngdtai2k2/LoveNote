@@ -11,7 +11,14 @@
     "rain_speed": "Rain speed",
     "auto_random_click": "Auto random click",
     "text_per_click": "Text per click",
+    "slug": "Slug",
     "background_sound": "Background sound",
     "volume": "Volume",
-    "upload": "Upload file"
+    "upload": "Upload file",
+    "redirect": "Redirect",
+    "copy_link": "Copy link",
+    "successfully_created_web": "Successfully created the website!",
+    "copy_success": "The path has been copied!",
+    "copy_fail": "Failed to copy the link!",
+    "hint_db_click": "👆 Double tap on the screen to turn music on/off."
 }

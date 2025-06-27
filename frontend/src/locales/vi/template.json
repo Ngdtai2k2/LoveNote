@@ -11,7 +11,15 @@
     "rain_speed": "Tốc độ rơi",
     "auto_random_click": "Tự động click ngẫu nhiên",
     "text_per_click": "Số lượng chữ 1 click",
+    "slug": "Đường dẫn",
     "background_sound": "Âm thanh nền",
     "volume": "Âm lượng",
-    "upload": "Tải file"
+    "upload": "Tải file",
+    "redirect": "Chuyển hướng",
+    "copy_link": "Sao chép",
+    "successfully_created_web": "Tạo web thành công!",
+    "copy_success": "Đã sao chép đường dẫn!",
+    "copy_fail": "Sao chép đường dẫn thất bại!",
+    "hint_db_click": "👆 Nhấp đôi vào màn hình để bật / tắt nhạc."
+
 }
