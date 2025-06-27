@@ -1,4 +1,6 @@
 {
   "server_error": "Có lỗi xảy ra vui lòng thử lại sau!",
-  "profile_update_success": "Cập nhật thông tin cá nhân thành công!"
+  "profile_update_success": "Cập nhật thông tin cá nhân thành công!",
+  "create_web_success": "Cấu hình web thành công!",
+  "invalid_config_json": "Cấu hình không hợp lệ. Vui lòng kiểm tra định dạng JSON!"
 }

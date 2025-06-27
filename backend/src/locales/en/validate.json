@@ -21,5 +21,8 @@
   "data_already_exists": "This data already exists!",
   "missing_url_to_shorten": "Missing URL for shortening!",
   "missing_api_key": "Missing api key!",
-  "missing_api_url": "Missing API URL!"
+  "missing_api_url": "Missing API URL!",
+  "slug_or_id": "Please provide slug or id!",
+  "no_data": "Please provide data!",
+  "slug_exists": "Slug already exists!"
 }

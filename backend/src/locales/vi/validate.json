@@ -21,5 +21,8 @@
   "data_already_exists": "Dữ liệu này đã tồn tại!",
   "missing_url_to_shorten": "Thiếu link cần rút gọn!",
   "missing_api_key": "Không tìm thấy khóa API!",
-  "missing_api_url": "Không tìm thấy đường dẫn API!"
+  "missing_api_url": "Không tìm thấy đường dẫn API!",
+  "slug_or_id": "Vui lòng cung cấp slug hoặc id!",
+  "no_data": "Vui lòng cung cấp dữ liệu!",
+  "slug_exists": "Slug đã tồn tại!"
 }

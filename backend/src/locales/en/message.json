@@ -1,4 +1,6 @@
 {
   "server_error": "An error occurred please try again later!",
-  "profile_update_success": "Successfully updated personal information!"
+  "profile_update_success": "Successfully updated personal information!",
+  "create_web_success": "Web configuration successful!",
+  "invalid_config_json": "Invalid configuration. Please check the JSON format!"
 }
