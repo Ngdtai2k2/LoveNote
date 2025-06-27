@@ -4,6 +4,8 @@ import { gsap } from 'gsap';
 
 import MUSIC_DEMO from '../assets/musics/music_background_003.mp3';
 import HEART_GLB from '../assets/glb/heart.glb';
+import HEART from '../assets/images/heart.png';
+import BALL from '../assets/images/ball.png';
 
 export function createHeartScene(
   canvas,
@@ -13,9 +15,6 @@ export function createHeartScene(
   vertexShader1,
   fragmentShader1
 ) {
-  const heartPNG = 'https://assets.codepen.io/74321/heart.png';
-  const matcapPNG = 'https://assets.codepen.io/74321/3.png';
-
   class HeartScene {
     constructor() {
       this.parameters = {
@@ -24,6 +23,7 @@ export function createHeartScene(
         a: 2,
         c: 4.5,
       };
+
       this.textureLoader = new THREE.TextureLoader();
       this.scene = new THREE.Scene();
       this.scene.background = new THREE.Color(0x000000);
@@ -68,7 +68,7 @@ export function createHeartScene(
         this.angle.x += this.time.delta * 0.001 * 0.63;
         this.angle.z += this.time.delta * 0.001 * 0.39;
 
-        if (!this.sound.isPlaying) {
+        if (this.audioElement.ended) {
           this.time.t1 = this.time.t;
           this.audioBtn.disabled = false;
           this.isRunning = false;
@@ -88,13 +88,16 @@ export function createHeartScene(
       }
 
       this.camera.lookAt(this.scene.position);
+
       if (this.heartMaterial) {
         this.heartMaterial.uniforms.uTime.value +=
           this.time.delta * this.time.frequency * (1 + this.data * 0.2);
       }
+
       if (this.model) {
         this.model.rotation.y -= 0.0005 * this.time.delta * (1 + this.data);
       }
+
       if (this.snowMaterial) {
         this.snowMaterial.uniforms.uTime.value += this.time.delta * 0.0004 * (1 + this.data);
       }
@@ -125,21 +128,21 @@ export function createHeartScene(
 
     addButton() {
       this.audioBtn.addEventListener('click', () => {
-        if (!this.sound) {
+        if (!this.audioElement) {
           this.loadMusic();
           return;
         }
 
-        if (this.sound.isPlaying) {
-          this.sound.stop();
-          this.isRunning = false;
-          gsap.to(this.audioBtn, { opacity: 1, duration: 1, ease: 'power1.out' });
-        } else {
-          this.sound.play();
+        if (this.audioElement.paused) {
+          this.audioElement.play();
           this.time.t0 = this.time.elapsed;
           this.data = 0;
           this.isRunning = true;
           gsap.to(this.audioBtn, { opacity: 0, duration: 1, ease: 'power1.out' });
+        } else {
+          this.audioElement.pause(); // chính là phần fix
+          this.isRunning = false;
+          gsap.to(this.audioBtn, { opacity: 1, duration: 1, ease: 'power1.out' });
         }
       });
     }
@@ -147,27 +150,28 @@ export function createHeartScene(
     async loadMusic() {
       const listener = new THREE.AudioListener();
       this.camera.add(listener);
+
+      this.audioElement = new Audio(MUSIC_DEMO);
+      this.audioElement.crossOrigin = 'anonymous';
+      this.audioElement.loop = false;
+      this.audioElement.volume = 0.5;
+
       this.sound = new THREE.Audio(listener);
-      const audioLoader = new THREE.AudioLoader();
+      this.sound.setMediaElementSource(this.audioElement);
 
-      audioLoader.load(MUSIC_DEMO, (buffer) => {
-        this.sound.setBuffer(buffer);
-        this.sound.setLoop(false);
-        this.sound.setVolume(0.5);
-        this.sound.play();
+      this.analyser = new THREE.AudioAnalyser(this.sound, 32);
+      this.data = this.analyser.getAverageFrequency();
+      this.isRunning = true;
+      this.time.t0 = this.time.elapsed;
 
-        this.analyser = new THREE.AudioAnalyser(this.sound, 32);
-        this.data = this.analyser.getAverageFrequency();
-        this.isRunning = true;
-        this.time.t0 = this.time.elapsed;
+      this.audioElement.play();
+      gsap.to(this.audioBtn, { opacity: 0, duration: 1, ease: 'power1.out' });
 
-        gsap.to(this.audioBtn, { opacity: 0, duration: 1, ease: 'power1.out' });
-
-        this.sound.source.onended = () => {
-          this.audioBtn.disabled = false;
-          gsap.to(this.audioBtn, { opacity: 1, duration: 1, ease: 'power1.out' });
-        };
-      });
+      this.audioElement.onended = () => {
+        this.audioBtn.disabled = false;
+        this.isRunning = false;
+        gsap.to(this.audioBtn, { opacity: 1, duration: 1, ease: 'power1.out' });
+      };
     }
 
     async addToScene() {
@@ -182,7 +186,7 @@ export function createHeartScene(
         this.model = gltf.scene.children[0];
         this.model.scale.set(0.001, 0.001, 0.001);
         this.model.material = new THREE.MeshMatcapMaterial({
-          matcap: this.textureLoader.load(matcapPNG, () => {
+          matcap: this.textureLoader.load(BALL, () => {
             gsap.to(this.model.scale, {
               x: 0.25,
               y: 0.25,
@@ -255,7 +259,7 @@ export function createHeartScene(
         uniforms: {
           uTime: { value: 0 },
           uSize: { value: 0.3 },
-          uTex: { value: this.textureLoader.load(heartPNG) },
+          uTex: { value: this.textureLoader.load(HEART) },
         },
         depthWrite: false,
         blending: THREE.AdditiveBlending,
