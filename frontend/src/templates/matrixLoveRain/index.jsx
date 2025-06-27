@@ -5,8 +5,8 @@ import MenuSettings from './menuSettings';
 import helperFunctions from '@helpers';
 import { useDocumentTitle } from '@hooks/useDocumentTitle';
 
-import MUSIC_BACKGROUND_001 from '../assets/musics/music_background_001.mp3';
 import BlinkingHint from '@components/BlinkingHint';
+import MUSIC_BACKGROUND_001 from '../assets/musics/music_background_001.mp3';
 
 export default function MatrixLoveRain({ data }) {
   const canvasRef = useRef(null);
