@@ -23,6 +23,7 @@ const API_ENDPOINTS = {
   USER_SITES: {
     CREATE: `${BASE_URL}/site/configs`,
     GET_CONFIGS: `${BASE_URL}/site/configs`,
+    CHECK_SLUG: `${BASE_URL}/site/check`,
   },
 };
 
