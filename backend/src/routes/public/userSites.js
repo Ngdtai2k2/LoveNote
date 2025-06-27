@@ -8,5 +8,6 @@ router.post(
   verifyMiddleware.token,
   userSitesController.createConfigSite
 );
+router.get('/check', userSitesController.checkSlugExists);
 
 module.exports = router;

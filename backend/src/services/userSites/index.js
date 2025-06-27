@@ -2,6 +2,13 @@ const { UserSite, User, Product } = require('@models');
 const ShortUniqueId = require('short-unique-id');
 
 const userSiteServices = {
+  checkSlugExists: async (req) => {
+    const { slug } = req.query;
+    if (!slug) throw { code: 400, messageKey: 'validate:slug' };
+
+    const data = await UserSite.findOne({ where: { slug } });
+    return !!data;
+  },
   getConfigSite: async (req) => {
     const { slug, id } = req.query;
 

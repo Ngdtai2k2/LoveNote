@@ -3,6 +3,14 @@ const userSiteServices = require('@services/userSites');
 const uploadMiddleware = require('@middlewares/upload');
 
 const userSitesController = {
+  checkSlugExists: async (req, res) => {
+    try {
+      const data = await userSiteServices.checkSlugExists(req);
+      return res.status(200).json(data);
+    } catch (error) {
+      handleError(res, req, error);
+    }
+  },
   getConfigSite: async (req, res) => {
     try {
       const data = await userSiteServices.getConfigSite(req);
