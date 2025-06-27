@@ -1,13 +1,18 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import MenuSettings from './menuSettings';
 import helperFunctions from '@helpers';
+import { useDocumentTitle } from '@hooks/useDocumentTitle';
 
 import MUSIC_BACKGROUND_001 from '../assets/musics/music_background_001.mp3';
+import BlinkingHint from '@components/BlinkingHint';
 
-export default function MatrixLoveRain() {
+export default function MatrixLoveRain({ data }) {
   const canvasRef = useRef(null);
   const audioRef = useRef(null);
+  const isPlaying = useRef(false);
+  const { t } = useTranslation('template');
 
   const [canvasSize, setCanvasSize] = useState({
     width: window.innerWidth,
@@ -16,21 +21,23 @@ export default function MatrixLoveRain() {
 
   // configs default
   const [settings, setSettings] = useState({
-    textRain: 'DEMO',
-    title: 'DEMO',
-    fontSize: 16,
-    fontSizeTitle: 50,
-    textColor: '#ff69b4',
-    backgroundHex: '#000000',
-    backgroundOpacity: 0.05,
-    titleColor: '#ff69b4',
-    rainSpeed: 1,
-    textPerClick: 8,
-    autoBurst: false,
-    playAudio: false,
-    audioVolume: 0.5,
-    audioFile: MUSIC_BACKGROUND_001,
+    textRain: data?.configs?.textRain || 'DEMO',
+    title: data?.configs?.title || 'DEMO',
+    fontSize: data?.configs?.fontSize || 16,
+    fontSizeTitle: data?.configs?.fontSizeTitle || 50,
+    textColor: data?.configs?.textColor || '#ff69b4',
+    backgroundHex: data?.configs?.backgroundHex || '#000000',
+    backgroundOpacity: data?.configs?.backgroundOpacity || 0.05,
+    titleColor: data?.configs?.titleColor || '#ff69b4',
+    rainSpeed: data?.configs?.rainSpeed || 1,
+    textPerClick: data?.configs?.textPerClick || 8,
+    autoBurst: data?.configs?.autoBurst || false,
+    playAudio: data?.configs?.playAudio || false,
+    audioVolume: data?.configs?.audioVolume || 0.5,
+    audioFile: data?.configs?.audioFile || MUSIC_BACKGROUND_001,
   });
+
+  useDocumentTitle(settings?.title);
 
   const updateSetting = (key, value) => {
     setSettings((prev) => ({
@@ -160,15 +167,30 @@ export default function MatrixLoveRain() {
 
   // audio
   useEffect(() => {
-    if (!audioRef.current) return;
-    audioRef.current.volume = settings.audioVolume;
+    const handleDoubleClick = () => {
+      const audio = audioRef.current;
+      if (!audio || !settings.playAudio) return;
 
-    if (settings.playAudio) {
-      audioRef.current.play();
-    } else {
-      audioRef.current.pause();
-    }
-  }, [settings.playAudio, settings.audioVolume, settings.audioFile]);
+      audio.volume = settings.audioVolume ?? 1;
+
+      if (!isPlaying.current) {
+        audio
+          .play()
+          .then(() => {
+            isPlaying.current = true;
+          })
+          .catch((err) => {
+            console.warn('🔇 Play bị chặn:', err);
+          });
+      } else {
+        audio.pause();
+        isPlaying.current = false;
+      }
+    };
+
+    window.addEventListener('dblclick', handleDoubleClick);
+    return () => window.removeEventListener('dblclick', handleDoubleClick);
+  }, [settings.playAudio, settings.audioVolume]);
 
   return (
     <div className="relative h-screen w-screen cursor-pointer overflow-hidden">
@@ -195,7 +217,11 @@ export default function MatrixLoveRain() {
           {settings.title}
         </h1>
       </div>
-      <MenuSettings settings={settings} onUpdate={(key, value) => updateSetting(key, value)} />
+      {settings.playAudio && <BlinkingHint hint={t('hint_db_click')} hiddenAfter={5} />}
+
+      {!data && (
+        <MenuSettings settings={settings} onUpdate={(key, value) => updateSetting(key, value)} />
+      )}
     </div>
   );
 }
