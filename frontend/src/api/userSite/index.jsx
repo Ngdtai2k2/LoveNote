@@ -27,9 +27,9 @@ export const userSiteAPI = {
   createSiteConfig: async (axiosJWT, data) => {
     try {
       const res = await axiosJWT.post(API_ENDPOINTS.USER_SITES.CREATE, data);
-      toast.success(res.data.message, {
-        position: 'top-right',
-      });
+      // toast.success(res.data.message, {
+      //   position: 'top-right',
+      // });
       return res.data;
     } catch (error) {
       toast.error(error.response?.data.message, {
