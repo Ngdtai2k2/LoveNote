@@ -31,7 +31,7 @@ export function ProductCard({ image, title, description, rating, onReadMore }) {
             {rating}
           </Typography>
         </div>
-        <Typography className="line-clamp-2 min-h-[2rem] text-sm text-gray-800 dark:text-gray-200">
+        <Typography className="line-clamp-3 min-h-[2rem] text-sm text-gray-800 dark:text-gray-200">
           {description}
         </Typography>
         <div className="mt-auto pt-4">

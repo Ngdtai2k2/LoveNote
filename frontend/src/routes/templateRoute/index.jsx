@@ -1,6 +1,6 @@
 import MatrixLoveRain from '@templates/matrixLoveRain';
 import GalaxyText from '@templates/galaxyText';
-import HeartAnimation from '@templates/heartAnimation';
+import HeartBeatVisualizer from '@templates/heartBeatVisualizer';
 
 const templateRoutes = [
   {
@@ -12,9 +12,9 @@ const templateRoutes = [
     path: '/galaxy-text',
     element: <GalaxyText />,
   },
-    {
-    path: '/heart-animation',
-    element: <HeartAnimation />,
+  {
+    path: '/heart-beat-visualizer',
+    element: <HeartBeatVisualizer />,
   },
 ];
 

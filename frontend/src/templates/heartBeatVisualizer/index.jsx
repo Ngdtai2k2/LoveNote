@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { createHeartScene } from './createHeartScene';
 import BlinkingHint from '@components/BlinkingHint';
@@ -8,9 +9,8 @@ import heartVertex from './shaders/heartVertex.glsl';
 import heartFragment from './shaders/heartFragment.glsl';
 import snowVertex from './shaders/snowVertex.glsl';
 import snowFragment from './shaders/snowFragment.glsl';
-import { useTranslation } from 'react-i18next';
 
-const HeartScene = () => {
+export default function HeartBeatVisualizer() {
   const canvasRef = useRef();
   const audioBtnRef = useRef();
   const h1Ref = useRef();
@@ -57,6 +57,4 @@ const HeartScene = () => {
       <BlinkingHint hint={t('hint_click_player')} hiddenAfter={5} />
     </div>
   );
-};
-
-export default HeartScene;
+}
