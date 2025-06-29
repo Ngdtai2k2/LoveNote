@@ -16,9 +16,9 @@ import { useAxios } from '@hooks/useAxiosJWT';
 import { useCurrentUser } from '@hooks/useCurrentUser';
 import { handleSubmitSettings } from './handleSubmitSettings';
 
-import { FormItem } from './components/formItem';
-import { FormRange } from './components/formRange';
-import { FormCheckbox } from './components/formCheckbox';
+import { FormItem } from '../components/formItem';
+import { FormRange } from '../components/formRange';
+import { FormCheckbox } from '../components/formCheckbox';
 import ModalRenderLink from '../modalRenderLink';
 
 export default function MenuSettings({ settings, onUpdate }) {
