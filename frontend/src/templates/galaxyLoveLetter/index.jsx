@@ -38,7 +38,7 @@ const injectTwinkle = () => {
   }
 };
 
-export default function GalaxyTest() {
+export default function GalaxyLoveLetter() {
   const galaxyRef = useRef(null);
   const audioRef = useRef(null);
   const isPlaying = useRef(false);
@@ -185,6 +185,7 @@ export default function GalaxyTest() {
 
     createStars();
     return () => clearInterval(loop);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {

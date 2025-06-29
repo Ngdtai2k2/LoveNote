@@ -1,6 +1,6 @@
 import MatrixLoveRain from '@templates/matrixLoveRain';
-import GalaxyText from '@templates/galaxyText';
 import HeartBeatVisualizer from '@templates/heartBeatVisualizer';
+import GalaxyLoveLetter from '@templates/galaxyLoveLetter';
 
 const templateRoutes = [
   {
@@ -9,8 +9,8 @@ const templateRoutes = [
   },
   // test route
   {
-    path: '/galaxy-text',
-    element: <GalaxyText />,
+    path: '/galaxy-love-letter',
+    element: <GalaxyLoveLetter />,
   },
   {
     path: '/heart-beat-visualizer',
