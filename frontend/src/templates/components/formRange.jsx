@@ -4,7 +4,10 @@ export function FormRange({ label, name, value, min, max, step, onChange, suffix
   return (
     <div>
       <label className="block mb-1 text-sm text-white">{label}</label>
-      <Tooltip content={`${value}${suffix}`} placement="top">
+      <Tooltip
+        content={`${suffix === '%' ? Math.round(value * 100) : value}${suffix}`}
+        placement="top"
+      >
         <input
           name={name}
           type="range"
