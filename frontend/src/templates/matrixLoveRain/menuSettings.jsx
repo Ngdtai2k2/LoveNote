@@ -44,7 +44,6 @@ export default function MenuSettings({ settings, onUpdate }) {
     rainSpeed: settings.rainSpeed || 1,
     textPerClick: settings.textPerClick || 3,
     autoBurst: settings.autoBurst || false,
-    playAudio: settings.playAudio || false,
     audioVolume: settings.audioVolume || 1,
     audioFile: '',
     slug: '',
@@ -237,16 +236,6 @@ export default function MenuSettings({ settings, onUpdate }) {
                     }}
                   />
 
-                  <FormCheckbox
-                    label={t('background_sound')}
-                    name="playAudio"
-                    checked={values.playAudio}
-                    onChange={(e) => {
-                      handleChange(e);
-                      onUpdate('playAudio', e.target.checked);
-                    }}
-                  />
-
                   <FormRange
                     label={t('volume')}
                     name="audioVolume"
@@ -285,7 +274,6 @@ export default function MenuSettings({ settings, onUpdate }) {
                         const file = e.target.files?.[0];
                         setFieldValue('audioFile', file || null);
                         onUpdate('audioFile', file ? URL.createObjectURL(file) : null);
-                        onUpdate('playAudio', !!file);
                       }}
                       className="mt-1 text-white"
                     />

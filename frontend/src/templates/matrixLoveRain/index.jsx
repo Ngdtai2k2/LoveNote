@@ -31,12 +31,10 @@ export default function MatrixLoveRain({ data }) {
     rainSpeed: 1,
     textPerClick: 8,
     autoBurst: false,
-    playAudio: false,
     audioVolume: 0.5,
     audioFile: MUSIC_BACKGROUND_001,
   };
 
-  // configs default
   const [settings, setSettings] = useState(() => ({
     ...defaultSettings,
     ...(data?.configs || {}),
@@ -144,7 +142,6 @@ export default function MatrixLoveRain({ data }) {
       autoBurstInterval = setInterval(() => {
         const x = Math.random() * canvasSize.width;
         const y = Math.random() * canvasSize.height;
-
         textClick(particles, x, y);
       }, 1000);
     }
@@ -171,12 +168,10 @@ export default function MatrixLoveRain({ data }) {
     };
   }, [canvasSize, settings, textClick]);
 
-  // audio
   useEffect(() => {
     const handleDoubleClick = () => {
       const audio = audioRef.current;
-
-      if (!audio || !settings.playAudio) return;
+      if (!audio) return;
 
       audio.volume = settings.audioVolume ?? 1;
 
@@ -197,17 +192,7 @@ export default function MatrixLoveRain({ data }) {
 
     window.addEventListener('dblclick', handleDoubleClick);
     return () => window.removeEventListener('dblclick', handleDoubleClick);
-  }, [settings.playAudio, settings.audioVolume]);
-
-  useEffect(() => {
-    const audio = audioRef.current;
-    if (!audio) return;
-
-    if (!settings.playAudio) {
-      audio.pause();
-      isPlaying.current = false;
-    }
-  }, [settings.playAudio]);
+  }, [settings.audioVolume]);
 
   return (
     <div className="relative h-screen w-screen cursor-pointer overflow-hidden">
@@ -229,8 +214,7 @@ export default function MatrixLoveRain({ data }) {
           {settings.title}
         </h1>
       </div>
-      {settings.playAudio && <BlinkingHint hint={t('hint_db_click')} hiddenAfter={5} />}
-
+      <BlinkingHint hint={t('hint_db_click')} hiddenAfter={5} />
       {!data && <MenuSettings settings={settings} onUpdate={updateSetting} />}
     </div>
   );

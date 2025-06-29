@@ -19,7 +19,6 @@ export const handleSubmitSettings = async (values, user, axiosJWT, navigate) => 
     rainSpeed,
     textPerClick,
     autoBurst,
-    playAudio,
     audioVolume,
     slug,
     audioFile,
@@ -37,7 +36,6 @@ export const handleSubmitSettings = async (values, user, axiosJWT, navigate) => 
     rainSpeed,
     textPerClick,
     autoBurst,
-    playAudio,
     audioVolume,
   };
 
