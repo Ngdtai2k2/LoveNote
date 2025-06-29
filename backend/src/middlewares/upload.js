@@ -2,54 +2,42 @@ const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
 
-const createStorage = (folder) => {
-  return multer.diskStorage({
-    destination: (req, file, callBack) => {
-      const imageTypes = /jpg|jpeg|png|gif/;
-      const audioTypes = /mp3/;
+const uploadMiddleware = () => {
+  const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      const userId = req.user?.id || 'temp';
+      let basePath = path.join(__dirname, '../public/assets/temp');
 
-      const ext = path.extname(file.originalname).toLowerCase();
-
-      let baseDir = '';
-      if (imageTypes.test(ext)) {
-        baseDir = path.join(__dirname, '../assets/avatar', folder);
-      } else if (audioTypes.test(ext)) {
-        baseDir = path.join(__dirname, '../assets/audio', folder);
-      } else {
-        return callBack(new Error('Unsupported file type'), false);
+      if (file.fieldname === 'images') {
+        basePath = path.join(__dirname, `../public/assets/images/${userId}`);
+      } else if (file.fieldname === 'file') {
+        basePath = path.join(__dirname, `../public/assets/audio/${userId}`);
       }
 
-      fs.mkdirSync(baseDir, { recursive: true });
-      callBack(null, baseDir);
+      fs.mkdirSync(basePath, { recursive: true });
+      cb(null, basePath);
     },
-    filename: (req, file, callBack) => {
-      const uniqueName = `${file.fieldname}-${Date.now()}${path.extname(file.originalname)}`;
-      callBack(null, uniqueName);
+
+    filename: function (req, file, cb) {
+      const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
+      const ext = path.extname(file.originalname);
+      cb(null, uniqueSuffix + ext);
     },
   });
-};
 
-const upload = (folder) => {
-  const storage = createStorage(folder);
-
-  const fileFilter = (req, file, callBack) => {
-    const allowedImageTypes = /jpg|jpeg|png|gif/;
-    const allowedAudioTypes = /mp3/;
-
-    const ext = path.extname(file.originalname).toLowerCase();
-    const mime = file.mimetype;
-
-    if (allowedImageTypes.test(ext) && allowedImageTypes.test(mime)) {
-      return callBack(null, true);
-    }
-    if (allowedAudioTypes.test(ext) && mime === 'audio/mpeg') {
-      return callBack(null, true);
-    }
-
-    return callBack(new Error('Only image and MP3 files are allowed!'), false);
+  const limits = {
+    fileSize: 10 * 1024 * 1024,
   };
 
-  return multer({ storage: storage, fileFilter: fileFilter });
+  const fileFilter = (req, file, cb) => {
+    const allowed = ['image/jpeg', 'image/png', 'audio/mpeg'];
+    if (!allowed.includes(file.mimetype)) {
+      return cb(new Error('Invalid file type'), false);
+    }
+    cb(null, true);
+  };
+
+  return multer({ storage, limits, fileFilter });
 };
 
-module.exports = upload;
+module.exports = uploadMiddleware;

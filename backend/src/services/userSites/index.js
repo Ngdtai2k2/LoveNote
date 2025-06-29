@@ -1,5 +1,7 @@
 const { UserSite, User, Product } = require('@models');
 const ShortUniqueId = require('short-unique-id');
+const path = require('path');
+const fs = require('fs');
 
 const userSiteServices = {
   checkSlugExists: async (req) => {
@@ -35,8 +37,10 @@ const userSiteServices = {
 
     return data;
   },
+
   createConfigSite: async (req) => {
-    const { userId, productId, slug: rawSlug } = req.body;
+    const userId = req.user.id;
+    const { productId, slug: rawSlug } = req.body;
     let { configs } = req.body;
 
     if (!userId || !productId || !configs) {
@@ -55,26 +59,40 @@ const userSiteServices = {
     }
 
     const user = await User.findByPk(userId);
-    if (!user) {
-      throw { code: 404, messageKey: 'notfound:user' };
-    }
+    if (!user) throw { code: 404, messageKey: 'notfound:user' };
 
     const product = await Product.findByPk(productId);
-    if (!product) {
-      throw { code: 404, messageKey: 'not_found:product' };
-    }
+    if (!product) throw { code: 404, messageKey: 'not_found:product' };
 
     let parsedConfigs;
-
     try {
       parsedConfigs = JSON.parse(configs);
     } catch (e) {
       throw { code: 400, messageKey: 'validate:invalid_config_json' };
     }
 
-    if (req.file) {
-      const fileUrl = `${process.env.SERVER_URL}/assets/music/${userId}/${req.file.filename}`;
-      parsedConfigs.audioFile = fileUrl;
+    const avatarDir = path.join(
+      __dirname,
+      `../../../public/assets/images/${userId}`
+    );
+    const audioDir = path.join(
+      __dirname,
+      `../../../public/assets/audio/${userId}`
+    );
+
+    fs.mkdirSync(avatarDir, { recursive: true });
+    fs.mkdirSync(audioDir, { recursive: true });
+
+    if (req.files?.images && Array.isArray(req.files.images)) {
+      const imageUrls = req.files.images.map((file) => {
+        return `${process.env.SERVER_URL}/assets/images/${userId}/${file.filename}`;
+      });
+      parsedConfigs.images = imageUrls;
+    }
+
+    if (req.files?.file?.[0]) {
+      const file = req.files.file[0];
+      parsedConfigs.audioFile = `${process.env.SERVER_URL}/assets/audio/${userId}/${file.filename}`;
     }
 
     const newSite = await UserSite.create({

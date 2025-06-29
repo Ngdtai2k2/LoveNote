@@ -1,6 +1,5 @@
 const handleError = require('@utils/handleError');
 const userSiteServices = require('@services/userSites');
-const uploadMiddleware = require('@middlewares/upload');
 
 const userSitesController = {
   checkSlugExists: async (req, res) => {
@@ -22,27 +21,13 @@ const userSitesController = {
 
   createConfigSite: async (req, res) => {
     try {
-      const upload = uploadMiddleware(`${req.userId}`).single('file');
-
-      upload(req, res, async (err) => {
-        if (err && err.code !== 'LIMIT_UNEXPECTED_FILE') {
-          return handleError(res, req, {
-            code: 500,
-            messageKey: 'validate:error_uploading_file',
-          });
-        }
-
-        try {
-          const result = await userSiteServices.createConfigSite(req);
-          return res
-            .status(200)
-            .json({ message: req.t(result.messageKey), data: result.data });
-        } catch (error) {
-          return handleError(res, req, error);
-        }
+      const result = await userSiteServices.createConfigSite(req);
+      return res.status(200).json({
+        message: req.t(result.messageKey),
+        data: result.data,
       });
     } catch (error) {
-      handleError(res, req, error);
+      return handleError(res, req, error);
     }
   },
 };
