@@ -45,6 +45,9 @@ export function createHeartScene(
 
       this.audioBtn = audioBtn;
 
+      this.resizeHandler = this.onResize.bind(this);
+      this.mouseMoveHandler = this.onMouseMove.bind(this);
+
       this.addToScene();
       this.addButton();
       this.render();
@@ -104,26 +107,30 @@ export function createHeartScene(
 
       this.render();
       this.time.current = this.time.elapsed;
-      requestAnimationFrame(this.loop.bind(this));
+      this.animationFrameId = requestAnimationFrame(this.loop.bind(this));
+    }
+
+    onResize() {
+      this.width = window.innerWidth;
+      this.height = window.innerHeight;
+      this.camera.aspect = this.width / this.height;
+      this.camera.updateProjectionMatrix();
+      this.renderer.setSize(this.width, this.height);
+    }
+
+    onMouseMove(e) {
+      gsap.to(this.camera.position, {
+        x: gsap.utils.mapRange(0, window.innerWidth, 0.2, -0.2, e.clientX),
+        y: gsap.utils.mapRange(0, window.innerHeight, 0.2, -0.2, -e.clientY),
+      });
     }
 
     listenToResize() {
-      window.addEventListener('resize', () => {
-        this.width = window.innerWidth;
-        this.height = window.innerHeight;
-        this.camera.aspect = this.width / this.height;
-        this.camera.updateProjectionMatrix();
-        this.renderer.setSize(this.width, this.height);
-      });
+      window.addEventListener('resize', this.resizeHandler);
     }
 
     listenToMouseMove() {
-      window.addEventListener('mousemove', (e) => {
-        gsap.to(this.camera.position, {
-          x: gsap.utils.mapRange(0, window.innerWidth, 0.2, -0.2, e.clientX),
-          y: gsap.utils.mapRange(0, window.innerHeight, 0.2, -0.2, -e.clientY),
-        });
-      });
+      window.addEventListener('mousemove', this.mouseMoveHandler);
     }
 
     addButton() {
@@ -140,7 +147,7 @@ export function createHeartScene(
           this.isRunning = true;
           gsap.to(this.audioBtn, { opacity: 0, duration: 1, ease: 'power1.out' });
         } else {
-          this.audioElement.pause(); // chính là phần fix
+          this.audioElement.pause();
           this.isRunning = false;
           gsap.to(this.audioBtn, { opacity: 1, duration: 1, ease: 'power1.out' });
         }
@@ -303,7 +310,44 @@ export function createHeartScene(
       this.snow = new THREE.Mesh(instancedGeometry, this.snowMaterial);
       this.scene.add(this.snow);
     }
+
+    dispose() {
+      cancelAnimationFrame(this.animationFrameId);
+
+      if (this.audioElement) {
+        this.audioElement.pause();
+        this.audioElement.src = '';
+        this.audioElement.remove();
+        this.audioElement = null;
+      }
+
+      this.renderer.dispose();
+
+      window.removeEventListener('resize', this.resizeHandler);
+      window.removeEventListener('mousemove', this.mouseMoveHandler);
+
+      this.scene.traverse((child) => {
+        if (child.geometry) child.geometry.dispose();
+        if (child.material) {
+          if (Array.isArray(child.material)) {
+            child.material.forEach((m) => m.dispose());
+          } else {
+            child.material.dispose();
+          }
+        }
+      });
+
+      while (this.scene.children.length > 0) {
+        this.scene.remove(this.scene.children[0]);
+      }
+
+      this.scene = null;
+      this.camera = null;
+      this.renderer = null;
+      this.analyser = null;
+      this.sound = null;
+    }
   }
 
-  new HeartScene();
+  return new HeartScene();
 }
