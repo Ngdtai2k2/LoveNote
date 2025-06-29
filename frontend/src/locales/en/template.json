@@ -15,11 +15,19 @@
     "background_sound": "Background sound",
     "volume": "Volume",
     "upload": "Upload file",
+    "upload_images": "Upload images",
+    "note_upload_images": "Upload up to 5 photos",
     "redirect": "Redirect",
     "copy_link": "Copy link",
     "successfully_created_web": "Successfully created the website!",
     "copy_success": "The path has been copied!",
     "copy_fail": "Failed to copy the link!",
     "hint_db_click": "👆 Double tap on the screen to turn music on/off.",
-    "hint_click_player": "♫ Click on the musical note to play or stop the music ♫"
+    "hint_click_player": "♫ Click on the musical note to play or stop the music ♫",
+    "messages": "Messages",
+    "icons": "Icons",
+    "note_performance": "Due to performance considerations, the effects and text will appear more frequently and smoothly on desktop devices compared to mobile phones.",
+    "note_form_area": "After each message and icon, please start a new line.",
+    "colors": "Colors",
+    "crop_to_heart": "Crop to heart"
 }

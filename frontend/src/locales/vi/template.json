@@ -15,11 +15,19 @@
     "background_sound": "Âm thanh nền",
     "volume": "Âm lượng",
     "upload": "Tải file",
+    "upload_images": "Tải lên ảnh",
+    "note_upload_images": "Tải tối đa 5 ảnh",
     "redirect": "Chuyển hướng",
     "copy_link": "Sao chép",
     "successfully_created_web": "Tạo web thành công!",
     "copy_success": "Đã sao chép đường dẫn!",
     "copy_fail": "Sao chép đường dẫn thất bại!",
     "hint_db_click": "👆 Nhấp đôi vào màn hình để bật / tắt nhạc.",
-    "hint_click_player": "♫ Click vào hình nốt nhạc để phát hoặc dừng nhạc ♫"
+    "hint_click_player": "♫ Click vào hình nốt nhạc để phát hoặc dừng nhạc ♫",
+    "messages": "Tin nhắn",
+    "icons": "Biểu tượng",
+    "note_performance": "Vì vấn đề hiệu năng nên trên máy tính hiệu ứng và chữ sẽ nhiều và ổn hơn trên điện thoại.",
+    "note_form_area": "Sau mỗi tin nhắn và biểu tượng hãy xuống dòng nhe!",
+    "colors": "Bộ màu",
+    "crop_to_heart": "Cắt ảnh trái tim"
 }
