@@ -19,23 +19,29 @@ export default function MatrixLoveRain({ data }) {
     height: window.innerHeight,
   });
 
+  const defaultSettings = {
+    textRain: 'DEMO',
+    title: 'DEMO',
+    fontSize: 16,
+    fontSizeTitle: 50,
+    textColor: '#ff69b4',
+    backgroundHex: '#000000',
+    backgroundOpacity: 0.05,
+    titleColor: '#ff69b4',
+    rainSpeed: 1,
+    textPerClick: 8,
+    autoBurst: false,
+    playAudio: false,
+    audioVolume: 0.5,
+    audioFile: MUSIC_BACKGROUND_001,
+  };
+
   // configs default
-  const [settings, setSettings] = useState({
-    textRain: data?.configs?.textRain || 'DEMO',
-    title: data?.configs?.title || 'DEMO',
-    fontSize: data?.configs?.fontSize || 16,
-    fontSizeTitle: data?.configs?.fontSizeTitle || 50,
-    textColor: data?.configs?.textColor || '#ff69b4',
-    backgroundHex: data?.configs?.backgroundHex || '#000000',
-    backgroundOpacity: data?.configs?.backgroundOpacity || 0.05,
-    titleColor: data?.configs?.titleColor || '#ff69b4',
-    rainSpeed: data?.configs?.rainSpeed || 1,
-    textPerClick: data?.configs?.textPerClick || 8,
-    autoBurst: data?.configs?.autoBurst || false,
-    playAudio: data?.configs?.playAudio || false,
-    audioVolume: data?.configs?.audioVolume || 0.5,
+  const [settings, setSettings] = useState(() => ({
+    ...defaultSettings,
+    ...(data?.configs || {}),
     audioFile: data?.configs?.audioFile || MUSIC_BACKGROUND_001,
-  });
+  }));
 
   useDocumentTitle(settings?.title);
 
@@ -169,6 +175,7 @@ export default function MatrixLoveRain({ data }) {
   useEffect(() => {
     const handleDoubleClick = () => {
       const audio = audioRef.current;
+
       if (!audio || !settings.playAudio) return;
 
       audio.volume = settings.audioVolume ?? 1;
@@ -192,6 +199,16 @@ export default function MatrixLoveRain({ data }) {
     return () => window.removeEventListener('dblclick', handleDoubleClick);
   }, [settings.playAudio, settings.audioVolume]);
 
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    if (!settings.playAudio) {
+      audio.pause();
+      isPlaying.current = false;
+    }
+  }, [settings.playAudio]);
+
   return (
     <div className="relative h-screen w-screen cursor-pointer overflow-hidden">
       <canvas
@@ -200,12 +217,7 @@ export default function MatrixLoveRain({ data }) {
         height={canvasSize.height}
         className="absolute left-0 top-0 z-0"
       />
-      <audio
-        ref={audioRef}
-        src={settings.audioFile || MUSIC_BACKGROUND_001}
-        loop
-        style={{ display: 'none' }}
-      />
+      <audio ref={audioRef} src={settings.audioFile || MUSIC_BACKGROUND_001} loop hidden />
       <div className="pointer-events-none absolute left-0 top-0 z-10 flex h-full w-full items-center justify-center">
         <h1
           className="font-mono opacity-80"

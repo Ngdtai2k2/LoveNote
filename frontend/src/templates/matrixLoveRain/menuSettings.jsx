@@ -46,8 +46,8 @@ export default function MenuSettings({ settings, onUpdate }) {
     autoBurst: settings.autoBurst || false,
     playAudio: settings.playAudio || false,
     audioVolume: settings.audioVolume || 1,
-    audioFile: null,
-    slug: null,
+    audioFile: '',
+    slug: '',
   };
 
   const onSubmit = async (values) => {
@@ -271,7 +271,7 @@ export default function MenuSettings({ settings, onUpdate }) {
                     }}
                   />
                   {values.slug && (
-                    <span className='text-sm mt-1'>{`${import.meta.env.VITE_CLIENT_URL}/${values.slug}`}</span>
+                    <span className="text-sm mt-1">{`${import.meta.env.VITE_CLIENT_URL}/${values.slug}`}</span>
                   )}
 
                   {/* Upload Audio File */}
