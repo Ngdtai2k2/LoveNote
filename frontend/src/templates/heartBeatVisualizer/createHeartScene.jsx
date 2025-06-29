@@ -17,6 +17,7 @@ export function createHeartScene(
 ) {
   class HeartScene {
     constructor() {
+      this.isDisposed = false;
       this.parameters = {
         count: 1500,
         max: 12.5 * Math.PI,
@@ -61,6 +62,8 @@ export function createHeartScene(
     }
 
     loop() {
+      if (this.isDisposed) return;
+
       this.time.elapsed = this.clock.getElapsedTime();
       this.time.delta = (this.time.elapsed - this.time.current) * 1000;
 
@@ -111,6 +114,7 @@ export function createHeartScene(
     }
 
     onResize() {
+      if (this.isDisposed) return;
       this.width = window.innerWidth;
       this.height = window.innerHeight;
       this.camera.aspect = this.width / this.height;
@@ -119,6 +123,7 @@ export function createHeartScene(
     }
 
     onMouseMove(e) {
+      if (this.isDisposed) return;
       gsap.to(this.camera.position, {
         x: gsap.utils.mapRange(0, window.innerWidth, 0.2, -0.2, e.clientX),
         y: gsap.utils.mapRange(0, window.innerHeight, 0.2, -0.2, -e.clientY),
@@ -155,6 +160,7 @@ export function createHeartScene(
     }
 
     async loadMusic() {
+      if (this.isDisposed) return;
       const listener = new THREE.AudioListener();
       this.camera.add(listener);
 
@@ -175,6 +181,7 @@ export function createHeartScene(
       gsap.to(this.audioBtn, { opacity: 0, duration: 1, ease: 'power1.out' });
 
       this.audioElement.onended = () => {
+        if (this.isDisposed) return;
         this.audioBtn.disabled = false;
         this.isRunning = false;
         gsap.to(this.audioBtn, { opacity: 1, duration: 1, ease: 'power1.out' });
@@ -183,13 +190,18 @@ export function createHeartScene(
 
     async addToScene() {
       await this.addModel();
+      if (this.isDisposed) return;
+
       this.addHeart();
+      if (this.isDisposed) return;
+
       this.addSnow();
     }
 
     async addModel() {
       const loader = new GLTFLoader();
       loader.load(HEART_GLB, (gltf) => {
+        if (this.isDisposed) return;
         this.model = gltf.scene.children[0];
         this.model.scale.set(0.001, 0.001, 0.001);
         this.model.material = new THREE.MeshMatcapMaterial({
@@ -209,6 +221,7 @@ export function createHeartScene(
     }
 
     addHeart() {
+      if (!this.scene) return;
       this.heartMaterial = new THREE.ShaderMaterial({
         vertexShader,
         fragmentShader,
@@ -260,6 +273,7 @@ export function createHeartScene(
     }
 
     addSnow() {
+      if (!this.scene) return;
       this.snowMaterial = new THREE.ShaderMaterial({
         vertexShader: vertexShader1,
         fragmentShader: fragmentShader1,
@@ -312,6 +326,7 @@ export function createHeartScene(
     }
 
     dispose() {
+      this.isDisposed = true;
       cancelAnimationFrame(this.animationFrameId);
 
       if (this.audioElement) {
@@ -321,8 +336,12 @@ export function createHeartScene(
         this.audioElement = null;
       }
 
-      this.renderer.dispose();
+      if (this.sound) {
+        this.sound.disconnect();
+        this.sound = null;
+      }
 
+      this.renderer.dispose();
       window.removeEventListener('resize', this.resizeHandler);
       window.removeEventListener('mousemove', this.mouseMoveHandler);
 
@@ -345,7 +364,6 @@ export function createHeartScene(
       this.camera = null;
       this.renderer = null;
       this.analyser = null;
-      this.sound = null;
     }
   }
 

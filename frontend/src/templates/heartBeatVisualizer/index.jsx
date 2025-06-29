@@ -14,12 +14,11 @@ export default function HeartBeatVisualizer() {
   const canvasRef = useRef();
   const audioBtnRef = useRef();
   const h1Ref = useRef();
-  const sceneRef = useRef();
 
   const { t } = useTranslation('template');
 
   useEffect(() => {
-    sceneRef.current = createHeartScene(
+    const scene = createHeartScene(
       canvasRef.current,
       audioBtnRef.current,
       heartVertex,
@@ -29,7 +28,7 @@ export default function HeartBeatVisualizer() {
     );
 
     return () => {
-      sceneRef.current?.dispose();
+      scene?.dispose();
     };
   }, []);
 
