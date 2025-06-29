@@ -1,6 +1,7 @@
 import MatrixLoveRain from '@templates/matrixLoveRain';
 import HeartBeatVisualizer from '@templates/heartBeatVisualizer';
 import GalaxyLoveLetter from '@templates/galaxyLoveLetter';
+import MatrixRainWithParticles from '@templates/matrixRainWithParticles';
 
 const templateRoutes = [
   {
@@ -15,6 +16,10 @@ const templateRoutes = [
   {
     path: '/heart-beat-visualizer',
     element: <HeartBeatVisualizer />,
+  },
+  {
+    path: '/matrix-rain-text',
+    element: <MatrixRainWithParticles />,
   },
 ];
 
