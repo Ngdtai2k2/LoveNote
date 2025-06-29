@@ -219,9 +219,7 @@ export default function MatrixLoveRain({ data }) {
       </div>
       {settings.playAudio && <BlinkingHint hint={t('hint_db_click')} hiddenAfter={5} />}
 
-      {!data && (
-        <MenuSettings settings={settings} onUpdate={(key, value) => updateSetting(key, value)} />
-      )}
+      {!data && <MenuSettings settings={settings} onUpdate={updateSetting} />}
     </div>
   );
 }
