@@ -169,8 +169,10 @@ export default function MatrixLoveRain({ data }) {
   }, [canvasSize, settings, textClick]);
 
   useEffect(() => {
+    const audio = audioRef.current;
+    audio.volume = settings.audioVolume ?? 1;
+
     const handleDoubleClick = () => {
-      const audio = audioRef.current;
       if (!audio) return;
 
       audio.volume = settings.audioVolume ?? 1;
