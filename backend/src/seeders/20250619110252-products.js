@@ -35,6 +35,19 @@ module.exports = {
         created_at: new Date(),
         updated_at: new Date(),
       },
+      {
+        id: 'love-003',
+        name: 'Ngân hà chữ',
+        slug: 'galaxy-love-letter',
+        description: `Một thông điệp kỹ thuật số giữa dải ngân hà, kết hợp hiệu ứng vũ trụ 3D và âm nhạc ngọt ngào.`,
+        price: 0,
+        discount: 0,
+        thumbnail_url: `${SERVER_URL}/assets/images/galaxy-love-letter.png`,
+        demo_video_url: '#',
+        rating: 0,
+        created_at: new Date(),
+        updated_at: new Date(),
+      },
     ]);
   },
 
