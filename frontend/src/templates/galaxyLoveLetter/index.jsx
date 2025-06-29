@@ -1,27 +1,11 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-
 import BlinkingHint from '@components/BlinkingHint';
-
+import { useDebouncedValue } from '@hooks/useDebouncedValue';
 import IMAGE_DEMO from '../assets/images/image_galaxy_text.jpg';
 import MUSIC_DEMO from '../assets/musics/music_background_002.mp3';
-
-const galaxyData = {
-  messages: [
-    'Thank you for being my sunshine',
-    'You are my universe',
-    'You make my heart smile',
-    'Honey bunch, you are my everything!',
-  ],
-  icons: ['♥', '💖', '❤️', '💕', '💘'],
-  colors: ['#ff6b9d', '#4ecdc4', '#ff69b4', '#f34bce', '#ff99cc', '#ff85a1', '#ffb3de', '#ff6fd8'],
-  images: [IMAGE_DEMO],
-  song: MUSIC_DEMO,
-};
-
-function getRandomColor() {
-  return galaxyData.colors[Math.floor(Math.random() * galaxyData.colors.length)];
-}
+import MenuSettings from './menuSettings';
 
 const injectTwinkle = () => {
   const styleId = 'twinkle-keyframe';
@@ -38,7 +22,10 @@ const injectTwinkle = () => {
   }
 };
 
-export default function GalaxyLoveLetter() {
+const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768;
+const isSmallMobile = typeof window !== 'undefined' && window.innerWidth <= 480;
+
+export default function GalaxyLoveLetter({ data }) {
   const galaxyRef = useRef(null);
   const audioRef = useRef(null);
   const isPlaying = useRef(false);
@@ -46,17 +33,46 @@ export default function GalaxyLoveLetter() {
   const lastMouse = useRef({ x: 0, y: 0 });
   const activeParticles = useRef(new Set());
 
+  const { t } = useTranslation('template');
   const [rotation, setRotation] = useState({ x: 0, y: 0 });
   const [scale] = useState(1);
 
-  const { t } = useTranslation('template');
+  const defaultSettings = {
+    messages: ['Lorem ipsum dolor sit amet!', 'Lorem ipsum dolor sit amet consectetur!'],
+    icons: ['💖', '❤️', '💕', '💘'],
+    colors: ['#ff6b9d', '#4ecdc4', '#ff69b4'],
+    images: [IMAGE_DEMO],
+    audioFile: MUSIC_DEMO,
+    cropToHeart: true,
+    audioVolume: 0.5,
+  };
 
-  const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768;
-  const isSmallMobile = typeof window !== 'undefined' && window.innerWidth <= 480;
-  const maxParticles = isSmallMobile ? 150 : isMobile ? 200 : 300;
+  const [settings, setSettings] = useState({
+    messages: data?.configs.messages ?? defaultSettings.messages,
+    icons: data?.configs.icons ?? defaultSettings.icons,
+    colors: data?.configs.colors ?? defaultSettings.colors,
+    images: data?.configs.images ?? defaultSettings.images,
+    audioFile: data?.configs.audioFile ?? defaultSettings.audioFile,
+    cropToHeart: data?.configs.cropToHeart ?? defaultSettings.cropToHeart,
+    audioVolume: data?.configs.audioVolume ?? defaultSettings.audioVolume,
+  });
+
+  const debouncedSettings = useDebouncedValue(settings, 2000);
+
+  const updateSetting = (key, valueOrUpdater) => {
+    setSettings((prev) => ({
+      ...prev,
+      [key]: typeof valueOrUpdater === 'function' ? valueOrUpdater(prev[key]) : valueOrUpdater,
+    }));
+  };
+
+  const maxParticles = isSmallMobile ? 60 : isMobile ? 80 : 300;
+  const starCount = isSmallMobile ? 120 : isMobile ? 200 : 500;
   const particleInterval = isMobile ? 100 : 120;
-  const starCount = isSmallMobile ? 250 : isMobile ? 350 : 500;
   const particleSpeedMultiplier = 1.3;
+
+  const getRandomColor = () =>
+    debouncedSettings.colors[Math.floor(Math.random() * debouncedSettings.colors.length)];
 
   useEffect(() => {
     injectTwinkle();
@@ -75,63 +91,43 @@ export default function GalaxyLoveLetter() {
         star.style.top = `calc(50% + ${y}px)`;
         star.style.transform = `translateZ(${z}px)`;
         const brightness = 0.8 + Math.random() * 0.5;
-        star.style.boxShadow = `0 0 ${6 + Math.random() * 8}px rgba(255, 255, 255, ${brightness})`;
+        star.style.boxShadow = isMobile
+          ? `0 0 8px rgba(255,255,255,${brightness})`
+          : `0 0 ${6 + Math.random() * 8}px rgba(255, 255, 255, ${brightness})`;
         star.style.animation = `twinkle ${2 + Math.random() * 3}s infinite ease-in-out`;
         galaxy.appendChild(star);
       }
     };
 
-    const createShootingStar = () => {
-      const shootingStar = document.createElement('div');
-      shootingStar.className = 'absolute bg-white rounded-full';
-      shootingStar.style.width = '3px';
-      shootingStar.style.height = '3px';
-      shootingStar.style.boxShadow = '0 0 30px white';
-      shootingStar.style.transform = 'rotate(45deg)';
-      const startX = Math.random() * window.innerWidth * 0.5;
-      const startY = Math.random() * window.innerHeight * 0.3;
-      const duration = 1000 + Math.random() * 500;
-      shootingStar.style.left = `${startX}px`;
-      shootingStar.style.top = `${startY}px`;
-      shootingStar.style.opacity = 1;
-      shootingStar.style.transition = `all ${duration}ms linear`;
+    createStars();
+  }, []);
 
-      galaxy.appendChild(shootingStar);
+  useEffect(() => {
+    const galaxy = galaxyRef.current;
 
-      requestAnimationFrame(() => {
-        shootingStar.style.left = `${startX + 300}px`;
-        shootingStar.style.top = `${startY + 150}px`;
-        shootingStar.style.opacity = 0;
-      });
-
-      setTimeout(() => shootingStar.remove(), duration + 300);
-    };
-
-    const createTextParticle = () => {
+    const createParticle = () => {
       if (activeParticles.current.size >= maxParticles) return;
       const el = document.createElement('div');
       const isIcon = Math.random() > 0.7;
       const message = isIcon
-        ? galaxyData.icons[Math.floor(Math.random() * galaxyData.icons.length)]
-        : galaxyData.messages[Math.floor(Math.random() * galaxyData.messages.length)];
+        ? debouncedSettings.icons[Math.floor(Math.random() * debouncedSettings.icons.length)]
+        : debouncedSettings.messages[Math.floor(Math.random() * debouncedSettings.messages.length)];
       const color = getRandomColor();
 
-      el.className = `absolute font-semibold pointer-events-none text-[14px]`;
+      el.className = 'select-none absolute font-semibold pointer-events-none text-[14px]';
       el.style.color = color;
-      el.style.textShadow = `0 0 15px ${color}`;
+      el.style.textShadow = isMobile ? `0 0 8px ${color}` : `0 0 15px ${color}`;
       el.textContent = message;
-
-      el.style.left = `${Math.random() * 100}%`;
+      el.style.left = `${Math.random() * 90}%`;
       el.style.fontSize = `${Math.random() * 8 + 14}px`;
-      el.style.opacity = 1;
 
-      const startY = -150,
-        endY = window.innerHeight + 150;
+      const startY = -150;
+      const endY = window.innerHeight + 150;
       const zPos = (Math.random() - 0.5) * (isMobile ? 300 : 500);
       const duration = Math.random() * 2 + 3;
-
       let startTime = null;
-      function animate(t) {
+
+      const animate = (t) => {
         if (!startTime) startTime = t;
         const p = (t - startTime) / (duration * 1000 * particleSpeedMultiplier);
         if (p < 1) {
@@ -141,94 +137,138 @@ export default function GalaxyLoveLetter() {
           el.remove();
           activeParticles.current.delete(el);
         }
-      }
+      };
+
       galaxy.appendChild(el);
       activeParticles.current.add(el);
       requestAnimationFrame(animate);
     };
 
-    const loop = setInterval(() => {
-      if (Math.random() < 0.02) createShootingStar();
-      if (galaxyData.images.length && Math.random() < 0.1) {
-        const img = document.createElement('img');
-        img.src = galaxyData.images[Math.floor(Math.random() * galaxyData.images.length)];
-        img.className = 'absolute rounded pointer-events-none';
-        img.style.width = `${Math.random() * 40 + 60}px`;
-        img.style.left = `${Math.random() * 100}%`;
-        const startY = -150,
-          endY = window.innerHeight + 150;
-        const zPos = (Math.random() - 0.5) * (isMobile ? 300 : 500);
-        const duration = Math.random() * 2 + 3;
-        let startTime = null;
-        function animate(t) {
-          if (!startTime) startTime = t;
-          const p = (t - startTime) / (duration * 1000);
-          if (p < 1) {
-            img.style.transform = `translate3d(0, ${startY + (endY - startY) * p}px, ${zPos}px)`;
-            requestAnimationFrame(animate);
-          } else {
-            img.remove();
-            activeParticles.current.delete(img);
-          }
+    const createImageParticle = () => {
+      if (!debouncedSettings.images.length || Math.random() >= 0.1) return;
+      const img = document.createElement('img');
+      img.src =
+        debouncedSettings.images[Math.floor(Math.random() * debouncedSettings.images.length)];
+      img.className = `absolute pointer-events-none ${debouncedSettings.cropToHeart ? 'heart-shape' : 'rounded'}`;
+      img.style.width = `${Math.random() * 40 + 80}px`;
+      img.style.left = `${Math.random() * 100}%`;
+      const startY = -150;
+      const endY = window.innerHeight + 150;
+      const zPos = (Math.random() - 0.5) * (isMobile ? 300 : 500);
+      const duration = Math.random() * 2 + 3;
+      let startTime = null;
+
+      function animate(t) {
+        if (!startTime) startTime = t;
+        const p = (t - startTime) / (duration * 1000);
+        if (p < 1) {
+          img.style.transform = `translate3d(0, ${startY + (endY - startY) * p}px, ${zPos}px)`;
+          requestAnimationFrame(animate);
+        } else {
+          img.remove();
+          activeParticles.current.delete(img);
         }
-        galaxy.appendChild(img);
-        activeParticles.current.add(img);
-        requestAnimationFrame(animate);
-      } else {
-        createTextParticle();
       }
+
+      galaxy.appendChild(img);
+      activeParticles.current.add(img);
+      requestAnimationFrame(animate);
+    };
+
+    const createShootingStar = () => {
+      const star = document.createElement('div');
+      star.className = 'absolute bg-white rounded-full';
+      star.style.width = '3px';
+      star.style.height = '3px';
+      star.style.boxShadow = '0 0 30px white';
+      star.style.transform = 'rotate(45deg)';
+      const startX = Math.random() * window.innerWidth * 0.5;
+      const startY = Math.random() * window.innerHeight * 0.3;
+      const duration = 1000 + Math.random() * 500;
+      star.style.left = `${startX}px`;
+      star.style.top = `${startY}px`;
+      star.style.opacity = 1;
+      star.style.transition = `all ${duration}ms linear`;
+      galaxy.appendChild(star);
+      requestAnimationFrame(() => {
+        star.style.left = `${startX + 300}px`;
+        star.style.top = `${startY + 150}px`;
+        star.style.opacity = 0;
+      });
+      setTimeout(() => star.remove(), duration + 300);
+    };
+
+    const loop = setInterval(() => {
+      if (document.hidden) return;
+      if (Math.random() < 0.02) createShootingStar();
+      createParticle();
+      createImageParticle();
     }, particleInterval);
 
     for (let i = 0; i < 15; i++) {
-      setTimeout(() => createTextParticle(), i * 80);
+      setTimeout(createParticle, i * 80);
     }
 
-    createStars();
     return () => clearInterval(loop);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [debouncedSettings]);
 
   useEffect(() => {
+    const getTouch = (e) => e.touches?.[0] || e.changedTouches?.[0];
+
     const handleMouseDown = (e) => {
+      if (e.target.closest('.menu-settings')) return;
       isDragging.current = true;
-      lastMouse.current = { x: e.clientX, y: e.clientY };
+      const point = e.touches ? getTouch(e) : e;
+      lastMouse.current = { x: point.clientX, y: point.clientY };
     };
+
     const handleMouseMove = (e) => {
       if (!isDragging.current) return;
-      const deltaX = e.clientX - lastMouse.current.x;
-      const deltaY = e.clientY - lastMouse.current.y;
-      setRotation((prev) => ({ x: prev.x - deltaY * 0.5, y: prev.y + deltaX * 0.5 }));
-      lastMouse.current = { x: e.clientX, y: e.clientY };
+      const point = e.touches ? getTouch(e) : e;
+      const deltaX = point.clientX - lastMouse.current.x;
+      const deltaY = point.clientY - lastMouse.current.y;
+      setRotation((prev) => ({
+        x: prev.x - deltaY * 0.5,
+        y: prev.y + deltaX * 0.5,
+      }));
+      lastMouse.current = { x: point.clientX, y: point.clientY };
     };
+
     const handleMouseUp = () => {
       isDragging.current = false;
     };
+
     document.addEventListener('mousedown', handleMouseDown);
     document.addEventListener('mousemove', handleMouseMove);
     document.addEventListener('mouseup', handleMouseUp);
+    document.addEventListener('touchstart', handleMouseDown);
+    document.addEventListener('touchmove', handleMouseMove);
+    document.addEventListener('touchend', handleMouseUp);
+
     return () => {
       document.removeEventListener('mousedown', handleMouseDown);
       document.removeEventListener('mousemove', handleMouseMove);
       document.removeEventListener('mouseup', handleMouseUp);
+      document.removeEventListener('touchstart', handleMouseDown);
+      document.removeEventListener('touchmove', handleMouseMove);
+      document.removeEventListener('touchend', handleMouseUp);
     };
   }, []);
 
   useEffect(() => {
-    const handleDoubleClick = () => {
-      const audio = audioRef.current;
-      if (!audio) return;
+    const audio = audioRef.current;
+    audio.volume = settings.audioVolume || 0.5;
 
-      audio.volume = 0.5;
+    const handleDoubleClick = (e) => {
+      if (e.target.closest('.menu-settings')) return;
+      if (!audio) return;
+      audio.volume = settings.audioVolume || 0.5;
 
       if (!isPlaying.current) {
         audio
           .play()
-          .then(() => {
-            isPlaying.current = true;
-          })
-          .catch((err) => {
-            console.warn('🔇 Play bị chặn:', err);
-          });
+          .then(() => (isPlaying.current = true))
+          .catch((err) => console.warn('🔇 Play bị chặn:', err));
       } else {
         audio.pause();
         isPlaying.current = false;
@@ -237,11 +277,11 @@ export default function GalaxyLoveLetter() {
 
     window.addEventListener('dblclick', handleDoubleClick);
     return () => window.removeEventListener('dblclick', handleDoubleClick);
-  }, []);
+  }, [settings.audioVolume]);
 
   return (
     <div
-      className="relative w-full h-screen overflow-hidden bg-black"
+      className="relative w-full h-screen overflow-hidden bg-black cursor-pointer"
       style={{ fontFamily: 'Orbitron, Courier New, monospace' }}
     >
       <div
@@ -253,8 +293,9 @@ export default function GalaxyLoveLetter() {
           perspective: '1500px',
         }}
       />
-      <audio ref={audioRef} hidden src={galaxyData.song} />
+      <audio ref={audioRef} hidden src={settings.audioFile} loop />
       <BlinkingHint hint={t('hint_db_click')} hiddenAfter={5} />
+      {!data && <MenuSettings settings={settings} onUpdate={updateSetting} />}
     </div>
   );
 }
