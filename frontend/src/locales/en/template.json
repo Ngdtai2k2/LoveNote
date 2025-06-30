@@ -31,5 +31,6 @@
     "note_form_area": "After each message and icon, please start a new line.",
     "colors": "Colors",
     "crop_to_heart": "Crop to heart",
-    "upload_audio": "Upload audio"
+    "upload_audio": "Upload audio",
+    "optional": "Optional"
 }

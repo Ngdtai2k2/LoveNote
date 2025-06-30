@@ -309,7 +309,7 @@ export default function MenuSettings({ settings, onUpdate }) {
                       )}
                     </div>
                   </div>
-                  <FormSlug label={t('slug')} name="slug" />
+                  <FormSlug label={`${t('slug')} (${t('optional')})`} name="slug" />
 
                   <button
                     type="submit"

@@ -251,7 +251,7 @@ export default function MenuSettings({ settings, onUpdate }) {
                     }}
                   />
 
-                  <FormSlug label={t('slug')} name="slug" />
+                  <FormSlug label={`${t('slug')} (${t('optional')})`} name="slug" />
 
                   {/* Upload Audio File */}
                   <div>
