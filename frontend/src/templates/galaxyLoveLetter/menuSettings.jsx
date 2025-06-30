@@ -25,6 +25,7 @@ import { FormRange } from '../components/formRange';
 import ModalRenderLink from '../modalRenderLink';
 import { handleSubmitSettings } from './handleSubmitSettings';
 import IMAGE_DEMO from '../assets/images/image_galaxy_text.jpg';
+import FormSlug from '../components/formSlug';
 
 export default function MenuSettings({ settings, onUpdate }) {
   const [openSettings, setOpenSettings] = useState(false);
@@ -58,6 +59,7 @@ export default function MenuSettings({ settings, onUpdate }) {
     audioFile: '',
     cropToHeart: settings.cropToHeart,
     audioVolume: settings.audioVolume,
+    slug: '',
   };
 
   const [emojiInput, setEmojiInput] = useState(initialValues.icons);
@@ -75,11 +77,11 @@ export default function MenuSettings({ settings, onUpdate }) {
   };
 
   const onSubmit = async (values) => {
-     const cleanedValues = {
-         ...values,
-         messages: multilineTextToArray(values.messages),
-         icons: multilineTextToArray(values.icons)
-     };
+    const cleanedValues = {
+      ...values,
+      messages: multilineTextToArray(values.messages),
+      icons: multilineTextToArray(values.icons),
+    };
     const res = await handleSubmitSettings(cleanedValues, user, axiosJWT, navigate);
     if (res?.data) {
       const path = res.data.slug;
@@ -307,6 +309,7 @@ export default function MenuSettings({ settings, onUpdate }) {
                       )}
                     </div>
                   </div>
+                  <FormSlug label={t('slug')} name="slug" />
 
                   <button
                     type="submit"

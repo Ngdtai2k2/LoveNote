@@ -19,6 +19,7 @@ import { handleSubmitSettings } from './handleSubmitSettings';
 import { FormItem } from '../components/formItem';
 import { FormRange } from '../components/formRange';
 import { FormCheckbox } from '../components/formCheckbox';
+import FormSlug from '../components/formSlug';
 import ModalRenderLink from '../modalRenderLink';
 
 export default function MenuSettings({ settings, onUpdate }) {
@@ -250,18 +251,7 @@ export default function MenuSettings({ settings, onUpdate }) {
                     }}
                   />
 
-                  <FormItem
-                    label={t('slug')}
-                    name="slug"
-                    type="text"
-                    value={values.slug}
-                    onChange={(e) => {
-                      handleChange(e);
-                    }}
-                  />
-                  {values.slug && (
-                    <span className="text-sm mt-1">{`${import.meta.env.VITE_CLIENT_URL}/${values.slug}`}</span>
-                  )}
+                  <FormSlug label={t('slug')} name="slug" />
 
                   {/* Upload Audio File */}
                   <div>
