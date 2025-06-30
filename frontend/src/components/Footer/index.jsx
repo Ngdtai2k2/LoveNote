@@ -53,7 +53,8 @@ export default function Footer() {
           <p className="text-base font-bold tracking-wide text-gray-900 dark:text-white">
             {t('contacts')}
           </p>
-          <div className="flex">
+          {/* hidden phone */}
+          {/* <div className="flex">
             <p className="mr-1 text-gray-800 dark:text-gray-100">{t('phone')}:</p>
             <a
               href={`tel:${webData.contacts?.phone}`}
@@ -63,7 +64,7 @@ export default function Footer() {
             >
               {webData.contacts?.phone}
             </a>
-          </div>
+          </div> */}
           <div className="flex">
             <p className="mr-1 text-gray-800 dark:text-gray-100">{t('email')}:</p>
             <a
