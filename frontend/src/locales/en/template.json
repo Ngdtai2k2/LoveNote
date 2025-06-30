@@ -30,5 +30,6 @@
     "note_performance": "Due to performance considerations, the effects and text will appear more frequently and smoothly on desktop devices compared to mobile phones.",
     "note_form_area": "After each message and icon, please start a new line.",
     "colors": "Colors",
-    "crop_to_heart": "Crop to heart"
+    "crop_to_heart": "Crop to heart",
+    "upload_audio": "Upload audio"
 }

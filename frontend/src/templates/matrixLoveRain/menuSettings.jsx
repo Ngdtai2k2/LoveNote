@@ -255,7 +255,7 @@ export default function MenuSettings({ settings, onUpdate }) {
 
                   {/* Upload Audio File */}
                   <div>
-                    <label className="block mt-2 text-sm text-white">{t('upload')}</label>
+                    <label className="block mt-2 text-sm text-white">{t('upload_audio')}</label>
                     <input
                       name="audioFile"
                       type="file"
