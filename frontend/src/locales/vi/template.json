@@ -12,6 +12,7 @@
     "auto_random_click": "Tự động click ngẫu nhiên",
     "text_per_click": "Số lượng chữ 1 click",
     "slug": "Đường dẫn",
+    "slug_exists": "Đường dẫn đã tồn tại",
     "background_sound": "Âm thanh nền",
     "volume": "Âm lượng",
     "upload": "Tải file",

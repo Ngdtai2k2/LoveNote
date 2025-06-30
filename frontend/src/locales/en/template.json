@@ -12,6 +12,7 @@
     "auto_random_click": "Auto random click",
     "text_per_click": "Text per click",
     "slug": "Slug",
+    "slug_exists": "The path already exists",
     "background_sound": "Background sound",
     "volume": "Volume",
     "upload": "Upload file",
