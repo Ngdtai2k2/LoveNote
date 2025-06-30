@@ -1,8 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+
 import BlinkingHint from '@components/BlinkingHint';
 import { useDebouncedValue } from '@hooks/useDebouncedValue';
+import { useDocumentTitle } from '@hooks/useDocumentTitle';
+
 import IMAGE_DEMO from '../assets/images/image_galaxy_text.jpg';
 import MUSIC_DEMO from '../assets/musics/music_background_002.mp3';
 import MenuSettings from './menuSettings';
@@ -36,6 +39,7 @@ export default function GalaxyLoveLetter({ data }) {
   const { t } = useTranslation('template');
   const [rotation, setRotation] = useState({ x: 0, y: 0 });
   const [scale] = useState(1);
+  const [title, setTitle] = useState('DEMO');
 
   const defaultSettings = {
     messages: ['Lorem ipsum dolor sit amet!', 'Lorem ipsum dolor sit amet consectetur!'],
@@ -103,6 +107,12 @@ export default function GalaxyLoveLetter({ data }) {
   }, []);
 
   useEffect(() => {
+    // set title
+    const randomTitle =
+      debouncedSettings.messages[Math.floor(Math.random() * debouncedSettings.messages.length)];
+    setTitle(randomTitle);
+
+    // create particle
     const galaxy = galaxyRef.current;
 
     const createParticle = () => {
@@ -211,6 +221,9 @@ export default function GalaxyLoveLetter({ data }) {
 
     return () => clearInterval(loop);
   }, [debouncedSettings]);
+
+  // title
+  useDocumentTitle(title);
 
   useEffect(() => {
     const getTouch = (e) => e.touches?.[0] || e.changedTouches?.[0];
