@@ -43,8 +43,7 @@ export const userSiteAPI = {
       const res = await axios.get(API_ENDPOINTS.USER_SITES.CHECK_SLUG, {
         params: { slug },
       });
-
-      return res.data.exists === true;
+      return res.data === true;
     } catch {
       return false;
     }
