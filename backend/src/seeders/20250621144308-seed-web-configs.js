@@ -23,8 +23,8 @@ module.exports = {
       {
         key: 'copyright',
         value: JSON.stringify({
-          vi: 'Bản quyền © 2025 - @ngdtai2k2',
-          en: 'Copyright © 2025 - @ngdtai2k2',
+          vi: 'Bản quyền © 2025',
+          en: 'Copyright © 2025',
         }),
         created_at: new Date(),
         updated_at: new Date(),
@@ -32,7 +32,7 @@ module.exports = {
       {
         key: 'contacts',
         value: JSON.stringify({
-          phone: '0967273792',
+          phone: '',
           email: 'support@notelove.com',
           google_map: 'https://maps.app.goo.gl/RhBnQki42gVzsdz56',
         }),
