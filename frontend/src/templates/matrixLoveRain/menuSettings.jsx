@@ -94,7 +94,7 @@ export default function MenuSettings({ settings, onUpdate }) {
         <Formik initialValues={initialValues} onSubmit={onSubmit}>
           {({ values, handleChange, setFieldValue }) => (
             <Form className="p-4 space-y-4">
-              <div className="fixed right-0 top-0 z-30 h-full w-[350px] bg-black bg-opacity-90 text-white shadow-lg border-l border-white/20 overflow-scroll">
+              <div className="menu-settings fixed right-0 top-0 z-30 h-full w-[350px] bg-black bg-opacity-90 text-white shadow-lg border-l border-white/20 overflow-scroll">
                 <div className="flex items-center justify-between p-4 border-b border-white/10">
                   <h2 className="text-lg font-semibold">{t('settings')}</h2>
                   <button

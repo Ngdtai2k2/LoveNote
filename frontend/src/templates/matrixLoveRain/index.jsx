@@ -172,7 +172,8 @@ export default function MatrixLoveRain({ data }) {
     const audio = audioRef.current;
     audio.volume = settings.audioVolume ?? 1;
 
-    const handleDoubleClick = () => {
+    const handleDoubleClick = (e) => {
+      if (e.target.closest('.menu-settings')) return;
       if (!audio) return;
 
       audio.volume = settings.audioVolume ?? 1;
