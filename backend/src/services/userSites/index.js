@@ -26,7 +26,7 @@ const userSiteServices = {
         {
           model: Product,
           as: 'product',
-          attributes: ['id', 'slug'],
+          attributes: ['slug'],
         },
       ],
     });
