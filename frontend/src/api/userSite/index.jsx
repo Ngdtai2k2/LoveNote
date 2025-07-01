@@ -1,7 +1,7 @@
-import axios from 'axios';
 import { toast } from 'react-fox-toast';
 
 import API_ENDPOINTS from '@utils/api';
+import axiosClient from '@utils/axiosClient';
 
 export const userSiteAPI = {
   getSiteConfig: async ({ id, slug }) => {
@@ -14,7 +14,7 @@ export const userSiteAPI = {
         params.id = id;
       }
 
-      const res = await axios.get(API_ENDPOINTS.USER_SITES.GET_CONFIGS, {
+      const res = await axiosClient.get(API_ENDPOINTS.USER_SITES.GET_CONFIGS, {
         params,
       });
 
@@ -40,7 +40,7 @@ export const userSiteAPI = {
 
   checkSlugExists: async (slug) => {
     try {
-      const res = await axios.get(API_ENDPOINTS.USER_SITES.CHECK_SLUG, {
+      const res = await axiosClient.get(API_ENDPOINTS.USER_SITES.CHECK_SLUG, {
         params: { slug },
       });
       return res.data === true;

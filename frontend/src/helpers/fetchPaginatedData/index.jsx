@@ -1,6 +1,9 @@
-import axios from 'axios';
+import axiosClient from '@utils/axiosClient';
 
-const fetchPaginatedData = async (url, { client = axios, params = {}, headers = {} } = {}) => {
+const fetchPaginatedData = async (
+  url,
+  { client = axiosClient, params = {}, headers = {} } = {}
+) => {
   try {
     const res = await client.get(url, {
       params,

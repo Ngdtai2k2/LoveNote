@@ -4,7 +4,14 @@ import useCachedApi from '@hooks/useCachedApi';
 
 const useBanner = () => {
   const fetchBanners = useCallback(() => {
-    return bannerAPI.getAll(true).then((res) => res.data);
+    return bannerAPI
+      .getAll(true)
+      .then((res) => {
+        if (res && res.data) return res.data;
+      })
+      .catch(() => {
+        return [];
+      });
   }, []);
 
   const { data: banners, loading } = useCachedApi({
@@ -13,7 +20,10 @@ const useBanner = () => {
     fetcher: fetchBanners,
   });
 
-  return { banners: banners || [], loading };
+  return {
+    banners: Array.isArray(banners) ? banners : [],
+    loading,
+  };
 };
 
 export default useBanner;
