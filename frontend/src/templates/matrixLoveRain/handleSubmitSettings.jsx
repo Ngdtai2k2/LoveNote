@@ -45,7 +45,7 @@ export const handleSubmitSettings = async (values, user, axiosJWT, navigate) => 
   if (slug) formData.append('slug', slug);
   formData.append('configs', JSON.stringify(config));
   if (audioFile instanceof File) {
-    formData.append('file', audioFile);
+    formData.append('audio', audioFile);
   }
 
   try {

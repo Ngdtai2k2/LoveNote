@@ -34,7 +34,7 @@ export default function handleSubmitSettings(values, user, axiosJWT, navigate) {
   formData.append('configs', JSON.stringify(config));
 
   if (audioFile instanceof File) {
-    formData.append('file', audioFile);
+    formData.append('audio', audioFile);
   }
 
   try {
