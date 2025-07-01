@@ -4,21 +4,30 @@ const fs = require('fs');
 
 const uploadMiddleware = () => {
   const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
+    destination: (req, file, cb) => {
       const userId = req.user?.id || 'temp';
-      let basePath = path.join(__dirname, '../public/assets/temp');
+      let basePath;
 
-      if (file.fieldname === 'images') {
-        basePath = path.join(__dirname, `../public/assets/images/${userId}`);
-      } else if (file.fieldname === 'file') {
-        basePath = path.join(__dirname, `../public/assets/audio/${userId}`);
+      switch (file.fieldname) {
+        case 'avatar':
+          basePath = path.join(__dirname, `../public/assets/avatars/${userId}`);
+          break;
+        case 'image':
+          basePath = path.join(__dirname, `../public/assets/images/${userId}`);
+          break;
+        case 'audio':
+          basePath = path.join(__dirname, `../public/assets/audio/${userId}`);
+          break;
+        default:
+          basePath = path.join(__dirname, '../public/assets/temp');
+          break;
       }
 
       fs.mkdirSync(basePath, { recursive: true });
       cb(null, basePath);
     },
 
-    filename: function (req, file, cb) {
+    filename: (req, file, cb) => {
       const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
       const ext = path.extname(file.originalname);
       cb(null, uniqueSuffix + ext);
