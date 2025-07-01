@@ -40,7 +40,6 @@ export const handleSubmitSettings = async (values, user, axiosJWT, navigate) => 
   };
 
   const formData = new FormData();
-  formData.append('userId', user.id);
   formData.append('productId', 'love-001');
   if (slug) formData.append('slug', slug);
   formData.append('configs', JSON.stringify(config));
