@@ -5,19 +5,11 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { signInSuccess } from '@redux/slice/auth';
 import API_ENDPOINTS from '@utils/api';
+import axiosClient from '@utils/axiosClient';
 
-const refreshToken = async (lng) => {
+const refreshToken = async () => {
   try {
-    const res = await axios.post(
-      API_ENDPOINTS.AUTH.REFRESH_TOKEN,
-      {},
-      {
-        withCredentials: true,
-        headers: {
-          'Accept-Language': lng,
-        },
-      }
-    );
+    const res = await axiosClient.post(API_ENDPOINTS.AUTH.REFRESH_TOKEN);
     return res.data;
   } catch (err) {
     return err.response.data;
@@ -28,6 +20,7 @@ let refreshTokenPromise = null;
 
 export const createAxios = (lng, auth, dispatch, stateSuccess) => {
   const newInstance = axios.create({
+    baseURL: import.meta.env.VITE_API_URL,
     withCredentials: true,
     headers: {
       'Accept-Language': lng,
@@ -43,7 +36,7 @@ export const createAxios = (lng, auth, dispatch, stateSuccess) => {
 
       if (isExpired) {
         if (!refreshTokenPromise) {
-          refreshTokenPromise = refreshToken(lng);
+          refreshTokenPromise = refreshToken();
         }
 
         const data = await refreshTokenPromise;

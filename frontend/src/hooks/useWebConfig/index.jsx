@@ -4,7 +4,14 @@ import useCachedApi from '@hooks/useCachedApi';
 
 const useWebConfig = () => {
   const fetcher = useCallback(() => {
-    return webConfigAPI.getAll(true).then((res) => res.data);
+    return webConfigAPI
+      .getAll(true)
+      .then((res) => {
+        if (res && res.data) return res.data;
+      })
+      .catch(() => {
+        return [];
+      });
   }, []);
 
   const { data: webConfigs, loading } = useCachedApi({
@@ -13,7 +20,10 @@ const useWebConfig = () => {
     fetcher,
   });
 
-  return { webConfigs: webConfigs || [], loading };
+  return {
+    webConfigs: Array.isArray(webConfigs) ? webConfigs : [],
+    loading,
+  };
 };
 
 export default useWebConfig;
