@@ -1,104 +1,95 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
-const MatrixRain = () => {
-  const canvasRef = React.useRef(null);
-  const letters = '♥ILOVEYOU♥';
+import { useDocumentTitle } from '@hooks/useDocumentTitle';
+import { useDebouncedValue } from '@hooks/useDebouncedValue';
+import BlinkingHint from '@components/BlinkingHint';
 
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    const ctx = canvas.getContext('2d');
+import MatrixRain from './matrixRain';
+import WordDisplay from './wordDisplay';
+import MenuSettings from './menuSettings';
 
-    const resizeCanvas = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    };
+import MUSIC_DEMO from '../assets/musics/music_background_005.mp3';
 
-    resizeCanvas();
-    window.addEventListener('resize', resizeCanvas);
-    window.addEventListener('orientationchange', resizeCanvas);
+export default function MatrixRainWithWords({ data }) {
+  const { t } = useTranslation('template');
+  const audioRef = useRef(null);
+  const isPlaying = useRef(false);
 
-    const fontSize = 14;
-    const columns = Math.floor(canvas.width / fontSize);
-    const drops = Array(columns).fill(1);
+  const defaultSettings = {
+    title: 'Matrix Rain with Words',
+    wordList: [
+      { text: 'Demo 1', duration: 1000 },
+      {
+        text: 'Demo 2',
+        duration: 2000,
+      },
+    ],
+    letters: 'abcdefghiklmnopqrstuvwxyz',
+    loop: true,
+    backgroundColor: '#000000',
+    textColor: '#00ff00',
+    textFontSize: 100,
+    rainTextColor: '#00ff00',
+    rainFontSize: 14,
+    fontFamily: 'Tektur',
+    audioFile: MUSIC_DEMO,
+    audioVolume: 0.5,
+  };
 
-    const draw = () => {
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-      ctx.fillStyle = 'red';
-      ctx.font = `${fontSize}px monospace`;
+  const [settings, setSettings] = useState(() => ({
+    ...defaultSettings,
+    ...data?.configs,
+  }));
 
-      drops.forEach((y, i) => {
-        const text = letters[Math.floor(Math.random() * letters.length)];
-        const x = i * fontSize;
-        ctx.fillText(text, x, y * fontSize);
+  const updateSetting = (key, value) => setSettings((prev) => ({ ...prev, [key]: value }));
 
-        if (y * fontSize > canvas.height && Math.random() > 0.975) {
-          drops[i] = 0;
-        }
-
-        drops[i]++;
-      });
-
-      requestAnimationFrame(draw);
-    };
-
-    draw();
-
-    return () => {
-      window.removeEventListener('resize', resizeCanvas);
-      window.removeEventListener('orientationchange', resizeCanvas);
-    };
-  }, []);
-
-  return <canvas ref={canvasRef} className="fixed top-0 left-0 z-0 w-full h-full" />;
-};
-
-const WordDisplay = ({ words = [] }) => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [fade, setFade] = useState(true);
+  const debounced = useDebouncedValue(settings, 500);
+  useDocumentTitle(debounced.title);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setFade(false);
-      setTimeout(() => {
-        const next = (currentIndex + 1) % words.length;
-        setCurrentIndex(next);
-        setFade(true);
-      }, 300);
-    }, words[currentIndex].duration);
+    const audio = audioRef.current;
+    if (audio) audio.volume = debounced.audioVolume || 0.5;
 
-    return () => clearTimeout(timer);
-  }, [currentIndex, words]);
+    const toggleAudio = (e) => {
+      if (e.target.closest('.menu-settings') || !audio) return;
 
-  return (
-    <div className="absolute inset-0 flex items-center justify-center z-20">
-      <div
-        className={`font-bitcount text-red-600 text-[50px] md:text-[150px] font-bold transition-all duration-300 ease-in-out ${
-          fade ? 'opacity-100 scale-100' : 'opacity-0 scale-75'
-        }`}
-      >
-        {words[currentIndex].text}
-      </div>
-    </div>
-  );
-};
+      if (!isPlaying.current) {
+        audio
+          .play()
+          .then(() => (isPlaying.current = true))
+          .catch((err) => console.warn('🔇 Play bị chặn:', err));
+      } else {
+        audio.pause();
+        isPlaying.current = false;
+      }
+    };
 
-const MatrixRainWithWords = () => {
-  const wordList = [
-    { text: '3', duration: 1000 },
-    { text: '2', duration: 1000 },
-    { text: '1', duration: 1000 },
-    { text: 'I LOVE YOU', duration: 3000 },
-    { text: 'SO MUCH', duration: 3000 },
-    { text: '♥', duration: 3000 },
-  ];
+    window.addEventListener('dblclick', toggleAudio);
+    return () => window.removeEventListener('dblclick', toggleAudio);
+  }, [debounced.audioVolume]);
 
   return (
     <div className="relative w-screen h-screen bg-black overflow-hidden">
-      <MatrixRain />
-      <WordDisplay words={wordList} />
+      <audio ref={audioRef} hidden src={debounced.audioFile} loop />
+
+      <MatrixRain
+        letters={debounced.letters}
+        rainTextColor={debounced.rainTextColor}
+        rainFontSize={debounced.rainFontSize}
+        backgroundColor={debounced.backgroundColor}
+      />
+      <WordDisplay
+        words={debounced.wordList}
+        loop={debounced.loop}
+        fontFamily={debounced.fontFamily}
+        textColor={debounced.textColor}
+        textFontSize={debounced.textFontSize}
+      />
+
+      <BlinkingHint hint={t('hint_db_click')} hiddenAfter={5} />
+
+      {!data && <MenuSettings settings={debounced} onUpdate={updateSetting} />}
     </div>
   );
-};
-
-export default MatrixRainWithWords;
+}

@@ -5,6 +5,7 @@
     "text_rain": "Text rain",
     "font_size_text_rain": "Font size (rain)",
     "font_size_title": "Font size (title)",
+    "font_size_text": "Font size (text)",
     "text_color": "Text color",
     "background_color": "Background color",
     "color_spread": "Color spread",
@@ -36,5 +37,10 @@
     "heart": "Heart",
     "d_heart": "3D Heart",
     "floating_heart": "Floating heart",
-    "button_color": "Button color"
+    "button_color": "Button color",
+    "letters": "Letters",
+    "words": "Word or sentence",
+    "step": "Step",
+    "font_family": "Font family",
+    "loop": "Loop"
 }

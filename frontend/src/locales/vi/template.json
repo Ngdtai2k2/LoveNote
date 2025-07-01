@@ -5,6 +5,7 @@
     "text_rain": "Mưa chữ",
     "font_size_text_rain": "Kích thước (mưa chữ)",
     "font_size_title": "Kích thước (tiêu đề)",
+    "font_size_text": "Kích thước (chữ)",
     "text_color": "Màu chữ",
     "background_color": "Màu nền",
     "color_spread": "Loang màu",
@@ -36,5 +37,10 @@
     "heart": "Trái tim",
     "d_heart": "Trái tim 3d",
     "floating_heart": "Trái tim bay",
-    "button_color": "Màu nút"
+    "button_color": "Màu nút",
+    "letters": "Chữ cái",
+    "words": "Từ hoặc câu",
+    "step": "Bước nhảy",
+    "font_family": "Phông chữ",
+    "loop": "Lặp lại"
 }
