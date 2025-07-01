@@ -32,5 +32,9 @@
     "colors": "Colors",
     "crop_to_heart": "Crop to heart",
     "upload_audio": "Upload audio",
-    "optional": "Optional"
+    "optional": "Optional",
+    "heart": "Heart",
+    "d_heart": "3D Heart",
+    "floating_heart": "Floating heart",
+    "button_color": "Button color"
 }

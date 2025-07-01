@@ -32,5 +32,9 @@
     "colors": "Bộ màu",
     "crop_to_heart": "Cắt ảnh trái tim",
     "upload_audio": "Tải lên nhạc",
-    "optional": "Tùy chọn"
+    "optional": "Tùy chọn",
+    "heart": "Trái tim",
+    "d_heart": "Trái tim 3d",
+    "floating_heart": "Trái tim bay",
+    "button_color": "Màu nút"
 }
