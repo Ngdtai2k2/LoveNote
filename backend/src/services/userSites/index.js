@@ -71,7 +71,7 @@ const userSiteServices = {
       throw { code: 400, messageKey: 'validate:invalid_config_json' };
     }
 
-    const avatarDir = path.join(
+    const imageDir = path.join(
       __dirname,
       `../../../public/assets/images/${userId}`
     );
@@ -80,7 +80,7 @@ const userSiteServices = {
       `../../../public/assets/audio/${userId}`
     );
 
-    fs.mkdirSync(avatarDir, { recursive: true });
+    fs.mkdirSync(imageDir, { recursive: true });
     fs.mkdirSync(audioDir, { recursive: true });
 
     if (req.files?.images && Array.isArray(req.files.images)) {
