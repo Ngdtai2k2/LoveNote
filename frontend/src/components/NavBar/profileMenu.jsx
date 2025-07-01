@@ -39,6 +39,7 @@ export function ProfileMenu() {
 
   const renderMenuItem = (label, Icon, path) => (
     <MenuItem
+      key={label}
       onClick={() => handleNavigate(path)}
       className="flex items-center gap-2 rounded hover:bg-gray-300 
             focus:bg-gray-300 active:bg-gray-300 dark:hover:bg-gray-700 
@@ -110,10 +111,10 @@ export function ProfileMenu() {
             </MenuItem>
           ))
         ) : (
-          <>
+          <div>
             {renderMenuItem('login', ArrowRightEndOnRectangleIcon, ROUTES.AUTH.SIGN_IN)}
             {renderMenuItem('register', PlusIcon, ROUTES.AUTH.SIGN_UP)}
-          </>
+          </div>
         )}
       </MenuList>
     </Menu>
