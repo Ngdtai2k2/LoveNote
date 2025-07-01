@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { IconButton } from '@material-tailwind/react';
@@ -26,6 +26,8 @@ export default function MenuSettings({ settings, onUpdate }) {
   const [openSettings, setOpenSettings] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const [sitePath, setSitePath] = useState('');
+  const [audioName, setAudioName] = useState();
+  const fileInputRef = useRef(null);
 
   const { t, i18n } = useTranslation('template');
 
@@ -48,6 +50,14 @@ export default function MenuSettings({ settings, onUpdate }) {
     audioVolume: settings.audioVolume || 1,
     audioFile: '',
     slug: '',
+  };
+
+  const clearAudioFile = (setFieldValue) => {
+    setAudioName('');
+    setFieldValue('audioFile', null);
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';
+    }
   };
 
   const onSubmit = async (values) => {
@@ -256,17 +266,31 @@ export default function MenuSettings({ settings, onUpdate }) {
                   {/* Upload Audio File */}
                   <div>
                     <label className="block mt-2 text-sm text-white">{t('upload_audio')}</label>
-                    <input
-                      name="audioFile"
-                      type="file"
-                      accept="audio/mpeg"
-                      onChange={(e) => {
-                        const file = e.target.files?.[0];
-                        setFieldValue('audioFile', file || null);
-                        onUpdate('audioFile', file ? URL.createObjectURL(file) : null);
-                      }}
-                      className="mt-1 text-white"
-                    />
+                    <div className="mt-2 flex items-center text-sm text-white">
+                      <input
+                        name="audioFile"
+                        type="file"
+                        ref={fileInputRef}
+                        accept="audio/mpeg"
+                        onChange={(e) => {
+                          const file = e.target.files?.[0];
+                          setFieldValue('audioFile', file || null);
+                          onUpdate('audioFile', file ? URL.createObjectURL(file) : null);
+                          setAudioName(file?.name);
+                        }}
+                        className="mt-1 text-white"
+                      />
+                      {audioName && (
+                        <p className="mt-2 text-xs text-gray-500 dark:text-gray-400 flex items-center">
+                          <span
+                            className="cursor-pointer hover:text-red-800 text-red-600 ms-1 text-xl text-bold"
+                            onClick={() => clearAudioFile(setFieldValue)}
+                          >
+                            ✕
+                          </span>
+                        </p>
+                      )}
+                    </div>
                   </div>
 
                   <button
