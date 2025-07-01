@@ -16,6 +16,31 @@ const helperFunctions = {
       doc.exitFullscreen?.();
     }
   },
+
+  arrayToMultilineText: (arr) => (Array.isArray(arr) ? arr.join('\n') : ''),
+
+  multilineTextToArray: (text) =>
+    text
+      .split('\n')
+      .map((line) => line.trim())
+      .filter((line) => line),
+
+  serializeItems: (items, delimiter = ' ') => {
+    return items.map(({ text, duration }) => `${text}${delimiter}${duration}`).join('\n');
+  },
+
+  deserializeItems: (textInput) => {
+    return textInput
+      .split('\n')
+      .map((line) => line.trim())
+      .filter(Boolean)
+      .map((line) => {
+        const parts = line.split(/[\s;]+/);
+        const duration = parseInt(parts.pop(), 10);
+        const text = parts.join(' ');
+        return { text, duration: isNaN(duration) ? 1000 : duration };
+      });
+  },
 };
 
 export default helperFunctions;
