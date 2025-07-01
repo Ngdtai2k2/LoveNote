@@ -62,7 +62,7 @@ const userSiteServices = {
     if (!user) throw { code: 404, messageKey: 'notfound:user' };
 
     const product = await Product.findByPk(productId);
-    if (!product) throw { code: 404, messageKey: 'not_found:product' };
+    if (!product) throw { code: 404, messageKey: 'notfound:product' };
 
     let parsedConfigs;
     try {
