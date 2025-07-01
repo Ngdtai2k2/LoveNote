@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
@@ -36,6 +36,7 @@ export default function MenuSettings({ settings, onUpdate }) {
   const [previewUrls, setPreviewUrls] = useState(
     Array.isArray(settings.images) ? settings.images : [IMAGE_DEMO]
   );
+  const fileInputRef = useRef(null);
 
   const { t, i18n } = useTranslation('template');
   const navigate = useNavigate();
@@ -74,6 +75,9 @@ export default function MenuSettings({ settings, onUpdate }) {
   const clearAudioFile = (setFieldValue) => {
     setAudioName('');
     setFieldValue('audioFile', null);
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';
+    }
   };
 
   const onSubmit = async (values) => {
@@ -287,6 +291,7 @@ export default function MenuSettings({ settings, onUpdate }) {
                       <input
                         name="audioFile"
                         type="file"
+                        ref={fileInputRef}
                         accept="audio/mpeg"
                         onChange={(e) => {
                           const file = e.target.files?.[0];
