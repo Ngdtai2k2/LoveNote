@@ -71,27 +71,15 @@ const userSiteServices = {
       throw { code: 400, messageKey: 'validate:invalid_config_json' };
     }
 
-    const imageDir = path.join(
-      __dirname,
-      `../../../public/assets/images/${userId}`
-    );
-    const audioDir = path.join(
-      __dirname,
-      `../../../public/assets/audio/${userId}`
-    );
-
-    fs.mkdirSync(imageDir, { recursive: true });
-    fs.mkdirSync(audioDir, { recursive: true });
-
     if (req.files?.images && Array.isArray(req.files.images)) {
       const imageUrls = req.files.images.map((file) => {
-        return `${process.env.SERVER_URL}/assets/images/${userId}/${file.filename}`;
+        return `${process.env.SERVER_URL}/assets/web/${userId}/${file.filename}`;
       });
       parsedConfigs.images = imageUrls;
     }
 
-    if (req.files?.file?.[0]) {
-      const file = req.files.file[0];
+    if (req.files?.audio?.[0]) {
+      const file = req.files.audio[0];
       parsedConfigs.audioFile = `${process.env.SERVER_URL}/assets/audio/${userId}/${file.filename}`;
     }
 
