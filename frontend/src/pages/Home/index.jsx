@@ -14,7 +14,7 @@ export default function Home() {
   const { t } = useTranslation(['product', 'navbar', 'notfound']);
   const navigate = useNavigate();
 
-  useDocumentTitle(t('navbar:home'));
+  useDocumentTitle(`${CONSTANTS.SITE_NAME} - ${t('navbar:home')}`);
 
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
