@@ -33,17 +33,11 @@ export default function HeartBeatVisualizer({ data }) {
     audioVolume: 0.5,
   };
 
-  const [settings, setSettings] = useState({
-    text: data?.configs.text ?? defaultSettings.text,
-    textColor: data?.configs.textColor ?? defaultSettings.textColor,
-    heartColor: data?.configs.heartColor ?? defaultSettings.heartColor,
-    snowColor: data?.configs.snowColor ?? defaultSettings.snowColor,
-    modelColor: data?.configs.modelColor ?? defaultSettings.modelColor,
-    buttonColor: data?.configs.buttonColor ?? defaultSettings.buttonColor,
-    audioFile: data?.configs.audioFile ?? MUSIC_DEMO,
-    audioVolume: data?.configs.audioVolume ?? defaultSettings.audioVolume,
-  });
-
+  const [settings, setSettings] = useState(() => ({
+    ...defaultSettings,
+    ...data?.configs,
+  }));
+  
   const sceneSettingsRaw = useMemo(() => {
     const { text, buttonColor, textColor, ...rest } = settings; // eslint-disable-line no-unused-vars
     return rest;

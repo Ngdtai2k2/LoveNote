@@ -51,15 +51,10 @@ export default function GalaxyLoveLetter({ data }) {
     audioVolume: 0.5,
   };
 
-  const [settings, setSettings] = useState({
-    messages: data?.configs.messages ?? defaultSettings.messages,
-    icons: data?.configs.icons ?? defaultSettings.icons,
-    colors: data?.configs.colors ?? defaultSettings.colors,
-    images: data?.configs.images ?? defaultSettings.images,
-    audioFile: data?.configs.audioFile ?? defaultSettings.audioFile,
-    cropToHeart: data?.configs.cropToHeart ?? defaultSettings.cropToHeart,
-    audioVolume: data?.configs.audioVolume ?? defaultSettings.audioVolume,
-  });
+  const [settings, setSettings] = useState(() => ({
+    ...defaultSettings,
+    ...data?.configs,
+  }));
 
   const debouncedSettings = useDebouncedValue(settings, 2000);
 
