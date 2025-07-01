@@ -53,7 +53,7 @@ export default function UpdateModal() {
       }
     });
     if (fileName) {
-      formData.append('file', values.avatar);
+      formData.append('avatar', values.avatar);
     }
 
     const res = await userAPI.updateProfile(user?.id, formData, axiosJWT);
