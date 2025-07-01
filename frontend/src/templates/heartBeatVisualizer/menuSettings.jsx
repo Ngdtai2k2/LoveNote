@@ -20,7 +20,7 @@ import { FormItem } from '../components/formItem';
 import ColorSelector from '../components/ColorSelector';
 import FormSlug from '../components/formSlug';
 import { FormRange } from '../components/formRange';
-import HandleSubmitSettings from './handleSubmitSettings';
+import handleSubmitSettings from './handleSubmitSettings';
 import ModalRenderLink from '../modalRenderLink';
 
 export default function MenuSettings({ settings, onUpdate }) {
@@ -56,7 +56,7 @@ export default function MenuSettings({ settings, onUpdate }) {
   };
 
   const onSubmit = async (values) => {
-    const res = await HandleSubmitSettings(values, user, axiosJWT, navigate);
+    const res = await handleSubmitSettings(values, user, axiosJWT, navigate);
     if (res?.data) {
       const path = res.data.slug;
       setSitePath(path);

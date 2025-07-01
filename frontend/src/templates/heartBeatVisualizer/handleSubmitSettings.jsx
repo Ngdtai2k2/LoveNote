@@ -1,7 +1,7 @@
 import ROUTES from '@constants/routes';
 import { userSiteAPI } from '@api/userSite';
 
-export default function HandleSubmitSettings(values, user, axiosJWT, navigate) {
+export default function handleSubmitSettings(values, user, axiosJWT, navigate) {
   if (!user?.id) {
     navigate(ROUTES.AUTH.SIGN_IN);
     return;
