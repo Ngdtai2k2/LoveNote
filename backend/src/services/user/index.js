@@ -1,5 +1,4 @@
 require('dotenv').config();
-const path = require('path');
 
 const { User } = require('@models');
 const helpers = require('@helpers');
@@ -20,21 +19,9 @@ const userServices = {
       throw { code: 404, messageKey: 'notfound:user' };
     }
 
-    let fileUrl = null;
-    if (req.file) {
-      fileUrl = `${process.env.SERVER_URL}/assets/avatar/${userId}/${req.file.filename}`;
-
-      // Delete old avatar
-      if (user.avatar) {
-        const oldAvatarPath = path.join(
-          __dirname,
-          '../../assets/avatar',
-          userId.toString(),
-          path.basename(user.avatar)
-        );
-        helpers.deleteFile(oldAvatarPath);
-      }
-
+    if (req.files?.avatar?.[0]) {
+      const file = req.files.avatar[0];
+      const fileUrl = `${process.env.SERVER_URL}/assets/avatars/${userId}/${file.filename}`;
       await user.update({ avatar: fileUrl });
     }
 
