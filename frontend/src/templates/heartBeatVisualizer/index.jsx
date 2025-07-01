@@ -13,7 +13,7 @@ import snowVertex from './shaders/snowVertex.glsl';
 import snowFragment from './shaders/snowFragment.glsl';
 import MenuSettings from './menuSettings';
 
-import MUSIC_DEMO from '../assets/musics/music_background_003.mp3';
+import MUSIC_DEMO from '../assets/musics/music_background_005.mp3';
 
 export default function HeartBeatVisualizer({ data }) {
   const canvasRef = useRef();
