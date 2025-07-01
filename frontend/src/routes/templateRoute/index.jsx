@@ -8,7 +8,6 @@ const templateRoutes = [
     path: '/matrix-love-rain',
     element: <MatrixLoveRain />,
   },
-  // test route
   {
     path: '/galaxy-love-letter',
     element: <GalaxyLoveLetter />,
