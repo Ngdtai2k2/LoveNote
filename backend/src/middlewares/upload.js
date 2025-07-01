@@ -15,6 +15,9 @@ const uploadMiddleware = () => {
         case 'image':
           basePath = path.join(__dirname, `../public/assets/images/${userId}`);
           break;
+        case 'images': 
+          basePath = path.join(__dirname, `../public/assets/web/${userId}`);
+          break;
         case 'audio':
           basePath = path.join(__dirname, `../public/assets/audio/${userId}`);
           break;
