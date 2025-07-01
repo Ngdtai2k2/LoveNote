@@ -2,7 +2,6 @@ import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { gsap } from 'gsap';
 
-import MUSIC_DEMO from '../assets/musics/music_background_003.mp3';
 import HEART_GLB from '../assets/glb/heart.glb';
 import HEART from '../assets/images/heart.png';
 import BALL from '../assets/images/ball.png';
@@ -13,7 +12,8 @@ export function createHeartScene(
   vertexShader,
   fragmentShader,
   vertexShader1,
-  fragmentShader1
+  fragmentShader1,
+  settings
 ) {
   class HeartScene {
     constructor() {
@@ -164,10 +164,10 @@ export function createHeartScene(
       const listener = new THREE.AudioListener();
       this.camera.add(listener);
 
-      this.audioElement = new Audio(MUSIC_DEMO);
+      this.audioElement = new Audio(settings.audioFile);
       this.audioElement.crossOrigin = 'anonymous';
       this.audioElement.loop = false;
-      this.audioElement.volume = 0.5;
+      this.audioElement.volume = settings.audioVolume || 0.5;
 
       this.sound = new THREE.Audio(listener);
       this.sound.setMediaElementSource(this.audioElement);
@@ -214,7 +214,7 @@ export function createHeartScene(
               ease: 'elastic.out',
             });
           }),
-          color: '#ff3366',
+          color: settings.modelColor || '#ff3366',
         });
         this.scene.add(this.model);
       });
@@ -246,7 +246,7 @@ export function createHeartScene(
       const speeds = new Float32Array(count);
       const randoms = new Float32Array(count);
       const randoms1 = new Float32Array(count);
-      const colorChoices = ['#ff66cc', '#ff99ff', '#ffccff', '#ff3366', '#ffffff'];
+      const colorChoices = settings.heartColor || ['#ff66cc'];
 
       for (let i = 0; i < count; i++) {
         const i3 = i * 3;
@@ -299,7 +299,7 @@ export function createHeartScene(
       const phis = new Float32Array(count);
       const randoms = new Float32Array(count);
       const randoms1 = new Float32Array(count);
-      const colorChoices = ['#ff66cc', '#ff99ff', '#ffccff', '#ffffff'];
+      const colorChoices = settings.snowColor || ['#ff66cc'];
 
       for (let i = 0; i < count; i++) {
         const i3 = i * 3;
