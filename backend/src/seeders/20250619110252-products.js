@@ -9,7 +9,7 @@ module.exports = {
     await queryInterface.bulkInsert('products', [
       {
         id: 'love-001',
-        name: 'Mưa Chữ Yêu Thương',
+        name: 'Mưa Chữ Yêu Thương (I)',
         slug: 'matrix-love-rain',
         description: `Gửi đến người bạn yêu những dòng chữ ngọt ngào rơi như mưa trên màn hình, 
             kết hợp hiệu ứng chạm tạo pháo hoa chữ lung linh.`,
@@ -43,6 +43,19 @@ module.exports = {
         price: 0,
         discount: 0,
         thumbnail_url: `${SERVER_URL}/assets/images/galaxy-love-letter.png`,
+        demo_video_url: '#',
+        rating: 0,
+        created_at: new Date(),
+        updated_at: new Date(),
+      },
+      {
+        id: 'love-004',
+        name: 'Mưa Chữ Yêu Thương (II)',
+        slug: 'matrix-rain-text',
+        description: `Từng từ, từng thông điệp xuất hiện như đang được viết giữa trời mưa Matrix – tạo nên một khoảnh khắc bất ngờ và xúc động.`,
+        price: 0,
+        discount: 0,
+        thumbnail_url: `${SERVER_URL}/assets/images/matrix-rain-text.png`,
         demo_video_url: '#',
         rating: 0,
         created_at: new Date(),
