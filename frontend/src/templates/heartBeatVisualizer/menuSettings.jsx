@@ -23,6 +23,8 @@ import { FormRange } from '../components/formRange';
 import handleSubmitSettings from './handleSubmitSettings';
 import ModalRenderLink from '../modalRenderLink';
 
+import MUSIC_DEMO from '../assets/musics/music_background_005.mp3';
+
 export default function MenuSettings({ settings, onUpdate }) {
   const [openSettings, setOpenSettings] = useState(false);
   const [audioName, setAudioName] = useState();
@@ -53,6 +55,7 @@ export default function MenuSettings({ settings, onUpdate }) {
     if (fileInputRef.current) {
       fileInputRef.current.value = '';
     }
+    onUpdate('audioFile', MUSIC_DEMO);
   };
 
   const onSubmit = async (values) => {

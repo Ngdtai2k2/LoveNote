@@ -21,11 +21,13 @@ import { FormArea } from '../components/formArea';
 import ColorSelector from '../components/ColorSelector';
 import { FormCheckbox } from '../components/formCheckbox';
 import { FormRange } from '../components/formRange';
+import FormSlug from '../components/formSlug';
 
 import ModalRenderLink from '../modalRenderLink';
 import { handleSubmitSettings } from './handleSubmitSettings';
+
 import IMAGE_DEMO from '../assets/images/image_galaxy_text.jpg';
-import FormSlug from '../components/formSlug';
+import MUSIC_DEMO from '../assets/musics/music_background_002.mp3';
 
 export default function MenuSettings({ settings, onUpdate }) {
   const [openSettings, setOpenSettings] = useState(false);
@@ -78,6 +80,7 @@ export default function MenuSettings({ settings, onUpdate }) {
     if (fileInputRef.current) {
       fileInputRef.current.value = '';
     }
+    onUpdate('audioFile', MUSIC_DEMO);
   };
 
   const onSubmit = async (values) => {

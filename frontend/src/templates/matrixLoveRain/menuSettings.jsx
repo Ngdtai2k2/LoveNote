@@ -22,6 +22,8 @@ import { FormCheckbox } from '../components/formCheckbox';
 import FormSlug from '../components/formSlug';
 import ModalRenderLink from '../modalRenderLink';
 
+import MUSIC_BACKGROUND_001 from '../assets/musics/music_background_001.mp3';
+
 export default function MenuSettings({ settings, onUpdate }) {
   const [openSettings, setOpenSettings] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
@@ -58,6 +60,7 @@ export default function MenuSettings({ settings, onUpdate }) {
     if (fileInputRef.current) {
       fileInputRef.current.value = '';
     }
+    onUpdate('audioFile', MUSIC_BACKGROUND_001);
   };
 
   const onSubmit = async (values) => {
