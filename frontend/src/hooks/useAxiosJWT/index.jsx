@@ -20,7 +20,7 @@ let refreshTokenPromise = null;
 
 export const createAxios = (lng, auth, dispatch, stateSuccess) => {
   const newInstance = axios.create({
-    baseURL: import.meta.env.VITE_API_URL,
+    baseURL: import.meta.env.VITE_API_BASE_URL,
     withCredentials: true,
     headers: {
       'Accept-Language': lng,
