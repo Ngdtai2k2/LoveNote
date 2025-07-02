@@ -12,26 +12,34 @@ import Pagination from '@components/Pagination';
 export default function SiteTab() {
   const [sites, setSites] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [loadingDelete, setLoadingDelete] = useState(false);
   const [page, setPage] = useState(1);
 
   const { t, i18n } = useTranslation(['profile', 'template']);
   const { axiosJWT } = useAxios(i18n.language);
 
+  const getData = async () => {
+    try {
+      setLoading(true);
+      const response = await userSiteAPI.getSitesByUser(axiosJWT, page, 4);
+      setSites(response);
+    } catch {
+      setSites([]);
+    } finally {
+      setLoading(false);
+    }
+  };
+  
   useEffect(() => {
-    const getData = async () => {
-      try {
-        setLoading(true);
-        const response = await userSiteAPI.getSitesByUser(axiosJWT, page, 4);
-        setSites(response);
-      } catch {
-        setSites([]);
-      } finally {
-        setLoading(false);
-      }
-    };
-
     getData();
   }, [axiosJWT, page]);
+
+  const handleDelete = async (id) => {
+    setLoadingDelete(true);
+    await userSiteAPI.deleteConfigSite(axiosJWT, id);
+    getData();
+    setLoadingDelete(false);
+  };
 
   const handlePageChange = (newPage) => {
     if (newPage !== page) {
@@ -96,7 +104,11 @@ export default function SiteTab() {
                         <Link to={`/${site.slug}`}>{t('profile:view')}</Link>
                       </Button>
                       {/* handle soon */}
-                      <Button className="bg-rose-500 hover:bg-rose-700">
+                      <Button
+                        className="bg-rose-500 hover:bg-rose-700"
+                        onClick={() => handleDelete(site.id)}
+                        loading={loadingDelete}
+                      >
                         {t('profile:delete')}
                       </Button>
                     </ButtonGroup>

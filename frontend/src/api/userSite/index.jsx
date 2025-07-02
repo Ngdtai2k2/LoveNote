@@ -55,16 +55,29 @@ export const userSiteAPI = {
         params: {
           page: page || 1,
           limit: limit || 4,
-        }
+        },
       });
       return res.data;
     } catch (error) {
-      console.error(error);
-
       toast.error(error.response?.data.message, {
         position: 'top-right',
       });
       return [];
+    }
+  },
+
+  deleteConfigSite: async (axiosJWT, id) => {
+    try {
+      const res = await axiosJWT.delete(API_ENDPOINTS.USER_SITES.DELETE_CONFIGS(id));
+      toast.success(res.data.message, {
+        position: 'top-right',
+      });
+      return res.data;
+    } catch (error) {
+      toast.error(error.response?.data.message, {
+        position: 'top-right',
+      });
+      return null;
     }
   },
 };

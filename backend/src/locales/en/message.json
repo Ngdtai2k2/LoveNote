@@ -2,5 +2,7 @@
   "server_error": "An error occurred please try again later!",
   "profile_update_success": "Successfully updated personal information!",
   "create_web_success": "Web configuration successful!",
-  "invalid_config_json": "Invalid configuration. Please check the JSON format!"
+  "invalid_config_json": "Invalid configuration. Please check the JSON format!",
+  "delete_web_success": "Successfully deleted web configuration!",
+  "file_delete_failed": "File deletion failed, please try again!"
 }

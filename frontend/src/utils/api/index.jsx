@@ -23,6 +23,7 @@ const API_ENDPOINTS = {
     CREATE: '/site/configs',
     GET_CONFIGS: '/site/configs',
     CHECK_SLUG: '/site/check',
+    DELETE_CONFIGS: (id) => `/site/configs/${id}/delete`,
   },
 };
 

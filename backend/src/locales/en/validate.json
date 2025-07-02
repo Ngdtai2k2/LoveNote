@@ -26,5 +26,6 @@
   "no_data": "Please provide data!",
   "slug_exists": "Slug already exists!",
   "slug": "Please provide the slug!",
-  "no_user_id": "Please provide the user ID!"
+  "no_user_id": "Please provide the user ID!",
+  "no_id": "Please provide the ID!"
 }
