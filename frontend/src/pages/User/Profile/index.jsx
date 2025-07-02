@@ -24,6 +24,7 @@ import { profileTabMenu } from '@constants/navigation';
 import CONSTANTS from '@constants';
 
 import UpdateModal from './updateModal';
+import SiteTab from './siteTab';
 
 dayjs.extend(relativeTime);
 
@@ -102,7 +103,9 @@ export default function Profile() {
                 ))}
               </TabsHeader>
               <TabsBody>
-                <TabPanel value="0">Tab 0 content</TabPanel>
+                <TabPanel value="0">
+                  <SiteTab />
+                </TabPanel>
                 <TabPanel value="1">Tab 1 content</TabPanel>
               </TabsBody>
             </Tabs>

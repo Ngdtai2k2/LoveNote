@@ -19,6 +19,7 @@ const API_ENDPOINTS = {
     GET_ALL: '/web-config',
   },
   USER_SITES: {
+    GET_BY_USER: '/site/me',
     CREATE: '/site/configs',
     GET_CONFIGS: '/site/configs',
     CHECK_SLUG: '/site/check',

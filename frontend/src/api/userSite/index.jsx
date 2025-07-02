@@ -48,4 +48,23 @@ export const userSiteAPI = {
       return false;
     }
   },
+
+  getSitesByUser: async (axiosJWT, page, limit) => {
+    try {
+      const res = await axiosJWT.get(API_ENDPOINTS.USER_SITES.GET_BY_USER, {
+        params: {
+          page: page || 1,
+          limit: limit || 4,
+        }
+      });
+      return res.data;
+    } catch (error) {
+      console.error(error);
+
+      toast.error(error.response?.data.message, {
+        position: 'top-right',
+      });
+      return [];
+    }
+  },
 };
