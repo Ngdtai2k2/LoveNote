@@ -8,12 +8,14 @@ import { ButtonGroup, Button } from '@material-tailwind/react';
 import { userSiteAPI } from '@api/userSite';
 import { useAxios } from '@hooks/useAxiosJWT';
 import Pagination from '@components/Pagination';
+import ModalConfirm from './modalConfirm';
 
 export default function SiteTab() {
   const [sites, setSites] = useState([]);
   const [loading, setLoading] = useState(true);
   const [loadingDelete, setLoadingDelete] = useState(false);
   const [page, setPage] = useState(1);
+  const [openModal, setOpenModal] = useState(false);
 
   const { t, i18n } = useTranslation(['profile', 'template']);
   const { axiosJWT } = useAxios(i18n.language);
@@ -29,7 +31,7 @@ export default function SiteTab() {
       setLoading(false);
     }
   };
-  
+
   useEffect(() => {
     getData();
   }, [axiosJWT, page]);
@@ -106,12 +108,22 @@ export default function SiteTab() {
                       {/* handle soon */}
                       <Button
                         className="bg-rose-500 hover:bg-rose-700"
-                        onClick={() => handleDelete(site.id)}
+                        onClick={() => setOpenModal(true)}
                         loading={loadingDelete}
                       >
                         {t('profile:delete')}
                       </Button>
                     </ButtonGroup>
+                    <ModalConfirm
+                      isOpen={openModal}
+                      title={t('profile:confirm_delete_title')}
+                      message={t('profile:confirm_delete_message')}
+                      onConfirm={() => {
+                        handleDelete(site.id);
+                        setOpenModal(false);
+                      }}
+                      onCancel={() => setOpenModal(false)}
+                    />
                   </div>
                 </div>
               </li>

@@ -4,5 +4,7 @@
     "no_data": "No data",
     "my_order": "My Order",
     "view": "View",
-    "delete": "Delete"
+    "delete": "Delete",
+    "confirm_delete_title": "Are you sure you want to delete this site?",
+    "confirm_delete_message": "This action will delete the site and all related data. Are you sure you want to proceed?"
 }

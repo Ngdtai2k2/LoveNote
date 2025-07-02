@@ -24,7 +24,7 @@ import { profileTabMenu } from '@constants/navigation';
 import CONSTANTS from '@constants';
 
 import UpdateModal from './updateModal';
-import SiteTab from './siteTab';
+import SiteTab from './tabs/siteTab';
 
 dayjs.extend(relativeTime);
 
@@ -87,7 +87,7 @@ export default function Profile() {
           <div className="md:col-span-8 col-span-12">
             <Tabs value="0">
               <TabsHeader
-                className="bg-transparent dark:bg-gray-700"
+                className="bg-transparent dark:bg-gray-700 z-0"
                 indicatorProps={{
                   className: 'bg-gray-900/10 dark:bg-gray-500 shadow-none !text-gray-900',
                 }}
