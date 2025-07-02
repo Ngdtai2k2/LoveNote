@@ -42,5 +42,6 @@
     "words": "Từ hoặc câu",
     "step": "Bước nhảy",
     "font_family": "Phông chữ",
-    "loop": "Lặp lại"
+    "loop": "Lặp lại",
+    "memory_overflow": "Tràn bộ nhớ"
 }

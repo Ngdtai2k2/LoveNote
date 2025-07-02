@@ -42,5 +42,6 @@
     "words": "Word or sentence",
     "step": "Step",
     "font_family": "Font family",
-    "loop": "Loop"
+    "loop": "Loop",
+    "memory_overflow": "Memory overflow"
 }
