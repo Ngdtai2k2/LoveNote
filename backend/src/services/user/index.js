@@ -22,6 +22,18 @@ const userServices = {
     if (req.files?.avatar?.[0]) {
       const file = req.files.avatar[0];
       const fileUrl = `${process.env.SERVER_URL}/assets/avatars/${userId}/${file.filename}`;
+
+      if (user.avatar) {
+        try {
+          await helpers.safeUnlink(user.avatar);
+        } catch (err) {
+          throw {
+            code: 500,
+            messageKey: 'message:file_delete_failed',
+          };
+        }
+      }
+
       await user.update({ avatar: fileUrl });
     }
 
