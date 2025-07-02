@@ -61,6 +61,19 @@ module.exports = {
         created_at: new Date(),
         updated_at: new Date(),
       },
+      {
+        id: 'love-005',
+        name: 'Tràn bộ nhớ',
+        slug: 'memory-overflow',
+        description: `Mô phỏng hiệu ứng tràn bộ nhớ – nơi ký ức dồn nén vỡ òa thành những cảm xúc không thể gọi tên.`,
+        price: 0,
+        discount: 0,
+        thumbnail_url: `${SERVER_URL}/assets/images/memory-overflow.png`,
+        demo_video_url: '#',
+        rating: 0,
+        created_at: new Date(),
+        updated_at: new Date(),
+      },
     ]);
   },
 
