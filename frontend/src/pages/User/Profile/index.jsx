@@ -24,7 +24,7 @@ import { profileTabMenu } from '@constants/navigation';
 import CONSTANTS from '@constants';
 
 import UpdateModal from './updateModal';
-import SiteTab from './tabs/siteTab';
+import SiteTab from './Tabs/siteTab';
 
 dayjs.extend(relativeTime);
 
