@@ -21,11 +21,7 @@ const verifyMiddleware = {
   ownership:
     (
       Model,
-      {
-        idParam = 'id', 
-        ownerField = 'user_id',
-        source = 'params',
-      } = {}
+      { idParam = 'id', ownerField = 'user_id', source = 'params' } = {}
     ) =>
     async (req, res, next) => {
       try {
@@ -70,6 +66,49 @@ const verifyMiddleware = {
       next();
     });
   },
+
+  adminOrOwner:
+    (
+      Model,
+      { idParam = 'id', ownerField = 'user_id', source = 'params' } = {}
+    ) =>
+    async (req, res, next) => {
+      try {
+        verifyMiddleware.token(req, res, async () => {
+          const id =
+            source === 'query'
+              ? req.query[idParam]
+              : source === 'body'
+                ? req.body[idParam]
+                : req.params[idParam];
+
+          if (!id) {
+            return res.status(400).json({ message: `Missing ${idParam}` });
+          }
+
+          const resource = await Model.findByPk(id);
+          if (!resource) {
+            return res
+              .status(404)
+              .json({ message: req.t('validate:not_found') });
+          }
+
+          const isAdmin = req.user.role !== 0;
+          const isOwner = resource[ownerField]?.toString() === req.user.id;
+
+          if (!isAdmin && !isOwner) {
+            return res
+              .status(403)
+              .json({ message: req.t('validate:not_allowed') });
+          }
+
+          req.resource = resource;
+          next();
+        });
+      } catch (err) {
+        return res.status(500).json({ message: req.t('message:server_error') });
+      }
+    },
 };
 
 module.exports = verifyMiddleware;
