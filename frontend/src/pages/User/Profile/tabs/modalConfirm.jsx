@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ModalConfirm = ({ isOpen, title, message, onConfirm, onCancel }) => {
+const ModalConfirm = ({ isOpen, title, message, onConfirm, onCancel, t }) => {
   if (!isOpen) return null;
 
   return (
@@ -13,13 +13,13 @@ const ModalConfirm = ({ isOpen, title, message, onConfirm, onCancel }) => {
             onClick={onCancel}
             className="px-4 py-2 rounded bg-gray-200 text-gray-700 hover:bg-gray-300"
           >
-            Cancel
+            {t('tabbar:cancel')}
           </button>
           <button
             onClick={onConfirm}
             className="px-4 py-2 rounded bg-red-600 text-white hover:bg-red-700"
           >
-            Confirm
+            {t('tabbar:confirm')}
           </button>
         </div>
       </div>

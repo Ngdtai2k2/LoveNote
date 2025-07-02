@@ -17,7 +17,7 @@ export default function SiteTab() {
   const [page, setPage] = useState(1);
   const [openModal, setOpenModal] = useState(false);
 
-  const { t, i18n } = useTranslation(['profile', 'template']);
+  const { t, i18n } = useTranslation(['profile', 'template', 'tabbar']);
   const { axiosJWT } = useAxios(i18n.language);
 
   const getData = async () => {
@@ -34,6 +34,7 @@ export default function SiteTab() {
 
   useEffect(() => {
     getData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [axiosJWT, page]);
 
   const handleDelete = async (id) => {
@@ -115,6 +116,7 @@ export default function SiteTab() {
                       </Button>
                     </ButtonGroup>
                     <ModalConfirm
+                      t={t}
                       isOpen={openModal}
                       title={t('profile:confirm_delete_title')}
                       message={t('profile:confirm_delete_message')}

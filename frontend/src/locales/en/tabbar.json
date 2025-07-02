@@ -1,4 +1,6 @@
 {
   "dashboard": "Dashboard",
-  "users": "Users"
+  "users": "Users",
+  "cancel": "Cancel",
+  "confirm": "Confirm"
 }

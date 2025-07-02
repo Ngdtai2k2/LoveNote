@@ -1,4 +1,6 @@
 {
   "dashboard": "Dashboard",
-  "users": "Người dùng"
+  "users": "Người dùng",
+  "cancel": "Hủy",
+  "confirm": "Xác nhận"
 }
