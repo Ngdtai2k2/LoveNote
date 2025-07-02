@@ -30,6 +30,16 @@ const userSitesController = {
       return handleError(res, req, error);
     }
   },
+
+  getSitesByUser: async (req, res) => {
+    try {
+      const data = await userSiteServices.getSitesByUser(req);
+      return res.status(200).json(data);
+    } catch (error) {
+      console.error(error);
+      handleError(res, req, error);
+    }
+  },
 };
 
 module.exports = userSitesController;

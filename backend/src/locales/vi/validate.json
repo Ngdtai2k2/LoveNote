@@ -25,5 +25,6 @@
   "slug_or_id": "Vui lòng cung cấp slug hoặc id!",
   "no_data": "Vui lòng cung cấp dữ liệu!",
   "slug_exists": "Slug đã tồn tại!",
-  "slug": "Vui lòng cung cấp slug!"
+  "slug": "Vui lòng cung cấp slug!",
+  "no_user_id": "Vui lòng cung cấp ID người dùng!"
 }

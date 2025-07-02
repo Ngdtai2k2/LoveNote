@@ -4,6 +4,8 @@ const verifyMiddleware = require('@middlewares/verifyToken');
 const upload = require('@middlewares/upload')();
 
 router.get('/configs', userSitesController.getConfigSite);
+router.get('/check', userSitesController.checkSlugExists);
+router.get('/me', verifyMiddleware.token, userSitesController.getSitesByUser);
 
 router.post(
   '/configs',
@@ -14,7 +16,5 @@ router.post(
   ]),
   userSitesController.createConfigSite
 );
-
-router.get('/check', userSitesController.checkSlugExists);
 
 module.exports = router;

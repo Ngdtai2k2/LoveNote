@@ -1,7 +1,6 @@
 const { UserSite, User, Product } = require('@models');
 const ShortUniqueId = require('short-unique-id');
-const path = require('path');
-const fs = require('fs');
+const paginate = require('@helpers/paginate');
 
 const userSiteServices = {
   checkSlugExists: async (req) => {
@@ -94,6 +93,31 @@ const userSiteServices = {
       messageKey: 'message:create_web_success',
       data: newSite,
     };
+  },
+
+  getSitesByUser: async (req) => {
+    const userId = req.user.id;
+
+    if (!userId) {
+      throw { code: 400, messageKey: 'validate:no_user_id' };
+    }
+
+    const sites = await paginate(UserSite, req, {
+      where: { user_id: userId },
+      include: [
+        {
+          model: Product,
+          as: 'product',
+          attributes: ['slug', 'name', 'thumbnail_url'],
+        },
+      ],
+    });
+
+    if (!sites || sites.length === 0) {
+      throw { code: 404, messageKey: 'not_found:data' };
+    }
+
+    return sites;
   },
 };
 
