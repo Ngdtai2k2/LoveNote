@@ -2,8 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
-import useWebConfig from '@hooks/useWebConfig';
 import { EnvelopeIcon, PhoneIcon } from '@heroicons/react/24/solid';
+
+import { useDocumentTitle } from '@hooks/useDocumentTitle';
+import useWebConfig from '@hooks/useWebConfig';
 
 export default function Contacts() {
   const [webData, setWebData] = useState({
@@ -12,6 +14,8 @@ export default function Contacts() {
   });
 
   const { t, i18n } = useTranslation('footer');
+
+  useDocumentTitle(t('contacts'));
 
   const { webConfigs, loading: configLoading } = useWebConfig();
   const contactsNote = webConfigs.find((item) => item.key === 'contacts_note');
