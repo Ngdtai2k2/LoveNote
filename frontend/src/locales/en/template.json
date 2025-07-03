@@ -43,5 +43,6 @@
     "step": "Step",
     "font_family": "Font family",
     "loop": "Loop",
-    "memory_overflow": "Memory overflow"
+    "memory_overflow": "Memory overflow",
+    "rotate_scene": "Please rotate the screen!"
 }

@@ -1,0 +1,15 @@
+export const lyricsData = [
+  { lyrics: 'Nỗi nhớ em cầu kỳ', start: 0, end: 1.2 },
+  { lyrics: 'Nên chẳng biết lý do là gì?', start: 1.2, end: 3.3 },
+  { lyrics: 'Hao tốn hơn nhiều G', start: 3.3, end: 5 },
+  { lyrics: 'Nên cần dùng thêm USB', start: 5, end: 7.3 },
+  { lyrics: 'Nỗi nhớ em cầu kỳ', start: 7.3, end: 8.8 },
+  { lyrics: 'nên chẳng biết lý do là gì', start: 8.8, end: 11.3 },
+  { lyrics: 'Hao tốn hơn nhiều G', start: 11.3, end: 12.3 },
+  { lyrics: 'Nên cần', start: 12.3, end: 13 },
+  { lyrics: 'D', start: 13.0, end: 13.33 },
+  { lyrics: 'O', start: 13.33, end: 13.66 },
+  { lyrics: 'M', start: 13.66, end: 14.0 },
+  { lyrics: 'I', start: 14.0, end: 14.33 },
+  { lyrics: 'C', start: 14.33, end: 15.0 },
+];

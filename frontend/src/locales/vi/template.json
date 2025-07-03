@@ -43,5 +43,6 @@
     "step": "Bước nhảy",
     "font_family": "Phông chữ",
     "loop": "Lặp lại",
-    "memory_overflow": "Tràn bộ nhớ"
+    "memory_overflow": "Tràn bộ nhớ",
+    "rotate_scene": "Vui lòng xoay ngang màn hình!"
 }
