@@ -6,7 +6,7 @@ export function FormCheckbox({ label, name, checked, onChange }) {
         type="checkbox"
         checked={checked}
         onChange={onChange}
-        className="accent-pink-500 cursor-pointer w-4 h-4"
+        className="accent-gray-500 cursor-pointer w-4 h-4"
       />
       {label}
     </label>

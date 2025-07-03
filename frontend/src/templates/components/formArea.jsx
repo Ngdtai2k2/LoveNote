@@ -10,7 +10,7 @@ export function FormArea({ label, type = 'text', ...props }) {
         className={`w-full ${
           type === 'color'
             ? 'cursor-pointer'
-            : 'rounded bg-white/10 px-2 py-1 text-sm text-white outline-none focus:ring-2 focus:ring-pink-500'
+            : 'rounded bg-white/10 px-2 py-1 text-sm text-white outline-none focus:ring-2 focus:ring-gray-500'
         }`}
         {...props}
       />

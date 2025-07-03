@@ -16,7 +16,7 @@ export function FormRange({ label, name, value, min, max, step, onChange, suffix
           step={step}
           value={value}
           onChange={onChange}
-          className="w-full accent-pink-500 cursor-pointer"
+          className="w-full accent-gray-500 cursor-pointer"
         />
       </Tooltip>
     </div>

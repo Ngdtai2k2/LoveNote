@@ -27,7 +27,7 @@ export default function ColorSelector({ label, value = [], onChange, max = 10 })
         />
         <button
           type="button"
-          className="px-3 py-1 bg-pink-500 text-white text-sm rounded hover:bg-pink-600 cursor-pointer"
+          className="px-3 py-1 bg-gray-500 text-white text-sm rounded hover:bg-gray-600 cursor-pointer"
           onClick={addColor}
           disabled={value.length >= max}
         >
