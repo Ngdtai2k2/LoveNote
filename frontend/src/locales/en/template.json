@@ -1,6 +1,7 @@
 {
     "settings": "Settings",
     "title": "Title",
+    "content": "Content",
     "title_color": "Title color",
     "text_rain": "Text rain",
     "font_size_text_rain": "Font size (rain)",
@@ -28,6 +29,7 @@
     "hint_click_player": "♫ Click on the musical note to play or stop the music ♫",
     "messages": "Messages",
     "icons": "Icons",
+    "icon": "Icon",
     "note_performance": "Due to performance considerations, the effects and text will appear more frequently and smoothly on desktop devices compared to mobile phones.",
     "note_form_area": "After each message and icon, please start a new line.",
     "colors": "Colors",
@@ -44,5 +46,7 @@
     "font_family": "Font family",
     "loop": "Loop",
     "memory_overflow": "Memory overflow",
-    "rotate_scene": "Please rotate the screen!"
+    "rotate_scene": "Please rotate the screen!",
+    "common_color": "Common color",
+    "button_text": "Button text"
 }

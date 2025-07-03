@@ -1,6 +1,7 @@
 {
     "settings": "Cài đặt",
     "title": "Tiêu đề",
+    "content": "Nội dung",
     "title_color": "Màu chữ tiêu đề",
     "text_rain": "Mưa chữ",
     "font_size_text_rain": "Kích thước (mưa chữ)",
@@ -28,6 +29,7 @@
     "hint_click_player": "♫ Click vào hình nốt nhạc để phát hoặc dừng nhạc ♫",
     "messages": "Tin nhắn",
     "icons": "Biểu tượng",
+    "icon": "Biểu tượng",
     "note_performance": "Vì vấn đề hiệu năng nên trên máy tính hiệu ứng và chữ sẽ nhiều và ổn hơn trên điện thoại.",
     "note_form_area": "Sau mỗi tin nhắn và biểu tượng hãy xuống dòng nhe!",
     "colors": "Bộ màu",
@@ -44,5 +46,7 @@
     "font_family": "Phông chữ",
     "loop": "Lặp lại",
     "memory_overflow": "Tràn bộ nhớ",
-    "rotate_scene": "Vui lòng xoay ngang màn hình!"
+    "rotate_scene": "Vui lòng xoay ngang màn hình!",
+    "common_color": "Màu chung",
+    "button_text": "Văn bản nút"
 }
