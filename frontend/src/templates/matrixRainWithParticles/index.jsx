@@ -5,8 +5,8 @@ import { useDocumentTitle } from '@hooks/useDocumentTitle';
 import { useDebouncedValue } from '@hooks/useDebouncedValue';
 import BlinkingHint from '@components/BlinkingHint';
 
-import MatrixRain from './matrixRain';
-import WordDisplay from './wordDisplay';
+import MatrixRain from './renderEffect/matrixRain';
+import WordDisplay from './renderEffect/wordDisplay';
 import MenuSettings from './menuSettings';
 
 import MUSIC_DEMO from '../assets/musics/music_background_005.mp3';
