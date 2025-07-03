@@ -298,7 +298,7 @@ export default function MenuSettings({ settings, onUpdate }) {
 
                   <button
                     type="submit"
-                    className="w-full bg-pink-500 py-2 rounded hover:bg-pink-600 transition"
+                    className="w-full bg-gray-500 py-2 rounded hover:bg-gray-600 transition"
                   >
                     SAVE
                   </button>

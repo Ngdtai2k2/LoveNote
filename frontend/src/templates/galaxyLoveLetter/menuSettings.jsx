@@ -18,10 +18,10 @@ import { useAxios } from '@hooks/useAxiosJWT';
 import { useCurrentUser } from '@hooks/useCurrentUser';
 
 import { FormArea } from '../components/formArea';
-import ColorSelector from '../components/ColorSelector';
 import { FormCheckbox } from '../components/formCheckbox';
 import { FormRange } from '../components/formRange';
 import FormSlug from '../components/formSlug';
+import ColorSelector from '../components/colorSelector';
 
 import ModalRenderLink from '../modalRenderLink';
 import { handleSubmitSettings } from './handleSubmitSettings';
@@ -321,7 +321,7 @@ export default function MenuSettings({ settings, onUpdate }) {
 
                   <button
                     type="submit"
-                    className="w-full bg-pink-500 py-2 rounded hover:bg-pink-600 transition"
+                    className="w-full bg-gray-500 py-2 rounded hover:bg-gray-600 transition"
                   >
                     SAVE
                   </button>
