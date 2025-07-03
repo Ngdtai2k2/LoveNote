@@ -1,4 +1,4 @@
-export function generateTargetPoints(text, canvas) {
+export function generateTargetPoints(text, canvas, commonColor) {
   const offCanvas = document.createElement('canvas');
   const offCtx = offCanvas.getContext('2d');
   offCanvas.width = canvas.width;
@@ -8,7 +8,7 @@ export function generateTargetPoints(text, canvas) {
   offCtx.font = `bold ${fontSize}px sans-serif`;
   offCtx.textAlign = 'center';
   offCtx.textBaseline = 'middle';
-  offCtx.fillStyle = '#fff';
+  offCtx.fillStyle = commonColor;
   offCtx.fillText(text, offCanvas.width / 2, offCanvas.height / 2);
 
   const imageData = offCtx.getImageData(0, 0, offCanvas.width, offCanvas.height).data;
