@@ -6,7 +6,7 @@ const productServices = {
     const products = await paginate(Product, req);
 
     if (!products || products.length === 0) {
-      throw { code: 404, messageKey: 'not_found:product' };
+      throw { code: 404, messageKey: 'notfound:product' };
     }
 
     return products;

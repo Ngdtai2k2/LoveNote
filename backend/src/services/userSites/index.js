@@ -23,7 +23,7 @@ const userSiteServices = {
       include: [{ model: Product, as: 'product', attributes: ['slug'] }],
     });
 
-    if (!data) throw { code: 404, messageKey: 'not_found:data' };
+    if (!data) throw { code: 404, messageKey: 'notfound:data' };
     return data;
   },
 
@@ -104,7 +104,7 @@ const userSiteServices = {
     if (!id) throw { code: 400, messageKey: 'validate:no_id' };
 
     const site = await UserSite.findByPk(id);
-    if (!site) throw { code: 404, messageKey: 'not_found:data' };
+    if (!site) throw { code: 404, messageKey: 'notfound:data' };
 
     const configs =
       typeof site.configs === 'string'

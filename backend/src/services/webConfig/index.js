@@ -8,7 +8,7 @@ const webConfigServices = {
     });
 
     if (!data || data.length === 0) {
-      throw { code: 404, messageKey: 'not_found:data' };
+      throw { code: 404, messageKey: 'notfound:data' };
     }
 
     return data;
