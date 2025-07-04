@@ -74,6 +74,19 @@ module.exports = {
         created_at: new Date(),
         updated_at: new Date(),
       },
+      {
+        id: 'love-006',
+        name: 'Ngân hà nở rộ',
+        slug: 'bloom-galaxy',
+        description: `Một ngân hà nở rộ cùng với những hình ảnh của người thân yêu sẽ là một món quà tuyệt vời nhất.`,
+        price: 0,
+        discount: 0,
+        thumbnail_url: `${SERVER_URL}/assets/images/bloom-galaxy.png`,
+        demo_video_url: '#',
+        rating: 0,
+        created_at: new Date(),
+        updated_at: new Date(),
+      },
     ]);
   },
 
