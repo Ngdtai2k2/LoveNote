@@ -2,7 +2,8 @@ import MatrixLoveRain from '@templates/matrixLoveRain';
 import HeartBeatVisualizer from '@templates/heartBeatVisualizer';
 import GalaxyLoveLetter from '@templates/galaxyLoveLetter';
 import MatrixRainWithParticles from '@templates/matrixRainWithParticles';
-import MemoryOverflow from '../../templates/memoryOverflow';
+import MemoryOverflow from '@templates/memoryOverflow';
+import BloomGalaxy from '@templates/bloomGalaxy';
 
 const templateRoutes = [
   {
@@ -21,9 +22,13 @@ const templateRoutes = [
     path: '/matrix-rain-text',
     element: <MatrixRainWithParticles />,
   },
-    {
+  {
     path: '/memory-overflow',
     element: <MemoryOverflow />,
+  },
+  {
+    path: '/bloom-galaxy',
+    element: <BloomGalaxy />,
   },
 ];
 
