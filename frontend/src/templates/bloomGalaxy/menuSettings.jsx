@@ -127,7 +127,7 @@ export default function MenuSettings({ settings, onUpdate }) {
           {({ values, handleChange, setFieldValue }) => (
             <Form className="p-4 space-y-4">
               <div
-                className="menu-settings fixed right-0 top-0 z-30 h-full w-[350px] bg-black bg-opacity-90 text-white shadow-lg border-l border-white/20 scroll-auto"
+                className="menu-settings fixed right-0 top-0 z-30 h-full w-[350px] bg-black bg-opacity-90 text-white shadow-lg border-l border-white/20 overflow-y-auto"
                 onMouseDown={(e) => e.stopPropagation()}
                 onMouseUp={(e) => e.stopPropagation()}
                 onClick={(e) => e.stopPropagation()}
