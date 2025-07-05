@@ -20,6 +20,7 @@
     "upload": "Upload file",
     "upload_images": "Upload images",
     "note_upload_images": "Upload up to 5 photos",
+    "note_upload_ten_images": "Upload up to 10 photos",
     "redirect": "Redirect",
     "copy_link": "Copy link",
     "successfully_created_web": "Successfully created the website!",
@@ -48,5 +49,8 @@
     "memory_overflow": "Memory overflow",
     "rotate_scene": "Please rotate the screen!",
     "common_color": "Common color",
-    "button_text": "Button text"
+    "button_text": "Button text",
+    "hint_bloom_galaxy": "👆 Click on the planet to start, click twice to start over.",
+    "bloom_galaxy": "Bloom galaxy",
+    "ring_texts": "Text (1 line per sentence/circle on the planet)"
 }

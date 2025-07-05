@@ -20,6 +20,7 @@
     "upload": "Tải file",
     "upload_images": "Tải lên ảnh",
     "note_upload_images": "Tải tối đa 5 ảnh",
+    "note_upload_ten_images": "Tải tối đa 10 ảnh",
     "redirect": "Chuyển hướng",
     "copy_link": "Sao chép",
     "successfully_created_web": "Tạo web thành công!",
@@ -48,5 +49,8 @@
     "memory_overflow": "Tràn bộ nhớ",
     "rotate_scene": "Vui lòng xoay ngang màn hình!",
     "common_color": "Màu chung",
-    "button_text": "Văn bản nút"
+    "button_text": "Văn bản nút",
+    "hint_bloom_galaxy": "👆 Nhấp vào tinh cầu để bắt đầu, nhấp đúp để bắt đầu lại.",
+    "bloom_galaxy": "Ngân hà nở rộ",
+    "ring_texts": "Văn bản (mỗi dòng 1 câu/vòng trên tinh cầu)"
 }
