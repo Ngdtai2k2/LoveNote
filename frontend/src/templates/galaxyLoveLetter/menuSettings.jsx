@@ -38,7 +38,9 @@ export default function MenuSettings({ settings, onUpdate }) {
   const [previewUrls, setPreviewUrls] = useState(
     Array.isArray(settings.images) ? settings.images : [IMAGE_DEMO]
   );
+
   const fileInputRef = useRef(null);
+  const imagesInputRef = useRef(null);
 
   const { t, i18n } = useTranslation('template');
   const navigate = useNavigate();
@@ -232,6 +234,7 @@ export default function MenuSettings({ settings, onUpdate }) {
                     </label>
                     <div className="mt-2 flex flex-col gap-2 text-sm text-white">
                       <input
+                        ref={imagesInputRef} // <-- ADD ref HERE
                         name="images"
                         type="file"
                         accept="image/*"
@@ -260,6 +263,13 @@ export default function MenuSettings({ settings, onUpdate }) {
                                 onClick={() => {
                                   const newFiles = values.images.filter((_, i) => i !== idx);
                                   const newUrls = previewUrls.filter((_, i) => i !== idx);
+
+                                  if (imagesInputRef.current) {
+                                    const dt = new DataTransfer();
+                                    newFiles.forEach((file) => dt.items.add(file));
+                                    imagesInputRef.current.files = dt.files;
+                                  }
+
                                   setFieldValue('images', newFiles);
                                   setPreviewUrls(newUrls);
                                   onUpdate('images', newUrls);
@@ -317,6 +327,7 @@ export default function MenuSettings({ settings, onUpdate }) {
                       )}
                     </div>
                   </div>
+
                   <FormSlug label={`${t('slug')} (${t('optional')})`} name="slug" />
 
                   <button
