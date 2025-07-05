@@ -116,7 +116,7 @@ export default function MenuSettings({ settings, onUpdate }) {
                   <h2 className="text-lg font-semibold">{t('settings')}</h2>
                   <button
                     onClick={() => setOpenSettings(false)}
-                    className="text-white hover:text-pink-300"
+                    className="text-white hover:text-red-500"
                   >
                     ✕
                   </button>
