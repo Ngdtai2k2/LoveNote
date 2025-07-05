@@ -16,9 +16,9 @@ import ROUTES from '@constants/routes';
 import { useCurrentUser } from '@hooks/useCurrentUser';
 import { useAxios } from '@hooks/useAxiosJWT';
 
-import { FormItem } from '../components/formItem';
-import ColorSelector from '../components/ColorSelector';
 import FormSlug from '../components/formSlug';
+import ColorSelector from '../components/colorSelector';
+import { FormItem } from '../components/formItem';
 import { FormRange } from '../components/formRange';
 import handleSubmitSettings from './handleSubmitSettings';
 import ModalRenderLink from '../modalRenderLink';
