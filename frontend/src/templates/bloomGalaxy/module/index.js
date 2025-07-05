@@ -30,7 +30,7 @@ export default function initGalaxy() {
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
   renderer.outputColorSpace = THREE.SRGBColorSpace;
 
-  const container = document.getElementById('container');
+  const container = window.containerTarget;
 
   if (container) {
     container.innerHTML = '';
