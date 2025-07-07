@@ -10,7 +10,7 @@ import ROUTES from '../routes';
 
 export const navbar = [
   { label: 'home', href: ROUTES.HOME },
-  { label: 'about', href: '#' },
+  { label: 'about', href: ROUTES.ABOUT },
   { label: 'contact', href: ROUTES.CONTACTS },
   { label: 'help', href: '#' },
 ];

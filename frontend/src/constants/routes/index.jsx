@@ -12,6 +12,7 @@ const ROUTES = {
   },
   HOME: '/',
   CONTACTS: '/contacts',
+  ABOUT: '/about-me',
   NOT_FOUND: '/404',
 };
 

@@ -25,6 +25,9 @@ import TEMPLATE_VI from '@locales/vi/template.json';
 import PROFILE_EN from '@locales/en/profile.json';
 import PROFILE_VI from '@locales/vi/profile.json';
 
+import ABOUT_EN from '@locales/en/about.json';
+import ABOUT_VI from '@locales/vi/about.json';
+
 const resources = {
   vi: {
     navbar: NAVBAR_VI,
@@ -35,6 +38,7 @@ const resources = {
     footer: FOOTER_VI,
     template: TEMPLATE_VI,
     profile: PROFILE_VI,
+    about: ABOUT_VI,
   },
   en: {
     navbar: NAVBAR_EN,
@@ -45,6 +49,7 @@ const resources = {
     footer: FOOTER_EN,
     template: TEMPLATE_EN,
     profile: PROFILE_EN,
+    about: ABOUT_EN,
   },
 };
 
@@ -53,7 +58,7 @@ const defaultLanguage = localStorage.getItem('language') || 'vi';
 i18n.use(initReactI18next).init({
   resources,
   lng: defaultLanguage,
-  ns: ['navbar', 'form', 'notfound', 'tabbar', 'product', 'footer', 'template', 'profile'],
+  ns: ['navbar', 'form', 'notfound', 'tabbar', 'product', 'footer', 'template', 'profile', 'about'],
   fallbackLng: 'en',
   interpolation: { escapeValue: false },
 });

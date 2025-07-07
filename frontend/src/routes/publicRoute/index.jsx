@@ -2,6 +2,7 @@ import SignIn from '@pages/User/Auth/SignIn';
 import SignUp from '@pages/User/Auth/SignUp';
 import Home from '@pages/Home';
 import Contacts from '@pages/Contacts';
+import About from '@pages/About';
 
 import ROUTES from '@constants/routes';
 
@@ -24,6 +25,11 @@ const publicRoute = [
   {
     path: ROUTES.CONTACTS,
     element: <Contacts />,
+    hideWhenAuthenticated: false,
+  },
+  {
+    path: ROUTES.ABOUT,
+    element: <About />,
     hideWhenAuthenticated: false,
   },
 ];
