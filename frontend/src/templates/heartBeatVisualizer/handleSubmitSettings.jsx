@@ -1,46 +1,21 @@
-import ROUTES from '@constants/routes';
-import { userSiteAPI } from '@api/userSite';
+import { submitSiteConfig } from '../submitSiteConfig';
 
 export default function handleSubmitSettings(values, user, axiosJWT, navigate) {
-  if (!user?.id) {
-    navigate(ROUTES.AUTH.SIGN_IN);
-    return;
-  }
-  const {
-    text,
-    textColor,
-    heartColor,
-    snowColor,
-    modelColor,
-    buttonColor,
-    audioFile,
-    audioVolume,
-    slug,
-  } = values;
-
-  const config = {
-    text,
-    textColor,
-    heartColor: Array.isArray(heartColor) ? heartColor : [],
-    snowColor: Array.isArray(snowColor) ? snowColor : [],
-    modelColor,
-    buttonColor,
-    audioVolume: typeof audioVolume === 'number' ? audioVolume : 1,
-  };
-
-  const formData = new FormData();
-  formData.append('productId', 'love-002');
-  if (slug) formData.append('slug', slug);
-  formData.append('configs', JSON.stringify(config));
-
-  if (audioFile instanceof File) {
-    formData.append('audio', audioFile);
-  }
-
-  try {
-    const res = userSiteAPI.createSiteConfig(axiosJWT, formData);
-    return res;
-  } catch {
-    return null;
-  }
+  return submitSiteConfig({
+    values,
+    user,
+    axiosJWT,
+    navigate,
+    productId: 'love-002',
+    buildConfig: (v) => ({
+      text: v.text,
+      textColor: v.textColor,
+      heartColor: Array.isArray(v.heartColor) ? v.heartColor : [],
+      snowColor: Array.isArray(v.snowColor) ? v.snowColor : [],
+      modelColor: v.modelColor,
+      buttonColor: v.buttonColor,
+      audioVolume: typeof v.audioVolume === 'number' ? v.audioVolume : 1,
+    }),
+    audioField: 'audioFile',
+  });
 }

@@ -1,0 +1,61 @@
+import ROUTES from '@constants/routes';
+import { userSiteAPI } from '@api/userSite';
+
+/**
+ * @param {Object} options
+ * @param {Object} options.values
+ * @param {Object} options.user
+ * @param {Object} options.axiosJWT
+ * @param {Function} options.navigate
+ * @param {string} options.productId
+ * @param {Function} options.buildConfig
+ * @param {string[]} [options.imageFields]
+ * @param {string} [options.audioField]
+ * @returns {Promise<Response|null>}
+ */
+export async function submitSiteConfig({
+  values,
+  user,
+  axiosJWT,
+  navigate,
+  productId,
+  buildConfig,
+  imageFields = [],
+  audioField = 'audioFile',
+}) {
+  if (!user?.id) {
+    navigate(ROUTES.AUTH.SIGN_IN);
+    return;
+  }
+
+  const { slug } = values;
+  const config = buildConfig(values);
+
+  const formData = new FormData();
+  formData.append('productId', productId);
+  if (slug) formData.append('slug', slug);
+  formData.append('configs', JSON.stringify(config));
+
+  imageFields.forEach((fieldName) => {
+    const files = values[fieldName];
+    if (Array.isArray(files)) {
+      files.forEach((file) => {
+        if (file instanceof File) {
+          formData.append('images', file);
+        }
+      });
+    }
+  });
+
+  const audioFile = values[audioField];
+  if (audioFile instanceof File) {
+    formData.append('audio', audioFile);
+  }
+
+  try {
+    const res = await userSiteAPI.createSiteConfig(axiosJWT, formData);
+    return res;
+  } catch {
+    return null;
+  }
+}

@@ -1,56 +1,26 @@
-import ROUTES from '@constants/routes';
-import { userSiteAPI } from '@api/userSite';
+import { submitSiteConfig } from '../submitSiteConfig';
 
-export const handleSubmitSettings = async (values, user, axiosJWT, navigate) => {
-  if (!user?.id) {
-    navigate(ROUTES.AUTH.SIGN_IN);
-    return;
-  }
-
-  const {
-    textRain,
-    fontSize,
-    textColor,
-    title,
-    titleColor,
-    fontSizeTitle,
-    backgroundOpacity,
-    backgroundHex,
-    rainSpeed,
-    textPerClick,
-    autoBurst,
-    audioVolume,
-    slug,
-    audioFile,
-  } = values;
-
-  const config = {
-    textRain,
-    fontSize,
-    textColor,
-    title,
-    titleColor,
-    fontSizeTitle,
-    backgroundOpacity,
-    backgroundHex,
-    rainSpeed,
-    textPerClick,
-    autoBurst,
-    audioVolume,
-  };
-
-  const formData = new FormData();
-  formData.append('productId', 'love-001');
-  if (slug) formData.append('slug', slug);
-  formData.append('configs', JSON.stringify(config));
-  if (audioFile instanceof File) {
-    formData.append('audio', audioFile);
-  }
-
-  try {
-    const res = await userSiteAPI.createSiteConfig(axiosJWT, formData);
-    return res;
-  } catch {
-    return null;
-  }
+export const handleSubmitSettings = (values, user, axiosJWT, navigate) => {
+  return submitSiteConfig({
+    values,
+    user,
+    axiosJWT,
+    navigate,
+    productId: 'love-001',
+    buildConfig: (v) => ({
+      textRain: v.textRain,
+      fontSize: v.fontSize,
+      textColor: v.textColor,
+      title: v.title,
+      titleColor: v.titleColor,
+      fontSizeTitle: v.fontSizeTitle,
+      backgroundOpacity: v.backgroundOpacity,
+      backgroundHex: v.backgroundHex,
+      rainSpeed: v.rainSpeed,
+      textPerClick: v.textPerClick,
+      autoBurst: v.autoBurst,
+      audioVolume: typeof v.audioVolume === 'number' ? v.audioVolume : 1,
+    }),
+    audioField: 'audioFile',
+  });
 };
