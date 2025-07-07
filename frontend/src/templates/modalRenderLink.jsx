@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import {
   Button,
   Dialog,
@@ -10,7 +9,7 @@ import {
 } from '@material-tailwind/react';
 import { useTranslation } from 'react-i18next';
 import { useState } from 'react';
-import helperFunctions from '../helpers';
+import helperFunctions from '@helpers';
 
 export default function ModalRenderLink({ isOpen, onClose, path }) {
   const [message, setMessage] = useState();
