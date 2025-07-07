@@ -12,7 +12,7 @@ export const navbar = [
   { label: 'home', href: ROUTES.HOME },
   { label: 'about', href: ROUTES.ABOUT },
   { label: 'contact', href: ROUTES.CONTACTS },
-  { label: 'help', href: '#' },
+  // { label: 'help', href: '#' },
 ];
 
 export const tabbar = [
