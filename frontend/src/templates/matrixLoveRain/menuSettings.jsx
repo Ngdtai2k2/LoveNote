@@ -1,17 +1,10 @@
-import React, { useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { IconButton } from '@material-tailwind/react';
-import {
-  ArrowsPointingInIcon,
-  ArrowsPointingOutIcon,
-  Cog6ToothIcon,
-  HomeIcon,
-} from '@heroicons/react/24/solid';
+import { Cog6ToothIcon } from '@heroicons/react/24/solid';
 import { Form, Formik } from 'formik';
 
-import helperFunctions from '@helpers';
-import ROUTES from '@constants/routes';
 import { useAxios } from '@hooks/useAxiosJWT';
 import { useCurrentUser } from '@hooks/useCurrentUser';
 import { handleSubmitSettings } from './handleSubmitSettings';
@@ -21,6 +14,7 @@ import { FormRange } from '../components/formRange';
 import { FormCheckbox } from '../components/formCheckbox';
 import FormSlug from '../components/formSlug';
 import ModalRenderLink from '../modalRenderLink';
+import TopLeftControl from '../components/topLeftControl';
 
 import MUSIC_BACKGROUND_001 from '../assets/musics/music_background_001.mp3';
 
@@ -82,26 +76,7 @@ export default function MenuSettings({ settings, onUpdate }) {
         <Cog6ToothIcon className="h-6 w-6 text-white" />
       </IconButton>
 
-      <div className="absolute top-4 left-4 flex gap-2">
-        <IconButton
-          onClick={() => navigate(ROUTES.HOME)}
-          className="z-20 bg-white/10 hover:bg-white/20"
-          ripple={false}
-        >
-          <HomeIcon className="h-6 w-6 text-white" />
-        </IconButton>
-        <IconButton
-          onClick={helperFunctions.toggleFullscreen}
-          className="z-20 bg-white/10 hover:bg-white/20"
-          ripple={false}
-        >
-          {!document.fullscreenElement ? (
-            <ArrowsPointingOutIcon className="h-6 w-6 text-white" />
-          ) : (
-            <ArrowsPointingInIcon className="h-6 w-6 text-white" />
-          )}
-        </IconButton>
-      </div>
+      <TopLeftControl />
 
       {openSettings && (
         <Formik initialValues={initialValues} onSubmit={onSubmit}>

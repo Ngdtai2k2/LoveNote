@@ -1,18 +1,11 @@
-import React, { useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 import { IconButton } from '@material-tailwind/react';
-import {
-  ArrowsPointingInIcon,
-  ArrowsPointingOutIcon,
-  Cog6ToothIcon,
-  HomeIcon,
-} from '@heroicons/react/24/solid';
+import { Cog6ToothIcon } from '@heroicons/react/24/solid';
 import { Form, Formik } from 'formik';
 
-import helperFunctions from '@helpers';
-import ROUTES from '@constants/routes';
 import { useCurrentUser } from '@hooks/useCurrentUser';
 import { useAxios } from '@hooks/useAxiosJWT';
 
@@ -20,6 +13,8 @@ import FormSlug from '../components/formSlug';
 import ColorSelector from '../components/colorSelector';
 import { FormItem } from '../components/formItem';
 import { FormRange } from '../components/formRange';
+import TopLeftControl from '../components/topLeftControl';
+
 import handleSubmitSettings from './handleSubmitSettings';
 import ModalRenderLink from '../modalRenderLink';
 
@@ -77,26 +72,7 @@ export default function MenuSettings({ settings, onUpdate }) {
         <Cog6ToothIcon className="h-6 w-6 text-white" />
       </IconButton>
 
-      <div className="absolute top-4 left-4 flex gap-2">
-        <IconButton
-          onClick={() => navigate(ROUTES.HOME)}
-          className="z-20 bg-white/10 hover:bg-white/20"
-          ripple={false}
-        >
-          <HomeIcon className="h-6 w-6 text-white" />
-        </IconButton>
-        <IconButton
-          onClick={helperFunctions.toggleFullscreen}
-          className="z-20 bg-white/10 hover:bg-white/20"
-          ripple={false}
-        >
-          {!document.fullscreenElement ? (
-            <ArrowsPointingOutIcon className="h-6 w-6 text-white" />
-          ) : (
-            <ArrowsPointingInIcon className="h-6 w-6 text-white" />
-          )}
-        </IconButton>
-      </div>
+      <TopLeftControl />
 
       {openSettings && (
         <Formik initialValues={initialValues} onSubmit={onSubmit} enableReinitialize>

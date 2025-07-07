@@ -3,28 +3,26 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
 import { IconButton } from '@material-tailwind/react';
-import {
-  ArrowsPointingInIcon,
-  ArrowsPointingOutIcon,
-  Cog6ToothIcon,
-  HomeIcon,
-} from '@heroicons/react/24/solid';
+import { Cog6ToothIcon } from '@heroicons/react/24/solid';
 import { Formik, Form } from 'formik';
 
 import { useAxios } from '@hooks/useAxiosJWT';
 import { useCurrentUser } from '@hooks/useCurrentUser';
 
 import helperFunctions from '@helpers';
-import ROUTES from '@constants/routes';
+
 import { FormItem } from '../components/formItem';
 import { FormRange } from '../components/formRange';
 import { FormArea } from '../components/formArea';
 import { FormSelect } from '../components/formSelect';
-import MUSIC_DEMO from '../assets/musics/music_background_005.mp3';
 import FormSlug from '../components/formSlug';
+import TopLeftControl from '../components/topLeftControl';
 import { FormCheckbox } from '../components/formCheckbox';
+
 import { handleSubmitSettings } from './handleSubmitSettings';
 import ModalRenderLink from '../modalRenderLink';
+
+import MUSIC_DEMO from '../assets/musics/music_background_005.mp3';
 
 export default function MenuSettings({ settings, onUpdate }) {
   const [openSettings, setOpenSettings] = useState(false);
@@ -86,26 +84,7 @@ export default function MenuSettings({ settings, onUpdate }) {
         <Cog6ToothIcon className="h-6 w-6 text-white" />
       </IconButton>
 
-      <div className="absolute top-4 left-4 flex gap-2">
-        <IconButton
-          onClick={() => navigate(ROUTES.HOME)}
-          className="z-20 bg-white/10 hover:bg-white/20"
-          ripple={false}
-        >
-          <HomeIcon className="h-6 w-6 text-white" />
-        </IconButton>
-        <IconButton
-          onClick={helperFunctions.toggleFullscreen}
-          className="z-20 bg-white/10 hover:bg-white/20"
-          ripple={false}
-        >
-          {!document.fullscreenElement ? (
-            <ArrowsPointingOutIcon className="h-6 w-6 text-white" />
-          ) : (
-            <ArrowsPointingInIcon className="h-6 w-6 text-white" />
-          )}
-        </IconButton>
-      </div>
+      <TopLeftControl />
 
       {openSettings && (
         <Formik initialValues={initialValues} onSubmit={onSubmit}>

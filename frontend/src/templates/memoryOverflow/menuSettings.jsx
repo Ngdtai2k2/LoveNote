@@ -18,6 +18,7 @@ import { useCurrentUser } from '@hooks/useCurrentUser';
 
 import { FormItem } from '../components/formItem';
 import FormSlug from '../components/formSlug';
+import TopLeftControl from '../components/topLeftControl';
 
 import ModalRenderLink from '../modalRenderLink';
 import { handleSubmitSettings } from './handleSubmitSettings';
@@ -78,6 +79,7 @@ export default function MenuSettings({ settings, onUpdate, onOpen }) {
       >
         <Cog6ToothIcon className="h-6 w-6 text-white" />
       </IconButton>
+      <TopLeftControl />
       <Dialog open={open} handler={handleOpen} size="xs">
         <Formik initialValues={initialValues} onSubmit={onSubmit}>
           {({ values, handleChange }) => (
