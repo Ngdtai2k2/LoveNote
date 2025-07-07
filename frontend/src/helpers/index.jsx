@@ -41,6 +41,13 @@ const helperFunctions = {
         return { text, duration: isNaN(duration) ? 1000 : duration };
       });
   },
+
+  shortenUrl: (url, maxLength = 40) => {
+    if (!url || url.length <= maxLength) return url;
+    const head = Math.ceil((maxLength - 3) / 2);
+    const tail = Math.floor((maxLength - 3) / 2);
+    return `${url.slice(0, head)}...${url.slice(-tail)}`;
+  },
 };
 
 export default helperFunctions;

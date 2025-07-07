@@ -10,6 +10,7 @@ import {
 } from '@material-tailwind/react';
 import { useTranslation } from 'react-i18next';
 import { useState } from 'react';
+import helperFunctions from '../helpers';
 
 export default function ModalRenderLink({ isOpen, onClose, path }) {
   const [message, setMessage] = useState();
@@ -31,21 +32,20 @@ export default function ModalRenderLink({ isOpen, onClose, path }) {
         {t('successfully_created_web')}
       </DialogHeader>
       <DialogBody>
-        <Alert
-          variant="outlined"
-          className="py-2 px-3 flex justify-center dark:text-gray-200"
-        >
-          <span>{url}</span>
+        <Alert variant="outlined" className="py-2 px-3 flex justify-center dark:text-gray-200">
+          {helperFunctions.shortenUrl(url, 30)}
         </Alert>
-        <span className="flex justify-center text-green-500 dark:text-green-300 text-xs mt-1">{message}</span>
+        <span className="flex justify-center text-green-500 dark:text-green-300 text-xs mt-1">
+          {message}
+        </span>
       </DialogBody>
       <DialogFooter className="flex justify-center gap-2">
-        <Link
+        <a
+          href={url}
           className="inline-block bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition"
-          to={url}
         >
           {t('redirect')}
-        </Link>
+        </a>
         <Button variant="gradient" color="green" onClick={handleCopy}>
           <span>{t('Copy link')}</span>
         </Button>
