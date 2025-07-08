@@ -25,7 +25,9 @@ export default function SignIn() {
 
   const validationSchema = Yup.object({
     email: Yup.string().email(t('auth.email_invalid')).required(t('auth.email_required')),
-    password: Yup.string().min(6, t('auth.password_min')).required(t('auth.password_required')),
+    password: Yup.string()
+      .min(6, t('auth.password_min', { min: 6 }))
+      .required(t('auth.password_required')),
   });
 
   const onSubmit = (values) => {
