@@ -1,9 +1,7 @@
 require('dotenv').config();
 
-const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
-const { User } = require('@models');
 const authService = require('@services/auth');
 const jwtService = require('@services/jwt');
 const handleError = require('@utils/handleError');
@@ -127,6 +125,7 @@ const authController = {
         message: req.t(messageKey),
       });
     } catch (error) {
+      console.log(error.message);
       handleError(res, req, error);
     }
   },

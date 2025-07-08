@@ -69,17 +69,25 @@ const authService = {
   changePassword: async (req) => {
     const user = req.user;
     const { currentPassword, newPassword } = req.body;
-
     const userData = await User.findByPk(user.id);
 
     const isPasswordValid = await bcrypt.compare(
       currentPassword,
       userData.password
     );
+
     if (!isPasswordValid) {
       throw {
         code: 401,
         messageKey: 'validate:invalid_password',
+      };
+    }
+
+    const isSamePassword = await bcrypt.compare(newPassword, userData.password);
+    if (isSamePassword) {
+      throw {
+        code: 400,
+        messageKey: 'validate:new_password_same_as_old',
       };
     }
 
