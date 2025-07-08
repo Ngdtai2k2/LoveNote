@@ -30,7 +30,7 @@ export default function SignUp() {
       .required(t('auth.full_name_required')),
     email: Yup.string().email(t('auth.email_invalid')).required(t('auth.email_required')),
     password: Yup.string()
-      .min(6, t('auth.password_min', { min: 6 }))
+      .min(8, t('auth.password_min', { min: 8 }))
       .required(t('auth.password_required')),
     confirmPassword: Yup.string()
       .oneOf([Yup.ref('password'), null], t('auth.confirm_password_mismatch'))
