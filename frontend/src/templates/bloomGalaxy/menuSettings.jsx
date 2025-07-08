@@ -102,13 +102,11 @@ export default function MenuSettings({ settings, onUpdate }) {
       </IconButton>
 
       <div className="absolute top-4 left-4 flex gap-2">
-        <IconButton
-          onClick={() => navigate(ROUTES.HOME)}
-          className="z-20 bg-white/10 hover:bg-white/20"
-          ripple={false}
-        >
-          <HomeIcon className="h-6 w-6 text-white" />
-        </IconButton>
+        <a href={ROUTES.HOME}>
+          <IconButton className="z-20 bg-white/10 hover:bg-white/20" ripple={false}>
+            <HomeIcon className="h-6 w-6 text-white" />
+          </IconButton>
+        </a>
         <IconButton
           onClick={helperFunctions.toggleFullscreen}
           className="z-20 bg-white/10 hover:bg-white/20"
