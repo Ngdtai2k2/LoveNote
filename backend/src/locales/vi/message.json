@@ -4,5 +4,7 @@
   "create_web_success": "Cấu hình web thành công!",
   "invalid_config_json": "Cấu hình không hợp lệ. Vui lòng kiểm tra định dạng JSON!",
   "delete_web_success": "Xóa cấu hình web thành công!",
-  "file_delete_failed": "Xóa file không thành công, vui lòng thử lại!"
+  "file_delete_failed": "Xóa file không thành công, vui lòng thử lại!",
+  "send_too_many": "Bạn đã gửi quá nhiều lần, vui lòng thử lại sau!",
+  "data_sent_success": "Gửi dữ liệu thành công!"
 }

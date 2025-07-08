@@ -29,7 +29,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.TEXT,
         allowNull: false,
         validate: {
-          len: [10, 1200],
+          len: [1, 1200],
         },
       },
       ip_address: {
