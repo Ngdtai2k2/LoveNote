@@ -47,6 +47,55 @@ const authService = {
       deviceId,
     };
   },
+
+  getCurrentUser: async (req) => {
+    const user = req.user;
+
+    const userData = await User.findOne({
+      where: { id: user.id },
+      attributes: { exclude: ['password'] },
+    });
+
+    if (!userData) {
+      throw {
+        code: 404,
+        messageKey: 'notfound:user',
+      };
+    }
+
+    return userData;
+  },
+
+  changePassword: async (req) => {
+    const user = req.user;
+    const { currentPassword, newPassword } = req.body;
+
+    const userData = await User.findByPk(user.id);
+
+    const isPasswordValid = await bcrypt.compare(
+      currentPassword,
+      userData.password
+    );
+    if (!isPasswordValid) {
+      throw {
+        code: 401,
+        messageKey: 'validate:invalid_password',
+      };
+    }
+
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+    await User.update(
+      { password: hashedPassword },
+      {
+        where: { id: user.id },
+      }
+    );
+
+    return {
+      code: 200,
+      messageKey: 'auth:change_password_success',
+    };
+  },
 };
 
 module.exports = authService;

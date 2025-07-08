@@ -112,53 +112,22 @@ const authController = {
 
   getCurrentUser: async (req, res) => {
     try {
-      const user = req.user;
-
-      const userData = await User.findOne({
-        where: { id: user.id },
-        attributes: { exclude: ['password'] },
-      });
-
-      if (!userData) {
-        return res.status(404).json({ message: req.t('notfound:user') });
-      }
+      const userData = await authService.getCurrentUser(req);
 
       return res.status(200).json({ user: userData });
     } catch (error) {
-      return res.status(500).json({ message: req.t('message:server_error') });
+      handleError(res, req, error);
     }
   },
 
   changePassword: async (req, res) => {
     try {
-      const user = req.user;
-      const { currentPassword, newPassword } = req.body;
-
-      const userData = await User.findByPk(user.id);
-
-      const isPasswordValid = await bcrypt.compare(
-        currentPassword,
-        userData.password
-      );
-      if (!isPasswordValid) {
-        return res
-          .status(401)
-          .json({ message: req.t('validate:invalid_password') });
-      }
-
-      const hashedPassword = await bcrypt.hash(newPassword, 10);
-      await User.update(
-        { password: hashedPassword },
-        {
-          where: { id: user.id },
-        }
-      );
-
-      return res
-        .status(200)
-        .json({ message: req.t('auth:change_password_success') });
+      const { code, messageKey } = await authService.changePassword(req);
+      return res.status(code).json({
+        message: req.t(messageKey),
+      });
     } catch (error) {
-      return res.status(500).json({ message: req.t('message:server_error') });
+      handleError(res, req, error);
     }
   },
 };
