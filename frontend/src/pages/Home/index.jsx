@@ -5,9 +5,10 @@ import { Typography } from '@material-tailwind/react';
 
 import { BannerSlider } from '@components/BannerSlider';
 import { ProductCard } from '@components/ProductCard';
+import Pagination from '@components/Pagination';
 import { useDocumentTitle } from '@hooks/useDocumentTitle';
 import useBanner from '@hooks/useBanner';
-import { getAll } from '@api/product';
+import { productAPI } from '@api/product';
 import CONSTANTS from '@constants';
 
 export default function Home() {
@@ -18,23 +19,31 @@ export default function Home() {
 
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [page, setPage] = useState(1);
 
   const { banners, loading: bannerLoading } = useBanner();
 
-  useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const res = await getAll(CONSTANTS.PAGE, CONSTANTS.LIMIT);
-        setProducts(res.data);
-      } catch {
-        setProducts([]);
-      } finally {
-        setLoading(false);
-      }
-    };
+  const fetchProducts = async () => {
+    try {
+      const res = await productAPI.getAll(page, CONSTANTS.LIMIT);
+      setProducts(res);
+    } catch {
+      setProducts([]);
+    } finally {
+      setLoading(false);
+    }
+  };
 
+  useEffect(() => {
     fetchProducts();
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [page]);
+
+  const handlePageChange = (newPage) => {
+    if (newPage !== page) {
+      setPage(newPage);
+    }
+  };
 
   const onReadMore = (slug) => {
     navigate(`/${slug}`);
@@ -62,17 +71,29 @@ export default function Home() {
         <div className="flex flex-wrap justify-center gap-2">
           {loading ? (
             <div className="h-8 w-8 animate-spin rounded-full border-4 border-gray-300 border-t-gray-800"></div>
-          ) : products?.length > 0 ? (
-            products.map((product) => (
-              <ProductCard
-                key={product.id}
-                image={product.thumbnail_url}
-                title={product.name}
-                description={product.description}
-                rating={product.rating}
-                onReadMore={() => onReadMore(product.slug)}
-              />
-            ))
+          ) : products?.data?.length > 0 ? (
+            <>
+              {products?.data?.map((product) => (
+                <ProductCard
+                  key={product.id}
+                  image={product.thumbnail_url}
+                  title={product.name}
+                  description={product.description}
+                  rating={product.rating}
+                  onReadMore={() => onReadMore(product.slug)}
+                />
+              ))}
+
+              {products?.totalPages > 1 && (
+                <div className="flex justify-center mt-4">
+                  <Pagination
+                    currentPage={page}
+                    totalPages={products?.totalPages}
+                    onPageChange={handlePageChange}
+                  />
+                </div>
+              )}
+            </>
           ) : (
             <p className="text-gray-500">{t('notfound:product')}</p>
           )}
