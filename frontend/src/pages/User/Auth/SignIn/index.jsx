@@ -5,9 +5,9 @@ import { useNavigate } from 'react-router-dom';
 import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
 
-import FormField from '@components/FormField';
+import { authAPI } from '@api/auth';
 import ROUTES from '@constants/routes';
-import { signIn } from '@api/auth';
+import FormField from '@components/FormField';
 import { useDocumentTitle } from '@hooks/useDocumentTitle';
 
 export default function SignIn() {
@@ -31,7 +31,7 @@ export default function SignIn() {
   });
 
   const onSubmit = (values) => {
-    dispatch(signIn(values, navigate));
+    dispatch(authAPI.signIn(values, navigate));
   };
 
   return (
