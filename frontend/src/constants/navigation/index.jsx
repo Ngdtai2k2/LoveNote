@@ -1,9 +1,9 @@
 import {
   UserCircleIcon,
-  Cog6ToothIcon,
   PowerIcon,
   AdjustmentsHorizontalIcon,
   UsersIcon,
+  LockClosedIcon,
 } from '@heroicons/react/24/solid';
 
 import ROUTES from '../routes';
@@ -31,8 +31,9 @@ export const profileMenu = [
     href: ROUTES.USER.ME,
   },
   {
-    label: 'settings',
-    icon: Cog6ToothIcon,
+    label: 'change_password',
+    icon: LockClosedIcon,
+    href: ROUTES.AUTH.CHANGE_PASSWORD,
   },
   {
     label: 'logout',
