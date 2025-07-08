@@ -18,7 +18,7 @@ import { ChevronDownIcon, ArrowRightEndOnRectangleIcon, PlusIcon } from '@heroic
 import { profileMenu } from '@constants/navigation';
 import { useCurrentUser } from '@hooks/useCurrentUser';
 import { useAxios } from '@hooks/useAxiosJWT';
-import { signOut } from '@api/auth';
+import { authAPI } from '@api/auth';
 import ROUTES from '@constants/routes';
 import CONSTANTS from '@constants';
 
@@ -88,7 +88,7 @@ export function ProfileMenu() {
               onClick={() => {
                 setIsMenuOpen(false);
                 if (key === profileMenu.length - 1) {
-                  dispatch(signOut(axiosJWT, navigate));
+                  dispatch(authAPI.signOut(axiosJWT, navigate));
                 }
               }}
               className="flex items-center gap-2 rounded hover:bg-gray-300 
