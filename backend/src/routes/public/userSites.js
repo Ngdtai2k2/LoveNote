@@ -15,7 +15,7 @@ router.post(
     { name: 'audio', maxCount: 1 },
     { name: 'images', maxCount: 5 },
   ]),
-  userSitesController.createConfigSite
+  userSitesController.create
 );
 router.delete(
   '/configs/:id/delete',
@@ -23,7 +23,7 @@ router.delete(
     idParam: 'id',
     ownerField: 'user_id',
   }),
-  userSitesController.deleteConfigSite
+  userSitesController.delete
 );
 
 module.exports = router;

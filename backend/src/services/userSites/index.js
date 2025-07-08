@@ -27,7 +27,7 @@ const userSiteServices = {
     return data;
   },
 
-  createConfigSite: async (req) => {
+  create: async (req) => {
     const userId = req.user.id;
     const { productId, slug: rawSlug, configs } = req.body;
 
@@ -99,7 +99,7 @@ const userSiteServices = {
     return sites;
   },
 
-  deleteConfigSite: async (req) => {
+  delete: async (req) => {
     const { id } = req.params;
     if (!id) throw { code: 400, messageKey: 'validate:no_id' };
 

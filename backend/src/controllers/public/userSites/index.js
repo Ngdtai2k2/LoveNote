@@ -20,9 +20,9 @@ const userSitesController = {
     }
   },
 
-  createConfigSite: async (req, res) => {
+  create: async (req, res) => {
     try {
-      const result = await userSiteServices.createConfigSite(req);
+      const result = await userSiteServices.create(req);
       return res.status(201).json({
         data: result.data,
         message: req.t(result.messageKey),
@@ -41,9 +41,9 @@ const userSitesController = {
     }
   },
 
-  deleteConfigSite: async (req, res) => {
+  delete: async (req, res) => {
     try {
-      const data = await userSiteServices.deleteConfigSite(req);
+      const data = await userSiteServices.delete(req);
       return res.status(200).json({
         message: req.t(data.messageKey),
       });
