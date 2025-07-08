@@ -2,6 +2,7 @@ const ROUTES = {
   AUTH: {
     SIGN_IN: '/sign-in',
     SIGN_UP: '/sign-up',
+    CHANGE_PASSWORD: '/change-password',
   },
   USER: {
     ME: '/me',

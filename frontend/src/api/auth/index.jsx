@@ -29,6 +29,7 @@ export const authAPI = {
       });
     }
   },
+
   signIn: (data, navigate) => async (dispatch) => {
     dispatch(signInStart());
 
@@ -63,6 +64,23 @@ export const authAPI = {
       window.location.reload();
     } catch (error) {
       dispatch(signOutError());
+      toast.error(error.response?.data.message, {
+        position: 'top-right',
+      });
+    }
+  },
+
+  changePassword: async (axiosJWT, userId, data) => {
+    try {
+      const response = await axiosJWT.put(API_ENDPOINTS.AUTH.CHANGE_PASSWORD(userId), {
+        currentPassword: data.currentPassword,
+        newPassword: data.newPassword,
+      });
+      toast.success(response?.data.message, {
+        position: 'top-right',
+      });
+      return response;
+    } catch (error) {
       toast.error(error.response?.data.message, {
         position: 'top-right',
       });
