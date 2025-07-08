@@ -27,6 +27,12 @@
     "phone_number_placeholder": "Enter your phone number",
     "phone_number_validate": "Phone number must be 10 or 11 digits"
   },
+  "message": "Message",
+  "message_placeholder": "Enter your message",
+  "message_required": "Message is required",
+  "message_min": "Message must be at least {{min}} characters",
+  "message_max": "Message must not exceed {{max}} characters",
+  "send": "Send",
   "update": "Update",
   "save": "Save",
   "cancel": "Cancel",

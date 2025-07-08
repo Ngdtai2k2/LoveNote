@@ -25,6 +25,9 @@ const API_ENDPOINTS = {
     CHECK_SLUG: '/site/check',
     DELETE_CONFIGS: (id) => `/site/configs/${id}/delete`,
   },
+  CONTACT: {
+    CREATE: '/contact',
+  },
 };
 
 export default API_ENDPOINTS;

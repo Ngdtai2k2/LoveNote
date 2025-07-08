@@ -1,24 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { EnvelopeIcon, PhoneIcon, GlobeAltIcon } from '@heroicons/react/24/solid';
+import { Form, Formik } from 'formik';
+import * as Yup from 'yup';
 
-import { useDocumentTitle } from '@hooks/useDocumentTitle';
+import { EnvelopeIcon } from '@heroicons/react/24/solid';
+
 import useWebConfig from '@hooks/useWebConfig';
+import { useDocumentTitle } from '@hooks/useDocumentTitle';
+
+import FormField from '@components/FormField';
+import FormTextArea from '@components/FormTextArea';
+
+import { contactAPI } from '@api/contact';
 
 export default function Contacts() {
   const [webData, setWebData] = useState({});
 
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: '',
-  });
-  const [submitted, setSubmitted] = useState(false);
+  const { t } = useTranslation(['contact', 'form']);
 
-  const { t } = useTranslation('contact');
-
-  useDocumentTitle(t('contacts'));
+  useDocumentTitle(t('contact:contact_me'));
 
   const { webConfigs, loading: configLoading } = useWebConfig();
 
@@ -34,17 +35,30 @@ export default function Contacts() {
     });
   }, [webConfigs, configLoading]);
 
-  const handleChange = (e) => {
-    setFormData((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }));
+  const initialValues = {
+    fullName: '',
+    email: '',
+    message: '',
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log('Dữ liệu form:', formData);
-    setSubmitted(true);
+  const validationSchema = Yup.object({
+    fullName: Yup.string()
+      .min(2, t('form:auth.full_name_min', { min: 2 }))
+      .max(100, t('form:auth.full_name_max', { max: 100 }))
+      .required(t('form:auth.full_name_required')),
+    email: Yup.string().email(t('form:auth.email_invalid')).required(t('form:auth.email_required')),
+    message: Yup.string()
+      .min(1, t('form:message_min', { min: 1 }))
+      .max(1200, t('form:message_max', { max: 1200 }))
+      .required(t('form:message_required')),
+  });
+
+  const onSubmit = async (values, { resetForm }) => {
+    const res = await contactAPI.create(values);
+
+    if (res?.status === 201) {
+      resetForm();
+    }
   };
 
   return (
@@ -56,51 +70,73 @@ export default function Contacts() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 bg-white dark:bg-gray-700 p-6 rounded-xl shadow-lg">
             <div>
               <h2 className="text-2xl font-bold mb-4">{t('contact_me')}</h2>
-              {submitted ? (
-                <p className="text-green-600">Cảm ơn bạn đã gửi tin nhắn!</p>
-              ) : (
-                <form onSubmit={handleSubmit} className="space-y-4">
-                  <div>
-                    <label className="block text-gray-700 dark:text-gray-200">Họ và tên</label>
-                    <input
-                      type="text"
-                      name="name"
-                      required
-                      value={formData.name}
-                      onChange={handleChange}
-                      className="w-full mt-1 p-2 border border-gray-300 rounded-md"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-gray-700 dark:text-gray-200">Email</label>
-                    <input
-                      type="email"
-                      name="email"
-                      required
-                      value={formData.email}
-                      onChange={handleChange}
-                      className="w-full mt-1 p-2 border border-gray-300 rounded-md"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-gray-700 dark:text-gray-200">Tin nhắn</label>
-                    <textarea
-                      name="message"
-                      required
-                      rows="4"
-                      value={formData.message}
-                      onChange={handleChange}
-                      className="w-full text-black dark:text-gray-200 mt-1 p-2 border border-gray-300 rounded-md"
-                    ></textarea>
-                  </div>
-                  <button
-                    type="submit"
-                    className="w-full bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-md transition"
-                  >
-                    Send
-                  </button>
-                </form>
-              )}
+
+              <Formik
+                initialValues={initialValues}
+                validationSchema={validationSchema}
+                onSubmit={onSubmit}
+              >
+                {({ values, errors, touched, handleChange }) => (
+                  <Form>
+                    <div className="mb-4">
+                      <FormField
+                        name="fullName"
+                        type="text"
+                        label={t('form:auth.full_name')}
+                        placeholder={t('form:auth.full_name_placeholder')}
+                        errors={errors}
+                        touched={touched}
+                        required
+                        value={values.fullName}
+                        onChange={handleChange}
+                        labelColor="text-gray-800 dark:text-gray-200"
+                        className="w-full rounded bg-black/10 px-2 py-2 text-[16px] focus:outline-none dark:bg-white/10"
+                      />
+                    </div>
+                    <div className="mb-4">
+                      <FormField
+                        name="email"
+                        type="email"
+                        label={t('form:auth.email')}
+                        placeholder={t('form:auth.email_placeholder')}
+                        errors={errors}
+                        touched={touched}
+                        required
+                        value={values.email}
+                        onChange={handleChange}
+                        labelColor="text-gray-800 dark:text-gray-200"
+                        className="w-full rounded bg-black/10 px-2 py-2 text-[16px] focus:outline-none dark:bg-white/10"
+                      />
+                    </div>
+                    <div>
+                      <FormTextArea
+                        name="message"
+                        type="message"
+                        label={t('form:message')}
+                        placeholder={t('form:message_placeholder')}
+                        errors={errors}
+                        touched={touched}
+                        required
+                        rows={3}
+                        value={values.message}
+                        onChange={handleChange}
+                        labelColor="text-gray-800 dark:text-gray-200"
+                        className="w-full rounded bg-black/10 px-2 py-2 text-[16px] focus:outline-none dark:bg-white/10"
+                      />
+                    </div>
+                    <div className="flex justify-center mt-2">
+                      <button
+                        type="submit"
+                        className="w-full rounded bg-gray-600 py-2 text-white transition duration-200 hover:bg-gray-800 
+                        focus:bg-gray-800 active:bg-gray-800 dark:bg-gray-600 dark:hover:bg-gray-800 dark:focus:bg-gray-800 
+                        dark:active:bg-gray-800"
+                      >
+                        {t('form:send')}
+                      </button>
+                    </div>
+                  </Form>
+                )}
+              </Formik>
             </div>
 
             <div className="space-y-6">

@@ -27,6 +27,12 @@
     "phone_number_placeholder": "Nhập số điện thoại của bạn",
     "phone_number_validate": "Số điện thoại phải có 10 hoặc 11 chữ số"
   },
+  "message": "Tin nhắn",
+  "message_placeholder": "Nhập tin nhắn của bạn",
+  "message_required": "Tin nhắn là bắt buộc",
+  "message_min": "Tin nhắn tối thiểu {{min}} kí tự",
+  "message_max": "Tin nhắn không được vượt quá {{max}} kí tự",
+  "send": "Gửi",
   "update": "Cập nhập",
   "save": "Lưu",
   "cancel": "Hủy",
