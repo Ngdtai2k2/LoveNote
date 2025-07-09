@@ -34,7 +34,7 @@ module.exports = {
         key: 'contacts',
         value: JSON.stringify({
           phone: '',
-          email: 'support@notelove.com',
+          email: 'love.note.t2t@gmail.com',
           google_map: 'https://maps.app.goo.gl/RhBnQki42gVzsdz56',
         }),
         created_at: new Date(),
@@ -43,7 +43,7 @@ module.exports = {
       {
         key: 'socials',
         value: JSON.stringify({
-          facebook: 'https://fb.me/ngdtai2k2',
+          facebook: 'https://fb.me/',
           instagram: '#',
         }),
         created_at: new Date(),
