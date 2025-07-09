@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Bitcount+Grid+Double:wght,CRSV,ELSH,ELXP@262,0,100,67&family=Raleway:ital,wght@0,100..900;1,100..900&family=Tektur:wght@400..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bitcount+Grid+Double:wght,CRSV,ELSH,ELXP@262,0,100,67&family=Raleway&family=Sacramento&family=Tektur:wght@400..900&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -53,7 +53,6 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
-
 
 .heart-shape {
   object-position: center;

@@ -41,11 +41,16 @@ export default function Footer() {
       <div className="row-gap-6 mb-8 grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
         <div className="sm:col-span-2">
           <Link to={ROUTES.HOME} aria-label="Go home" className="inline-flex items-center">
-            <span className="text-xl font-bold uppercase tracking-wide text-gray-800 dark:text-gray-100">
+            <span
+              style={{
+                fontFamily: 'Sacramento',
+              }}
+              className="text-xl font-bold uppercase tracking-wide text-gray-800 dark:text-gray-100"
+            >
               {CONSTANTS.SITE_NAME}
             </span>
           </Link>
-          <div className="mt-6 lg:max-w-sm">
+          <div className="mt-4 lg:max-w-sm">
             <p className="text-sm text-gray-800 dark:text-gray-100" data-key="description_site"></p>
           </div>
         </div>

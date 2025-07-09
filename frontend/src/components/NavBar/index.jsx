@@ -49,7 +49,13 @@ function TabBar({ openTabBar, closeTabBar }) {
   return (
     <Drawer open={openTabBar} onClose={closeTabBar} className="p-4 dark:bg-gray-700">
       <div className="mb-6 flex items-center justify-between">
-        <Typography variant="h5" className="text-black dark:text-gray-200">
+        <Typography
+          variant="h5"
+          style={{
+            fontFamily: 'Sacramento',
+          }}
+          className="text-black dark:text-gray-200"
+        >
           {CONSTANTS.SITE_NAME}
         </Typography>
         <IconButton variant="text" color="black" onClick={closeTabBar}>
@@ -99,12 +105,18 @@ export default function NavBar({ isAdmin }) {
         <div className="relative mx-auto flex items-center justify-between dark:text-gray-200">
           {/* Logo */}
           {!isAdmin && (
-            <Typography
-              className="ml-2 mr-4 hidden cursor-pointer border-none py-1.5 font-medium text-black 
+            <Link to={ROUTES.HOME}>
+              <Typography
+                variant="h5"
+                style={{
+                  fontFamily: 'Sacramento',
+                }}
+                className="ml-2 mr-4 hidden cursor-pointer border-none py-1.5 font-medium text-black 
               dark:text-gray-200 md:block"
-            >
-              <Link to={ROUTES.HOME}>{CONSTANTS.SITE_NAME}</Link>
-            </Typography>
+              >
+                {CONSTANTS.SITE_NAME}
+              </Typography>
+            </Link>
           )}
 
           {/* User Nav */}
@@ -133,7 +145,13 @@ export default function NavBar({ isAdmin }) {
             </IconButton>
           ) : (
             <Link to={ROUTES.HOME}>
-              <Typography className="ml-2 mr-4 block cursor-pointer border-none py-1.5 font-medium text-black dark:text-gray-200 md:hidden">
+              <Typography
+                variant="h5"
+                style={{
+                  fontFamily: 'Sacramento',
+                }}
+                className="ml-2 mr-4 block cursor-pointer border-none py-1.5 font-medium text-black dark:text-gray-200 md:hidden"
+              >
                 {CONSTANTS.SITE_NAME}
               </Typography>
             </Link>
