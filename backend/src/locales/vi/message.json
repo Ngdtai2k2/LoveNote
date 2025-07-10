@@ -11,5 +11,6 @@
   "code_expired": "Mã xác thực hết hạn!",
   "verification_successful": "Xác thực thành công!",
   "reset_password_successful": "Đặt lại mật khẩu thành công!",
-  "email_send_failed": "Gửi mail thất bại, vui lòng thử lại!"
+  "email_send_failed": "Gửi mail thất bại, vui lòng thử lại!",
+  "too_many_reset_requests": "Bạn đã gửi yêu cầu vượt quá số lần cho phép!"
 }

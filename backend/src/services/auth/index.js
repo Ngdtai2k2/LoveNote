@@ -1,11 +1,13 @@
-require('dotenv').config();
+const { Op } = require('sequelize');
 const bcrypt = require('bcrypt');
 const { v4: uuidv4 } = require('uuid');
 const crypto = require('crypto');
-const nodemailer = require('nodemailer');
 
-const { User, PasswordResetCode } = require('@models');
 const jwtService = require('@services/jwt');
+const { User, PasswordResetCode } = require('@models');
+const emailTemplates = require('@config/emailTemplates');
+
+const transporter = require('@config/mailTransporter');
 
 const authService = {
   signUp: async ({ fullName, email, password }) => {
@@ -120,42 +122,53 @@ const authService = {
       throw { code: 400, messageKey: 'validate:no_data' };
     }
 
-    const user = await User.findOne({
-      where: { email },
-    });
+    const user = await User.findOne({ where: { email } });
 
     if (!user) {
+      throw { code: 404, messageKey: 'notfound:user' };
+    }
+
+    const startOfDay = new Date();
+    startOfDay.setHours(0, 0, 0, 0);
+    const endOfDay = new Date();
+    endOfDay.setHours(23, 59, 59, 999);
+
+    const sentCount = await PasswordResetCode.count({
+      where: {
+        email,
+        created_at: {
+          [Op.between]: [startOfDay, endOfDay],
+        },
+      },
+    });
+
+    if (sentCount >= 3) {
       throw {
-        code: 404,
-        messageKey: 'notfound:user',
+        code: 429,
+        messageKey: 'message:too_many_reset_requests',
       };
     }
 
     const code = crypto.randomInt(100000, 999999).toString();
     const expiresAt = new Date(Date.now() + 10 * 60 * 1000);
 
-    const transporter = nodemailer.createTransport({
-      service: 'gmail',
-      auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASSWORD,
-      },
-    });
-
     try {
       await transporter.sendMail({
         from: process.env.EMAIL_USER,
         to: email,
         subject: 'Your Password Reset Token',
-        html: `<div>
-        <p>Dear ${email},</p>
-        <p>You recently requested to reset your password. Please use the following token to reset your password:</p>
-        <p style="font-size: 20px;"><strong>${code}</strong></p>
-        <p>The token is only valid for 10 minutes.</p>
-        <p>If you did not request a password reset, please ignore this email.</p>
-        <p>Best regards,<br>${process.env.EMAIL_USER}</p>
-      </div>`,
+        html: emailTemplates.resetPassword(email, code),
       });
+
+      await PasswordResetCode.update(
+        { used: true },
+        {
+          where: {
+            email,
+            used: false,
+          },
+        }
+      );
 
       await PasswordResetCode.create({
         email,
@@ -171,7 +184,7 @@ const authService = {
     } catch (error) {
       throw {
         code: 500,
-        messageKey: 'error:email_send_failed',
+        messageKey: 'message:email_send_failed',
       };
     }
   },

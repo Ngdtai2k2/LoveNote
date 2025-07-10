@@ -11,5 +11,6 @@
   "code_expired": "Authentication code has expired!",
   "verification_successful": "Verification successful!",
   "reset_password_successful": "Password reset successful!",
-  "email_send_failed": "Failed to send email, please try again!"
+  "email_send_failed": "Failed to send email, please try again!",
+  "too_many_reset_requests": "You have submitted a request exceeding the allowed number of times!"
 }
