@@ -1,7 +1,10 @@
+require('dotenv').config();
 const bcrypt = require('bcrypt');
 const { v4: uuidv4 } = require('uuid');
+const crypto = require('crypto');
+const nodemailer = require('nodemailer');
 
-const { User } = require('@models');
+const { User, PasswordResetCode } = require('@models');
 const jwtService = require('@services/jwt');
 
 const authService = {
@@ -69,6 +72,11 @@ const authService = {
   changePassword: async (req) => {
     const user = req.user;
     const { currentPassword, newPassword } = req.body;
+
+    if (!currentPassword || !newPassword) {
+      throw { code: 400, messageKey: 'validate:no_data' };
+    }
+
     const userData = await User.findByPk(user.id);
 
     const isPasswordValid = await bcrypt.compare(
@@ -102,6 +110,134 @@ const authService = {
     return {
       code: 200,
       messageKey: 'auth:change_password_success',
+    };
+  },
+
+  forgotPassword: async (req) => {
+    const { email } = req.body;
+
+    if (!email) {
+      throw { code: 400, messageKey: 'validate:no_data' };
+    }
+
+    const user = await User.findOne({
+      where: { email },
+    });
+
+    if (!user) {
+      throw {
+        code: 404,
+        messageKey: 'notfound:user',
+      };
+    }
+
+    const code = crypto.randomInt(100000, 999999).toString();
+    const expiresAt = new Date(Date.now() + 10 * 60 * 1000);
+
+    const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASSWORD,
+      },
+    });
+
+    try {
+      await transporter.sendMail({
+        from: process.env.EMAIL_USER,
+        to: email,
+        subject: 'Your Password Reset Token',
+        html: `<div>
+        <p>Dear ${email},</p>
+        <p>You recently requested to reset your password. Please use the following token to reset your password:</p>
+        <p style="font-size: 20px;"><strong>${code}</strong></p>
+        <p>The token is only valid for 10 minutes.</p>
+        <p>If you did not request a password reset, please ignore this email.</p>
+        <p>Best regards,<br>${process.env.EMAIL_USER}</p>
+      </div>`,
+      });
+
+      await PasswordResetCode.create({
+        email,
+        code,
+        used: false,
+        expires_at: expiresAt,
+      });
+
+      return {
+        code: 200,
+        messageKey: 'message:code_sent_success',
+      };
+    } catch (error) {
+      throw {
+        code: 500,
+        messageKey: 'error:email_send_failed',
+      };
+    }
+  },
+
+  verifyCode: async (req) => {
+    const { email, code } = req.body;
+
+    if (!email || !code) {
+      throw { code: 400, messageKey: 'validate:no_data' };
+    }
+
+    const record = await PasswordResetCode.findOne({
+      where: { email, code, used: false },
+      order: [['created_at', 'DESC']],
+    });
+
+    if (!record || new Date() > new Date(record.expires_at)) {
+      throw {
+        code: 400,
+        messageKey: 'message:code_expired',
+      };
+    }
+
+    record.used = true;
+    await record.save();
+
+    return {
+      code: 200,
+      messageKey: 'message:verification_successful',
+    };
+  },
+
+  resetPassword: async (req) => {
+    const { email, newPassword, code } = req.body;
+
+    if (!email || !newPassword || !code) {
+      throw { code: 400, messageKey: 'validate:no_data' };
+    }
+
+    const resetRecord = await PasswordResetCode.findOne({
+      where: { email, code, used: true },
+      order: [['created_at', 'DESC']],
+    });
+
+    if (!resetRecord || new Date() > new Date(resetRecord.expires_at)) {
+      throw {
+        code: 400,
+        messageKey: 'message:code_expired',
+      };
+    }
+
+    const user = await User.findOne({ where: { email } });
+    if (!user) {
+      throw {
+        code: 404,
+        messageKey: 'notfound:user',
+      };
+    }
+
+    const hashedPassword = await bcrypt.hash(newPassword, 12);
+    user.password = hashedPassword;
+    await user.save();
+
+    return {
+      code: 200,
+      messageKey: 'message:reset_password_successful',
     };
   },
 };

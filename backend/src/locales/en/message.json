@@ -6,5 +6,10 @@
   "delete_web_success": "Successfully deleted web configuration!",
   "file_delete_failed": "File deletion failed, please try again!",
   "send_too_many": "You have sent too many times, please try again later!",
-  "data_sent_success": "Data sent successfully!"
+  "data_sent_success": "Data sent successfully!",
+  "code_sent_success": "The verification code has been sent to your email!",
+  "code_expired": "Authentication code has expired!",
+  "verification_successful": "Verification successful!",
+  "reset_password_successful": "Password reset successful!",
+  "email_send_failed": "Failed to send email, please try again!"
 }

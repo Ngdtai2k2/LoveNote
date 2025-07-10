@@ -6,5 +6,10 @@
   "delete_web_success": "Xóa cấu hình web thành công!",
   "file_delete_failed": "Xóa file không thành công, vui lòng thử lại!",
   "send_too_many": "Bạn đã gửi quá nhiều lần, vui lòng thử lại sau!",
-  "data_sent_success": "Gửi dữ liệu thành công!"
+  "data_sent_success": "Gửi dữ liệu thành công!",
+  "code_sent_success": "Mã xác thực đã được gửi về email của bạn!",
+  "code_expired": "Mã xác thực hết hạn!",
+  "verification_successful": "Xác thực thành công!",
+  "reset_password_successful": "Đặt lại mật khẩu thành công!",
+  "email_send_failed": "Gửi mail thất bại, vui lòng thử lại!"
 }

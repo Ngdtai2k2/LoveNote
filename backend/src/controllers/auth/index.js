@@ -125,7 +125,42 @@ const authController = {
         message: req.t(messageKey),
       });
     } catch (error) {
-      console.log(error.message);
+      handleError(res, req, error);
+    }
+  },
+
+  forgotPassword: async (req, res) => {
+    try {
+      const { code, messageKey } = await authService.forgotPassword(req);
+
+      return res.status(code).json({
+        message: req.t(messageKey),
+      });
+    } catch (error) {
+      handleError(res, req, error);
+    }
+  },
+
+  verifyCode: async (req, res) => {
+    try {
+      const { code, messageKey } = await authService.verifyCode(req);
+
+      return res.status(code).json({
+        message: req.t(messageKey),
+      });
+    } catch (error) {
+      handleError(res, req, error);
+    }
+  },
+
+  resetPassword: async (req, res) => {
+    try {
+      const { code, messageKey } = await authService.resetPassword(req);
+
+      return res.status(code).json({
+        message: req.t(messageKey),
+      });
+    } catch (error) {
       handleError(res, req, error);
     }
   },
