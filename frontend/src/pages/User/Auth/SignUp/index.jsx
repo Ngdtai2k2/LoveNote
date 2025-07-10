@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { Form, Formik } from 'formik';
@@ -10,6 +10,8 @@ import { useDocumentTitle } from '@hooks/useDocumentTitle';
 import { authAPI } from '@api/auth';
 
 export default function SignUp() {
+  const [loading, setLoading] = useState(false);
+
   const { t } = useTranslation('form');
 
   useDocumentTitle(t('auth.sign_up'));
@@ -25,8 +27,8 @@ export default function SignUp() {
 
   const validationSchema = Yup.object({
     fullName: Yup.string()
-      .min(2, t('full_name_min', { min: 2 }))
-      .max(50, ('full_name_max', { max: 50 }))
+      .min(2, t('auth.full_name_min', { min: 2 }))
+      .max(50, ('auth.full_name_max', { max: 50 }))
       .required(t('auth.full_name_required')),
     email: Yup.string().email(t('auth.email_invalid')).required(t('auth.email_required')),
     password: Yup.string()
@@ -37,8 +39,13 @@ export default function SignUp() {
       .required(t('auth.confirm_password_required')),
   });
 
-  const onSubmit = (values) => {
-    authAPI.signUp(values, navigate);
+  const onSubmit = async (values) => {
+    setLoading(true);
+    try {
+      await authAPI.signUp(values, navigate);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -125,10 +132,12 @@ export default function SignUp() {
 
               <div className="flex justify-center">
                 <button
+                  disabled={loading}
                   type="submit"
-                  className="w-full rounded bg-gray-600 py-2 text-white transition duration-200 hover:bg-gray-800 
-                focus:bg-gray-800 active:bg-gray-800 dark:bg-gray-600 dark:hover:bg-gray-800 dark:focus:bg-gray-800 
-                dark:active:bg-gray-800"
+                  className={`w-full rounded py-2 text-white transition duration-200
+                  ${loading ? 'bg-gray-400 cursor-not-allowed' : 'bg-gray-600 hover:bg-gray-800'}
+                focus:bg-gray-800 active:bg-gray-800
+                  dark:${loading ? 'bg-gray-500' : 'bg-gray-600 hover:bg-gray-800'}`}
                 >
                   {t('auth.sign_up')}
                 </button>

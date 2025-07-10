@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
@@ -11,6 +11,8 @@ import FormField from '@components/FormField';
 import { useDocumentTitle } from '@hooks/useDocumentTitle';
 
 export default function SignIn() {
+  const [loading, setLoading] = useState(false);
+
   const { t } = useTranslation('form');
 
   useDocumentTitle(t('auth.sign_in'));
@@ -30,8 +32,13 @@ export default function SignIn() {
       .required(t('auth.password_required')),
   });
 
-  const onSubmit = (values) => {
-    dispatch(authAPI.signIn(values, navigate));
+  const onSubmit = async (values) => {
+    setLoading(true);
+    try {
+      await dispatch(authAPI.signIn(values, navigate));
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -96,10 +103,12 @@ export default function SignIn() {
 
               <div className="flex justify-center">
                 <button
+                  disabled={loading}
                   type="submit"
-                  className="w-full rounded bg-gray-600 py-2 text-white transition duration-200 hover:bg-gray-800 
-                focus:bg-gray-800 active:bg-gray-800 dark:bg-gray-600 dark:hover:bg-gray-800 dark:focus:bg-gray-800 
-                dark:active:bg-gray-800"
+                  className={`w-full rounded py-2 text-white transition duration-200
+                  ${loading ? 'bg-gray-400 cursor-not-allowed' : 'bg-gray-600 hover:bg-gray-800'}
+                focus:bg-gray-800 active:bg-gray-800
+                  dark:${loading ? 'bg-gray-500' : 'bg-gray-600 hover:bg-gray-800'}`}
                 >
                   {t('auth.sign_in')}
                 </button>

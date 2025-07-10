@@ -48,7 +48,9 @@
   "update": "Update",
   "updating": "Updating...",
   "save": "Save",
+  "saving": "Saving...",
   "cancel": "Cancel",
+  "cancelling": "Cancelling...",
   "update_profile": "Update profile",
   "click_to_upload": "Click to upload",
   "clear_file": "Clear file"

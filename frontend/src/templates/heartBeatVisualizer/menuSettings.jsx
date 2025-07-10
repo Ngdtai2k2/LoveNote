@@ -21,6 +21,7 @@ import ModalRenderLink from '../modalRenderLink';
 import MUSIC_DEMO from '../assets/musics/music_background_005.mp3';
 
 export default function MenuSettings({ settings, onUpdate }) {
+  const [loading, setLoading] = useState(false);
   const [openSettings, setOpenSettings] = useState(false);
   const [audioName, setAudioName] = useState();
   const [modalOpen, setModalOpen] = useState(false);
@@ -52,13 +53,17 @@ export default function MenuSettings({ settings, onUpdate }) {
     }
     onUpdate('audioFile', MUSIC_DEMO);
   };
-
   const onSubmit = async (values) => {
-    const res = await handleSubmitSettings(values, user, axiosJWT, navigate);
-    if (res?.data) {
-      const path = res.data.slug;
-      setSitePath(path);
-      setModalOpen(true);
+    setLoading(true);
+    try {
+      const res = await handleSubmitSettings(values, user, axiosJWT, navigate);
+      if (res?.data) {
+        const path = res.data.slug;
+        setSitePath(path);
+        setModalOpen(true);
+      }
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -86,7 +91,7 @@ export default function MenuSettings({ settings, onUpdate }) {
                 onDoubleClick={(e) => e.stopPropagation()}
               >
                 <div className="flex items-center justify-between p-4 border-b border-white/10">
-                  <h2 className="text-lg font-semibold">{t('settings')}</h2>
+                  <h2 className="text-lg font-semibold">{t('template:settings')}</h2>
                   <button
                     onClick={() => setOpenSettings(false)}
                     className="text-white hover:text-red-500"
@@ -96,7 +101,7 @@ export default function MenuSettings({ settings, onUpdate }) {
                 </div>
                 <div className="p-4 space-y-4">
                   <FormItem
-                    label={t('title')}
+                    label={t('template:title')}
                     name="text"
                     value={values.text}
                     maxLength={20}
@@ -106,7 +111,7 @@ export default function MenuSettings({ settings, onUpdate }) {
                     }}
                   />
                   <FormItem
-                    label={t('text_color')}
+                    label={t('template:text_color')}
                     name="textColor"
                     type="color"
                     value={values.textColor}
@@ -116,7 +121,7 @@ export default function MenuSettings({ settings, onUpdate }) {
                     }}
                   />
                   <ColorSelector
-                    label={`${t('colors')} (${t('heart')})`}
+                    label={`${t('template:colors')} (${t('template:heart')})`}
                     value={Array.isArray(values.heartColor) ? values.heartColor : []}
                     onChange={(newColors) => {
                       onUpdate('heartColor', newColors);
@@ -124,7 +129,7 @@ export default function MenuSettings({ settings, onUpdate }) {
                     max={5}
                   />
                   <ColorSelector
-                    label={`${t('colors')} (${t('floating_heart')})`}
+                    label={`${t('template:colors')} (${t('template:floating_heart')})`}
                     value={Array.isArray(values.snowColor) ? values.snowColor : []}
                     onChange={(newColors) => {
                       onUpdate('snowColor', newColors);
@@ -132,7 +137,7 @@ export default function MenuSettings({ settings, onUpdate }) {
                     max={5}
                   />
                   <FormItem
-                    label={t('button_color')}
+                    label={t('template:button_color')}
                     name="buttonColor"
                     type="color"
                     value={values.buttonColor}
@@ -142,7 +147,7 @@ export default function MenuSettings({ settings, onUpdate }) {
                     }}
                   />
                   <FormItem
-                    label={t('d_heart')}
+                    label={t('template:d_heart')}
                     name="modelColor"
                     type="color"
                     value={values.modelColor}
@@ -152,7 +157,7 @@ export default function MenuSettings({ settings, onUpdate }) {
                     }}
                   />
                   <FormRange
-                    label={t('volume')}
+                    label={t('template:volume')}
                     name="audioVolume"
                     min={0}
                     max={1}
@@ -167,7 +172,9 @@ export default function MenuSettings({ settings, onUpdate }) {
 
                   {/* Upload Audio File */}
                   <div>
-                    <label className="block mt-2 text-sm text-white">{t('upload_audio')}</label>
+                    <label className="block mt-2 text-sm text-white">
+                      {t('template:upload_audio')}
+                    </label>
                     <div className="mt-2 flex items-center text-sm text-white">
                       <input
                         name="audioFile"
@@ -195,13 +202,20 @@ export default function MenuSettings({ settings, onUpdate }) {
                     </div>
                   </div>
 
-                  <FormSlug label={`${t('slug')} (${t('optional')})`} name="slug" />
+                  <FormSlug
+                    label={`${t('template:slug')} (${t('template:optional')})`}
+                    name="slug"
+                  />
 
                   <button
+                    disabled={loading}
                     type="submit"
-                    className="w-full bg-gray-500 py-2 rounded hover:bg-gray-600 transition"
+                    className={`w-full rounded py-2 text-white transition duration-200
+                    ${loading ? 'bg-gray-400 cursor-not-allowed' : 'bg-gray-600 hover:bg-gray-800'}
+                  focus:bg-gray-800 active:bg-gray-800
+                    dark:${loading ? 'bg-gray-500' : 'bg-gray-600 hover:bg-gray-800'}`}
                   >
-                    SAVE
+                    {loading ? t('form:saving') : t('form:save')}
                   </button>
                 </div>
               </div>

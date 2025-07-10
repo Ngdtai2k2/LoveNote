@@ -24,6 +24,7 @@ import IMAGE_DEMO from '../assets/images/image_galaxy_text.jpg';
 import MUSIC_DEMO from '../assets/musics/music_background_005.mp3';
 
 export default function MenuSettings({ settings, onUpdate }) {
+  const [loading, setLoading] = useState(false);
   const [openSettings, setOpenSettings] = useState(false);
   const [audioName, setAudioName] = useState();
   const [modalOpen, setModalOpen] = useState(false);
@@ -35,7 +36,7 @@ export default function MenuSettings({ settings, onUpdate }) {
   const fileInputRef = useRef(null);
   const imagesInputRef = useRef(null);
 
-  const { t, i18n } = useTranslation('template');
+  const { t, i18n } = useTranslation(['template', 'form']);
   const navigate = useNavigate();
   const user = useCurrentUser();
   const { axiosJWT } = useAxios(i18n.language);
@@ -79,15 +80,20 @@ export default function MenuSettings({ settings, onUpdate }) {
   };
 
   const onSubmit = async (values) => {
-    const cleanedValues = {
-      ...values,
-      ringTexts: multilineTextToArray(values.ringTexts),
-    };
-    const res = await handleSubmitSettings(cleanedValues, user, axiosJWT, navigate);
-    if (res?.data) {
-      const path = res.data.slug;
-      setSitePath(path);
-      setModalOpen(true);
+    setLoading(true);
+    try {
+      const cleanedValues = {
+        ...values,
+        ringTexts: multilineTextToArray(values.ringTexts),
+      };
+      const res = await handleSubmitSettings(cleanedValues, user, axiosJWT, navigate);
+      if (res?.data) {
+        const path = res.data.slug;
+        setSitePath(path);
+        setModalOpen(true);
+      }
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -132,7 +138,7 @@ export default function MenuSettings({ settings, onUpdate }) {
                 onDoubleClick={(e) => e.stopPropagation()}
               >
                 <div className="flex items-center justify-between p-4 border-b border-white/10">
-                  <h2 className="text-lg font-semibold">{t('settings')}</h2>
+                  <h2 className="text-lg font-semibold">{t('template:settings')}</h2>
                   <button
                     onClick={() => setOpenSettings(false)}
                     className="text-white hover:text-red-500"
@@ -142,7 +148,7 @@ export default function MenuSettings({ settings, onUpdate }) {
                 </div>
                 <div className="p-4 space-y-4">
                   <FormArea
-                    label={t('ring_texts')}
+                    label={t('template:ring_texts')}
                     name="ringTexts"
                     value={values.ringTexts}
                     as="textarea"
@@ -155,7 +161,7 @@ export default function MenuSettings({ settings, onUpdate }) {
                   />
                   <div>
                     <label className="block mt-2 text-sm text-white">
-                      {t('upload_images')} ({t('note_upload_ten_images')})
+                      {t('template:upload_images')} ({t('template:note_upload_ten_images')})
                     </label>
                     <div className="mt-2 flex flex-col gap-2 text-sm text-white">
                       <input
@@ -199,7 +205,7 @@ export default function MenuSettings({ settings, onUpdate }) {
                   </div>
 
                   <div>
-                    <label className="block mt-2 text-sm text-white">{t('upload_audio')}</label>
+                    <label className="block mt-2 text-sm text-white">{t('template:upload_audio')}</label>
                     <div className="mt-2 flex items-center text-sm text-white">
                       <input
                         name="heartAudio"
@@ -227,12 +233,19 @@ export default function MenuSettings({ settings, onUpdate }) {
                       )}
                     </div>
                   </div>
-                  <FormSlug label={`${t('slug')} (${t('optional')})`} name="slug" />
+                  <FormSlug
+                    label={`${t('template:slug')} (${t('template:optional')})`}
+                    name="slug"
+                  />
                   <button
+                    disabled={loading}
                     type="submit"
-                    className="w-full bg-gray-500 py-2 rounded hover:bg-gray-600 transition"
+                    className={`w-full rounded py-2 text-white transition duration-200
+                    ${loading ? 'bg-gray-400 cursor-not-allowed' : 'bg-gray-600 hover:bg-gray-800'}
+                  focus:bg-gray-800 active:bg-gray-800
+                    dark:${loading ? 'bg-gray-500' : 'bg-gray-600 hover:bg-gray-800'}`}
                   >
-                    SAVE
+                    {loading ? t('form:saving') : t('form:save')}
                   </button>
                 </div>
               </div>

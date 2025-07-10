@@ -19,6 +19,7 @@ import TopLeftControl from '../components/topLeftControl';
 import MUSIC_BACKGROUND_001 from '../assets/musics/music_background_001.mp3';
 
 export default function MenuSettings({ settings, onUpdate }) {
+  const [loading, setLoading] = useState(false);
   const [openSettings, setOpenSettings] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const [sitePath, setSitePath] = useState('');
@@ -58,11 +59,16 @@ export default function MenuSettings({ settings, onUpdate }) {
   };
 
   const onSubmit = async (values) => {
-    const res = await handleSubmitSettings(values, user, axiosJWT, navigate);
-    if (res?.data) {
-      const path = res.data.slug;
-      setSitePath(path);
-      setModalOpen(true);
+    setLoading(true);
+    try {
+      const res = await handleSubmitSettings(values, user, axiosJWT, navigate);
+      if (res?.data) {
+        const path = res.data.slug;
+        setSitePath(path);
+        setModalOpen(true);
+      }
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -84,7 +90,7 @@ export default function MenuSettings({ settings, onUpdate }) {
             <Form className="p-4 space-y-4">
               <div className="menu-settings fixed right-0 top-0 z-30 h-full w-[350px] bg-black bg-opacity-90 text-white shadow-lg border-l border-white/20 overflow-scroll">
                 <div className="flex items-center justify-between p-4 border-b border-white/10">
-                  <h2 className="text-lg font-semibold">{t('settings')}</h2>
+                  <h2 className="text-lg font-semibold">{t('template:settings')}</h2>
                   <button
                     onClick={() => setOpenSettings(false)}
                     className="text-white hover:text-red-500"
@@ -95,7 +101,7 @@ export default function MenuSettings({ settings, onUpdate }) {
 
                 <div className="p-4 space-y-4">
                   <FormItem
-                    label={t('text_rain')}
+                    label={t('template:text_rain')}
                     name="textRain"
                     value={values.textRain}
                     maxLength={20}
@@ -106,7 +112,7 @@ export default function MenuSettings({ settings, onUpdate }) {
                   />
 
                   <FormRange
-                    label={t('font_size_text_rain')}
+                    label={t('template:font_size_text_rain')}
                     name="fontSize"
                     min={5}
                     max={30}
@@ -119,7 +125,7 @@ export default function MenuSettings({ settings, onUpdate }) {
                   />
 
                   <FormItem
-                    label={t('text_color')}
+                    label={t('template:text_color')}
                     name="textColor"
                     type="color"
                     value={values.textColor}
@@ -130,7 +136,7 @@ export default function MenuSettings({ settings, onUpdate }) {
                   />
 
                   <FormItem
-                    label={t('title')}
+                    label={t('template:title')}
                     name="title"
                     value={values.title}
                     maxLength={20}
@@ -141,7 +147,7 @@ export default function MenuSettings({ settings, onUpdate }) {
                   />
 
                   <FormItem
-                    label={t('title_color')}
+                    label={t('template:title_color')}
                     name="titleColor"
                     type="color"
                     value={values.titleColor}
@@ -152,7 +158,7 @@ export default function MenuSettings({ settings, onUpdate }) {
                   />
 
                   <FormRange
-                    label={t('font_size_title')}
+                    label={t('template:font_size_title')}
                     name="fontSizeTitle"
                     min={16}
                     max={200}
@@ -165,7 +171,7 @@ export default function MenuSettings({ settings, onUpdate }) {
                   />
 
                   <FormRange
-                    label={t('color_spread')}
+                    label={t('template:color_spread')}
                     name="backgroundOpacity"
                     min={0}
                     max={1}
@@ -179,7 +185,7 @@ export default function MenuSettings({ settings, onUpdate }) {
                   />
 
                   <FormItem
-                    label={t('background_color')}
+                    label={t('template:background_color')}
                     name="backgroundHex"
                     type="color"
                     value={values.backgroundHex}
@@ -190,7 +196,7 @@ export default function MenuSettings({ settings, onUpdate }) {
                   />
 
                   <FormRange
-                    label={t('rain_speed')}
+                    label={t('template:rain_speed')}
                     name="rainSpeed"
                     min={0.2}
                     max={5}
@@ -203,7 +209,7 @@ export default function MenuSettings({ settings, onUpdate }) {
                   />
 
                   <FormRange
-                    label={t('text_per_click')}
+                    label={t('template:text_per_click')}
                     name="textPerClick"
                     min={1}
                     max={20}
@@ -216,7 +222,7 @@ export default function MenuSettings({ settings, onUpdate }) {
                   />
 
                   <FormCheckbox
-                    label={t('auto_random_click')}
+                    label={t('template:auto_random_click')}
                     name="autoBurst"
                     checked={values.autoBurst}
                     onChange={(e) => {
@@ -226,7 +232,7 @@ export default function MenuSettings({ settings, onUpdate }) {
                   />
 
                   <FormRange
-                    label={t('volume')}
+                    label={t('template:volume')}
                     name="audioVolume"
                     min={0}
                     max={1}
@@ -239,11 +245,16 @@ export default function MenuSettings({ settings, onUpdate }) {
                     }}
                   />
 
-                  <FormSlug label={`${t('slug')} (${t('optional')})`} name="slug" />
+                  <FormSlug
+                    label={`${t('template:slug')} (${t('template:optional')})`}
+                    name="slug"
+                  />
 
                   {/* Upload Audio File */}
                   <div>
-                    <label className="block mt-2 text-sm text-white">{t('upload_audio')}</label>
+                    <label className="block mt-2 text-sm text-white">
+                      {t('template:upload_audio')}
+                    </label>
                     <div className="mt-2 flex items-center text-sm text-white">
                       <input
                         name="audioFile"
@@ -272,10 +283,14 @@ export default function MenuSettings({ settings, onUpdate }) {
                   </div>
 
                   <button
+                    disabled={loading}
                     type="submit"
-                    className="w-full bg-gray-500 py-2 rounded hover:bg-gray-600 transition"
+                    className={`w-full rounded py-2 text-white transition duration-200
+                    ${loading ? 'bg-gray-400 cursor-not-allowed' : 'bg-gray-600 hover:bg-gray-800'}
+                  focus:bg-gray-800 active:bg-gray-800
+                    dark:${loading ? 'bg-gray-500' : 'bg-gray-600 hover:bg-gray-800'}`}
                   >
-                    SAVE
+                    {loading ? t('form:saving') : t('form:save')}
                   </button>
                 </div>
               </div>

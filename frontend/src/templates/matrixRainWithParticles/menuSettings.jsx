@@ -25,6 +25,7 @@ import ModalRenderLink from '../modalRenderLink';
 import MUSIC_DEMO from '../assets/musics/music_background_005.mp3';
 
 export default function MenuSettings({ settings, onUpdate }) {
+  const [loading, setLoading] = useState(false);
   const [openSettings, setOpenSettings] = useState(false);
   const [audioName, setAudioName] = useState();
   const [modalOpen, setModalOpen] = useState(false);
@@ -62,15 +63,20 @@ export default function MenuSettings({ settings, onUpdate }) {
   };
 
   const onSubmit = async (values) => {
-    const cleanedValues = {
-      ...values,
-      wordList: helperFunctions.deserializeItems(values.wordList, ' ; '),
-    };
-    const res = await handleSubmitSettings(cleanedValues, user, axiosJWT, navigate);
-    if (res) {
-      const path = res.data.slug;
-      setSitePath(path);
-      setModalOpen(true);
+    setLoading(true);
+    try {
+      const cleanedValues = {
+        ...values,
+        wordList: helperFunctions.deserializeItems(values.wordList, ' ; '),
+      };
+      const res = await handleSubmitSettings(cleanedValues, user, axiosJWT, navigate);
+      if (res) {
+        const path = res.data.slug;
+        setSitePath(path);
+        setModalOpen(true);
+      }
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -92,7 +98,7 @@ export default function MenuSettings({ settings, onUpdate }) {
             <Form className="p-4 space-y-4">
               <div className="menu-settings fixed right-0 top-0 z-30 h-full w-[350px] bg-black bg-opacity-90 text-white shadow-lg border-l border-white/20 overflow-scroll">
                 <div className="flex items-center justify-between p-4 border-b border-white/10">
-                  <h2 className="text-lg font-semibold">{t('settings')}</h2>
+                  <h2 className="text-lg font-semibold">{t('template:settings')}</h2>
                   <button
                     onClick={() => setOpenSettings(false)}
                     className="text-white hover:text-red-500"
@@ -102,7 +108,7 @@ export default function MenuSettings({ settings, onUpdate }) {
                 </div>
                 <div className="p-4 space-y-4">
                   <FormItem
-                    label={t('letters')}
+                    label={t('template:letters')}
                     name="letters"
                     value={values.letters}
                     maxLength={50}
@@ -112,7 +118,7 @@ export default function MenuSettings({ settings, onUpdate }) {
                     }}
                   />
                   <FormItem
-                    label={t('text_color')}
+                    label={t('template:text_color')}
                     name="rainTextColor"
                     type="color"
                     value={values.rainTextColor}
@@ -122,7 +128,7 @@ export default function MenuSettings({ settings, onUpdate }) {
                     }}
                   />
                   <FormItem
-                    label={t('background_color')}
+                    label={t('template:background_color')}
                     name="backgroundColor"
                     type="color"
                     value={values.backgroundColor}
@@ -132,7 +138,7 @@ export default function MenuSettings({ settings, onUpdate }) {
                     }}
                   />
                   <FormRange
-                    label={t('font_size_text_rain')}
+                    label={t('template:font_size_text_rain')}
                     name="rainFontSize"
                     min={5}
                     max={30}
@@ -144,7 +150,7 @@ export default function MenuSettings({ settings, onUpdate }) {
                     }}
                   />
                   <FormItem
-                    label={t('title')}
+                    label={t('template:title')}
                     name="title"
                     value={values.title}
                     maxLength={20}
@@ -154,7 +160,7 @@ export default function MenuSettings({ settings, onUpdate }) {
                     }}
                   />
                   <FormArea
-                    label={`${t('words')} ; ${t('step')}`}
+                    label={`${t('template:words')} ; ${t('template:step')}`}
                     name="wordList"
                     value={values.wordList}
                     as="textarea"
@@ -167,7 +173,7 @@ export default function MenuSettings({ settings, onUpdate }) {
                   />
 
                   <FormItem
-                    label={t('text_color')}
+                    label={t('template:text_color')}
                     name="textColor"
                     type="color"
                     value={values.textColor}
@@ -178,7 +184,7 @@ export default function MenuSettings({ settings, onUpdate }) {
                   />
 
                   <FormRange
-                    label={t('font_size_text')}
+                    label={t('template:font_size_text')}
                     name="textFontSize"
                     min={50}
                     max={200}
@@ -191,7 +197,7 @@ export default function MenuSettings({ settings, onUpdate }) {
                   />
 
                   <FormCheckbox
-                    label={t('loop')}
+                    label={t('template:loop')}
                     name="loop"
                     checked={values.loop}
                     onChange={(e) => {
@@ -201,7 +207,7 @@ export default function MenuSettings({ settings, onUpdate }) {
                   />
 
                   <FormSelect
-                    label={t('font_family')}
+                    label={t('template:font_family')}
                     name="fontFamily"
                     value={values.fontFamily}
                     onChange={(e) => {
@@ -217,7 +223,9 @@ export default function MenuSettings({ settings, onUpdate }) {
 
                   {/* Upload Audio File */}
                   <div>
-                    <label className="block mt-2 text-sm text-white">{t('upload_audio')}</label>
+                    <label className="block mt-2 text-sm text-white">
+                      {t('template:upload_audio')}
+                    </label>
                     <div className="mt-2 flex items-center text-sm text-white">
                       <input
                         name="audioFile"
@@ -246,7 +254,7 @@ export default function MenuSettings({ settings, onUpdate }) {
                   </div>
 
                   <FormRange
-                    label={t('volume')}
+                    label={t('template:volume')}
                     name="audioVolume"
                     min={0}
                     max={1}
@@ -259,13 +267,20 @@ export default function MenuSettings({ settings, onUpdate }) {
                     }}
                   />
 
-                  <FormSlug label={`${t('slug')} (${t('optional')})`} name="slug" />
+                  <FormSlug
+                    label={`${t('template:slug')} (${t('template:optional')})`}
+                    name="slug"
+                  />
 
                   <button
+                    disabled={loading}
                     type="submit"
-                    className="w-full bg-gray-500 py-2 rounded hover:bg-gray-600 transition"
+                    className={`w-full rounded py-2 text-white transition duration-200
+                    ${loading ? 'bg-gray-400 cursor-not-allowed' : 'bg-gray-600 hover:bg-gray-800'}
+                  focus:bg-gray-800 active:bg-gray-800
+                    dark:${loading ? 'bg-gray-500' : 'bg-gray-600 hover:bg-gray-800'}`}
                   >
-                    SAVE
+                    {loading ? t('form:saving') : t('form:save')}
                   </button>
                 </div>
               </div>

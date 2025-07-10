@@ -24,6 +24,7 @@ import ModalRenderLink from '../modalRenderLink';
 import { handleSubmitSettings } from './handleSubmitSettings';
 
 export default function MenuSettings({ settings, onUpdate, onOpen }) {
+  const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
   const [demoPreview, setDemoPreview] = useState(settings);
   const [modalOpen, setModalOpen] = useState(false);
@@ -61,12 +62,17 @@ export default function MenuSettings({ settings, onUpdate, onOpen }) {
   };
 
   const onSubmit = async (values) => {
-    const res = await handleSubmitSettings(values, user, axiosJWT, navigate);
-    if (res) {
-      const path = res.data.slug;
-      handleOpen();
-      setSitePath(path);
-      setModalOpen(true);
+    setLoading(true);
+    try {
+      const res = await handleSubmitSettings(values, user, axiosJWT, navigate);
+      if (res) {
+        const path = res.data.slug;
+        handleOpen();
+        setSitePath(path);
+        setModalOpen(true);
+      }
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -85,13 +91,13 @@ export default function MenuSettings({ settings, onUpdate, onOpen }) {
           {({ values, handleChange }) => (
             <Form className="bg-black rounded bg-opacity-90 text-white">
               <DialogHeader>
-                <h2 className="text-lg font-semibold">{t('settings')}</h2>
+                <h2 className="text-lg font-semibold">{t('template:settings')}</h2>
               </DialogHeader>
 
               <DialogBody className="max-h-[70vh] overflow-y-auto">
                 <div className="mb-2">
                   <FormItem
-                    label={t('title')}
+                    label={t('template:title')}
                     name="popupTitle"
                     value={values.popupTitle}
                     maxLength={20}
@@ -103,7 +109,7 @@ export default function MenuSettings({ settings, onUpdate, onOpen }) {
                 </div>
                 <div className="mb-2">
                   <FormItem
-                    label={t('content')}
+                    label={t('template:content')}
                     name="popupContent"
                     value={values.popupContent}
                     maxLength={20}
@@ -115,7 +121,7 @@ export default function MenuSettings({ settings, onUpdate, onOpen }) {
                 </div>
                 <div className="mb-2">
                   <FormItem
-                    label={t('icon')}
+                    label={t('template:icon')}
                     name="popupIcon"
                     value={values.popupIcon}
                     maxLength={10}
@@ -127,7 +133,7 @@ export default function MenuSettings({ settings, onUpdate, onOpen }) {
                 </div>
                 <div className="mb-2">
                   <FormItem
-                    label={t('common_color')}
+                    label={t('template:common_color')}
                     name="commonColor"
                     type="color"
                     value={values.commonColor}
@@ -139,7 +145,7 @@ export default function MenuSettings({ settings, onUpdate, onOpen }) {
                 </div>
                 <div className="mb-2">
                   <FormItem
-                    label={`${t('text_color')} (${t('title')})`}
+                    label={`${t('template:text_color')} (${t('template:title')})`}
                     name="popupTitleColor"
                     type="color"
                     value={values.popupTitleColor}
@@ -151,7 +157,7 @@ export default function MenuSettings({ settings, onUpdate, onOpen }) {
                 </div>
                 <div className="mb-2">
                   <FormItem
-                    label={`${t('text_color')} (${t('content')})`}
+                    label={`${t('template:text_color')} (${t('template:content')})`}
                     name="popupContentColor"
                     type="color"
                     value={values.popupContentColor}
@@ -163,7 +169,7 @@ export default function MenuSettings({ settings, onUpdate, onOpen }) {
                 </div>
                 <div className="mb-2">
                   <FormItem
-                    label={t('button_text')}
+                    label={t('template:button_text')}
                     name="buttonText"
                     value={values.buttonText}
                     maxLength={20}
@@ -233,7 +239,7 @@ export default function MenuSettings({ settings, onUpdate, onOpen }) {
                   </div>
                 </div>
 
-                <FormSlug label={`${t('slug')} (${t('optional')})`} name="slug" />
+                <FormSlug label={`${t('template:slug')} (${t('template:optional')})`} name="slug" />
               </DialogBody>
 
               <DialogFooter>
@@ -246,8 +252,8 @@ export default function MenuSettings({ settings, onUpdate, onOpen }) {
                 >
                   <span>Demo</span>
                 </Button>
-                <Button type="submit" variant="outlined" color="green" size="sm">
-                  <span>Save</span>
+                <Button disabled={loading} type="submit" variant="outlined" color="green" size="sm">
+                  {loading ? t('form:saving') : t('form:save')}
                 </Button>
               </DialogFooter>
             </Form>
