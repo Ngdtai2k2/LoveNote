@@ -35,7 +35,7 @@ export default function SignIn() {
   };
 
   return (
-    <div className="mt-10 flex items-center justify-center pt-5">
+    <div className="mt-6 flex items-center justify-center pt-5">
       <div className="w-96 rounded-lg bg-white p-8 shadow-md dark:bg-gray-900">
         <h2 className="mb-6 text-center text-2xl font-bold text-gray-800 dark:text-gray-200">
           {t('auth.sign_in')}
@@ -80,7 +80,10 @@ export default function SignIn() {
               </div>
 
               <div className="mb-5 flex justify-between px-1">
-                <h6 className="cursor-pointer text-[12px] italic text-gray-800 underline hover:no-underline dark:text-gray-200">
+                <h6
+                  onClick={() => navigate(ROUTES.AUTH.RESET_PASSWORD)}
+                  className="cursor-pointer text-[12px] italic text-gray-800 underline hover:no-underline dark:text-gray-200"
+                >
                   {t('auth.forgot_password')}
                 </h6>
                 <h6

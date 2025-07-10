@@ -42,7 +42,7 @@ export default function SignUp() {
   };
 
   return (
-    <div className="mt-5 flex items-center justify-center">
+    <div className="mt-6 flex items-center justify-center">
       <div className="w-96 rounded-lg bg-white p-8 shadow-md dark:bg-gray-900">
         <h2 className="mb-6 text-center text-2xl font-bold text-gray-800 dark:text-gray-200">
           {t('auth.sign_up')}
