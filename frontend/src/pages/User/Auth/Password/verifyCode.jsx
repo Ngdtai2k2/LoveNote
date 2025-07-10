@@ -17,7 +17,7 @@ export default function VerifyCode() {
   const { t } = useTranslation('form');
   const navigate = useNavigate();
 
-  useDocumentTitle(t('auth.reset_password'));
+  useDocumentTitle(t('auth.verification_code'));
 
   const initialValues = {
     code: '',
@@ -47,7 +47,7 @@ export default function VerifyCode() {
     <div className="mt-6 flex items-center justify-center pt-5">
       <div className="w-96 rounded-lg bg-white p-8 shadow-md dark:bg-gray-900">
         <h2 className="mb-6 text-center text-2xl font-bold text-gray-800 dark:text-gray-200">
-          {t('auth.reset_password')}
+          {t('auth.verification_code')}
         </h2>
         <Formik
           initialValues={initialValues}

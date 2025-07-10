@@ -29,7 +29,7 @@
     "verification_code_required": "Verification code is required",
     "verification_code_min": "Verification code must be at least {{min}} characters",
     "verification_code_max": "Verification code must not exceed {{max}} characters",
-    "forgot_password": "Forgot Password?",
+    "forgot_password": "Forgot Password",
     "sign_in_now": "Sign In Now",
     "sign_up_now": "Sign Up Now",
     "joined": "Joined",

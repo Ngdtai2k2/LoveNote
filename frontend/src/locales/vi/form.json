@@ -31,7 +31,7 @@
     "verification_code_placeholder": "Nhập mã xác thực",
     "verification_code_min": "Mã xác thực tối thiếu {{min}} kí tự",
     "verification_code_max": "Mã xác thực không vượt quá {{max}} kí tự",
-    "forgot_password": "Quên mật khẩu?",
+    "forgot_password": "Quên mật khẩu",
     "sign_in_now": "Đăng nhập ngay",
     "sign_up_now": "Đăng ký ngay",
     "joined": "Đã tham gia",

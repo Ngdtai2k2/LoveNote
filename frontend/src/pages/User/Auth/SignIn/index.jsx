@@ -91,7 +91,7 @@ export default function SignIn() {
                   onClick={() => navigate(ROUTES.AUTH.FORGOT_PASSWORD)}
                   className="cursor-pointer text-[12px] italic text-gray-800 underline hover:no-underline dark:text-gray-200"
                 >
-                  {t('auth.forgot_password')}
+                  {t('auth.forgot_password')}?
                 </h6>
                 <h6
                   onClick={() => navigate(ROUTES.AUTH.SIGN_UP)}
