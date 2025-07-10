@@ -3,6 +3,9 @@ const ROUTES = {
     SIGN_IN: '/sign-in',
     SIGN_UP: '/sign-up',
     CHANGE_PASSWORD: '/change-password',
+    FORGOT_PASSWORD: '/forgot-password',
+    VERIFY_CODE: '/verify-code',
+    RESET_PASSWORD: '/reset-password',
   },
   USER: {
     ME: '/me',

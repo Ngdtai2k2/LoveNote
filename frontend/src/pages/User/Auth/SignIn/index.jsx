@@ -81,7 +81,7 @@ export default function SignIn() {
 
               <div className="mb-5 flex justify-between px-1">
                 <h6
-                  onClick={() => navigate(ROUTES.AUTH.RESET_PASSWORD)}
+                  onClick={() => navigate(ROUTES.AUTH.FORGOT_PASSWORD)}
                   className="cursor-pointer text-[12px] italic text-gray-800 underline hover:no-underline dark:text-gray-200"
                 >
                   {t('auth.forgot_password')}

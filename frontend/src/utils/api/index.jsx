@@ -6,6 +6,9 @@ const API_ENDPOINTS = {
     REFRESH_TOKEN: '/auth/refresh-token',
     ME: '/auth/me',
     CHANGE_PASSWORD: (id) => `/auth/change-password/${id}`,
+    FORGOT_PASSWORD: '/auth/forgot-password',
+    VERIFY_CODE: '/auth/verify-code',
+    RESET_PASSWORD: '/auth/reset-password',
   },
   USER: {
     UPDATE: (id) => `/user/${id}`,

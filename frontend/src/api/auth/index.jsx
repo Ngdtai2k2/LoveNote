@@ -86,4 +86,57 @@ export const authAPI = {
       });
     }
   },
+
+  forgotPassword: async (email) => {
+    try {
+      const response = await axiosClient.post(API_ENDPOINTS.AUTH.FORGOT_PASSWORD, email);
+      toast.success(response?.data.message, {
+        position: 'top-right',
+      });
+      return response;
+    } catch (error) {
+      toast.error(error.response?.data.message, {
+        position: 'top-right',
+      });
+    }
+  },
+
+  verifyCode: async (code) => {
+    const email = sessionStorage.getItem('email');
+    try {
+      const response = await axiosClient.post(API_ENDPOINTS.AUTH.VERIFY_CODE, {
+        code: code,
+        email: email,
+      });
+      toast.success(response?.data.message, {
+        position: 'top-right',
+      });
+      return response;
+    } catch (error) {
+      toast.error(error.response?.data.message, {
+        position: 'top-right',
+      });
+    }
+  },
+
+  resetPassword: async (newPassword) => {
+    const email = sessionStorage.getItem('email');
+    const code = sessionStorage.getItem('verify_code');
+
+    try {
+      const response = await axiosClient.post(API_ENDPOINTS.AUTH.RESET_PASSWORD, {
+        code: code,
+        email: email,
+        newPassword: newPassword,
+      });
+      toast.success(response?.data.message, {
+        position: 'top-right',
+      });
+      return response;
+    } catch (error) {
+      toast.error(error.response?.data.message, {
+        position: 'top-right',
+      });
+    }
+  },
 };
