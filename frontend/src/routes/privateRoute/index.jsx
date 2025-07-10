@@ -1,6 +1,6 @@
 import ROUTES from '@constants/routes';
 import Profile from '@pages/User/Profile';
-import ChangePassword from '@pages/User/Auth/ChangePassword';
+import ChangePassword from '@pages/User/Auth/Password/ChangePassword';
 
 const privateRoutes = [
   {
