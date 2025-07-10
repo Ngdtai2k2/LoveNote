@@ -7,8 +7,11 @@ import { useDocumentTitle } from '@hooks/useDocumentTitle';
 import { useCurrentUser } from '@hooks/useCurrentUser';
 import { useAxios } from '@hooks/useAxiosJWT';
 import { authAPI } from '@api/auth';
+import { useState } from 'react';
 
 export default function ChangePassword() {
+  const [loading, setLoading] = useState(false);
+
   const { t, i18n } = useTranslation('form');
 
   useDocumentTitle(t('auth.change_password'));
@@ -36,9 +39,14 @@ export default function ChangePassword() {
   });
 
   const onSubmit = async (values, { resetForm }) => {
-    const res = await authAPI.changePassword(axiosJWT, user?.id, values);
-    if (res?.status === 200) {
-      resetForm();
+    setLoading(true);
+    try {
+      const res = await authAPI.changePassword(axiosJWT, user?.id, values);
+      if (res?.status === 200) {
+        resetForm();
+      }
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -102,12 +110,14 @@ export default function ChangePassword() {
               </div>
               <div className="flex justify-center">
                 <button
+                  disabled={loading}
                   type="submit"
-                  className="w-full rounded bg-gray-600 py-2 text-white transition duration-200 hover:bg-gray-800 
-                focus:bg-gray-800 active:bg-gray-800 dark:bg-gray-600 dark:hover:bg-gray-800 dark:focus:bg-gray-800 
-                dark:active:bg-gray-800"
+                  className={`w-full rounded py-2 text-white transition duration-200
+                  ${loading ? 'bg-gray-400 cursor-not-allowed' : 'bg-gray-600 hover:bg-gray-800'}
+                focus:bg-gray-800 active:bg-gray-800
+                  dark:${loading ? 'bg-gray-500' : 'bg-gray-600 hover:bg-gray-800'}`}
                 >
-                  {t('update')}
+                  {loading ? t('updating') : t('update')}
                 </button>
               </div>
             </Form>
