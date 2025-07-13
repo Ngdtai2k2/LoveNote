@@ -3,5 +3,7 @@
   "refresh_token": "Không tìm thấy token!",
   "product": "Không tìm thấy sản phẩm!",
   "banner": "Không tìm thấy banner!",
-  "data": "Không tìm thấy dữ liệu!"
+  "data": "Không tìm thấy dữ liệu!",
+  "provider": "Không tìm thấy nhà cung cấp này!",
+  "task": "Không tìm thấy nhiệm vụ này!"
 }

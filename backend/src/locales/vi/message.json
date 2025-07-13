@@ -12,5 +12,9 @@
   "verification_successful": "Xác thực thành công!",
   "reset_password_successful": "Đặt lại mật khẩu thành công!",
   "email_send_failed": "Gửi mail thất bại, vui lòng thử lại!",
-  "too_many_reset_requests": "Bạn đã gửi yêu cầu vượt quá số lần cho phép!"
+  "too_many_reset_requests": "Bạn đã gửi yêu cầu vượt quá số lần cho phép!",
+  "shortening_fail": "Có lỗi trong quá trình tạo link!",
+  "view_limit": "Đã đạt đến giới hạn xem trong ngày cho nhà cung cấp này!",
+  "task_already_completed": "Nhiệm vụ đã được hoàn thành!",
+  "completed_task": "Nhiệm vụ hoàn thành!"
 }

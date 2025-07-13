@@ -1,12 +1,15 @@
 'use strict';
 const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class shortLinkProviders extends Model {
+  class ShortLinkProviders extends Model {
     static associate(models) {
-      // define association here
+      ShortLinkProviders.hasMany(models.UserProviderLimit, {
+        foreignKey: 'provider_id',
+        as: 'user_provider',
+      });
     }
   }
-  shortLinkProviders.init(
+  ShortLinkProviders.init(
     {
       name: DataTypes.STRING,
       base_url: DataTypes.STRING,
@@ -16,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      modelName: 'shortLinkProviders',
+      modelName: 'ShortLinkProviders',
       tableName: 'short_link_providers',
       underscored: true,
       timestamps: true,
@@ -24,5 +27,5 @@ module.exports = (sequelize, DataTypes) => {
       updatedAt: 'updated_at',
     }
   );
-  return shortLinkProviders;
+  return ShortLinkProviders;
 };

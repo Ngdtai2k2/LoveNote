@@ -1,34 +1,32 @@
 'use strict';
 const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class UserProviderLimit extends Model {
+  class Wallet extends Model {
     static associate(models) {
-      UserProviderLimit.belongsTo(models.User, {
+      Wallet.belongsTo(models.User, {
         foreignKey: 'user_id',
         as: 'user',
         onDelete: 'CASCADE',
       });
     }
   }
-  UserProviderLimit.init(
+  Wallet.init(
     {
       user_id: {
         type: DataTypes.STRING(10),
         allowNull: false,
       },
-      provider_id: DataTypes.INTEGER,
-      views_today: DataTypes.INTEGER,
-      last_reset_date: DataTypes.DATE,
+      token_balance: DataTypes.DECIMAL,
     },
     {
       sequelize,
-      modelName: 'UserProviderLimit',
-      tableName: 'user_provider_limits',
+      modelName: 'Wallet',
+      tableName: 'wallets',
       underscored: true,
-      timestamps: true,
+      timestamps: false,
       createdAt: 'created_at',
       updatedAt: 'updated_at',
     }
   );
-  return UserProviderLimit;
+  return Wallet;
 };

@@ -8,6 +8,8 @@ const bannerRoutes = require('./banner');
 const webConfigRoutes = require('./webConfig');
 const userSitesRoutes = require('./userSites');
 const contactRoutes = require('./contact');
+const taskRoutes = require('./task');
+const shortLinkProviderRoute = require('./shortLinkProvider');
 
 router.use('/auth', authRoutes);
 router.use('/user', userRoutes);
@@ -16,5 +18,7 @@ router.use('/banner', bannerRoutes);
 router.use('/web-config', webConfigRoutes);
 router.use('/site', userSitesRoutes);
 router.use('/contact', contactRoutes);
+router.use('/task', taskRoutes);
+router.use('/shortener-provider', shortLinkProviderRoute);
 
 module.exports = router;
