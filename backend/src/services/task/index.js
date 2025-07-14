@@ -60,7 +60,7 @@ const taskService = {
     const shortLink = await createShortLink(
       provider.base_url,
       provider.api_key,
-      `https://lovenote.vercel.app/verify-token/${token}`
+      `${process.env.CORS_ORIGIN}/verify-token/${token}`
     );
 
     await Task.create(
