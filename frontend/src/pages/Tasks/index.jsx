@@ -57,10 +57,17 @@ export default function Tasks() {
             >
               <div className="flex items-center">
                 <div className="flex flex-col justify-center">
-                  <span className="text-[16px] font-bold py-0 my-0 leading-tight">
-                    {provider?.name}
-                  </span>
-                  <div className="py-1.5 flex items-center font-thin text-gray-400 text-[13px] italic">
+                  <Typography variant="h6" className="py-0 my-0 flex gap-3">
+                    <span className="text-[18px] font-bold ">{provider?.name}</span>
+                  </Typography>
+                  <div className="flex gap-2 font-thin text-[12px] items-center">
+                    <span>{t('tasks:views')}:</span>
+                    <span>
+                      {provider?.user_provider?.views_today || provider.view_limit_per_day}/
+                      {provider.view_limit_per_day}
+                    </span>
+                  </div>
+                  <div className="flex items-center font-thin text-gray-400 text-[12px]">
                     <span>Token: {provider?.price}</span>
                     <CurrencyDollarIcon className="size-4" />
                   </div>
