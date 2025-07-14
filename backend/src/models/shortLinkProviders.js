@@ -3,7 +3,7 @@ const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class ShortLinkProviders extends Model {
     static associate(models) {
-      ShortLinkProviders.hasMany(models.UserProviderLimit, {
+      ShortLinkProviders.hasOne(models.UserProviderLimit, {
         foreignKey: 'provider_id',
         as: 'user_provider',
       });

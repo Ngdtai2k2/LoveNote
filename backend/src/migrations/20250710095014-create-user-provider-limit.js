@@ -17,6 +17,9 @@ module.exports = {
       },
       provider_id: {
         type: Sequelize.INTEGER,
+        allowNull: false,
+        references: { model: 'short_link_providers', key: 'id' },
+        onDelete: 'CASCADE',
       },
       views_today: {
         type: Sequelize.INTEGER,

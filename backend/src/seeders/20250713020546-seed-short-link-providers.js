@@ -9,7 +9,7 @@ module.exports = {
         base_url:
           'https://api.1short.io/public/links?token={api_key}&url={link}&method_level=level_3_plus',
         api_key: '',
-        view_limit_per_day: 0,
+        view_limit_per_day: 1,
         price: 0,
         created_at: new Date(),
         updated_at: new Date(),
