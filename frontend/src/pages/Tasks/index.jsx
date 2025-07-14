@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { Alert, Typography } from '@material-tailwind/react';
+import { Alert, Typography, Spinner } from '@material-tailwind/react';
 import { ArrowTopRightOnSquareIcon, CurrencyDollarIcon } from '@heroicons/react/24/outline';
 
 import { shortenerProviderAPI } from '@api/shortenerProvider';
@@ -11,6 +11,7 @@ import { taskAPI } from '@api/task';
 
 export default function Tasks() {
   const [providers, setProviders] = useState([]);
+  const [loadingProviderId, setLoadingProviderId] = useState(null);
 
   const { t, i18n } = useTranslation(['navbar', 'tasks']);
 
@@ -29,10 +30,17 @@ export default function Tasks() {
   }, []);
 
   const handleCreateShortLink = async (providerId) => {
-    const res = await taskAPI.createShortLinks(axiosJWT, providerId);
+    setLoadingProviderId(providerId);
 
-    if (res?.data?.url) {
-      window.location.href = res.data.url;
+    try {
+      const res = await taskAPI.createShortLinks(axiosJWT, providerId);
+      if (res?.data?.url) {
+        window.location.href = res.data.url;
+      }
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoadingProviderId(null);
     }
   };
 
@@ -48,6 +56,7 @@ export default function Tasks() {
       <Alert variant="outlined" className="mb-2 text-gray-900 dark:text-gray-200 border-gray-200">
         {t('tasks:note')}
       </Alert>
+
       <div className="mt-5">
         <ul className="grid grid-cols-1 md:grid-cols-2 gap-2 border-1">
           {providers?.map((provider) => (
@@ -76,10 +85,17 @@ export default function Tasks() {
               <div className="flex justify-end">
                 <button
                   onClick={() => handleCreateShortLink(provider.id)}
-                  className="flex items-center text-sm w-20 gap-1 rounded text-[16px] text-white bg-green-400 hover:bg-green-500 py-1 px-2"
+                  disabled={loadingProviderId === provider.id}
+                  className="flex items-center justify-center text-sm w-20 gap-1 rounded text-[16px] text-white bg-green-400 hover:bg-green-500 py-1 px-2 disabled:opacity-50"
                 >
-                  <ArrowTopRightOnSquareIcon className="size-5" />
-                  <span>{t('tasks:go_to')}</span>
+                  {loadingProviderId === provider.id ? (
+                    <Spinner className="h-4 w-4" />
+                  ) : (
+                    <>
+                      <ArrowTopRightOnSquareIcon className="size-5" />
+                      <span>{t('tasks:go_to')}</span>
+                    </>
+                  )}
                 </button>
               </div>
             </li>
