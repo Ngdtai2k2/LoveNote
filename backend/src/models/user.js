@@ -39,6 +39,19 @@ module.exports = (sequelize, DataTypes) => {
       timestamps: true,
       createdAt: 'created_at',
       updatedAt: 'updated_at',
+      hooks: {
+        async afterCreate(user, options) {
+          const { Wallet } = sequelize.models;
+
+          await Wallet.create(
+            {
+              user_id: user.id,
+              token_balance: 0,
+            },
+            { transaction: options.transaction }
+          );
+        },
+      },
     }
   );
   return User;

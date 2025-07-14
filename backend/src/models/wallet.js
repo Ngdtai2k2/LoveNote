@@ -23,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
       modelName: 'Wallet',
       tableName: 'wallets',
       underscored: true,
-      timestamps: false,
+      timestamps: true,
       createdAt: 'created_at',
       updatedAt: 'updated_at',
     }
