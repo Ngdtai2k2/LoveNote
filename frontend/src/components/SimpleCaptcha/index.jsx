@@ -27,9 +27,10 @@ export default function SimpleCaptcha({ onCaptchaMatched }) {
       document.getElementById('user_captcha_input').value = '';
     }
   };
+
   return (
     <div className="flex flex-col justify-center items-center gap-1">
-      <div className="mt-3">
+      <div className="mt-3 dark:text-gray-200 text-gray-900">
         <LoadCanvasTemplate reloadColor="inherit" reloadText="Reload" />
       </div>
       <div className="flex flex-col">
@@ -46,12 +47,12 @@ export default function SimpleCaptcha({ onCaptchaMatched }) {
         hover:border-green-500 cursor-pointer text-white"
             onClick={doSubmit}
           >
-            Submit
+            {t('confirm')}
           </button>
         </div>
 
         {errorMessage && (
-          <p className="text-red-600 text-sm italic py-1">{t('validation:incorrect_captcha')}</p>
+          <p className="text-red-600 text-sm italic py-1">{t('captcha.incorrect_captcha')}</p>
         )}
       </div>
     </div>

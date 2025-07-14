@@ -40,6 +40,12 @@
     "phone_number_validate": "Số điện thoại phải có 10 hoặc 11 chữ số",
     "reset_password": "Lấy lại mật khẩu"
   },
+  "captcha": {
+    "value": "Giá trị",
+    "placeholder": "Nhập mã captcha",
+    "required": "Mã captcha là bắt buộc",
+    "incorrect_captcha": "Mã captcha không chính xác"
+  },
   "message": "Tin nhắn",
   "message_placeholder": "Nhập tin nhắn của bạn",
   "message_required": "Tin nhắn là bắt buộc",
@@ -55,5 +61,7 @@
   "cancelling": "Đang hủy...",
   "update_profile": "Cập nhập thông tin",
   "click_to_upload": "Click để tải lên",
-  "clear_file": "Xóa file"
+  "clear_file": "Xóa file",
+  "confirm": "Xác nhận",
+  "confirming": "Đang xác nhận..."
 }

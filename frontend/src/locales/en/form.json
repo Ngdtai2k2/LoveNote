@@ -38,6 +38,12 @@
     "phone_number_validate": "Phone number must be 10 or 11 digits",
     "reset_password": "Reset password"
   },
+  "captcha": {
+    "value": "Value",
+    "placeholder": "Enter the captcha",
+    "required": "Captcha is required",
+    "incorrect_captcha": "Incorrect captcha"
+  },
   "message": "Message",
   "message_placeholder": "Enter your message",
   "message_required": "Message is required",
@@ -53,5 +59,7 @@
   "cancelling": "Cancelling...",
   "update_profile": "Update profile",
   "click_to_upload": "Click to upload",
-  "clear_file": "Clear file"
+  "clear_file": "Clear file",
+  "confirm": "Confirm",
+  "confirming": "Confirming..."
 }
