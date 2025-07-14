@@ -13,12 +13,18 @@ import {
   MenuItem,
   Avatar,
 } from '@material-tailwind/react';
-import { ChevronDownIcon, ArrowRightEndOnRectangleIcon, PlusIcon } from '@heroicons/react/24/solid';
+import {
+  ChevronDownIcon,
+  ArrowRightEndOnRectangleIcon,
+  PlusIcon,
+  CurrencyDollarIcon,
+} from '@heroicons/react/24/solid';
 
 import { profileMenu } from '@constants/navigation';
 import { useCurrentUser } from '@hooks/useCurrentUser';
 import { useAxios } from '@hooks/useAxiosJWT';
 import { authAPI } from '@api/auth';
+
 import ROUTES from '@constants/routes';
 import CONSTANTS from '@constants';
 
@@ -82,34 +88,42 @@ export function ProfileMenu() {
 
       <MenuList className="bg-white p-1 dark:border-gray-700 dark:bg-gray-900">
         {user ? (
-          profileMenu.map(({ label, icon, href }, key) => (
-            <MenuItem
-              key={key}
-              onClick={() => {
-                setIsMenuOpen(false);
-                if (key === profileMenu.length - 1) {
-                  dispatch(authAPI.signOut(axiosJWT, navigate));
-                }
-              }}
-              className="flex items-center gap-2 rounded hover:bg-gray-300 
+          <>
+            <MenuItem>
+              <div className="flex items-center dark:text-gray-200 text-gray-900 border rounded p-1">
+                <span>Token: {user?.wallet?.token_balance}</span>
+                <CurrencyDollarIcon className="w-4 h-4" />
+              </div>
+            </MenuItem>
+            {profileMenu.map(({ label, icon, href }, key) => (
+              <MenuItem
+                key={key}
+                onClick={() => {
+                  setIsMenuOpen(false);
+                  if (key === profileMenu.length - 1) {
+                    dispatch(authAPI.signOut(axiosJWT, navigate));
+                  }
+                }}
+                className="flex items-center gap-2 rounded hover:bg-gray-300 
             focus:bg-gray-300 active:bg-gray-300 dark:hover:bg-gray-700 
             dark:focus:bg-gray-700 dark:active:bg-gray-700"
-            >
-              {createElement(icon, {
-                className: 'h-4 w-4 text-gray-800 dark:text-gray-200',
-                strokeWidth: 2,
-              })}
-              <Link to={href}>
-                <Typography
-                  as="span"
-                  variant="small"
-                  className="font-normal text-gray-800 dark:text-gray-200"
-                >
-                  {t(label)}
-                </Typography>
-              </Link>
-            </MenuItem>
-          ))
+              >
+                {createElement(icon, {
+                  className: 'h-4 w-4 text-gray-800 dark:text-gray-200',
+                  strokeWidth: 2,
+                })}
+                <Link to={href}>
+                  <Typography
+                    as="span"
+                    variant="small"
+                    className="font-normal text-gray-800 dark:text-gray-200"
+                  >
+                    {t(label)}
+                  </Typography>
+                </Link>
+              </MenuItem>
+            ))}
+          </>
         ) : (
           <div>
             {renderMenuItem('login', ArrowRightEndOnRectangleIcon, ROUTES.AUTH.SIGN_IN)}
