@@ -5,7 +5,7 @@ const taskController = {
     try {
       const { url, code } = await taskService.createShortLinks(req);
 
-      return res.status(code).json(url);
+      return res.status(code).json({ url });
     } catch (error) {
       handleError(res, req, error);
     }
