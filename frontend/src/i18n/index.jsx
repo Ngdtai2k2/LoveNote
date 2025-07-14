@@ -31,6 +31,9 @@ import ABOUT_EN from '@locales/en/about.json';
 import CONTACT_VI from '@locales/vi/contact.json';
 import CONTACT_EN from '@locales/en/contact.json';
 
+import TASKS_VI from '@locales/vi/tasks.json';
+import TASKS_EN from '@locales/en/tasks.json';
+
 const resources = {
   vi: {
     navbar: NAVBAR_VI,
@@ -43,6 +46,7 @@ const resources = {
     profile: PROFILE_VI,
     about: ABOUT_VI,
     contact: CONTACT_VI,
+    tasks: TASKS_VI,
   },
   en: {
     navbar: NAVBAR_EN,
@@ -55,6 +59,7 @@ const resources = {
     profile: PROFILE_EN,
     about: ABOUT_EN,
     contact: CONTACT_EN,
+    tasks: TASKS_EN,
   },
 };
 

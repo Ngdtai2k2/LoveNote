@@ -10,5 +10,7 @@
   "help": "Help",
   "my_website": "My Website",
   "my_order": "My Order",
-  "change_password": "Change password"
+  "change_password": "Change password",
+  "tasks": "Tasks",
+  "verify_token": "Verify token"
 }

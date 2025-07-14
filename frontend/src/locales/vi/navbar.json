@@ -10,5 +10,7 @@
   "help": "Trợ giúp",
   "my_website": "Website của tôi",
   "my_order": "Đơn hàng",
-  "change_password": "Đổi mật khẩu"
+  "change_password": "Đổi mật khẩu",
+  "tasks": "Nhiệm vụ",
+  "verify_token": "Xác minh token"
 }

@@ -32,6 +32,14 @@ const API_ENDPOINTS = {
   CONTACT: {
     CREATE: '/contact',
   },
+  TASK: {
+    CREATE: '/task',
+    VERIFY_TOKEN: (token) => `/task/verify/${token}`,
+    CHECK_TOKEN: (token) => `/task/check/${token}`,
+  },
+  SHORTENER_PROVIDER: {
+    GET_BY_USER: '/shortener-provider/me',
+  },
 };
 
 export default API_ENDPOINTS;

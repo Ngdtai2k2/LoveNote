@@ -14,6 +14,8 @@ const ROUTES = {
     DASHBOARD: '/admin/dashboard',
     USERS: '/admin/users',
   },
+  TASKS: '/tasks',
+  VERIFY_TOKEN_TASK: '/verify-token/:token',
   HOME: '/',
   CONTACTS: '/contacts',
   ABOUT: '/about-me',
