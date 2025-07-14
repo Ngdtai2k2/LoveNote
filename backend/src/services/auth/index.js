@@ -4,7 +4,7 @@ const { v4: uuidv4 } = require('uuid');
 const crypto = require('crypto');
 
 const jwtService = require('@services/jwt');
-const { User, PasswordResetCode } = require('@models');
+const { User, PasswordResetCode, Wallet } = require('@models');
 const emailTemplates = require('@config/emailTemplates');
 
 const transporter = require('@config/mailTransporter');
@@ -59,6 +59,13 @@ const authService = {
     const userData = await User.findOne({
       where: { id: user.id },
       attributes: { exclude: ['password'] },
+      include: [
+        {
+          model: Wallet,
+          as: 'wallet',
+          attributes: ['token_balance'],
+        },
+      ],
     });
 
     if (!userData) {

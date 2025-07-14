@@ -5,7 +5,13 @@ const ShortUniqueId = require('short-unique-id');
 module.exports = (sequelize, DataTypes) => {
   const uid = new ShortUniqueId({ length: 10 });
   class User extends Model {
-    static associate() {}
+    static associate(models) {
+      User.hasOne(models.Wallet, {
+        foreignKey: 'user_id',
+        as: 'wallet',
+        onDelete: 'CASCADE',
+      });
+    }
   }
   User.init(
     {
