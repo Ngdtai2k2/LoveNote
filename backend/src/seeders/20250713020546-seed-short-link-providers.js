@@ -25,7 +25,7 @@ module.exports = {
       },
       {
         name: 'link2m',
-        base_url: 'https://link2m.net/st?api={api_key}&url={link}',
+        base_url: 'https://link2m.net/api-shorten/v2?api={api_key}&url={link}',
         api_key: process.env.LINK_2M_KEY,
         view_limit_per_day: 2,
         price: 10,
@@ -36,8 +36,6 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.bulkDelete('short_link_providers', {
-      name: '1short',
-    });
+    await queryInterface.bulkDelete('short_link_providers', null, {});
   },
 };

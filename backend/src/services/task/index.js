@@ -60,13 +60,13 @@ const taskService = {
     const shortLink = await createShortLink(
       provider.base_url,
       provider.api_key,
-      `${process.env.CORS_ORIGIN}/verify-token/${token}`
+      `https:/test.com/verify-token/${token}`
     );
 
     await Task.create(
       {
         user_id: user.id,
-        provider_id: provider.id,
+        provider_id: providerId,
         verify_token: token,
         short_link: shortLink,
         earned: provider.price,

@@ -18,7 +18,7 @@ module.exports = {
       provider_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        references: { model: 'user_provider_limits', key: 'id' },
+        references: { model: 'short_link_providers', key: 'id' },
         onDelete: 'CASCADE',
       },
       short_link: {
