@@ -7,6 +7,7 @@ const axios = require('axios');
  * @param {string} urlToShorten - Long URL to shorten
  * @returns {Promise<string>} - Shortened URL
  */
+
 const createShortLink = async (apiUrl, apiKey, urlToShorten) => {
   if (!urlToShorten) {
     throw {
@@ -49,7 +50,7 @@ const createShortLink = async (apiUrl, apiKey, urlToShorten) => {
     return result.shortenedUrl;
   } catch (err) {
     throw {
-      code: err.code || 500,
+      code: 500,
       messageKey: 'message:server_error',
     };
   }

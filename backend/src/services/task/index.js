@@ -18,7 +18,7 @@ const taskService = {
   createShortLinks: async (req) => {
     const transaction = await sequelize.transaction();
 
-    const { provider_id } = req.body;
+    const { providerId } = req.body;
     const userId = req.user.id;
 
     const token = uid.stamp(32);
@@ -33,7 +33,7 @@ const taskService = {
       };
     }
 
-    const provider = await ShortLinkProviders.findByPk(provider_id, {
+    const provider = await ShortLinkProviders.findByPk(providerId, {
       transaction,
     });
 
@@ -45,28 +45,22 @@ const taskService = {
       };
     }
 
-    const userProviderLimitData = await userProviderLimitService.create(
-      req,
-      res,
-      {
-        transaction,
-      }
-    );
+    const userProviderLimitData = await userProviderLimitService.create(req, {
+      transaction,
+    });
 
     if (userProviderLimitData.views_today <= 0) {
       await transaction.rollback();
       throw {
         code: 403,
-        messageKey: 'provider:view_limit',
+        messageKey: 'message:view_limit',
       };
     }
 
     const shortLink = await createShortLink(
-      req,
-      res,
       provider.base_url,
       provider.api_key,
-      `${process.env.CORS_ORIGIN}/verify-token/${token}`
+      `https://lovenote.vercel.app/verify-token/${token}`
     );
 
     await Task.create(
