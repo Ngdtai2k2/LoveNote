@@ -88,8 +88,8 @@ export function ProfileMenu() {
 
       <MenuList className="bg-white p-1 dark:border-gray-700 dark:bg-gray-900">
         {user ? (
-          <>
-            <MenuItem>
+          <div>
+            <MenuItem key={user.id}>
               <div className="flex items-center dark:text-gray-200 text-gray-900 border rounded p-1">
                 <span>
                   Token: {Number(user?.wallet?.token_balance || 0).toLocaleString('vi-VN')}
@@ -126,7 +126,7 @@ export function ProfileMenu() {
                 </Link>
               </MenuItem>
             ))}
-          </>
+          </div>
         ) : (
           <div>
             {renderMenuItem('login', ArrowRightEndOnRectangleIcon, ROUTES.AUTH.SIGN_IN)}
