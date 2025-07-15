@@ -37,8 +37,6 @@ export default function Tasks() {
       if (res?.data?.url) {
         window.location.href = res.data.url;
       }
-    } catch (error) {
-      console.error(error);
     } finally {
       setLoadingProviderId(null);
     }
