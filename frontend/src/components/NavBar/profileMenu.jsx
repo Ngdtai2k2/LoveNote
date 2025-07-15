@@ -91,7 +91,10 @@ export function ProfileMenu() {
           <>
             <MenuItem>
               <div className="flex items-center dark:text-gray-200 text-gray-900 border rounded p-1">
-                <span>Token: {user?.wallet?.token_balance}</span>
+                <span>
+                  Token: {Number(user?.wallet?.token_balance || 0).toLocaleString('vi-VN')}
+                </span>
+
                 <CurrencyDollarIcon className="w-4 h-4" />
               </div>
             </MenuItem>
