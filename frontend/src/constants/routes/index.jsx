@@ -16,6 +16,7 @@ const ROUTES = {
   },
   TASKS: '/tasks',
   VERIFY_TOKEN_TASK: '/verify-token/:token',
+  REWARD: '/reward',
   HOME: '/',
   CONTACTS: '/contacts',
   ABOUT: '/about-me',

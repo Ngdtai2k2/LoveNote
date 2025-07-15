@@ -12,5 +12,6 @@
   "my_order": "Đơn hàng",
   "change_password": "Đổi mật khẩu",
   "tasks": "Nhiệm vụ",
-  "verify_token": "Xác minh token"
+  "verify_token": "Xác minh token",
+  "reward": "Đổi thưởng"
 }

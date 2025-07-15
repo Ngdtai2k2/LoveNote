@@ -11,6 +11,7 @@ import ROUTES from '../routes';
 export const navbar = [
   { label: 'home', href: ROUTES.HOME },
   { label: 'tasks', href: ROUTES.TASKS },
+  { label: 'reward', href: ROUTES.REWARD },
   { label: 'about', href: ROUTES.ABOUT },
   { label: 'contact', href: ROUTES.CONTACTS },
 ];

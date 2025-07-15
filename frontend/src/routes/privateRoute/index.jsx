@@ -3,6 +3,7 @@ import Profile from '@pages/User/Profile';
 import ChangePassword from '@pages/User/Auth/Password/ChangePassword';
 import VerifyTokenTask from '@pages/Tasks/verifyToken';
 import Tasks from '@pages/Tasks';
+import Reward from '@pages/Reward';
 
 const privateRoutes = [
   {
@@ -25,6 +26,11 @@ const privateRoutes = [
     element: <VerifyTokenTask />,
     isPrivate: true,
     hideLayout: true,
+  },
+  {
+    path: ROUTES.REWARD,
+    element: <Reward />,
+    isPrivate: true,
   },
 ];
 

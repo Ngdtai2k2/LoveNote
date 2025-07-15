@@ -1,13 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
 
 import { Alert, Typography, Spinner } from '@material-tailwind/react';
 import { ArrowTopRightOnSquareIcon, CurrencyDollarIcon } from '@heroicons/react/24/outline';
 
 import { shortenerProviderAPI } from '@api/shortenerProvider';
 import { useDocumentTitle } from '@hooks/useDocumentTitle';
+import { useCurrentUser } from '@hooks/useCurrentUser';
 import { useAxios } from '@hooks/useAxiosJWT';
 import { taskAPI } from '@api/task';
+
+import ROUTES from '@constants/routes';
 
 export default function Tasks() {
   const [providers, setProviders] = useState([]);
@@ -18,6 +22,7 @@ export default function Tasks() {
   useDocumentTitle(t('navbar:tasks'));
 
   const { axiosJWT } = useAxios(i18n.language);
+  const user = useCurrentUser();
 
   const getShortenerProviderByUser = async () => {
     const res = await shortenerProviderAPI.getShortenerProviderByUser(axiosJWT);
@@ -43,7 +48,7 @@ export default function Tasks() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto py-10">
+    <div className="max-w-4xl mx-auto py-8">
       <Typography
         variant="h1"
         className="text-3xl font-bold mb-3 text-center text-gray-900 dark:text-gray-200"
@@ -54,6 +59,24 @@ export default function Tasks() {
       <Alert variant="outlined" className="mb-2 text-gray-900 dark:text-gray-200 border-gray-200">
         {t('tasks:note')}
       </Alert>
+      <div className="flex gap-2">
+        <Alert
+          variant="outlined"
+          className="mb-2 gap-1 text-gray-900 dark:text-gray-200 border-gray-200"
+        >
+          <span className="flex items-center">
+            Token: {Number(user?.wallet?.token_balance || 0).toLocaleString('vi-VN')}
+            <CurrencyDollarIcon className="size-4 text-yellow-400" />
+          </span>
+        </Alert>
+        <Alert variant="outlined" className="mb-2 text-gray-900 dark:text-gray-200 border-gray-200">
+          {t('navbar:reward')}:
+          <Link to={ROUTES.REWARD}>
+            <span className="ml-1">👉</span>
+            <span className="italic hover:underline">Here</span>
+          </Link>
+        </Alert>
+      </div>
 
       <div className="mt-5">
         <ul className="grid grid-cols-1 md:grid-cols-2 gap-2 border-1">
@@ -76,7 +99,7 @@ export default function Tasks() {
                   </div>
                   <div className="flex items-center font-thin text-gray-400 text-[12px]">
                     <span>Token: {provider?.price}</span>
-                    <CurrencyDollarIcon className="size-4" />
+                    <CurrencyDollarIcon className="size-4 text-yellow-500" />
                   </div>
                 </div>
               </div>
