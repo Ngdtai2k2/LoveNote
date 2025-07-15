@@ -13,5 +13,7 @@
   "change_password": "Đổi mật khẩu",
   "tasks": "Nhiệm vụ",
   "verify_token": "Xác minh token",
-  "reward": "Đổi thưởng"
+  "reward": "Đổi thưởng",
+  "redeem_voucher": "Đổi voucher",
+  "voucher_redeemed": "Voucher đã đổi"
 }

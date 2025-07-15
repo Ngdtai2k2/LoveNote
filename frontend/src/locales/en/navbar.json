@@ -13,5 +13,7 @@
   "change_password": "Change password",
   "tasks": "Tasks",
   "verify_token": "Verify token",
-  "reward": "Reward"
+  "reward": "Reward",
+  "redeem_voucher": "Redeem voucher",
+  "voucher_redeemed": "Voucher redeemed"
 }
