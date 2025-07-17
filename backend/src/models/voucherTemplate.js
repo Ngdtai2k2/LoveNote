@@ -30,7 +30,7 @@ module.exports = (sequelize, DataTypes) => {
     {
       sequelize,
       modelName: 'VoucherTemplate',
-      tableName: 'voucher_template',
+      tableName: 'voucher_templates',
       underscored: true,
       timestamps: true,
       createdAt: 'created_at',
