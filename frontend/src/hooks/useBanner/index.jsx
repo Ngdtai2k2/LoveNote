@@ -1,27 +1,52 @@
-import { useCallback } from 'react';
+import { useCallback, useEffect, useState, useRef } from 'react';
 import { bannerAPI } from '@api/banner';
-import useCachedApi from '@hooks/useCachedApi';
 
 const useBanner = () => {
-  const fetchBanners = useCallback(() => {
-    return bannerAPI
-      .getAll(true)
-      .then((res) => {
-        if (res && res.data) return res.data;
-      })
-      .catch(() => {
-        return [];
-      });
+  const [banners, setBanners] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const retryTimeoutRef = useRef(null);
+
+  const fetchBanners = useCallback(async () => {
+    setLoading(true);
+    try {
+      const res = await bannerAPI.getAll(true);
+      if (res && Array.isArray(res.data)) {
+        setBanners(res.data);
+        if (res.data.length === 0) {
+          retryTimeoutRef.current = setTimeout(
+            () => {
+              fetchBanners();
+            },
+            5000 + Math.random() * 5000
+          );
+        } else {
+          setLoading(false);
+        }
+        return;
+      }
+      throw new Error('Invalid data');
+    } catch {
+      retryTimeoutRef.current = setTimeout(
+        () => {
+          fetchBanners();
+        },
+        5000 + Math.random() * 5000
+      );
+    }
   }, []);
 
-  const { data: banners, loading } = useCachedApi({
-    cacheKey: 'banners',
-    ttl: 5 * 60 * 1000,
-    fetcher: fetchBanners,
-  });
+  useEffect(() => {
+    fetchBanners();
+
+    return () => {
+      if (retryTimeoutRef.current) {
+        clearTimeout(retryTimeoutRef.current);
+      }
+    };
+  }, [fetchBanners]);
 
   return {
-    banners: Array.isArray(banners) ? banners : [],
+    banners,
     loading,
   };
 };

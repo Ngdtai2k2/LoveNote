@@ -1,27 +1,52 @@
-import { useCallback } from 'react';
+import { useCallback, useEffect, useState, useRef } from 'react';
 import { webConfigAPI } from '@api/webConfig';
-import useCachedApi from '@hooks/useCachedApi';
 
 const useWebConfig = () => {
-  const fetcher = useCallback(() => {
-    return webConfigAPI
-      .getAll(true)
-      .then((res) => {
-        if (res && res.data) return res.data;
-      })
-      .catch(() => {
-        return [];
-      });
+  const [webConfigs, setWebConfigs] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const retryTimeoutRef = useRef(null);
+
+  const fetchWebConfigs = useCallback(async () => {
+    setLoading(true);
+    try {
+      const res = await webConfigAPI.getAll(true);
+      if (res && Array.isArray(res.data)) {
+        setWebConfigs(res.data);
+        if (res.data.length === 0) {
+          retryTimeoutRef.current = setTimeout(
+            () => {
+              fetchWebConfigs();
+            },
+            5000 + Math.random() * 5000
+          );
+        } else {
+          setLoading(false);
+        }
+        return;
+      }
+      throw new Error('Invalid data');
+    } catch {
+      retryTimeoutRef.current = setTimeout(
+        () => {
+          fetchWebConfigs();
+        },
+        5000 + Math.random() * 5000
+      );
+    }
   }, []);
 
-  const { data: webConfigs, loading } = useCachedApi({
-    cacheKey: 'web_configs',
-    ttl: 10 * 60 * 1000,
-    fetcher,
-  });
+  useEffect(() => {
+    fetchWebConfigs();
+
+    return () => {
+      if (retryTimeoutRef.current) {
+        clearTimeout(retryTimeoutRef.current);
+      }
+    };
+  }, [fetchWebConfigs]);
 
   return {
-    webConfigs: Array.isArray(webConfigs) ? webConfigs : [],
+    webConfigs,
     loading,
   };
 };
