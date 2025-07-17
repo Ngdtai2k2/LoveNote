@@ -28,7 +28,7 @@ module.exports = (sequelize, DataTypes) => {
     {
       sequelize,
       modelName: 'UserVoucherRedemption',
-      tableName: 'user_voucher_redemption',
+      tableName: 'user_voucher_redemptions',
       underscored: true,
       timestamps: true,
       createdAt: 'created_at',

@@ -40,6 +40,10 @@ const API_ENDPOINTS = {
   SHORTENER_PROVIDER: {
     GET_BY_USER: '/shortener-provider/me',
   },
+  VOUCHERS: {
+    GET_TEMPLATE: (type) => `/voucher/template${type ? `?type=${type}` : ''}`,
+    REDEEM: '/voucher/redeem',
+  },
 };
 
 export default API_ENDPOINTS;

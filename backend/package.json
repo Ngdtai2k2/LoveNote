@@ -51,7 +51,8 @@
     "@middlewares": "src/middlewares",
     "@helpers": "src/helpers",
     "@utils": "src/utils",
-    "@services": "src/services"
+    "@services": "src/services",
+    "@constants": "src/constants"
   },
   "devDependencies": {
     "cross-env": "^7.0.3",

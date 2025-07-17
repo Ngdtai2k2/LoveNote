@@ -17,7 +17,8 @@ module.exports = {
         type: Sequelize.JSON,
       },
       discount_type: {
-        type: Sequelize.STRING,
+        type: Sequelize.ENUM('percent', 'amount', 'day'),
+        allowNull: false,
       },
       discount_value: {
         type: Sequelize.INTEGER,
@@ -40,6 +41,11 @@ module.exports = {
       },
       total_redeem_limit: {
         type: Sequelize.INTEGER,
+      },
+      type: {
+        type: Sequelize.ENUM('redeemable', 'global', 'personal'),
+        allowNull: false,
+        defaultValue: 'redeemable',
       },
       created_at: {
         type: Sequelize.DATE,

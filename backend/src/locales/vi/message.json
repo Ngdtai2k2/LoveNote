@@ -16,5 +16,11 @@
   "shortening_fail": "Có lỗi trong quá trình tạo link!",
   "view_limit": "Đã đạt đến giới hạn xem trong ngày cho nhà cung cấp này!",
   "task_already_completed": "Nhiệm vụ đã được hoàn thành!",
-  "completed_task": "Nhiệm vụ hoàn thành!"
+  "completed_task": "Nhiệm vụ hoàn thành!",
+  "voucher_expired": "Voucher đã hết hạn!",
+  "voucher_not_available": "Voucher này không khả dụng!",
+  "voucher_run_out": "Voucher đã hết lượt đổi!",
+  "voucher_run_out_user": "Bạn đã hết lượt đổi voucher này!",
+  "not_enough_tokens": "Bạn không đủ token để đổi!",
+  "redeem_successful": "Đổi voucher thành công!"
 }

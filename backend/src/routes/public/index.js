@@ -10,6 +10,7 @@ const userSitesRoutes = require('./userSites');
 const contactRoutes = require('./contact');
 const taskRoutes = require('./task');
 const shortLinkProviderRoute = require('./shortLinkProvider');
+const voucherRoute = require('./voucher');
 
 router.use('/auth', authRoutes);
 router.use('/user', userRoutes);
@@ -20,5 +21,6 @@ router.use('/site', userSitesRoutes);
 router.use('/contact', contactRoutes);
 router.use('/task', taskRoutes);
 router.use('/shortener-provider', shortLinkProviderRoute);
+router.use('/voucher', voucherRoute);
 
 module.exports = router;

@@ -16,5 +16,11 @@
   "shortening_fail": "There was an error in creating the link!",
   "view_limit": "View limit reached for the day for this provider!",
   "task_already_completed": "Task already completed!",
-  "completed_task": "Completed task!"
+  "completed_task": "Completed task!",
+  "voucher_expired": "The voucher has expired!",
+  "voucher_not_available": "The voucher is not available!",
+  "voucher_run_out": "The voucher has run out of exchanges!",
+  "voucher_run_out_user": "You have run out of this voucher exchange!",
+  "not_enough_tokens": "You do not have enough tokens to exchange!",
+  "redeem_successful": "Voucher redeemed successfully!"
 }

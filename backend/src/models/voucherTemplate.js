@@ -26,6 +26,11 @@ module.exports = (sequelize, DataTypes) => {
       },
       max_usage_per_user: DataTypes.INTEGER,
       total_redeem_limit: DataTypes.INTEGER,
+      type: {
+        type: DataTypes.ENUM('redeemable', 'global', 'personal'),
+        allowNull: false,
+        defaultValue: 'redeemable',
+      },
     },
     {
       sequelize,

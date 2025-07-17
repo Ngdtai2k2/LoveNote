@@ -1,0 +1,5 @@
+const DICTIONARY_CAP = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'.split('');
+
+module.exports = {
+  DICTIONARY_CAP,
+};

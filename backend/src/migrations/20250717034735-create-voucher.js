@@ -16,27 +16,11 @@ module.exports = {
         type: Sequelize.ENUM('personal', 'global'),
         allowNull: false,
       },
-      discount_type: {
-        type: Sequelize.ENUM('percent', 'amount'),
-        allowNull: false,
-      },
-      discount_value: {
-        type: Sequelize.DECIMAL,
-      },
       max_usage: {
         type: Sequelize.INTEGER,
       },
       used_count: {
         type: Sequelize.INTEGER,
-      },
-      user_id: {
-        type: Sequelize.STRING(10),
-        allowNull: false,
-        references: { model: 'users', key: 'id' },
-        onDelete: 'CASCADE',
-      },
-      templates: {
-        type: Sequelize.JSON,
       },
       expires_at: {
         type: Sequelize.DATE,

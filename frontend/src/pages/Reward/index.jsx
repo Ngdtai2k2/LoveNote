@@ -1,33 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Typography, Tabs, TabsHeader, Tab } from '@material-tailwind/react';
-import { useDocumentTitle } from '@hooks/useDocumentTitle';
-import VoucherCard from '@components/VoucherCard';
 
-// fake data
-const availableVouchers = [
-  {
-    id: 1,
-    name: 'Giảm 50K đơn từ 300K',
-    description: 'Áp dụng cho toàn bộ sản phẩm, không giới hạn ngành hàng.',
-    tokenCost: 500,
-    code: 'VOUCHER50K',
-  },
-  {
-    id: 2,
-    name: 'Freeship toàn quốc',
-    description: 'Dành cho mọi đơn hàng từ 150K.',
-    tokenCost: 300,
-    code: 'FREESHIP150',
-  },
-  {
-    id: 3,
-    name: 'Voucher 100K Lazada',
-    description: 'Áp dụng khi mua qua ứng dụng Lazada.',
-    tokenCost: 1000,
-    code: 'LAZADA100K',
-  },
-];
+import { Typography, Tabs, TabsHeader, Tab } from '@material-tailwind/react';
+
+import { useDocumentTitle } from '@hooks/useDocumentTitle';
+import { useAxios } from '@hooks/useAxiosJWT';
+import { vouchersAPI } from '@api/vouchers';
+import VoucherCard from '@components/VoucherCard';
 
 const redeemedVouchers = [
   {
@@ -47,11 +26,29 @@ const redeemedVouchers = [
 ];
 
 export default function Reward() {
-  const { t } = useTranslation(['navbar']);
+  const [activeTab, setActiveTab] = useState('available');
+  const [voucherTemplates, setVoucherTemplate] = useState([]);
+
+  const { t, i18n } = useTranslation(['navbar']);
 
   useDocumentTitle(t('navbar:reward'));
 
-  const [activeTab, setActiveTab] = useState('available');
+  const { axiosJWT } = useAxios(i18n.language);
+
+  const getVoucherTemplate = async () => {
+    const res = await vouchersAPI.getVoucherTemplate('redeemable');
+    if (res?.status === 200) {
+      setVoucherTemplate(res.data);
+    }
+  };
+
+  useEffect(() => {
+    getVoucherTemplate();
+  }, []);
+
+  const handleRedeem = async (templateId) => {
+    await vouchersAPI.redeem(axiosJWT, templateId);
+  };
 
   const renderVoucherCard = (voucher, isRedeemed = false) => (
     <VoucherCard
@@ -59,11 +56,11 @@ export default function Reward() {
       voucher={voucher}
       isRedeemed={isRedeemed}
       isLoading={false}
-      onRedeem={() => console.log('Redeem voucher:', voucher)}
+      onRedeem={() => handleRedeem(voucher.id)}
     />
   );
 
-  const vouchersToRender = activeTab === 'available' ? availableVouchers : redeemedVouchers;
+  const vouchersToRender = activeTab === 'available' ? voucherTemplates : redeemedVouchers;
 
   return (
     <div className="max-w-6xl mx-auto py-10 px-4">
@@ -90,7 +87,7 @@ export default function Reward() {
         </TabsHeader>
       </Tabs>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
         {vouchersToRender.map((voucher) => renderVoucherCard(voucher, activeTab === 'redeemed'))}
       </div>
     </div>

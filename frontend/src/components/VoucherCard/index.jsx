@@ -11,7 +11,7 @@ import {
 import { useTranslation } from 'react-i18next';
 
 export default function VoucherCard({ voucher, isRedeemed = false, isLoading = false, onRedeem }) {
-  const { t } = useTranslation(['form', 'template']);
+  const { t, i18n } = useTranslation(['form', 'template']);
 
   const handleCopy = async (code) => {
     try {
@@ -23,7 +23,7 @@ export default function VoucherCard({ voucher, isRedeemed = false, isLoading = f
   };
 
   return (
-    <Card className="flex flex-row items-center shadow-lg overflow-hidden h-full min-h-[150px] dark:bg-gray-700">
+    <Card className="flex flex-row items-center shadow-lg overflow-hidden h-full min-h-[125px] dark:bg-gray-700">
       <div className="w-20 h-20 flex items-center justify-center bg-blue-100 rounded-full m-4 shrink-0">
         {isRedeemed ? (
           <CheckCircleIcon className="w-8 h-8 text-green-600" />
@@ -35,10 +35,10 @@ export default function VoucherCard({ voucher, isRedeemed = false, isLoading = f
       <div className="flex flex-col justify-between flex-1 h-full pr-4 py-4">
         <div>
           <Typography variant="h6" className="font-bold text-gray-900 dark:text-white mb-1">
-            {voucher.name}
+            {voucher.name[i18n.language]}
           </Typography>
           <Typography className="text-sm text-gray-700 dark:text-gray-400 line-clamp-2 mb-2">
-            {voucher.description}
+            {voucher.description[i18n.language]}
           </Typography>
 
           {isRedeemed && voucher.code && (
@@ -63,7 +63,7 @@ export default function VoucherCard({ voucher, isRedeemed = false, isLoading = f
         {!isRedeemed && (
           <div className="flex items-center justify-between mt-4 ml-1">
             <span className="flex items-center text-blue-600 font-semibold">
-              {Number(voucher.tokenCost).toLocaleString('vi-VN')}
+              {Number(voucher.redeem_token_cost).toLocaleString('vi-VN')}
               <CurrencyDollarIcon className="w-5 h-5 mr-1" />
             </span>
 
