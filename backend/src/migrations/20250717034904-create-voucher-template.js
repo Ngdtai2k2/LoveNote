@@ -3,35 +3,43 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('user_sites', {
+    await queryInterface.createTable('voucher_templates', {
       id: {
-        type: Sequelize.STRING(10),
         allowNull: false,
+        autoIncrement: true,
         primaryKey: true,
+        type: Sequelize.INTEGER,
       },
-      user_id: {
-        type: Sequelize.STRING(10),
-        allowNull: false,
-        references: { model: 'users', key: 'id' },
-        onDelete: 'CASCADE',
+      name: {
+        type: Sequelize.JSON,
       },
-      product_id: {
-        type: Sequelize.STRING(10),
-        allowNull: false,
-        references: { model: 'products', key: 'id' },
-        onDelete: 'CASCADE',
+      description: {
+        type: Sequelize.JSON,
       },
-      slug: {
+      discount_type: {
         type: Sequelize.STRING,
-        allowNull: false,
-        unique: true,
       },
-      configs: {
+      discount_value: {
+        type: Sequelize.INTEGER,
+      },
+      templates: {
         type: Sequelize.JSON,
       },
       expires_at: {
         type: Sequelize.DATE,
+      },
+      redeem_token_cost: {
+        type: Sequelize.DECIMAL,
+      },
+      site_lifespan_days: {
+        type: Sequelize.INTEGER,
         allowNull: true,
+      },
+      max_usage_per_user: {
+        type: Sequelize.INTEGER,
+      },
+      total_redeem_limit: {
+        type: Sequelize.INTEGER,
       },
       created_at: {
         type: Sequelize.DATE,
@@ -47,6 +55,6 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('user_sites');
+    await queryInterface.dropTable('voucher_templates');
   },
 };

@@ -44,6 +44,10 @@ module.exports = (sequelize, DataTypes) => {
       configs: {
         type: DataTypes.JSON,
       },
+      expires_at: {
+        type: DataTypes.DATE,
+        allowNull: true,
+      },
       created_at: {
         type: DataTypes.DATE,
         allowNull: false,

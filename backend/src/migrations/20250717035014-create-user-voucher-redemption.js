@@ -1,13 +1,13 @@
 'use strict';
-
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('user_sites', {
+    await queryInterface.createTable('user_voucher_redemptions', {
       id: {
-        type: Sequelize.STRING(10),
         allowNull: false,
+        autoIncrement: true,
         primaryKey: true,
+        type: Sequelize.INTEGER,
       },
       user_id: {
         type: Sequelize.STRING(10),
@@ -15,23 +15,11 @@ module.exports = {
         references: { model: 'users', key: 'id' },
         onDelete: 'CASCADE',
       },
-      product_id: {
-        type: Sequelize.STRING(10),
-        allowNull: false,
-        references: { model: 'products', key: 'id' },
-        onDelete: 'CASCADE',
+      voucher_id: {
+        type: Sequelize.INTEGER,
       },
-      slug: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        unique: true,
-      },
-      configs: {
-        type: Sequelize.JSON,
-      },
-      expires_at: {
-        type: Sequelize.DATE,
-        allowNull: true,
+      voucher_template_id: {
+        type: Sequelize.INTEGER,
       },
       created_at: {
         type: Sequelize.DATE,
@@ -45,8 +33,7 @@ module.exports = {
       },
     });
   },
-
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('user_sites');
+    await queryInterface.dropTable('user_voucher_redemptions');
   },
 };

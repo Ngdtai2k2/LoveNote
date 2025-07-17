@@ -11,6 +11,18 @@ module.exports = (sequelize, DataTypes) => {
         as: 'wallet',
         onDelete: 'CASCADE',
       });
+
+      User.hasMany(models.Voucher, {
+        foreignKey: 'user_id',
+        as: 'vouchers',
+        onDelete: 'SET NULL',
+      });
+
+      User.hasMany(models.UserVoucherRedemption, {
+        foreignKey: 'user_id',
+        as: 'voucher_redemptions',
+        onDelete: 'CASCADE',
+      });
     }
   }
   User.init(

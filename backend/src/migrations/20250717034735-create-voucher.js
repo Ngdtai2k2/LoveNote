@@ -1,13 +1,33 @@
 'use strict';
-
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('user_sites', {
+    await queryInterface.createTable('vouchers', {
       id: {
-        type: Sequelize.STRING(10),
         allowNull: false,
+        autoIncrement: true,
         primaryKey: true,
+        type: Sequelize.INTEGER,
+      },
+      code: {
+        type: Sequelize.STRING,
+      },
+      type: {
+        type: Sequelize.ENUM('personal', 'global'),
+        allowNull: false,
+      },
+      discount_type: {
+        type: Sequelize.ENUM('percent', 'amount'),
+        allowNull: false,
+      },
+      discount_value: {
+        type: Sequelize.DECIMAL,
+      },
+      max_usage: {
+        type: Sequelize.INTEGER,
+      },
+      used_count: {
+        type: Sequelize.INTEGER,
       },
       user_id: {
         type: Sequelize.STRING(10),
@@ -15,23 +35,11 @@ module.exports = {
         references: { model: 'users', key: 'id' },
         onDelete: 'CASCADE',
       },
-      product_id: {
-        type: Sequelize.STRING(10),
-        allowNull: false,
-        references: { model: 'products', key: 'id' },
-        onDelete: 'CASCADE',
-      },
-      slug: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        unique: true,
-      },
-      configs: {
+      templates: {
         type: Sequelize.JSON,
       },
       expires_at: {
         type: Sequelize.DATE,
-        allowNull: true,
       },
       created_at: {
         type: Sequelize.DATE,
@@ -45,8 +53,7 @@ module.exports = {
       },
     });
   },
-
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('user_sites');
+    await queryInterface.dropTable('vouchers');
   },
 };
