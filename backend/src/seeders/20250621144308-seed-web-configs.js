@@ -113,11 +113,13 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        key: 'bank_donate',
+        key: 'donate_info',
         value: JSON.stringify({
           bank_name: 'TIMO',
           bank_account: '9021508805275',
           bank_holder: 'Nguyen Duc Tai',
+          momo_link: 'https://me.momo.vn/ngdtai2k2',
+          buymeacoffee_link: 'https://coff.ee/ngdtai2k2',
         }),
         created_at: new Date(),
         updated_at: new Date(),
