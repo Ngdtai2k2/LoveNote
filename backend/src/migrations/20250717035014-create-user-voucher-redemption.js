@@ -21,6 +21,10 @@ module.exports = {
       voucher_template_id: {
         type: Sequelize.INTEGER,
       },
+      is_used: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: false,
+      },
       created_at: {
         type: Sequelize.DATE,
         allowNull: false,

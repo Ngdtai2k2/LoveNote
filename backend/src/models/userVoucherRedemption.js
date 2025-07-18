@@ -24,6 +24,10 @@ module.exports = (sequelize, DataTypes) => {
       user_id: DataTypes.INTEGER,
       voucher_id: DataTypes.INTEGER,
       voucher_template_id: DataTypes.INTEGER,
+      is_used: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+      },
     },
     {
       sequelize,

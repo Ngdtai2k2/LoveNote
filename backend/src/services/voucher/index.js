@@ -26,7 +26,7 @@ const voucherService = {
       templates.map(async (voucher) => {
         const templateSlugs = voucher.templates;
 
-        let productNames = [];
+        let productsInfo = [];
 
         if (
           Array.isArray(templateSlugs) &&
@@ -37,15 +37,21 @@ const voucherService = {
             where: {
               slug: templateSlugs,
             },
-            attributes: ['slug', 'name'],
+            attributes: ['slug', 'name', 'thumbnail_url'],
           });
 
-          productNames = products.map((p) => p.name);
+          productsInfo = products.map((p) => ({
+            slug: p.slug,
+            name: p.name,
+            thumbnail_url: p.thumbnail_url,
+          }));
         }
 
+        const { templates, ...voucherData } = voucher.toJSON();
+
         return {
-          ...voucher.toJSON(),
-          product_names: productNames,
+          ...voucherData,
+          products: productsInfo,
         };
       })
     );
@@ -151,6 +157,33 @@ const voucherService = {
     return {
       code: 200,
       messageKey: 'message:redeem_successful',
+    };
+  },
+
+  getVoucherRedeemByUser: async (req) => {
+    const userId = req.user.id;
+
+    const redemptions = await UserVoucherRedemption.findAll({
+      where: {
+        user_id: userId,
+      },
+      includes: [
+        {
+          model: Voucher,
+          as: 'voucher',
+          attributes: ['code', 'is_used'],
+        },
+        {
+          model: VoucherTemplate,
+          as: 'template',
+          attributes: ['name', 'description', 'templates'],
+        },
+      ],
+    });
+
+    return {
+      code: 200,
+      data: redemptions,
     };
   },
 };
