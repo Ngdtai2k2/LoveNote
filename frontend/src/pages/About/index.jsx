@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
+import ArcMenu from '@components/ArcMenu';
+
 import useWebConfig from '@hooks/useWebConfig';
 import { useDocumentTitle } from '@hooks/useDocumentTitle';
 
@@ -81,6 +83,7 @@ export default function About() {
           </section>
         </>
       )}
+      <ArcMenu />
     </div>
   );
 }

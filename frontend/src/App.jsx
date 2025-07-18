@@ -6,7 +6,6 @@ import { useTranslation } from 'react-i18next';
 import AppRoutes from './routes';
 import { useAxios } from '@hooks/useAxiosJWT';
 import { userAPI } from '@api/user';
-import ArcMenu from './components/ArcMenu';
 
 function App() {
   const dispatch = useDispatch();
@@ -24,7 +23,6 @@ function App() {
         <ToastContainer />
       </div>
       <AppRoutes />
-      <ArcMenu />
     </>
   );
 }

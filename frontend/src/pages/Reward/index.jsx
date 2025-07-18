@@ -3,6 +3,8 @@ import { useTranslation } from 'react-i18next';
 
 import { Typography, Tabs, TabsHeader, Tab } from '@material-tailwind/react';
 
+import ArcMenu from '@components/ArcMenu';
+
 import { useDocumentTitle } from '@hooks/useDocumentTitle';
 import { useAxios } from '@hooks/useAxiosJWT';
 import { vouchersAPI } from '@api/vouchers';
@@ -90,6 +92,7 @@ export default function Reward() {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
         {vouchersToRender.map((voucher) => renderVoucherCard(voucher, activeTab === 'redeemed'))}
       </div>
+      <ArcMenu />
     </div>
   );
 }

@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 import { Alert, Typography, Spinner } from '@material-tailwind/react';
 import { ArrowTopRightOnSquareIcon, CurrencyDollarIcon } from '@heroicons/react/24/outline';
 
+import ArcMenu from '@components/ArcMenu';
+
 import { shortenerProviderAPI } from '@api/shortenerProvider';
 import { useDocumentTitle } from '@hooks/useDocumentTitle';
 import { useCurrentUser } from '@hooks/useCurrentUser';
@@ -123,6 +125,7 @@ export default function Tasks() {
           ))}
         </ul>
       </div>
+      <ArcMenu />
     </div>
   );
 }

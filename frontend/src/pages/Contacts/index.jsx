@@ -11,6 +11,7 @@ import { useDocumentTitle } from '@hooks/useDocumentTitle';
 
 import FormField from '@components/FormField';
 import FormTextArea from '@components/FormTextArea';
+import ArcMenu from '@components/ArcMenu';
 
 import { contactAPI } from '@api/contact';
 
@@ -176,6 +177,7 @@ export default function Contacts() {
           </div>
         </div>
       )}
+      <ArcMenu />
     </div>
   );
 }

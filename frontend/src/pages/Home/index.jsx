@@ -6,6 +6,7 @@ import { Typography } from '@material-tailwind/react';
 import { BannerSlider } from '@components/BannerSlider';
 import { ProductCard } from '@components/ProductCard';
 import Pagination from '@components/Pagination';
+import ArcMenu from '@components/ArcMenu';
 import { useDocumentTitle } from '@hooks/useDocumentTitle';
 import useBanner from '@hooks/useBanner';
 import { productAPI } from '@api/product';
@@ -99,6 +100,7 @@ export default function Home() {
           )}
         </div>
       </div>
+      <ArcMenu />
     </div>
   );
 }
