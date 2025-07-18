@@ -103,6 +103,25 @@ module.exports = {
         created_at: new Date(),
         updated_at: new Date(),
       },
+      {
+        key: 'donate_note',
+        value: JSON.stringify({
+          vi: 'Nếu bạn muốn hỗ trợ cho trang web này, bạn có thể gửi qua đây, tôi sẽ rất cảm kích vì món quà của bạn!',
+          en: 'If you want to support this website, you can send it here, I would greatly appreciate your gift!',
+        }),
+        created_at: new Date(),
+        updated_at: new Date(),
+      },
+      {
+        key: 'bank_donate',
+        value: JSON.stringify({
+          bank_name: 'TIMO',
+          bank_account: '9021508805275',
+          bank_holder: 'Nguyen Duc Tai',
+        }),
+        created_at: new Date(),
+        updated_at: new Date(),
+      },
     ]);
   },
 
