@@ -15,5 +15,7 @@
   "verify_token": "Xác minh token",
   "reward": "Đổi thưởng",
   "redeem_voucher": "Đổi voucher",
-  "voucher_redeemed": "Voucher đã đổi"
+  "voucher_redeemed": "Voucher đã đổi",
+  "notifications": "Thông báo",
+  "donate": "Ủng hộ"
 }

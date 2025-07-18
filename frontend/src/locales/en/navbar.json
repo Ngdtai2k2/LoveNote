@@ -15,5 +15,7 @@
   "verify_token": "Verify token",
   "reward": "Reward",
   "redeem_voucher": "Redeem voucher",
-  "voucher_redeemed": "Voucher redeemed"
+  "voucher_redeemed": "Voucher redeemed",
+  "notifications": "Notifications",
+  "donate": "Donate"
 }

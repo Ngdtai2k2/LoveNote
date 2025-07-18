@@ -1,3 +1,5 @@
+import { toast } from 'react-fox-toast';
+
 const helperFunctions = {
   hexToRgba: (hex, alpha = 1) => {
     const r = parseInt(hex.slice(1, 3), 16);
@@ -47,6 +49,15 @@ const helperFunctions = {
     const head = Math.ceil((maxLength - 3) / 2);
     const tail = Math.floor((maxLength - 3) / 2);
     return `${url.slice(0, head)}...${url.slice(-tail)}`;
+  },
+
+  handleCopy: async (text, t) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      toast.success(t('template:copy_success'), { position: 'top-right' });
+    } catch {
+      toast.error(t('template:copy_fail'), { position: 'top-right' });
+    }
   },
 };
 
