@@ -8,6 +8,11 @@ module.exports = (sequelize, DataTypes) => {
         as: 'redemptions',
         onDelete: 'CASCADE',
       });
+
+      VoucherTemplate.hasMany(models.Voucher, {
+        as: 'vouchers',
+        foreignKey: 'template_id',
+      });
     }
   }
 

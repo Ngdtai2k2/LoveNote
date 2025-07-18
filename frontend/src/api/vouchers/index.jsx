@@ -29,4 +29,18 @@ export const vouchersAPI = {
       });
     }
   },
+
+  getVoucherRedeemByUser: async (axiosJWT, isUsed) => {
+    try {
+      const response = await axiosJWT.get(
+        API_ENDPOINTS.VOUCHERS.GET_VOUCHER_REDEEM_BY_USER(isUsed)
+      );
+
+      return response;
+    } catch (error) {
+      toast.error(error.response?.data.message, {
+        position: 'top-right',
+      });
+    }
+  },
 };

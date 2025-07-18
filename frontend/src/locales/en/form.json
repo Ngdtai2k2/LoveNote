@@ -63,5 +63,13 @@
   "confirm": "Confirm",
   "confirming": "Confirming...",
   "redeem": "Redeem now",
-  "redeeming": "Redeeming"
+  "redeeming": "Redeeming",
+  "applicable": "Applicable",
+  "details": "Details",
+  "all_products": "All products",
+  "redirect": "Redirect",
+  "used": "Used",
+  "not_used": "Not used",
+  "note_voucher_del": "Note*: Used vouchers will be automatically deleted after 3 days.",
+  "note_voucher_redeem": "Chú ý*: Voucher sau khi đổi chỉ dùng 1 lần và sẽ tự động xóa sau 7 ngày."
 }

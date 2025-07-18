@@ -23,6 +23,15 @@ const voucherController = {
       return handleError(res, req, error);
     }
   },
+
+  getVoucherRedeemByUser: async (req, res) => {
+    try {
+      const { code, vouchers } = await userService.getVoucherRedeemByUser(req);
+      return res.status(code).json(vouchers);
+    } catch (error) {
+      return handleError(res, req, error);
+    }
+  },
 };
 
 module.exports = voucherController;

@@ -65,5 +65,13 @@
   "confirm": "Xác nhận",
   "confirming": "Đang xác nhận...",
   "redeem": "Đổi ngay",
-  "redeeming": "Đang đổi"
+  "redeeming": "Đang đổi",
+  "applicable": "Áp dụng",
+  "details": "Chi tiết",
+  "all_products": "Tất cả sản phẩm",
+  "redirect": "Chuyển hướng",
+  "used": "Đã dùng",
+  "not_used": "Chưa dùng",
+  "note_voucher_del": "Chú ý*: Voucher đã dùng sẽ tự động xóa sau 3 ngày.",
+  "note_voucher_redeem": "Chú ý*: Voucher sau khi đổi chỉ dùng 1 lần và sẽ tự động xóa sau 7 ngày."
 }

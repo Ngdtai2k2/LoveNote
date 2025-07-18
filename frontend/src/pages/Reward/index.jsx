@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { Typography, Tabs, TabsHeader, Tab } from '@material-tailwind/react';
+import { Typography, Tabs, TabsHeader, Tab, Button, ButtonGroup } from '@material-tailwind/react';
 
 import ArcMenu from '@components/ArcMenu';
 
@@ -10,28 +10,13 @@ import { useAxios } from '@hooks/useAxiosJWT';
 import { vouchersAPI } from '@api/vouchers';
 import VoucherCard from '@components/VoucherCard';
 
-const redeemedVouchers = [
-  {
-    id: 4,
-    name: 'Shopee Giảm 30K',
-    description: 'Dành cho đơn hàng từ 200K.',
-    tokenCost: 400,
-    code: 'SHOPEE30K',
-  },
-  {
-    id: 5,
-    name: 'Tiki Voucher 20%',
-    description: 'Giảm tối đa 80K cho đơn hàng Tiki.',
-    tokenCost: 600,
-    code: 'TIKI20',
-  },
-];
-
 export default function Reward() {
   const [activeTab, setActiveTab] = useState('available');
   const [voucherTemplates, setVoucherTemplate] = useState([]);
+  const [voucherRedeem, setVoucherRedeem] = useState([]);
+  const [isUsed, setIsUsed] = useState(0);
 
-  const { t, i18n } = useTranslation(['navbar']);
+  const { t, i18n } = useTranslation(['navbar', 'form']);
 
   useDocumentTitle(t('navbar:reward'));
 
@@ -44,17 +29,30 @@ export default function Reward() {
     }
   };
 
+  const getVoucherRedeemByUser = async () => {
+    const res = await vouchersAPI.getVoucherRedeemByUser(axiosJWT, isUsed);
+    if (res?.status === 200) {
+      setVoucherRedeem(res.data);
+    }
+  };
+
   useEffect(() => {
     getVoucherTemplate();
   }, []);
 
+  useEffect(() => {
+    getVoucherRedeemByUser(isUsed);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isUsed]);
+
   const handleRedeem = async (templateId) => {
     await vouchersAPI.redeem(axiosJWT, templateId);
+    getVoucherRedeemByUser();
   };
 
   const renderVoucherCard = (voucher, isRedeemed = false) => (
     <VoucherCard
-      key={voucher.id}
+      key={voucher.id || voucher.code}
       voucher={voucher}
       isRedeemed={isRedeemed}
       isLoading={false}
@@ -62,7 +60,7 @@ export default function Reward() {
     />
   );
 
-  const vouchersToRender = activeTab === 'available' ? voucherTemplates : redeemedVouchers;
+  const vouchersToRender = activeTab === 'available' ? voucherTemplates : voucherRedeem;
 
   return (
     <div className="max-w-6xl mx-auto py-10 px-4">
@@ -73,11 +71,11 @@ export default function Reward() {
         {t('navbar:reward')}
       </Typography>
 
-      <Tabs value={activeTab} className="mb-6">
+      <Tabs value={activeTab} className="mb-3">
         <TabsHeader
-          className="bg-gray-200 dark:bg-gray-800"
+          className="bg-gray-200 dark:bg-gray-700"
           indicatorProps={{
-            className: 'bg-gray-300 dark:bg-gray-700 dark:text-gray-200 shadow-none',
+            className: 'bg-gray-300 dark:bg-gray-800 dark:text-gray-200 shadow-none',
           }}
         >
           <Tab value="available" onClick={() => setActiveTab('available')}>
@@ -89,7 +87,35 @@ export default function Reward() {
         </TabsHeader>
       </Tabs>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+      {activeTab !== 'redeemed' && (
+        <Typography className="text-red-600 text-sm italic font-semibold">
+          {t('form:note_voucher_redeem')}
+        </Typography>
+      )}
+
+      {activeTab === 'redeemed' && (
+        <>
+          <ButtonGroup size="sm" className="flex justify-end mb-2">
+            <Button
+              onClick={() => setIsUsed(0)}
+              className="font-semibold bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-gray-200"
+            >
+              {t('form:used')}
+            </Button>
+            <Button
+              onClick={() => setIsUsed(1)}
+              className="font-semibold bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-gray-200"
+            >
+              {t('form:not_used')}
+            </Button>
+          </ButtonGroup>
+          <Typography className="text-red-600 text-sm italic font-semibold">
+            {isUsed == 1 ? t('form:note_voucher_del') : t('form:note_voucher_redeem')}
+          </Typography>
+        </>
+      )}
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-3">
         {vouchersToRender.map((voucher) => renderVoucherCard(voucher, activeTab === 'redeemed'))}
       </div>
       <ArcMenu />

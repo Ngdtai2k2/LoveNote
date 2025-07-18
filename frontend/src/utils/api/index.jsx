@@ -42,6 +42,8 @@ const API_ENDPOINTS = {
   },
   VOUCHERS: {
     GET_TEMPLATE: (type) => `/voucher/template${type ? `?type=${type}` : ''}`,
+    GET_VOUCHER_REDEEM_BY_USER: (isUsed) =>
+      `/voucher/redeem/me${isUsed ? `?is_used=${isUsed}` : ''}`,
     REDEEM: '/voucher/redeem',
   },
 };

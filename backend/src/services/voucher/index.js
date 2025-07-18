@@ -162,16 +162,25 @@ const voucherService = {
 
   getVoucherRedeemByUser: async (req) => {
     const userId = req.user.id;
+    const { is_used } = req.query;
+
+    const where = {
+      user_id: userId,
+    };
+
+    if (is_used) {
+      where.is_used = is_used;
+    } else {
+      where.is_used = false;
+    }
 
     const redemptions = await UserVoucherRedemption.findAll({
-      where: {
-        user_id: userId,
-      },
-      includes: [
+      where,
+      include: [
         {
           model: Voucher,
           as: 'voucher',
-          attributes: ['code', 'is_used'],
+          attributes: ['code'],
         },
         {
           model: VoucherTemplate,
@@ -181,9 +190,46 @@ const voucherService = {
       ],
     });
 
+    const results = await Promise.all(
+      redemptions.map(async (item) => {
+        const redemption = item.toJSON();
+        const { voucher, template, is_used } = redemption;
+
+        let productsInfo = [];
+
+        if (
+          template?.templates &&
+          Array.isArray(template.templates) &&
+          template.templates.length > 0 &&
+          !(template.templates.length === 1 && template.templates[0] === '*')
+        ) {
+          const products = await Product.findAll({
+            where: {
+              slug: template.templates,
+            },
+            attributes: ['slug', 'name', 'thumbnail_url'],
+          });
+
+          productsInfo = products.map((p) => ({
+            slug: p.slug,
+            name: p.name,
+            thumbnail_url: p.thumbnail_url,
+          }));
+        }
+
+        return {
+          code: voucher?.code,
+          is_used,
+          name: template?.name || {},
+          description: template?.description || {},
+          products: productsInfo,
+        };
+      })
+    );
+
     return {
       code: 200,
-      data: redemptions,
+      vouchers: results,
     };
   },
 };
