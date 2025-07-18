@@ -1,4 +1,4 @@
-import React, { createElement, useEffect, useState } from 'react';
+import React, { createElement, useEffect, useState, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import {
@@ -31,8 +31,8 @@ function NavList() {
           <Link to={nav.href}>
             <MenuItem
               className="flex items-center gap-2 hover:bg-gray-300 focus:bg-gray-300 
-          active:bg-gray-300 dark:hover:bg-gray-800 dark:focus:bg-gray-800 
-          dark:active:bg-gray-800 md:rounded-full"
+              active:bg-gray-300 dark:hover:bg-gray-800 dark:focus:bg-gray-800 
+              dark:active:bg-gray-800 md:rounded-full"
             >
               <span className="text-black dark:text-gray-200">{t(nav.label)}</span>
             </MenuItem>
@@ -51,9 +51,7 @@ function TabBar({ openTabBar, closeTabBar }) {
       <div className="mb-6 flex items-center justify-between">
         <Typography
           variant="h5"
-          style={{
-            fontFamily: 'Sacramento',
-          }}
+          style={{ fontFamily: 'Sacramento' }}
           className="text-black dark:text-gray-200"
         >
           {CONSTANTS.SITE_NAME}
@@ -67,8 +65,8 @@ function TabBar({ openTabBar, closeTabBar }) {
           <Link key={index} to={tab.href}>
             <MenuItem
               className="flex items-center gap-2 hover:bg-gray-300 focus:bg-gray-300 
-            active:bg-gray-300 dark:hover:bg-gray-800 dark:focus:bg-gray-800 
-            dark:active:bg-gray-800 md:rounded-full"
+              active:bg-gray-300 dark:hover:bg-gray-800 dark:focus:bg-gray-800 
+              dark:active:bg-gray-800 md:rounded-full"
             >
               {createElement(tab.icon, {
                 className: 'h-6 w-6 text-gray-800 dark:text-gray-200',
@@ -86,15 +84,35 @@ function TabBar({ openTabBar, closeTabBar }) {
 export default function NavBar({ isAdmin }) {
   const [isNavOpen, setIsNavOpen] = useState(false);
   const [isTabBarOpen, setIsTabBarOpen] = useState(false);
+  const navRef = useRef(null);
 
   const toggleIsNavOpen = () => setIsNavOpen((cur) => !cur);
-
   const openTabBar = () => setIsTabBarOpen(true);
   const closeTabBar = () => setIsTabBarOpen(false);
 
   useEffect(() => {
-    window.addEventListener('resize', () => window.innerWidth >= 960 && setIsNavOpen(false));
-  }, []);
+    const handleResize = () => {
+      if (window.innerWidth >= 960) {
+        setIsNavOpen(false);
+      }
+    };
+
+    const handleClickOutside = (event) => {
+      if (navRef.current && !navRef.current.contains(event.target)) {
+        setIsNavOpen(false);
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    if (isNavOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isNavOpen]);
 
   return (
     <>
@@ -108,11 +126,9 @@ export default function NavBar({ isAdmin }) {
             <Link to={ROUTES.HOME}>
               <Typography
                 variant="h5"
-                style={{
-                  fontFamily: 'Sacramento',
-                }}
+                style={{ fontFamily: 'Sacramento' }}
                 className="ml-2 mr-4 hidden cursor-pointer border-none py-1.5 font-medium text-black 
-              dark:text-gray-200 md:block"
+                dark:text-gray-200 md:block"
               >
                 {CONSTANTS.SITE_NAME}
               </Typography>
@@ -147,9 +163,7 @@ export default function NavBar({ isAdmin }) {
             <Link to={ROUTES.HOME}>
               <Typography
                 variant="h5"
-                style={{
-                  fontFamily: 'Sacramento',
-                }}
+                style={{ fontFamily: 'Sacramento' }}
                 className="ml-2 mr-4 block cursor-pointer border-none py-1.5 font-medium text-black dark:text-gray-200 md:hidden"
               >
                 {CONSTANTS.SITE_NAME}
@@ -167,7 +181,7 @@ export default function NavBar({ isAdmin }) {
 
         {/* Collapse NavList (Mobile) */}
         {!isAdmin && (
-          <Collapse open={isNavOpen} className="overflow-scroll">
+          <Collapse ref={navRef} open={isNavOpen} className="overflow-scroll">
             <NavList />
           </Collapse>
         )}
