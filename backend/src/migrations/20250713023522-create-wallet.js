@@ -13,7 +13,7 @@ module.exports = {
         type: Sequelize.STRING,
       },
       token_balance: {
-        type: Sequelize.DECIMAL,
+        type: Sequelize.DECIMAL(15, 0),
       },
       created_at: {
         type: Sequelize.DATE,

@@ -17,7 +17,7 @@ connectDB();
 // socket
 const io = socketIO(server, {
   cors: {
-    origin: process.env.CORS_ORIGIN,
+    origin: process.env.CLIENT_URL,
   },
 });
 

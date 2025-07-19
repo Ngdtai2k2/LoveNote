@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING(10),
         allowNull: false,
       },
-      token_balance: DataTypes.DECIMAL,
+      token_balance: DataTypes.DECIMAL(15, 0),
     },
     {
       sequelize,
