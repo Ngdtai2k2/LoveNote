@@ -79,7 +79,7 @@ module.exports = {
         name: 'Ngân hà nở rộ',
         slug: 'bloom-galaxy',
         description: `Một ngân hà nở rộ cùng với những hình ảnh của người thân yêu sẽ là một món quà tuyệt vời nhất.`,
-        price: 30000,
+        price: 35000,
         discount: 0,
         thumbnail_url: `${SERVER_URL}/assets/images/bloom-galaxy.png`,
         demo_video_url: '#',
