@@ -1,14 +1,8 @@
 import { StarIcon } from '@heroicons/react/24/solid';
-import {
-  Card,
-  CardHeader,
-  CardBody,
-  Typography,
-  Button,
-} from '@material-tailwind/react';
+import { Card, CardHeader, CardBody, Typography, Button } from '@material-tailwind/react';
 import { useTranslation } from 'react-i18next';
 
-export function ProductCard({ image, title, description, rating, onReadMore }) {
+export function ProductCard({ image, title, description, rating, price, onReadMore }) {
   const { t } = useTranslation('product');
 
   return (
@@ -19,19 +13,22 @@ export function ProductCard({ image, title, description, rating, onReadMore }) {
       </CardHeader>
 
       <CardBody className="flex flex-1 flex-col">
-        <div className="mb-2 flex items-center justify-between">
+        <div className="mb-1 flex items-center justify-between">
           <Typography
             variant="h6"
-            className="line-clamp-1 font-bold text-gray-800 dark:text-gray-200"
+            className="line-clamp-1 font-bold text-gray-900 dark:text-gray-200"
           >
             {title}
           </Typography>
-          <Typography className="flex items-center gap-1.5 font-normal text-gray-800 dark:text-gray-200">
+          <Typography className="flex items-center gap-1.5 font-normal text-gray-900 dark:text-gray-200">
             <StarIcon className="-mt-0.5 h-5 w-5 text-yellow-300" />
             {rating}
           </Typography>
         </div>
-        <Typography className="line-clamp-3 min-h-[2rem] text-sm text-gray-800 dark:text-gray-200">
+        <Typography className="text-[15px] font-semibold text-gray-900 dark:text-gray-200">
+          {t('price')}: {Number(price).toLocaleString('vi-VN')}đ
+        </Typography>
+        <Typography className="line-clamp-3 min-h-[2rem] text-sm text-gray-900 dark:text-gray-200">
           {description}
         </Typography>
         <div className="mt-auto pt-4">

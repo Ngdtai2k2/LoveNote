@@ -81,6 +81,7 @@ export default function Home() {
                   title={product.name}
                   description={product.description}
                   rating={product.rating}
+                  price={product.price}
                   onReadMore={() => onReadMore(product.slug)}
                 />
               ))}

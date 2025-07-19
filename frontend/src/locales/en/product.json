@@ -3,5 +3,6 @@
   "card": {
     "read_more": "Read more",
     "create_web": "Create web"
-  }
+  },
+  "price": "Price"
 }

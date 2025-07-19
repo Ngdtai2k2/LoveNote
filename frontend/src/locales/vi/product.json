@@ -3,5 +3,6 @@
   "card": {
     "read_more": "Chi tiết",
     "create_web": "Tạo web"
-  }
+  },
+  "price": "Giá"
 }

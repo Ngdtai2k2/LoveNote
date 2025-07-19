@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       name: { type: DataTypes.STRING, allowNull: false },
       slug: { type: DataTypes.STRING, allowNull: false, unique: true },
       description: { type: DataTypes.TEXT },
-      price: { type: DataTypes.DECIMAL(10, 2), allowNull: false },
+      price: { type: DataTypes.DECIMAL(15, 0), allowNull: false },
       discount: {
         type: DataTypes.INTEGER,
         allowNull: false,
