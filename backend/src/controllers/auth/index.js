@@ -6,8 +6,6 @@ const authService = require('@services/auth');
 const jwtService = require('@services/jwt');
 const handleError = require('@utils/handleError');
 
-const isProduction = process.env.NODE_ENV === 'production';
-
 const authController = {
   signUp: async (req, res) => {
     try {
@@ -26,8 +24,8 @@ const authController = {
 
       res.cookie('rf', refreshToken, {
         httpOnly: true,
-        secure: isProduction,
-        sameSite: isProduction ? 'none' : 'lax',
+        secure: true,
+        sameSite: 'none',
         path: '/',
         maxAge: 7 * 24 * 60 * 60 * 1000,
       });
@@ -72,8 +70,8 @@ const authController = {
 
           res.cookie('rf', newRefreshToken, {
             httpOnly: true,
-            secure: isProduction,
-            sameSite: isProduction ? 'none' : 'lax',
+            secure: true,
+            sameSite: 'none',
             path: '/',
             maxAge: 7 * 24 * 60 * 60 * 1000,
           });
@@ -98,8 +96,8 @@ const authController = {
 
       res.clearCookie('rf', {
         httpOnly: true,
-        secure: isProduction,
-        sameSite: isProduction ? 'none' : 'lax',
+        secure: true,
+        sameSite: 'none',
       });
 
       return res.status(200).json({ message: req.t('auth:sign_out_success') });
