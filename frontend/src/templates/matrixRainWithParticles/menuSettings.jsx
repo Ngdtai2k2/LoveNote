@@ -14,7 +14,7 @@ import helperFunctions from '@helpers';
 import FormItem from '../components/formItem';
 import FormRange from '../components/formRange';
 import FormArea from '../components/formArea';
-import { FormSelect } from '../components/formSelect';
+import FormSelect from '../components/formSelect';
 import FormSlug from '../components/formSlug';
 import TopLeftControl from '../components/topLeftControl';
 import FormCheckbox from '../components/formCheckbox';

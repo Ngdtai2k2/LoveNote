@@ -15,7 +15,7 @@ import ROUTES from '@constants/routes';
 import { useAxios } from '@hooks/useAxiosJWT';
 import { useCurrentUser } from '@hooks/useCurrentUser';
 
-import { FormArea } from '../components/formArea';
+import FormArea from '../components/formArea';
 import FormSlug from '../components/formSlug';
 import ModalRenderLink from '../modalRenderLink';
 import { handleSubmitSettings } from './handleSubmitSettings';
@@ -205,7 +205,9 @@ export default function MenuSettings({ settings, onUpdate }) {
                   </div>
 
                   <div>
-                    <label className="block mt-2 text-sm text-white">{t('template:upload_audio')}</label>
+                    <label className="block mt-2 text-sm text-white">
+                      {t('template:upload_audio')}
+                    </label>
                     <div className="mt-2 flex items-center text-sm text-white">
                       <input
                         name="heartAudio"
