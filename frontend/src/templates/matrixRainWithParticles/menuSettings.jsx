@@ -11,13 +11,13 @@ import { useCurrentUser } from '@hooks/useCurrentUser';
 
 import helperFunctions from '@helpers';
 
-import { FormItem } from '../components/formItem';
-import { FormRange } from '../components/formRange';
+import FormItem from '../components/formItem';
+import FormRange from '../components/formRange';
 import { FormArea } from '../components/formArea';
 import { FormSelect } from '../components/formSelect';
 import FormSlug from '../components/formSlug';
 import TopLeftControl from '../components/topLeftControl';
-import { FormCheckbox } from '../components/formCheckbox';
+import FormCheckbox from '../components/formCheckbox';
 
 import { handleSubmitSettings } from './handleSubmitSettings';
 import ModalRenderLink from '../modalRenderLink';

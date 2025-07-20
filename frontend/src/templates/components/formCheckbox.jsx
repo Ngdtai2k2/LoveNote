@@ -1,4 +1,4 @@
-export function FormCheckbox({ label, name, checked, onChange }) {
+export default function FormCheckbox({ label, name, checked, onChange }) {
   return (
     <label className="flex items-center gap-2 text-sm text-white mt-2">
       <input

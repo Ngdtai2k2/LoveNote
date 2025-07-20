@@ -1,4 +1,4 @@
-export function FormSelect({ label, name, value, onChange, options = [] }) {
+export default function FormSelect({ label, name, value, onChange, options = [] }) {
   return (
     <div>
       <label className="block mb-1 text-sm">{label}</label>

@@ -1,6 +1,6 @@
 import { Tooltip } from '@material-tailwind/react';
 
-export function FormRange({ label, name, value, min, max, step, onChange, suffix = '' }) {
+export default function FormRange({ label, name, value, min, max, step, onChange, suffix = '' }) {
   return (
     <div>
       <label className="block mb-1 text-sm text-white">{label}</label>

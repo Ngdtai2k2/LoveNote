@@ -16,7 +16,7 @@ import { Form, Formik } from 'formik';
 import { useAxios } from '@hooks/useAxiosJWT';
 import { useCurrentUser } from '@hooks/useCurrentUser';
 
-import { FormItem } from '../components/formItem';
+import FormItem from '../components/formItem';
 import FormSlug from '../components/formSlug';
 import TopLeftControl from '../components/topLeftControl';
 

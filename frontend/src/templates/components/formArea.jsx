@@ -1,4 +1,4 @@
-export function FormArea({ label, type = 'text', ...props }) {
+export default function FormArea({ label, type = 'text', ...props }) {
   return (
     <div className="w-full">
       {label && (

@@ -11,8 +11,8 @@ import { useAxios } from '@hooks/useAxiosJWT';
 
 import FormSlug from '../components/formSlug';
 import ColorSelector from '../components/colorSelector';
-import { FormItem } from '../components/formItem';
-import { FormRange } from '../components/formRange';
+import FormItem from '../components/formCheckbox';
+import FormRange from '../components/formRange';
 import TopLeftControl from '../components/topLeftControl';
 
 import handleSubmitSettings from './handleSubmitSettings';

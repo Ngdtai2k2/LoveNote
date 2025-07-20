@@ -1,4 +1,4 @@
-export function FormItem({ label, name, value, onChange, type = 'text', maxLength }) {
+export default function FormItem({ label, name, value, onChange, type = 'text', maxLength }) {
   return (
     <div>
       <label className="block mb-1 text-sm">{label}</label>
