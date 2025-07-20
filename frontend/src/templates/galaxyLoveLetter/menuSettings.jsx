@@ -10,7 +10,7 @@ import EmojiPicker from 'emoji-picker-react';
 import { useAxios } from '@hooks/useAxiosJWT';
 import { useCurrentUser } from '@hooks/useCurrentUser';
 
-import { FormArea } from '../components/formArea';
+import FormArea from '../components/formArea';
 import FormCheckbox from '../components/formCheckbox';
 import FormRange from '../components/formRange';
 import FormSlug from '../components/formSlug';
