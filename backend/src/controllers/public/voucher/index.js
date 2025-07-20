@@ -20,7 +20,7 @@ const voucherController = {
       return res.status(code).json({ message: req.t(messageKey) });
     } catch (error) {
       await transaction.rollback();
-      return handleError(res, req, error);
+      handleError(res, req, error);
     }
   },
 
@@ -29,7 +29,16 @@ const voucherController = {
       const { code, vouchers } = await userService.getVoucherRedeemByUser(req);
       return res.status(code).json(vouchers);
     } catch (error) {
-      return handleError(res, req, error);
+      handleError(res, req, error);
+    }
+  },
+
+  checkVoucher: async (req, res) => {
+    try {
+      const result = await userService.checkVoucher(req);
+      return res.status(result.code).json(result.data);
+    } catch (error) {
+      handleError(res, req, error);
     }
   },
 };
