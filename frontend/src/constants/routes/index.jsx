@@ -20,6 +20,10 @@ const ROUTES = {
   HOME: '/',
   CONTACTS: '/contacts',
   ABOUT: '/about-me',
+  PAYMENT: {
+    SUCCESS: '/payment/success',
+    CANCEL: '/payment/cancel',
+  },
   NOT_FOUND: '/404',
 };
 
