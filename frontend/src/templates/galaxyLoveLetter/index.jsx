@@ -3,6 +3,8 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import BlinkingHint from '@components/BlinkingHint';
+import NotActivePage from '@components/NotActivePage';
+
 import { useDebouncedValue } from '@hooks/useDebouncedValue';
 import { useDocumentTitle } from '@hooks/useDocumentTitle';
 
@@ -74,6 +76,8 @@ export default function GalaxyLoveLetter({ data }) {
     debouncedSettings.colors[Math.floor(Math.random() * debouncedSettings.colors.length)];
 
   useEffect(() => {
+    if (data?.is_active === false) return;
+
     injectTwinkle();
     const galaxy = galaxyRef.current;
 
@@ -106,6 +110,8 @@ export default function GalaxyLoveLetter({ data }) {
     const randomTitle =
       debouncedSettings.messages[Math.floor(Math.random() * debouncedSettings.messages.length)];
     setTitle(randomTitle);
+
+    if (data?.is_active === false) return;
 
     // create particle
     const galaxy = galaxyRef.current;
@@ -221,6 +227,8 @@ export default function GalaxyLoveLetter({ data }) {
   useDocumentTitle(title);
 
   useEffect(() => {
+    if (data?.is_active === false) return;
+
     const getTouch = (e) => e.touches?.[0] || e.changedTouches?.[0];
 
     const handleMouseDown = (e) => {
@@ -264,6 +272,8 @@ export default function GalaxyLoveLetter({ data }) {
   }, []);
 
   useEffect(() => {
+    if (data?.is_active === false) return;
+
     const audio = audioRef.current;
     audio.volume = settings.audioVolume || 0.5;
 
@@ -286,6 +296,10 @@ export default function GalaxyLoveLetter({ data }) {
     window.addEventListener('dblclick', handleDoubleClick);
     return () => window.removeEventListener('dblclick', handleDoubleClick);
   }, [settings.audioVolume]);
+
+  if (data?.is_active === false) {
+    return <NotActivePage />;
+  }
 
   return (
     <div

@@ -4,5 +4,8 @@
     "read_more": "Read more",
     "create_web": "Create web"
   },
-  "price": "Price"
+  "price": "Price",
+  "web_not_active": "Website not activated",
+  "web_not_active_note": "The website you are trying to access is not yet active. Please check the link again or contact the administrator.",
+  "home": "Back to home page"
 }

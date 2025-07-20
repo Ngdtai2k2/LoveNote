@@ -5,13 +5,16 @@ import MenuSettings from './menuSettings';
 import helperFunctions from '@helpers';
 import { useDocumentTitle } from '@hooks/useDocumentTitle';
 
+import NotActivePage from '@components/NotActivePage';
 import BlinkingHint from '@components/BlinkingHint';
+
 import MUSIC_BACKGROUND_001 from '../assets/musics/music_background_001.mp3';
 
 export default function MatrixLoveRain({ data }) {
   const canvasRef = useRef(null);
   const audioRef = useRef(null);
   const isPlaying = useRef(false);
+
   const { t } = useTranslation('template');
 
   const [canvasSize, setCanvasSize] = useState({
@@ -69,13 +72,15 @@ export default function MatrixLoveRain({ data }) {
   );
 
   useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
     const backgroundColor = helperFunctions.hexToRgba(
       settings.backgroundHex,
       settings.backgroundOpacity
     );
     const rainSpeed = Number(settings.rainSpeed) || 1;
 
-    const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
     let animationId;
 
@@ -170,13 +175,12 @@ export default function MatrixLoveRain({ data }) {
 
   useEffect(() => {
     const audio = audioRef.current;
+    if (!audio) return;
+
     audio.volume = settings.audioVolume ?? 1;
 
     const handleDoubleClick = (e) => {
       if (e.target.closest('.menu-settings')) return;
-      if (!audio) return;
-
-      audio.volume = settings.audioVolume ?? 1;
 
       if (!isPlaying.current) {
         audio
@@ -196,6 +200,10 @@ export default function MatrixLoveRain({ data }) {
     window.addEventListener('dblclick', handleDoubleClick);
     return () => window.removeEventListener('dblclick', handleDoubleClick);
   }, [settings.audioVolume]);
+
+  if (data?.is_active === false) {
+    return <NotActivePage />;
+  }
 
   return (
     <div className="relative h-screen w-screen cursor-pointer overflow-hidden">

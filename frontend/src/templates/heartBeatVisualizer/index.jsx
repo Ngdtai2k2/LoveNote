@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 
 import { createHeartScene } from './createHeartScene';
 import BlinkingHint from '@components/BlinkingHint';
+import NotActivePage from '@components/NotActivePage';
 import { useDocumentTitle } from '@hooks/useDocumentTitle';
 import { useDebouncedValue } from '@hooks/useDebouncedValue';
 
@@ -37,7 +38,7 @@ export default function HeartBeatVisualizer({ data }) {
     ...defaultSettings,
     ...data?.configs,
   }));
-  
+
   const sceneSettingsRaw = useMemo(() => {
     const { text, buttonColor, textColor, ...rest } = settings; // eslint-disable-line no-unused-vars
     return rest;
@@ -55,6 +56,8 @@ export default function HeartBeatVisualizer({ data }) {
   useDocumentTitle(settings.text);
 
   useEffect(() => {
+    if (data?.is_active === false) return;
+
     const scene = createHeartScene(
       canvasRef.current,
       audioBtnRef.current,
@@ -68,7 +71,11 @@ export default function HeartBeatVisualizer({ data }) {
     return () => {
       scene?.dispose();
     };
-  }, [debouncedSceneSettings]);
+  }, [data?.is_active, debouncedSceneSettings]);
+
+  if (data?.is_active === false) {
+    return <NotActivePage />;
+  }
 
   return (
     <div className="relative w-screen h-screen overflow-hidden bg-gradient-to-b from-[#1a0d1a] to-[#2b0f2b]">

@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 
 import { useDocumentTitle } from '@hooks/useDocumentTitle';
 
+import NotActivePage from '@components/NotActivePage';
 import Popups from './renderEffect/popups';
 import MenuSettings from './menuSettings';
 
@@ -49,7 +50,10 @@ export default function MemoryOverflow({ data }) {
 
   useEffect(() => {
     const canvas = canvasRef.current;
+    if (!canvas) return;
     const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 
@@ -117,6 +121,10 @@ export default function MemoryOverflow({ data }) {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
     }
   };
+
+  if (data?.is_active === false) {
+    return <NotActivePage />;
+  }
 
   return (
     <div className="relative w-full h-screen bg-black overflow-hidden">

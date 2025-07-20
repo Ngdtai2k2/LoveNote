@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useDocumentTitle } from '@hooks/useDocumentTitle';
 import { useDebouncedValue } from '@hooks/useDebouncedValue';
 import BlinkingHint from '@components/BlinkingHint';
+import NotActivePage from '@components/NotActivePage';
 
 import MatrixRain from './renderEffect/matrixRain';
 import WordDisplay from './renderEffect/wordDisplay';
@@ -20,10 +21,7 @@ export default function MatrixRainWithWords({ data }) {
     title: 'Matrix Rain with Words',
     wordList: [
       { text: 'Demo 1', duration: 1000 },
-      {
-        text: 'Demo 2',
-        duration: 2000,
-      },
+      { text: 'Demo 2', duration: 2000 },
     ],
     letters: 'abcdefghiklmnopqrstuvwxyz',
     loop: true,
@@ -39,7 +37,7 @@ export default function MatrixRainWithWords({ data }) {
 
   const [settings, setSettings] = useState(() => ({
     ...defaultSettings,
-    ...data?.configs,
+    ...(data?.configs || {}),
   }));
 
   const updateSetting = (key, value) => setSettings((prev) => ({ ...prev, [key]: value }));
@@ -49,16 +47,22 @@ export default function MatrixRainWithWords({ data }) {
 
   useEffect(() => {
     const audio = audioRef.current;
-    if (audio) audio.volume = debounced.audioVolume || 0.5;
+    if (!audio) return;
+
+    audio.volume = debounced.audioVolume || 0.5;
 
     const toggleAudio = (e) => {
-      if (e.target.closest('.menu-settings') || !audio) return;
+      if (e.target.closest('.menu-settings')) return;
 
       if (!isPlaying.current) {
         audio
           .play()
-          .then(() => (isPlaying.current = true))
-          .catch((err) => console.warn('🔇 Play bị chặn:', err));
+          .then(() => {
+            isPlaying.current = true;
+          })
+          .catch((err) => {
+            console.warn('🔇 Play bị chặn:', err);
+          });
       } else {
         audio.pause();
         isPlaying.current = false;
@@ -68,6 +72,10 @@ export default function MatrixRainWithWords({ data }) {
     window.addEventListener('dblclick', toggleAudio);
     return () => window.removeEventListener('dblclick', toggleAudio);
   }, [debounced.audioVolume]);
+
+  if (data?.is_active === false) {
+    return <NotActivePage />;
+  }
 
   return (
     <div className="relative w-screen h-screen bg-black overflow-hidden">

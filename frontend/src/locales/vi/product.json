@@ -4,5 +4,8 @@
     "read_more": "Chi tiết",
     "create_web": "Tạo web"
   },
-  "price": "Giá"
+  "price": "Giá",
+  "web_not_active": "Trang web chưa được kích hoạt",
+  "web_not_active_note": "Website bạn đang truy cập hiện chưa được active. Vui lòng kiểm tra lại đường dẫn hoặc liên hệ với quản trị viên.",
+  "home": "Quay lại trang chủ"
 }
