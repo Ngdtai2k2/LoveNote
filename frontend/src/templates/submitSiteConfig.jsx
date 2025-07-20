@@ -28,12 +28,13 @@ export async function submitSiteConfig({
     return;
   }
 
-  const { slug } = values;
+  const { slug, voucher } = values;
   const config = buildConfig(values);
 
   const formData = new FormData();
   formData.append('productId', productId);
   if (slug) formData.append('slug', slug);
+  if (voucher) formData.append('voucherCode', voucher);
   formData.append('configs', JSON.stringify(config));
 
   imageFields.forEach((fieldName) => {

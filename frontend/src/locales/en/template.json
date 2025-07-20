@@ -52,5 +52,12 @@
     "button_text": "Button text",
     "hint_bloom_galaxy": "👆 Click on the planet to start, click twice to start over.",
     "bloom_galaxy": "Bloom galaxy",
-    "ring_texts": "Text (1 line per sentence/circle on the planet)"
+    "ring_texts": "Text (1 line per sentence/circle on the planet)",
+    "voucher": "Voucher",
+    "total_amount": "Total amount",
+    "discount": "Discount",
+    "save": "Save",
+    "voucher_invalid": "Voucher is not valid for this product value.",
+    "checkouts": "Checkouts",
+    "template_payment_note": "Site needs activation to be accessed, pay now!"
 }

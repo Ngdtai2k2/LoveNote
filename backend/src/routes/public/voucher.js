@@ -9,5 +9,10 @@ router.get(
   verifyMiddleware.token,
   voucherController.getVoucherRedeemByUser
 );
+router.post(
+  '/check/:code',
+  verifyMiddleware.token,
+  voucherController.checkVoucher
+);
 
 module.exports = router;

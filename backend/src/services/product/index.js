@@ -11,6 +11,16 @@ const productServices = {
 
     return products;
   },
+
+  getProductBySlug: async (req) => {
+    const product = await Product.findOne({ slug: req.params.slug });
+
+    if (!product) {
+      throw { code: 404, messageKey: 'notfound:product' };
+    }
+
+    return product;
+  },
 };
 
 module.exports = productServices;

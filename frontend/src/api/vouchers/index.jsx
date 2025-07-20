@@ -43,4 +43,21 @@ export const vouchersAPI = {
       });
     }
   },
+
+  checkVoucher: async (axiosJWT, voucherCode) => {
+    try {
+      const response = await axiosJWT.post(API_ENDPOINTS.VOUCHERS.CHECK(voucherCode));
+      return {
+        code: response.status,
+        data: response.data,
+        message: null,
+      };
+    } catch (error) {
+      return {
+        code: error.response?.status,
+        data: null,
+        message: error.response?.data.message,
+      };
+    }
+  },
 };

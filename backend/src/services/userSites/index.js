@@ -1,6 +1,14 @@
 require('dotenv').config();
 
-const { UserSite, User, Product } = require('@models');
+const {
+  UserSite,
+  User,
+  Product,
+  Transaction,
+  Voucher,
+  UserVoucherRedemption,
+  VoucherTemplate,
+} = require('@models');
 const ShortUniqueId = require('short-unique-id');
 const paginate = require('@helpers/paginate');
 const helpers = require('@helpers');
@@ -20,7 +28,15 @@ const userSiteServices = {
     const whereClause = slug ? { slug } : { id };
     const data = await UserSite.findOne({
       where: whereClause,
-      include: [{ model: Product, as: 'product', attributes: ['slug'] }],
+      include: [
+        {
+          where: {},
+          model: Product,
+          as: 'product',
+          attributes: ['slug'],
+          required: false,
+        },
+      ],
     });
 
     if (!data) throw { code: 404, messageKey: 'notfound:data' };
@@ -29,7 +45,10 @@ const userSiteServices = {
 
   create: async (req) => {
     const userId = req.user.id;
-    const { productId, slug: rawSlug, configs } = req.body;
+    const { productId, slug: rawSlug, configs, voucherCode } = req.body;
+    let totalAmount = 0;
+    let expiresAt = null;
+    let transaction = null;
 
     if (!userId || !productId || !configs) {
       throw { code: 400, messageKey: 'validate:no_data' };
@@ -68,16 +87,87 @@ const userSiteServices = {
       parsedConfigs.audioFile = `${process.env.SERVER_URL}/assets/audio/${userId}/${req.files.audio[0].filename}`;
     }
 
+    let skipTransaction = false;
+
+    // check voucher
+    if (voucherCode) {
+      const voucher = await Voucher.findOne({ where: { code: voucherCode } });
+
+      if (!voucher) {
+        throw { code: 404, messageKey: 'notfound:voucher' };
+      }
+
+      if (voucher.expires_at && new Date(voucher.expires_at) < new Date()) {
+        throw { code: 400, messageKey: 'message:voucher_expired' };
+      }
+
+      if (voucher.used_count >= voucher.max_usage) {
+        throw { code: 400, messageKey: 'message:voucher_not_available' };
+      }
+
+      await voucher.increment('used_count');
+
+      const redemption = await UserVoucherRedemption.findOne({
+        where: {
+          user_id: userId,
+          voucher_id: voucher.id,
+        },
+        include: [
+          {
+            model: VoucherTemplate,
+            as: 'template',
+            attributes: ['discount_type', 'discount_value'],
+          },
+        ],
+      });
+
+      if (redemption && !redemption.is_used) {
+        await redemption.update({ is_used: true });
+
+        const { discount_type, discount_value } = redemption.template;
+
+        if (discount_type === 'day') {
+          // Free number of days of use
+          expiresAt = new Date();
+          expiresAt.setDate(expiresAt.getDate() + discount_value);
+          skipTransaction = true;
+        } else if (discount_type === 'percent') {
+          // Discount by %
+          const rawPrice = parseFloat(product.price || 0);
+          totalAmount = Math.floor(rawPrice * (1 - discount_value / 100));
+        }
+      }
+    }
+
+    // If there is no voucher or no % discount, then take the original price.
+    if (!totalAmount) {
+      totalAmount = parseFloat(product.price || 0);
+    }
+
+    // create new site
     const newSite = await UserSite.create({
       user_id: userId,
       product_id: productId,
       slug,
       configs: parsedConfigs,
+      expires_at: expiresAt,
     });
+
+    // create transaction
+    if (!skipTransaction) {
+      transaction = await Transaction.create({
+        user_id: userId,
+        user_sites_id: newSite.id,
+        total_amount: totalAmount,
+      });
+    }
 
     return {
       messageKey: 'message:create_web_success',
-      data: newSite,
+      data: {
+        ...newSite.toJSON(),
+        transaction_id: transaction?.id || null,
+      },
     };
   },
 

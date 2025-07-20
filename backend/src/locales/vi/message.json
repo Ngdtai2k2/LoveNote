@@ -22,5 +22,6 @@
   "voucher_run_out": "Voucher đã hết lượt đổi!",
   "voucher_run_out_user": "Bạn đã hết lượt đổi voucher này!",
   "not_enough_tokens": "Bạn không đủ token để đổi!",
-  "redeem_successful": "Đổi voucher thành công!"
+  "redeem_successful": "Đổi voucher thành công!",
+  "voucher_has_used": "Voucher đã được sử dụng trước đó!"
 }

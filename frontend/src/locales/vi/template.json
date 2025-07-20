@@ -52,5 +52,12 @@
     "button_text": "Văn bản nút",
     "hint_bloom_galaxy": "👆 Nhấp vào tinh cầu để bắt đầu, nhấp đúp để bắt đầu lại.",
     "bloom_galaxy": "Ngân hà nở rộ",
-    "ring_texts": "Văn bản (mỗi dòng 1 câu/vòng trên tinh cầu)"
+    "ring_texts": "Văn bản (mỗi dòng 1 câu/vòng trên tinh cầu)",
+    "voucher": "Mã giảm giá",
+    "total_amount": "Tổng tiền",
+    "discount": "Giảm",
+    "save": "Tiết kiệm",
+    "voucher_invalid": "Voucher không hợp lệ cho giá trị sản phẩm này.",
+    "checkouts": "Thanh toán",
+    "template_payment_note": "Trang web cần kích hoạt mới có thể truy cập, hãy thanh toán ngay!"
 }

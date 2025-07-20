@@ -1,20 +1,24 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
-import { IconButton } from '@material-tailwind/react';
-import { Cog6ToothIcon } from '@heroicons/react/24/solid';
 import { Form, Formik } from 'formik';
+import { IconButton, Typography } from '@material-tailwind/react';
+import { Cog6ToothIcon } from '@heroicons/react/24/solid';
 
 import { useAxios } from '@hooks/useAxiosJWT';
 import { useCurrentUser } from '@hooks/useCurrentUser';
+import { productAPI } from '@api/product';
+
 import { handleSubmitSettings } from './handleSubmitSettings';
 
-import { FormItem } from '../components/formItem';
-import { FormRange } from '../components/formRange';
-import { FormCheckbox } from '../components/formCheckbox';
-import FormSlug from '../components/formSlug';
-import ModalRenderLink from '../modalRenderLink';
 import TopLeftControl from '../components/topLeftControl';
+import FormCheckbox from '../components/formCheckbox';
+import FormVoucher from '../components/formVoucher';
+import FormRange from '../components/formRange';
+import FormItem from '../components/formItem';
+import FormSlug from '../components/formSlug';
+
+import ModalRenderLink from '../modalRenderLink';
 
 import MUSIC_BACKGROUND_001 from '../assets/musics/music_background_001.mp3';
 
@@ -24,6 +28,10 @@ export default function MenuSettings({ settings, onUpdate }) {
   const [modalOpen, setModalOpen] = useState(false);
   const [sitePath, setSitePath] = useState('');
   const [audioName, setAudioName] = useState();
+
+  const [product, setProduct] = useState();
+  const [payload, setPayload] = useState({});
+
   const fileInputRef = useRef(null);
 
   const { t, i18n } = useTranslation('template');
@@ -31,6 +39,21 @@ export default function MenuSettings({ settings, onUpdate }) {
   const navigate = useNavigate();
   const user = useCurrentUser();
   const { axiosJWT } = useAxios(i18n.language);
+
+  // get product information
+  const getProductBySlug = async () => {
+    const path = window.location.pathname;
+    const slug = path.startsWith('/') ? path.slice(1) : path;
+
+    const response = await productAPI.getProductBySlug(slug);
+    if (response?.status === 200) {
+      setProduct(response?.data);
+    }
+  };
+
+  useEffect(() => {
+    getProductBySlug();
+  }, []);
 
   const initialValues = {
     textRain: settings.textRain || 'DEMO',
@@ -66,6 +89,10 @@ export default function MenuSettings({ settings, onUpdate }) {
         const path = res.data.slug;
         setSitePath(path);
         setModalOpen(true);
+        setPayload({
+          description: `${user.id}-${product.id}`,
+          transactionId: res.data.transaction_id,
+        });
       }
     } finally {
       setLoading(false);
@@ -245,11 +272,6 @@ export default function MenuSettings({ settings, onUpdate }) {
                     }}
                   />
 
-                  <FormSlug
-                    label={`${t('template:slug')} (${t('template:optional')})`}
-                    name="slug"
-                  />
-
                   {/* Upload Audio File */}
                   <div>
                     <label className="block mt-2 text-sm text-white">
@@ -282,6 +304,17 @@ export default function MenuSettings({ settings, onUpdate }) {
                     </div>
                   </div>
 
+                  <FormSlug
+                    label={`${t('template:slug')} (${t('template:optional')})`}
+                    name="slug"
+                  />
+
+                  <FormVoucher
+                    label={t('template:voucher')}
+                    name="voucher"
+                    price={product?.price}
+                  />
+
                   <button
                     disabled={loading}
                     type="submit"
@@ -298,6 +331,7 @@ export default function MenuSettings({ settings, onUpdate }) {
                 isOpen={modalOpen}
                 onClose={() => setModalOpen(false)}
                 path={sitePath}
+                payload={payload}
               />
             </Form>
           )}

@@ -232,6 +232,78 @@ const voucherService = {
       vouchers: results,
     };
   },
+
+  checkVoucher: async (req) => {
+    const code = req.body.voucher || req.params.code;
+
+    const userId = req.user.id;
+
+    const voucher = await Voucher.findOne({
+      where: { code },
+      attributes: [
+        'id',
+        'code',
+        'type',
+        'max_usage',
+        'used_count',
+        'expires_at',
+      ],
+    });
+
+    if (!voucher) {
+      throw {
+        code: 404,
+        messageKey: 'notfound:voucher',
+      };
+    }
+
+    const now = new Date();
+
+    if (voucher.expires_at && new Date(voucher.expires_at) < now) {
+      throw {
+        code: 400,
+        messageKey: 'message:voucher_expired',
+      };
+    }
+
+    const redemption = await UserVoucherRedemption.findOne({
+      where: {
+        user_id: userId,
+        voucher_id: voucher.id,
+      },
+      include: [
+        {
+          model: VoucherTemplate,
+          as: 'template',
+          attributes: ['discount_type', 'discount_value'],
+        },
+      ],
+    });
+
+    if (!redemption) {
+      throw {
+        code: 400,
+        messageKey: 'message:voucher_not_available',
+      };
+    }
+
+    if (redemption.is_used) {
+      throw {
+        code: 400,
+        messageKey: 'message:voucher_has_used',
+      };
+    }
+
+    return {
+      code: 200,
+      data: {
+        code: voucher.code,
+        discount_type: redemption.template.discount_type,
+        discount_value: redemption.template.discount_value,
+        expires_at: voucher.expires_at,
+      },
+    };
+  },
 };
 
 module.exports = voucherService;

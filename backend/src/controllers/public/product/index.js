@@ -5,7 +5,16 @@ const productController = {
   getAll: async (req, res) => {
     try {
       const result = await productServices.getAll(req);
-      res.status(200).json(result);
+      return res.status(200).json(result);
+    } catch (error) {
+      handleError(res, req, error);
+    }
+  },
+
+  getProductBySlug: async (req, res) => {
+    try {
+      const result = await productServices.getProductBySlug(req);
+      return res.status(200).json(result);
     } catch (error) {
       handleError(res, req, error);
     }

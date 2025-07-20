@@ -15,6 +15,7 @@ const API_ENDPOINTS = {
   },
   PRODUCT: {
     GET_ALL: '/product',
+    GET_BY_SLUG: (slug) => `/product/${slug}`,
   },
   BANNER: {
     GET_ALL: '/banner',
@@ -45,6 +46,10 @@ const API_ENDPOINTS = {
     GET_VOUCHER_REDEEM_BY_USER: (isUsed) =>
       `/voucher/redeem/me${isUsed ? `?is_used=${isUsed}` : ''}`,
     REDEEM: '/voucher/redeem',
+    CHECK: (code) => `/voucher/check/${code}`,
+  },
+  PAYMENT: {
+    CREATE_LINK: '/payos/create-payment-link',
   },
 };
 

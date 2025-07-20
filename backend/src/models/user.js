@@ -12,16 +12,17 @@ module.exports = (sequelize, DataTypes) => {
         onDelete: 'CASCADE',
       });
 
-      User.hasMany(models.Voucher, {
-        foreignKey: 'user_id',
-        as: 'vouchers',
-        onDelete: 'SET NULL',
-      });
-
       User.hasMany(models.UserVoucherRedemption, {
         foreignKey: 'user_id',
         as: 'voucher_redemptions',
         onDelete: 'CASCADE',
+      });
+
+      User.belongsToMany(models.Voucher, {
+        through: models.UserVoucherRedemption,
+        foreignKey: 'user_id',
+        otherKey: 'voucher_id',
+        as: 'vouchers',
       });
     }
   }

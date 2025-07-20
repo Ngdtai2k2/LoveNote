@@ -3,14 +3,9 @@ const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Voucher extends Model {
     static associate(models) {
-      Voucher.belongsTo(models.VoucherTemplate, {
-        as: 'template',
-        foreignKey: 'template_id',
-      });
-
       Voucher.hasMany(models.UserVoucherRedemption, {
-        as: 'redemptions',
         foreignKey: 'voucher_id',
+        as: 'redemptions',
       });
     }
   }
