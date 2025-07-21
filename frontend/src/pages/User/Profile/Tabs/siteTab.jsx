@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { toast } from 'react-fox-toast';
 import { Link } from 'react-router-dom';
 
-import { ButtonGroup, Button } from '@material-tailwind/react';
+import { ButtonGroup, Button, Typography } from '@material-tailwind/react';
 
 import { userSiteAPI } from '@api/userSite';
 import { useAxios } from '@hooks/useAxiosJWT';
@@ -35,7 +35,6 @@ export default function SiteTab() {
 
   useEffect(() => {
     getData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [axiosJWT, page]);
 
   const handleDelete = async (id) => {
@@ -75,17 +74,36 @@ export default function SiteTab() {
   return (
     <div className="py-2 px-1">
       {sites?.data?.length > 0 ? (
-        <>
-          <ul className="list-none">
-            {sites?.data.map((site) => (
+        <ul className="list-none">
+          {sites?.data.map((site) => {
+            const isExpired = site.expires_at && new Date(site.expires_at) < new Date();
+
+            return (
               <li key={site.id} className="mb-2">
                 <div className="md:flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <img
-                      src={site.product.thumbnail_url}
-                      alt={site.product.name}
-                      className="w-24 h-24 rounded object-cover"
-                    />
+                    <div className="relative w-24 h-24">
+                      <img
+                        src={site.product.thumbnail_url}
+                        alt={site.product.name}
+                        className={`w-full h-full rounded object-cover ${
+                          !site.is_active || isExpired ? 'grayscale opacity-70' : ''
+                        }`}
+                      />
+
+                      {isExpired ? (
+                        <span className="absolute top-3 left-1 bg-yellow-600 text-white text-[8px] font-semibold px-2 py-0.5 rounded rotate-[-20deg] shadow-md">
+                          {t('profile:expired')}
+                        </span>
+                      ) : (
+                        !site.is_active && (
+                          <span className="absolute top-3 left-1 bg-red-600 text-white text-[8px] font-semibold px-2 py-0.5 rounded rotate-[-20deg] shadow-md">
+                            {t('profile:inactive')}
+                          </span>
+                        )
+                      )}
+                    </div>
+
                     <div className="flex flex-col">
                       <span className="text-gray-800 dark:text-gray-200">{site.product.name}</span>
                       <span
@@ -102,20 +120,28 @@ export default function SiteTab() {
                       </span>
                     </div>
                   </div>
-                  <div className="flex justify-end items-center my-2">
-                    <ButtonGroup size="sm">
-                      <Button className="bg-gray-600 hover:bg-gray-700">
-                        <Link to={`/${site.slug}`}>{t('profile:view')}</Link>
-                      </Button>
-                      {/* handle soon */}
-                      <Button
-                        className="bg-rose-500 hover:bg-rose-700"
-                        onClick={() => setOpenModal(true)}
-                        loading={loadingDelete}
-                      >
-                        {t('profile:delete')}
-                      </Button>
-                    </ButtonGroup>
+
+                  <div className="flex justify-end items-center my-2 gap-2">
+                    <Link
+                      to={`/${site.slug}`}
+                      className="px-4 py-2 text-sm rounded-md bg-gray-200 hover:bg-gray-300 text-gray-800 dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-white transition-colors"
+                    >
+                      {t('profile:view')}
+                    </Link>
+
+                    <button
+                      onClick={() => setOpenModal(true)}
+                      disabled={loadingDelete}
+                      className={`px-4 py-2 text-sm rounded-md text-white transition-colors
+                      ${
+                        loadingDelete
+                          ? 'bg-red-300 cursor-not-allowed'
+                          : 'bg-red-500 hover:bg-red-600 dark:bg-red-600 dark:hover:bg-red-500'
+                      }`}
+                    >
+                      {loadingDelete ? t('profile:deleting') : t('profile:delete')}
+                    </button>
+
                     <ModalConfirm
                       t={t}
                       isOpen={openModal}
@@ -130,20 +156,21 @@ export default function SiteTab() {
                   </div>
                 </div>
               </li>
-            ))}
-          </ul>
-          {sites?.totalPages > 1 && (
-            <div className="flex justify-center mt-4">
-              <Pagination
-                currentPage={page}
-                totalPages={sites?.totalPages}
-                onPageChange={handlePageChange}
-              />
-            </div>
-          )}
-        </>
+            );
+          })}
+        </ul>
       ) : (
         <p className="dark:text-gray-400 text-gray-600 text-center">{t('profile:no_data')}.</p>
+      )}
+
+      {sites?.totalPages > 1 && (
+        <div className="flex justify-center mt-4">
+          <Pagination
+            currentPage={page}
+            totalPages={sites?.totalPages}
+            onPageChange={handlePageChange}
+          />
+        </div>
       )}
     </div>
   );

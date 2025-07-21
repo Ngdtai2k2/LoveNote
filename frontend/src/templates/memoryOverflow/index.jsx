@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 
 import { useDocumentTitle } from '@hooks/useDocumentTitle';
 
-import NotActivePage from '@components/NotActivePage';
+import SiteStatusPage from '@components/SiteStatusPage';
 import Popups from './renderEffect/popups';
 import MenuSettings from './menuSettings';
 
@@ -122,8 +122,8 @@ export default function MemoryOverflow({ data }) {
     }
   };
 
-  if (data?.is_active === false) {
-    return <NotActivePage />;
+  if (data && (!data.is_active || new Date(data.expires_at) < new Date())) {
+    return <SiteStatusPage type={!data.is_active ? 'not_active' : 'expired'} />;
   }
 
   return (

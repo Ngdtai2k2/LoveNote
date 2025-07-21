@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import BlinkingHint from '@components/BlinkingHint';
-import NotActivePage from '@components/NotActivePage';
+import SiteStatusPage from '@components/SiteStatusPage';
 
 import { useDebouncedValue } from '@hooks/useDebouncedValue';
 import { useDocumentTitle } from '@hooks/useDocumentTitle';
@@ -272,7 +272,7 @@ export default function GalaxyLoveLetter({ data }) {
   }, []);
 
   useEffect(() => {
-    if (data?.is_active === false) return;
+    if (data?.is_active === false || new Date(data?.expires_at) < new Date()) return;
 
     const audio = audioRef.current;
     audio.volume = settings.audioVolume || 0.5;
@@ -297,8 +297,8 @@ export default function GalaxyLoveLetter({ data }) {
     return () => window.removeEventListener('dblclick', handleDoubleClick);
   }, [settings.audioVolume]);
 
-  if (data?.is_active === false) {
-    return <NotActivePage />;
+  if (data && (!data.is_active || new Date(data.expires_at) < new Date())) {
+    return <SiteStatusPage type={!data.is_active ? 'not_active' : 'expired'} />;
   }
 
   return (

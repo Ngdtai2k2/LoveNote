@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 
 import { createHeartScene } from './createHeartScene';
 import BlinkingHint from '@components/BlinkingHint';
-import NotActivePage from '@components/NotActivePage';
+import SiteStatusPage from '@components/SiteStatusPage';
 import { useDocumentTitle } from '@hooks/useDocumentTitle';
 import { useDebouncedValue } from '@hooks/useDebouncedValue';
 
@@ -56,7 +56,7 @@ export default function HeartBeatVisualizer({ data }) {
   useDocumentTitle(settings.text);
 
   useEffect(() => {
-    if (data?.is_active === false) return;
+    if (data?.is_active === false || new Date(data?.expires_at) < new Date()) return;
 
     const scene = createHeartScene(
       canvasRef.current,
@@ -71,10 +71,10 @@ export default function HeartBeatVisualizer({ data }) {
     return () => {
       scene?.dispose();
     };
-  }, [data?.is_active, debouncedSceneSettings]);
+  }, [data?.expires_at, data?.is_active, debouncedSceneSettings]);
 
-  if (data?.is_active === false) {
-    return <NotActivePage />;
+  if (data && (!data.is_active || new Date(data.expires_at) < new Date())) {
+    return <SiteStatusPage type={!data.is_active ? 'not_active' : 'expired'} />;
   }
 
   return (

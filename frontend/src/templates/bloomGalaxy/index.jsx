@@ -4,7 +4,7 @@ import { useDebouncedValue } from '@hooks/useDebouncedValue';
 import { useDocumentTitle } from '@hooks/useDocumentTitle';
 
 import BlinkingHint from '@components/BlinkingHint';
-import NotActivePage from '@components/NotActivePage';
+import SiteStatusPage from '@components/SiteStatusPage';
 import MenuSettings from './menuSettings.jsx';
 
 import IMAGE_DEMO from '../assets/images/image_galaxy_text.jpg';
@@ -13,7 +13,7 @@ import MUSIC_DEMO from '../assets/musics/music_background_005.mp3';
 export default function BloomGalaxy({ data }) {
   const containerRef = useRef(null);
   const [musicUrl, setMusicUrl] = useState(null);
-  
+
   const { t } = useTranslation('template');
 
   useDocumentTitle(t('bloom_galaxy'));
@@ -47,7 +47,7 @@ export default function BloomGalaxy({ data }) {
   };
 
   useEffect(() => {
-    if (data?.is_active === false) return;
+    if (data?.is_active === false || new Date(data?.expires_at) < new Date()) return;
 
     document.body.style.overflow = 'hidden';
     clearContainer();
@@ -117,10 +117,10 @@ export default function BloomGalaxy({ data }) {
         moduleRef.disposeGalaxy();
       }
     };
-  }, [data?.is_active, debouncedSettings]);
+  }, [data?.expires_at, data?.is_active, debouncedSettings]);
 
-  if (data?.is_active === false) {
-    return <NotActivePage />;
+  if (data && (!data.is_active || new Date(data.expires_at) < new Date())) {
+    return <SiteStatusPage type={!data.is_active ? 'not_active' : 'expired'} />;
   }
 
   return (

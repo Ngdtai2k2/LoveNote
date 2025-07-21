@@ -5,6 +5,8 @@
     "create_web": "Create web"
   },
   "price": "Price",
+  "web_expired": "Website has expired",
+  "web_expired_note": "The page you are trying to access has expired. Please check the link again or contact the administrator.",
   "web_not_active": "Website not activated",
   "web_not_active_note": "The website you are trying to access is not yet active. Please check the link again or contact the administrator.",
   "home": "Back to home page"

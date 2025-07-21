@@ -6,5 +6,8 @@
     "view": "Xem",
     "delete": "Xóa",
     "confirm_delete_title": "Bạn có chắc chắn muốn xóa trang này không?",
-    "confirm_delete_message": "Hành động này sẽ xóa trang và tất cả dữ liệu liên quan. Bạn có chắc chắn muốn tiếp tục không?"
+    "confirm_delete_message": "Hành động này sẽ xóa trang và tất cả dữ liệu liên quan. Bạn có chắc chắn muốn tiếp tục không?",
+    "inactive": "Chưa kích hoạt",
+    "inactive_note": "Những web chưa kích hoạt tức là chưa thanh toán (hãy thanh toán tại tab đơn hàng).",
+    "expired": "Hết hạn"
 }

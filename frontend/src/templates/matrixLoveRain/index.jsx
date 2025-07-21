@@ -5,7 +5,7 @@ import MenuSettings from './menuSettings';
 import helperFunctions from '@helpers';
 import { useDocumentTitle } from '@hooks/useDocumentTitle';
 
-import NotActivePage from '@components/NotActivePage';
+import SiteStatusPage from '@components/SiteStatusPage';
 import BlinkingHint from '@components/BlinkingHint';
 
 import MUSIC_BACKGROUND_001 from '../assets/musics/music_background_001.mp3';
@@ -201,8 +201,8 @@ export default function MatrixLoveRain({ data }) {
     return () => window.removeEventListener('dblclick', handleDoubleClick);
   }, [settings.audioVolume]);
 
-  if (data?.is_active === false) {
-    return <NotActivePage />;
+  if (data && (!data.is_active || new Date(data.expires_at) < new Date())) {
+    return <SiteStatusPage type={!data.is_active ? 'not_active' : 'expired'} />;
   }
 
   return (

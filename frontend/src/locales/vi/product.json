@@ -5,6 +5,8 @@
     "create_web": "Tạo web"
   },
   "price": "Giá",
+  "web_expired": "Trang web đã hết hạn",
+  "web_expired_note": "Trang web bạn truy cập đã hết hạn. Vui lòng kiểm tra lại đường dẫn hoặc liên hệ với quản trị viên.",
   "web_not_active": "Trang web chưa được kích hoạt",
   "web_not_active_note": "Website bạn đang truy cập hiện chưa được active. Vui lòng kiểm tra lại đường dẫn hoặc liên hệ với quản trị viên.",
   "home": "Quay lại trang chủ"

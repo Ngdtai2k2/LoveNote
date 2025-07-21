@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useDocumentTitle } from '@hooks/useDocumentTitle';
 import { useDebouncedValue } from '@hooks/useDebouncedValue';
 import BlinkingHint from '@components/BlinkingHint';
-import NotActivePage from '@components/NotActivePage';
+import SiteStatusPage from '@components/SiteStatusPage';
 
 import MatrixRain from './renderEffect/matrixRain';
 import WordDisplay from './renderEffect/wordDisplay';
@@ -46,6 +46,8 @@ export default function MatrixRainWithWords({ data }) {
   useDocumentTitle(debounced.title);
 
   useEffect(() => {
+    if (data?.is_active === false || new Date(data?.expires_at) < new Date()) return;
+
     const audio = audioRef.current;
     if (!audio) return;
 
@@ -71,10 +73,10 @@ export default function MatrixRainWithWords({ data }) {
 
     window.addEventListener('dblclick', toggleAudio);
     return () => window.removeEventListener('dblclick', toggleAudio);
-  }, [debounced.audioVolume]);
+  }, [data?.expires_at, data?.is_active, debounced.audioVolume]);
 
-  if (data?.is_active === false) {
-    return <NotActivePage />;
+  if (data && (!data.is_active || new Date(data.expires_at) < new Date())) {
+    return <SiteStatusPage type={!data.is_active ? 'not_active' : 'expired'} />;
   }
 
   return (
