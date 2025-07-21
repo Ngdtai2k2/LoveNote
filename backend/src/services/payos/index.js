@@ -55,6 +55,7 @@ const payosService = {
         orderCode: generateNumericOrderCode(),
         returnUrl: `${process.env.CLIENT_URL}/payment/success`,
         cancelUrl: `${process.env.CLIENT_URL}/payment/cancel`,
+        expiredAt: Math.floor((Date.now() + 15 * 60 * 1000) / 1000),
       };
 
       const paymentLink = await payos.createPaymentLink(paymentRequest);
