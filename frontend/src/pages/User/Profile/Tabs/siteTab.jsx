@@ -1,13 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { toast } from 'react-fox-toast';
 import { Link } from 'react-router-dom';
-
-import { ButtonGroup, Button, Typography } from '@material-tailwind/react';
 
 import { userSiteAPI } from '@api/userSite';
 import { useAxios } from '@hooks/useAxiosJWT';
 import Pagination from '@components/Pagination';
+import helperFunctions from '@helpers';
 
 import ModalConfirm from './modalConfirm';
 
@@ -35,6 +33,7 @@ export default function SiteTab() {
 
   useEffect(() => {
     getData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [axiosJWT, page]);
 
   const handleDelete = async (id) => {
@@ -47,19 +46,6 @@ export default function SiteTab() {
   const handlePageChange = (newPage) => {
     if (newPage !== page) {
       setPage(newPage);
-    }
-  };
-
-  const handleCopy = async (url) => {
-    try {
-      await navigator.clipboard.writeText(url);
-      toast.success(t('template:copy_success'), {
-        position: 'top-right',
-      });
-    } catch {
-      toast.error(t('template:copy_fail'), {
-        position: 'top-right',
-      });
     }
   };
 
@@ -109,7 +95,10 @@ export default function SiteTab() {
                       <span
                         className="text-gray-600 dark:text-gray-400 text-sm hover:underline cursor-pointer"
                         onClick={() =>
-                          handleCopy(`${import.meta.env.VITE_CLIENT_URL}/${site.slug}`)
+                          helperFunctions.handleCopy(
+                            `${import.meta.env.VITE_CLIENT_URL}/${site.slug}`,
+                            t
+                          )
                         }
                       >
                         {t('profile:path')}: {import.meta.env.VITE_CLIENT_URL}/{site.slug}
@@ -121,10 +110,10 @@ export default function SiteTab() {
                     </div>
                   </div>
 
-                  <div className="flex justify-end items-center my-2 gap-2">
+                  <div className="flex justify-end items-center my-2 gap-1">
                     <Link
                       to={`/${site.slug}`}
-                      className="px-4 py-2 text-sm rounded-md bg-gray-200 hover:bg-gray-300 text-gray-800 dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-white transition-colors"
+                      className="px-2 py-1 text-sm rounded-md bg-gray-200 hover:bg-gray-300 text-gray-800 dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-white transition-colors"
                     >
                       {t('profile:view')}
                     </Link>
@@ -132,7 +121,7 @@ export default function SiteTab() {
                     <button
                       onClick={() => setOpenModal(true)}
                       disabled={loadingDelete}
-                      className={`px-4 py-2 text-sm rounded-md text-white transition-colors
+                      className={`px-2 py-1 text-sm rounded-md text-white transition-colors
                       ${
                         loadingDelete
                           ? 'bg-red-300 cursor-not-allowed'
