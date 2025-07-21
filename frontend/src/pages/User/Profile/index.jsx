@@ -25,6 +25,7 @@ import CONSTANTS from '@constants';
 
 import UpdateModal from './updateModal';
 import SiteTab from './Tabs/siteTab';
+import TransactionTab from './Tabs/transactionTab';
 
 dayjs.extend(relativeTime);
 
@@ -103,10 +104,12 @@ export default function Profile() {
                 ))}
               </TabsHeader>
               <TabsBody>
-                <TabPanel value="0">
+                <TabPanel className='px-0' value="0">
                   <SiteTab />
                 </TabPanel>
-                <TabPanel value="1">Tab 1 content</TabPanel>
+                <TabPanel className='px-0' value="1">
+                  <TransactionTab />
+                </TabPanel>
               </TabsBody>
             </Tabs>
           </div>

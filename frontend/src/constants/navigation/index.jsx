@@ -44,5 +44,5 @@ export const profileMenu = [
 
 export const profileTabMenu = [
   { label: 'my_website', value: '0' },
-  { label: 'my_order', value: '1' },
+  { label: 'my_transaction', value: '1' },
 ];

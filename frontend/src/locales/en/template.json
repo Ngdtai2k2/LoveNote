@@ -59,5 +59,9 @@
     "save": "Save",
     "voucher_invalid": "Voucher is not valid for this product value.",
     "checkouts": "Checkouts",
-    "template_payment_note": "Site needs activation to be accessed, pay now!"
+    "template_payment_note": "Site needs activation to be accessed, pay now!",
+    "status": "Status",
+    "cancelled": "Cancelled",
+    "pending": "Pending",
+    "paid": "Paid"
 }

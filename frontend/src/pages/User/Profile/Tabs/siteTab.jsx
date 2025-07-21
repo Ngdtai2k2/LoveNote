@@ -67,7 +67,7 @@ export default function SiteTab() {
             return (
               <li key={site.id} className="mb-2">
                 <div className="md:flex items-center justify-between">
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-1">
                     <div className="relative w-24 h-24">
                       <img
                         src={site.product.thumbnail_url}
@@ -78,12 +78,12 @@ export default function SiteTab() {
                       />
 
                       {isExpired ? (
-                        <span className="absolute top-3 left-1 bg-yellow-600 text-white text-[8px] font-semibold px-2 py-0.5 rounded rotate-[-20deg] shadow-md">
+                        <span className="absolute top-3 left-1 bg-yellow-600 text-white text-[8px] font-semibold px-1 py-0.5 rounded rotate-[-20deg] shadow-md">
                           {t('profile:expired')}
                         </span>
                       ) : (
                         !site.is_active && (
-                          <span className="absolute top-3 left-1 bg-red-600 text-white text-[8px] font-semibold px-2 py-0.5 rounded rotate-[-20deg] shadow-md">
+                          <span className="absolute top-3 left-1 bg-red-600 text-white text-[8px] font-semibold px-1 py-0.5 rounded rotate-[-20deg] shadow-md">
                             {t('profile:inactive')}
                           </span>
                         )
@@ -128,8 +128,14 @@ export default function SiteTab() {
                           : 'bg-red-500 hover:bg-red-600 dark:bg-red-600 dark:hover:bg-red-500'
                       }`}
                     >
-                      {loadingDelete ? t('profile:deleting') : t('profile:delete')}
+                      {loadingDelete ? t('form:deleting') : t('form:delete')}
                     </button>
+
+                    {!site.is_active && (
+                      <button className="px-2 py-1 text-sm rounded-md text-white bg-green-500">
+                        {t('profile:active')}
+                      </button>
+                    )}
 
                     <ModalConfirm
                       t={t}

@@ -8,6 +8,10 @@ module.exports = (sequelize, DataTypes) => {
   class Transaction extends Model {
     static associate(models) {
       Transaction.belongsTo(models.User, { foreignKey: 'user_id' });
+      Transaction.belongsTo(models.UserSite, {
+        foreignKey: 'user_sites_id',
+        as: 'user_site',
+      });
     }
   }
   Transaction.init(

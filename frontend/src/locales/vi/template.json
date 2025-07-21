@@ -59,5 +59,9 @@
     "save": "Tiết kiệm",
     "voucher_invalid": "Voucher không hợp lệ cho giá trị sản phẩm này.",
     "checkouts": "Thanh toán",
-    "template_payment_note": "Trang web cần kích hoạt mới có thể truy cập, hãy thanh toán ngay!"
+    "template_payment_note": "Trang web cần kích hoạt mới có thể truy cập, hãy thanh toán ngay!",
+    "status": "Trạng thái",
+    "cancelled": "Hủy",
+    "pending": "Đang chờ",
+    "paid": "Đã thanh toán"
 }

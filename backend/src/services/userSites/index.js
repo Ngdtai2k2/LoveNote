@@ -186,7 +186,24 @@ const userSiteServices = {
           as: 'product',
           attributes: ['slug', 'name', 'thumbnail_url'],
         },
+        {
+          model: Transaction,
+          as: 'transactions',
+          attributes: ['id'],
+          required: false,
+        },
       ],
+    });
+
+    sites.data = sites.data.map((site) => {
+      const json = site.toJSON();
+      const has_transaction =
+        Array.isArray(json.transactions) && json.transactions.length > 0;
+      delete json.transactions;
+      return {
+        ...json,
+        has_transaction,
+      };
     });
 
     return sites;

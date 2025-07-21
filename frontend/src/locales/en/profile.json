@@ -2,12 +2,14 @@
     "created_at": "Created At",
     "path": "Path",
     "no_data": "No data",
-    "my_order": "My Order",
+    "my_transaction": "My Transaction",
     "view": "View",
     "delete": "Delete",
     "confirm_delete_title": "Are you sure you want to delete this site?",
     "confirm_delete_message": "This action will delete the site and all related data. Are you sure you want to proceed?",
     "inactive": "Inactive",
     "inactive_note": "Unactivated websites are unpaid (please pay at the orders tab).",
-    "expired": "Expired"
+    "expired": "Expired",
+    "checkouts": "Checkouts",
+    "active": "Active"
 }

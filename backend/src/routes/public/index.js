@@ -12,6 +12,7 @@ const taskRoutes = require('./task');
 const shortLinkProviderRoute = require('./shortLinkProvider');
 const voucherRoute = require('./voucher');
 const payosRoute = require('./payos');
+const transactionRoute = require('./transaction');
 
 router.use('/auth', authRoutes);
 router.use('/user', userRoutes);
@@ -24,5 +25,6 @@ router.use('/task', taskRoutes);
 router.use('/shortener-provider', shortLinkProviderRoute);
 router.use('/voucher', voucherRoute);
 router.use('/payos', payosRoute);
+router.use('/transaction', transactionRoute);
 
 module.exports = router;

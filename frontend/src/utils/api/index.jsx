@@ -52,6 +52,9 @@ const API_ENDPOINTS = {
     CREATE_LINK: '/payos/create-payment-link',
     CANCEL_LINK: '/payos/cancel-payment',
   },
+  TRANSACTION: {
+    GET_BY_USER: '/transaction/me'
+  }
 };
 
 export default API_ENDPOINTS;
