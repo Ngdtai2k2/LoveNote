@@ -60,7 +60,7 @@ const taskService = {
     const shortLink = await createShortLink(
       provider.base_url,
       provider.api_key,
-      `https:/test.com/verify-token/${token}`
+      `${process.env.CLIENT_URL}/verify-token/${token}`
     );
 
     await Task.create(
