@@ -89,7 +89,7 @@ export default function TransactionTab() {
                       </span>
                     </div>
                   </div>
-                  <div className="flex justify-end items-center my-2 gap-2">
+                  {/* <div className="flex justify-end items-center my-2 gap-2">
                     {transaction.status !== 'paid' && (
                       <Button
                         size="sm"
@@ -98,7 +98,7 @@ export default function TransactionTab() {
                         {t('profile:checkouts')}
                       </Button>
                     )}
-                  </div>
+                  </div> */}
                 </div>
               </li>
             );

@@ -8,8 +8,10 @@
     "confirm_delete_title": "Are you sure you want to delete this site?",
     "confirm_delete_message": "This action will delete the site and all related data. Are you sure you want to proceed?",
     "inactive": "Inactive",
-    "inactive_note": "Unactivated websites are unpaid (please pay at the orders tab).",
+    "inactive_note": "Unactivated websites mean unpaid.",
     "expired": "Expired",
+    "expired_note": "Expired websites are due to expired vouchers, you can activate 1 day by shortening the link.",
     "checkouts": "Checkouts",
-    "active": "Active"
+    "active": "Active",
+    "indefinite": "Indefinite"
 }

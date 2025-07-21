@@ -8,8 +8,10 @@
     "confirm_delete_title": "Bạn có chắc chắn muốn xóa trang này không?",
     "confirm_delete_message": "Hành động này sẽ xóa trang và tất cả dữ liệu liên quan. Bạn có chắc chắn muốn tiếp tục không?",
     "inactive": "Chưa kích hoạt",
-    "inactive_note": "Những web chưa kích hoạt tức là chưa thanh toán (hãy thanh toán tại tab đơn hàng).",
+    "inactive_note": "Những web chưa kích hoạt nghĩa là chưa thanh toán.",
     "expired": "Hết hạn",
+    "expired_note": "Những web hết hạn là do voucher hết thời gian, bạn có thể kích hoạt 1 ngày bằng cách vượt link rút gọn.",
     "checkouts": "Thanh toán",
-    "active": "Kích hoạt"
+    "active": "Kích hoạt",
+    "indefinite": "Vô thời hạn"
 }

@@ -8,6 +8,7 @@ import Pagination from '@components/Pagination';
 import helperFunctions from '@helpers';
 
 import ModalConfirm from './modalConfirm';
+import { Typography } from '@material-tailwind/react';
 
 export default function SiteTab() {
   const [sites, setSites] = useState([]);
@@ -59,6 +60,14 @@ export default function SiteTab() {
 
   return (
     <div className="py-2 px-1">
+      <div className="text-red-500 mb-3">
+        <Typography className="text-xs font-semibold italic">
+          *{t('profile:inactive_note')}
+        </Typography>
+        <Typography className="text-xs font-semibold italic">
+          *{t('profile:expired_note')}
+        </Typography>
+      </div>
       {sites?.data?.length > 0 ? (
         <ul className="list-none">
           {sites?.data.map((site) => {
@@ -107,6 +116,12 @@ export default function SiteTab() {
                         {t('profile:created_at')}:{' '}
                         {new Date(site.created_at).toLocaleDateString('vi-VN')}
                       </span>
+                      <span className="text-gray-600 dark:text-gray-400 text-sm font-light italic">
+                        {t('profile:expired')}:{' '}
+                        {site.expires_at
+                          ? helperFunctions.formatDateTime(site.expires_at)
+                          : t('profile:indefinite')}
+                      </span>
                     </div>
                   </div>
 
@@ -131,7 +146,7 @@ export default function SiteTab() {
                       {loadingDelete ? t('form:deleting') : t('form:delete')}
                     </button>
 
-                    {!site.is_active && (
+                    {(!site.is_active || isExpired) && (
                       <button className="px-2 py-1 text-sm rounded-md text-white bg-green-500">
                         {t('profile:active')}
                       </button>
