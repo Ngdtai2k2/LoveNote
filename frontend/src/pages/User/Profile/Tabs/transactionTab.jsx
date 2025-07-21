@@ -31,8 +31,6 @@ export default function TransactionTab() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [axiosJWT, page]);
 
-  console.log(transactions);
-
   const handlePageChange = (newPage) => {
     if (newPage !== page) {
       setPage(newPage);
