@@ -49,6 +49,7 @@ const userSiteServices = {
     let totalAmount = 0;
     let expiresAt = null;
     let transaction = null;
+    let is_active = false;
 
     if (!userId || !productId || !configs) {
       throw { code: 400, messageKey: 'validate:no_data' };
@@ -131,6 +132,7 @@ const userSiteServices = {
           expiresAt = new Date();
           expiresAt.setDate(expiresAt.getDate() + discount_value);
           skipTransaction = true;
+          is_active = true;
         } else if (discount_type === 'percent') {
           // Discount by %
           const rawPrice = parseFloat(product.price || 0);
@@ -151,6 +153,7 @@ const userSiteServices = {
       slug,
       configs: parsedConfigs,
       expires_at: expiresAt,
+      is_active: is_active,
     });
 
     // create transaction
@@ -216,6 +219,16 @@ const userSiteServices = {
 
       for (const filePath of filePaths) {
         await helpers.safeUnlink(filePath);
+      }
+
+      const count = await Transaction.count({
+        where: { user_sites_id: id },
+      });
+
+      if (count > 0) {
+        await Transaction.destroy({
+          where: { user_sites_id: id },
+        });
       }
 
       await site.destroy();
