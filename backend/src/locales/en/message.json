@@ -23,5 +23,7 @@
   "voucher_run_out_user": "You have run out of this voucher exchange!",
   "not_enough_tokens": "You do not have enough tokens to exchange!",
   "redeem_successful": "Voucher redeemed successfully!",
-  "voucher_has_used": "Voucher has been used before!"
+  "voucher_has_used": "Voucher has been used before!",
+  "cancel_payment_failed": "Cancel payment failed!",
+  "cancel_payment_successful": "Cancel payment successfully!"
 }

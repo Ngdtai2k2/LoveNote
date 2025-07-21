@@ -4,7 +4,7 @@ const ShortUniqueId = require('short-unique-id');
 const { Transaction, User, UserSite } = require('@models');
 const { sequelize } = require('@config/connectDB');
 
-const payos = new PayOS(
+const payOs = new PayOS(
   process.env.CLIENT_ID_PAYOS,
   process.env.API_KEY_PAYOS,
   process.env.CHECKSUM_KEY_PAYOS
@@ -58,7 +58,7 @@ const payosService = {
         expiredAt: Math.floor((Date.now() + 15 * 60 * 1000) / 1000),
       };
 
-      const paymentLink = await payos.createPaymentLink(paymentRequest);
+      const paymentLink = await payOs.createPaymentLink(paymentRequest);
 
       await transactionData.update(
         {
@@ -81,6 +81,31 @@ const payosService = {
         messageKey: 'message:server_error',
       };
     }
+  },
+
+  cancelPayment: async (req) => {
+    const { orderCode } = req.body;
+
+    const transaction = await Transaction.findOne({
+      where: { order_code: orderCode },
+    });
+
+    if (!transaction) {
+      throw {
+        code: 404,
+        messageKey: 'notfound:transaction',
+      };
+    }
+
+    await transaction.update({ status: 'cancelled' });
+
+    const userSite = await UserSite.findByPk(transaction.user_sites_id);
+    await userSite.update({ is_active: false });
+
+    return {
+      code: 200,
+      messageKey: 'message:cancel_payment_successful',
+    };
   },
 
   receiveHook: async (req) => {

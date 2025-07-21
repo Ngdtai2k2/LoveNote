@@ -50,6 +50,7 @@ const API_ENDPOINTS = {
   },
   PAYMENT: {
     CREATE_LINK: '/payos/create-payment-link',
+    CANCEL_LINK: '/payos/cancel-payment',
   },
 };
 

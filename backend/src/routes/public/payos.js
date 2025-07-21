@@ -1,12 +1,17 @@
 const router = require('express').Router();
-const payosController = require('@controllers/public/payos');
+const payOsController = require('@controllers/public/payos');
 const verifyMiddleware = require('@middlewares/verifyToken');
 
 router.post(
   '/create-payment-link',
   verifyMiddleware.token,
-  payosController.createPaymentLink
+  payOsController.createPaymentLink
 );
-router.post('/receive-hook', payosController.receiveHook);
+router.post(
+  '/cancel-payment',
+  verifyMiddleware.token,
+  payOsController.cancelPayment
+);
+router.post('/receive-hook', payOsController.receiveHook);
 
 module.exports = router;

@@ -6,5 +6,6 @@
   "data": "Data not found!",
   "provider": "Provider not found!",
   "task": "Task not found!",
-  "voucher": "Voucher not found!"
+  "voucher": "Voucher not found!",
+  "transaction": "No transaction found!"
 }

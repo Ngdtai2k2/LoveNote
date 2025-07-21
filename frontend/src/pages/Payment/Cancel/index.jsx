@@ -1,11 +1,31 @@
-import React from 'react';
+import { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
 import { XCircleIcon } from '@heroicons/react/24/solid';
-import { useTranslation } from 'react-i18next';
+
+import { useDocumentTitle } from '@hooks/useDocumentTitle';
+import { useAxios } from '@hooks/useAxiosJWT';
+import { paymentAPI } from '@api/payment';
 
 export default function Cancel() {
-  const { t } = useTranslation('payment');
+  const { t, i18n } = useTranslation('payment');
+
+  useDocumentTitle(t('cancel'));
+
+  const { axiosJWT } = useAxios(i18n.language);
+
+  const urlParams = new URLSearchParams(window.location.search);
+  const orderCode = urlParams.get('orderCode');
+
+  const handleCancelPayment = async (orderCode) => {
+    await paymentAPI.cancelPayment(axiosJWT, orderCode);
+  };
+
+  useEffect(() => {
+    handleCancelPayment(orderCode);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [orderCode]);
 
   return (
     <div className="my-10 flex items-center justify-center px-4">
