@@ -10,7 +10,7 @@
     "inactive": "Inactive",
     "inactive_note": "Unactivated websites mean unpaid.",
     "expired": "Expired",
-    "expired_note": "Expired websites are due to expired vouchers, you can activate 1 day by shortening the link.",
+    "expired_note": "Expired websites are due to expired vouchers, you can activate them using tokens.",
     "checkouts": "Checkouts",
     "active": "Active",
     "indefinite": "Indefinite"

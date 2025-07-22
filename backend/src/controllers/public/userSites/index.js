@@ -1,5 +1,6 @@
 const handleError = require('@utils/handleError');
 const userSiteServices = require('@services/userSites');
+const { sequelize } = require('@config/connectDB');
 
 const userSitesController = {
   checkSlugExists: async (req, res) => {
@@ -49,6 +50,21 @@ const userSitesController = {
       });
     } catch (error) {
       return handleError(res, req, error);
+    }
+  },
+
+  activeSite: async (req, res) => {
+    const transaction = await sequelize.transaction();
+    try {
+      const { code, messageKey } = await userSiteServices.activeSite(
+        req,
+        transaction
+      );
+      await transaction.commit();
+      return res.status(code).json({ message: req.t(messageKey) });
+    } catch (error) {
+      await transaction.rollback();
+      handleError(res, req, error);
     }
   },
 };

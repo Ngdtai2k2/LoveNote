@@ -25,5 +25,7 @@
   "redeem_successful": "Đổi voucher thành công!",
   "voucher_has_used": "Voucher đã được sử dụng trước đó!",
   "cancel_payment_failed": "Hủy thanh toán thất bại!",
-  "cancel_payment_successful": "Hủy thanh toán thành công!"
+  "cancel_payment_successful": "Hủy thanh toán thành công!",
+  "active_site_success": "Kích hoạt trang web thành công, vui lòng kiểm tra thử!",
+  "site_already_active": "Trang web đã được kích hoạt trước đó!"
 }

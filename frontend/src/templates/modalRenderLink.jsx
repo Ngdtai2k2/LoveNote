@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import {
   Button,
@@ -50,21 +51,29 @@ export default function ModalRenderLink({ isOpen, onClose, path, payload }) {
             </Typography>
           </Tooltip>
         </Card>
-        <Typography
-          as="p"
-          variant="small"
-          className="text-center text-yellow-500 font-semibold flex"
-        >
-          {t('template_payment_note')}
-        </Typography>
+        {payload.description && payload.transactionId && (
+          <Typography
+            as="p"
+            variant="small"
+            className="text-center text-yellow-500 font-semibold flex"
+          >
+            {t('template_payment_note')}
+          </Typography>
+        )}
       </DialogBody>
       <DialogFooter className="flex justify-center gap-4">
         <Button variant="gradient" color="blue" onClick={() => helperFunctions.handleCopy(url, t)}>
           <span>{t('Copy link')}</span>
         </Button>
-        <Button variant="gradient" color="green" onClick={() => handleCheckout()}>
-          <span>{t('checkouts')}</span>
-        </Button>
+        {payload.description && payload.transactionId ? (
+          <Button variant="gradient" color="green" onClick={() => handleCheckout()}>
+            <span>{t('checkouts')}</span>
+          </Button>
+        ) : (
+          <Button variant="gradient" color="green" onClick={() => (window.location.href = url)}>
+            <span>{t('redirect')}</span>
+          </Button>
+        )}
       </DialogFooter>
     </Dialog>
   );

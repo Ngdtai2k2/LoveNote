@@ -14,11 +14,11 @@ export const userSiteAPI = {
         params.id = id;
       }
 
-      const res = await axiosClient.get(API_ENDPOINTS.USER_SITES.GET_CONFIGS, {
+      const response = await axiosClient.get(API_ENDPOINTS.USER_SITES.GET_CONFIGS, {
         params,
       });
 
-      return res.data;
+      return response.data;
     } catch {
       return null;
     }
@@ -26,11 +26,11 @@ export const userSiteAPI = {
 
   createSiteConfig: async (axiosJWT, data) => {
     try {
-      const res = await axiosJWT.post(API_ENDPOINTS.USER_SITES.CREATE, data);
+      const response = await axiosJWT.post(API_ENDPOINTS.USER_SITES.CREATE, data);
       // toast.success(res.data.message, {
       //   position: 'top-right',
       // });
-      return res.data;
+      return response.data;
     } catch (error) {
       toast.error(error.response?.data.message, {
         position: 'top-right',
@@ -40,10 +40,10 @@ export const userSiteAPI = {
 
   checkSlugExists: async (slug) => {
     try {
-      const res = await axiosClient.get(API_ENDPOINTS.USER_SITES.CHECK_SLUG, {
+      const response = await axiosClient.get(API_ENDPOINTS.USER_SITES.CHECK_SLUG, {
         params: { slug },
       });
-      return res.data === true;
+      return response.data === true;
     } catch {
       return false;
     }
@@ -68,16 +68,41 @@ export const userSiteAPI = {
 
   deleteConfigSite: async (axiosJWT, id) => {
     try {
-      const res = await axiosJWT.delete(API_ENDPOINTS.USER_SITES.DELETE_CONFIGS(id));
-      toast.success(res.data.message, {
+      const response = await axiosJWT.delete(API_ENDPOINTS.USER_SITES.DELETE_CONFIGS(id));
+      toast.success(response.data.message, {
         position: 'top-right',
       });
-      return res.data;
+      return response.data;
     } catch (error) {
       toast.error(error.response?.data.message, {
         position: 'top-right',
       });
       return null;
+    }
+  },
+
+  activeSite: async (axiosJWT, payload) => {
+    try {
+      const response = await axiosJWT.post(
+        API_ENDPOINTS.USER_SITES.ACTIVE,
+        {},
+        {
+          params: {
+            id: payload.id,
+            num_days: payload.numDays,
+            token: payload.token,
+          },
+        }
+      );
+      toast.success(response.data.message, {
+        position: 'top-right',
+      });
+      return response;
+    } catch (error) {
+      toast.error(error.response?.data.message, {
+        position: 'top-right',
+      });
+      throw error;
     }
   },
 };

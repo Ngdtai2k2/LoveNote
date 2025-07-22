@@ -1,6 +1,7 @@
 require('dotenv').config();
 
 const {
+  Wallet,
   UserSite,
   User,
   Product,
@@ -180,6 +181,7 @@ const userSiteServices = {
 
     const sites = await paginate(UserSite, req, {
       where: { user_id: userId },
+      attributes: { exclude: ['configs', 'user_id', 'product_id'] },
       include: [
         {
           model: Product,
@@ -189,7 +191,7 @@ const userSiteServices = {
         {
           model: Transaction,
           as: 'transactions',
-          attributes: ['id'],
+          attributes: ['id', 'total_amount'],
           required: false,
         },
       ],
@@ -199,10 +201,17 @@ const userSiteServices = {
       const json = site.toJSON();
       const has_transaction =
         Array.isArray(json.transactions) && json.transactions.length > 0;
+
+      const total_amount = has_transaction
+        ? json.transactions[0].total_amount
+        : null;
+
       delete json.transactions;
+
       return {
         ...json,
         has_transaction,
+        total_amount,
       };
     });
 
@@ -259,6 +268,66 @@ const userSiteServices = {
         ? error
         : { code: 500, messageKey: 'message:server_error' };
     }
+  },
+
+  activeSite: async (req, transaction) => {
+    const { id, num_days, token } = req.query;
+    const userId = req.user.id;
+
+    const days = parseInt(num_days, 10);
+    if (isNaN(days) || days <= 0) {
+      throw { code: 400, messageKey: 'validate:invalid_num_days' };
+    }
+
+    const site = await UserSite.findByPk(id, { transaction });
+    if (!site) throw { code: 404, messageKey: 'notfound:data' };
+
+    const now = new Date();
+
+    if (new Date(site.expires_at) > now) {
+      throw {
+        code: 400,
+        messageKey: 'message:site_already_active',
+      };
+    }
+
+    const baseDate =
+      site.expires_at && new Date(site.expires_at) > now
+        ? new Date(site.expires_at)
+        : now;
+
+    const newExpiresAt = new Date(
+      baseDate.getTime() + days * 24 * 60 * 60 * 1000
+    );
+
+    const userWallet = await Wallet.findOne({
+      where: { user_id: userId },
+      transaction,
+      lock: transaction.LOCK.UPDATE,
+    });
+
+    if (
+      !userWallet ||
+      parseFloat(userWallet.token_balance) < parseFloat(token)
+    ) {
+      throw { code: 400, messageKey: 'message:not_enough_tokens' };
+    }
+
+    userWallet.token_balance -= parseFloat(token);
+    await userWallet.save({ transaction });
+
+    await site.update(
+      {
+        is_active: true,
+        expires_at: newExpiresAt,
+      },
+      { transaction }
+    );
+
+    return {
+      code: 200,
+      messageKey: 'message:active_site_success',
+    };
   },
 };
 

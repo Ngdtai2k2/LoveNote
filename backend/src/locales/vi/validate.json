@@ -28,5 +28,6 @@
   "slug": "Vui lòng cung cấp slug!",
   "no_user_id": "Vui lòng cung cấp ID người dùng!",
   "no_id": "Vui lòng cung cấp ID!",
-  "new_password_same_as_old": "Mật khẩu mới không được giống mật khẩu cũ!"
+  "new_password_same_as_old": "Mật khẩu mới không được giống mật khẩu cũ!",
+  "invalid_num_days": "Giá trị ngày không hợp lệ!"
 }

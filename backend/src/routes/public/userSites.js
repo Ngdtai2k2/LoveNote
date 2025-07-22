@@ -25,5 +25,6 @@ router.delete(
   }),
   userSitesController.delete
 );
+router.post('/active', verifyMiddleware.token, userSitesController.activeSite);
 
 module.exports = router;

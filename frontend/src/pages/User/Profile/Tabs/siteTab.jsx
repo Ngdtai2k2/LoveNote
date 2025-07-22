@@ -9,13 +9,16 @@ import helperFunctions from '@helpers';
 
 import ModalConfirm from './modalConfirm';
 import { Typography } from '@material-tailwind/react';
+import ModalActive from './modalActive';
 
 export default function SiteTab() {
   const [sites, setSites] = useState([]);
   const [loading, setLoading] = useState(true);
   const [loadingDelete, setLoadingDelete] = useState(false);
   const [page, setPage] = useState(1);
-  const [openModal, setOpenModal] = useState(false);
+
+  const [selectedForDelete, setSelectedForDelete] = useState(null);
+  const [selectedForActivate, setSelectedForActivate] = useState(null);
 
   const { t, i18n } = useTranslation(['profile', 'template', 'tabbar']);
   const { axiosJWT } = useAxios(i18n.language);
@@ -42,6 +45,7 @@ export default function SiteTab() {
     await userSiteAPI.deleteConfigSite(axiosJWT, id);
     getData();
     setLoadingDelete(false);
+    setSelectedForDelete(null);
   };
 
   const handlePageChange = (newPage) => {
@@ -68,6 +72,7 @@ export default function SiteTab() {
           *{t('profile:expired_note')}
         </Typography>
       </div>
+
       {sites?.data?.length > 0 ? (
         <ul className="list-none">
           {sites?.data.map((site) => {
@@ -134,10 +139,9 @@ export default function SiteTab() {
                     </Link>
 
                     <button
-                      onClick={() => setOpenModal(true)}
+                      onClick={() => setSelectedForDelete(site)}
                       disabled={loadingDelete}
-                      className={`px-2 py-1 text-sm rounded-md text-white transition-colors
-                      ${
+                      className={`px-2 py-1 text-sm rounded-md text-white transition-colors ${
                         loadingDelete
                           ? 'bg-red-300 cursor-not-allowed'
                           : 'bg-red-500 hover:bg-red-600 dark:bg-red-600 dark:hover:bg-red-500'
@@ -147,22 +151,13 @@ export default function SiteTab() {
                     </button>
 
                     {(!site.is_active || isExpired) && (
-                      <button className="px-2 py-1 text-sm rounded-md text-white bg-green-500">
+                      <button
+                        onClick={() => setSelectedForActivate(site)}
+                        className="px-2 py-1 text-sm rounded-md text-white bg-green-500 hover:bg-green-600"
+                      >
                         {t('profile:active')}
                       </button>
                     )}
-
-                    <ModalConfirm
-                      t={t}
-                      isOpen={openModal}
-                      title={t('profile:confirm_delete_title')}
-                      message={t('profile:confirm_delete_message')}
-                      onConfirm={() => {
-                        handleDelete(site.id);
-                        setOpenModal(false);
-                      }}
-                      onCancel={() => setOpenModal(false)}
-                    />
                   </div>
                 </div>
               </li>
@@ -181,6 +176,25 @@ export default function SiteTab() {
             onPageChange={handlePageChange}
           />
         </div>
+      )}
+
+      {/* Modal riêng biệt */}
+      {selectedForDelete && (
+        <ModalConfirm
+          t={t}
+          isOpen={true}
+          onConfirm={() => handleDelete(selectedForDelete.id)}
+          onCancel={() => setSelectedForDelete(null)}
+        />
+      )}
+
+      {selectedForActivate && (
+        <ModalActive
+          onGetData={() => getData()}
+          isOpen={true}
+          onCancel={() => setSelectedForActivate(null)}
+          data={selectedForActivate}
+        />
       )}
     </div>
   );

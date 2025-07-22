@@ -10,7 +10,7 @@
     "inactive": "Chưa kích hoạt",
     "inactive_note": "Những web chưa kích hoạt nghĩa là chưa thanh toán.",
     "expired": "Hết hạn",
-    "expired_note": "Những web hết hạn là do voucher hết thời gian, bạn có thể kích hoạt 1 ngày bằng cách vượt link rút gọn.",
+    "expired_note": "Những trang web hết hạn là do voucher hết hạn, bạn có thể kích hoạt bằng cách dùng token.",
     "checkouts": "Thanh toán",
     "active": "Kích hoạt",
     "indefinite": "Vô thời hạn"

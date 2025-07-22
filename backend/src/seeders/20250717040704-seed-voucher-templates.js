@@ -73,7 +73,7 @@ module.exports = {
           en: '35% off when creating any website.',
         }),
         discount_type: 'percent',
-        discount_value: 50,
+        discount_value: 35,
         redeem_token_cost: 250,
         templates: JSON.stringify(['*']),
         expires_at: null,

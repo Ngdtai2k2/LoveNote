@@ -25,5 +25,7 @@
   "redeem_successful": "Voucher redeemed successfully!",
   "voucher_has_used": "Voucher has been used before!",
   "cancel_payment_failed": "Cancel payment failed!",
-  "cancel_payment_successful": "Cancel payment successfully!"
+  "cancel_payment_successful": "Cancel payment successfully!",
+  "active_site_success": "Website activation successful, please check!",
+  "site_already_active": "The site has been activated before!"
 }

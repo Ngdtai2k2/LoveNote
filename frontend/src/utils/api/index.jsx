@@ -29,6 +29,7 @@ const API_ENDPOINTS = {
     GET_CONFIGS: '/site/configs',
     CHECK_SLUG: '/site/check',
     DELETE_CONFIGS: (id) => `/site/configs/${id}/delete`,
+    ACTIVE: '/site/active',
   },
   CONTACT: {
     CREATE: '/contact',
@@ -53,8 +54,8 @@ const API_ENDPOINTS = {
     CANCEL_LINK: '/payos/cancel-payment',
   },
   TRANSACTION: {
-    GET_BY_USER: '/transaction/me'
-  }
+    GET_BY_USER: '/transaction/me',
+  },
 };
 
 export default API_ENDPOINTS;

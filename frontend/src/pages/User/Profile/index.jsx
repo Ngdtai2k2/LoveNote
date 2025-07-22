@@ -46,7 +46,7 @@ export default function Profile() {
 
   return (
     <Card className="mt-5 overflow-hidden border-t shadow-md dark:border-gray-900 dark:bg-gray-900">
-      <CardBody className="p-4">
+      <CardBody className="p-2">
         <div className="grid grid-cols-12 gap-4">
           <div className="md:col-span-4 col-span-12 pr-2">
             <Avatar
