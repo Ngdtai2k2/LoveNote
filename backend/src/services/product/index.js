@@ -13,7 +13,9 @@ const productServices = {
   },
 
   getProductBySlug: async (req) => {
-    const product = await Product.findOne({ slug: req.params.slug });
+    const product = await Product.findOne({
+      where: { slug: req.params.slug },
+    });
 
     if (!product) {
       throw { code: 404, messageKey: 'notfound:product' };
