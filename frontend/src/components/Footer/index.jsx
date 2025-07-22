@@ -104,6 +104,7 @@ export default function Footer() {
           <div className="mt-1 flex items-center space-x-3">
             <Link
               to={webData.socials?.instagram}
+              aria-label="Instagram page"
               target="_blank"
               className="text-gray-500 transition-colors duration-300 dark:text-gray-200"
             >
@@ -114,6 +115,7 @@ export default function Footer() {
             </Link>
             <Link
               to={webData.socials?.facebook}
+              aria-label="Facebook page"
               target="_blank"
               className="text-gray-500 transition-colors duration-300 dark:text-gray-200"
             >
@@ -131,6 +133,7 @@ export default function Footer() {
         <ul className="mb-3 flex flex-col space-y-2 sm:flex-row sm:space-x-5 sm:space-y-0 lg:mb-0">
           <li>
             <Link
+              aria-label="Faq page"
               to="/"
               className="text-sm text-gray-600 transition-colors duration-300 hover:underline dark:text-gray-200"
             >
@@ -139,6 +142,7 @@ export default function Footer() {
           </li>
           <li>
             <Link
+              aria-label="Privacy policy page"
               to="/"
               className="text-sm text-gray-600 transition-colors duration-300 hover:underline dark:text-gray-200"
             >
@@ -147,6 +151,7 @@ export default function Footer() {
           </li>
           <li>
             <Link
+              aria-label="Terms and conditions page"
               to="/"
               className="text-sm text-gray-600 transition-colors duration-300 hover:underline dark:text-gray-200"
             >
