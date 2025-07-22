@@ -186,7 +186,7 @@ const userSiteServices = {
         {
           model: Product,
           as: 'product',
-          attributes: ['slug', 'name', 'thumbnail_url'],
+          attributes: ['id', 'slug', 'name', 'thumbnail_url'],
         },
         {
           model: Transaction,
@@ -202,16 +202,15 @@ const userSiteServices = {
       const has_transaction =
         Array.isArray(json.transactions) && json.transactions.length > 0;
 
-      const total_amount = has_transaction
-        ? json.transactions[0].total_amount
-        : null;
+      const transaction = has_transaction ? json.transactions[0] : null;
 
       delete json.transactions;
 
       return {
         ...json,
         has_transaction,
-        total_amount,
+        total_amount: transaction?.total_amount ?? null,
+        transaction_id: transaction?.id ?? null,
       };
     });
 

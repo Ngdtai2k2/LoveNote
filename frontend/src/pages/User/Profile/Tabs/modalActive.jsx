@@ -5,6 +5,7 @@ import { CheckCircleIcon, CurrencyDollarIcon } from '@heroicons/react/24/solid';
 
 import { useCurrentUser } from '@hooks/useCurrentUser';
 import { userSiteAPI } from '@api/userSite';
+import { paymentAPI } from '@api/payment';
 import { useAxios } from '@hooks/useAxiosJWT';
 
 import CONSTANTS from '@constants';
@@ -26,6 +27,18 @@ export default function ModalActive({ isOpen, onCancel, data, onGetData }) {
     setLoading(false);
     onCancel();
     onGetData();
+  };
+
+  const handleCheckout = async () => {
+    if (!data.transaction_id) return;
+    const res = await paymentAPI.createPaymentLink(axiosJWT, {
+      description: `${user.id}-${data.product.id}`,
+      transactionId: data.transaction_id,
+    });
+
+    if (res.status === 200) {
+      window.location.href = res.data.paymentLink;
+    }
   };
 
   return (
@@ -117,7 +130,11 @@ export default function ModalActive({ isOpen, onCancel, data, onGetData }) {
                 <Button size="sm" onClick={onCancel} className="flex-1 bg-red-500 hover:bg-red-600">
                   {t('form:cancel')}
                 </Button>
-                <Button size="sm" onClick={onCancel} className="bg-green-500 hover:bg-green-600">
+                <Button
+                  size="sm"
+                  onClick={handleCheckout}
+                  className="bg-green-500 hover:bg-green-600"
+                >
                   {t('template:checkouts')}
                 </Button>
               </div>
