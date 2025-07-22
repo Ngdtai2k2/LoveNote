@@ -8,12 +8,15 @@ import { Form, Formik } from 'formik';
 
 import { useCurrentUser } from '@hooks/useCurrentUser';
 import { useAxios } from '@hooks/useAxiosJWT';
+import { useProductBySlug } from '@hooks/useProductBySlug';
+import { useSettingsFormHandler } from '@hooks/useSettingsFormHandler';
 
 import FormSlug from '../components/formSlug';
 import ColorSelector from '../components/colorSelector';
-import FormItem from '../components/formCheckbox';
+import FormItem from '../components/formItem';
 import FormRange from '../components/formRange';
 import TopLeftControl from '../components/topLeftControl';
+import FormVoucher from '../components/formVoucher';
 
 import handleSubmitSettings from './handleSubmitSettings';
 import ModalRenderLink from '../modalRenderLink';
@@ -21,11 +24,9 @@ import ModalRenderLink from '../modalRenderLink';
 import MUSIC_DEMO from '../assets/musics/music_background_005.mp3';
 
 export default function MenuSettings({ settings, onUpdate }) {
-  const [loading, setLoading] = useState(false);
   const [openSettings, setOpenSettings] = useState(false);
   const [audioName, setAudioName] = useState();
-  const [modalOpen, setModalOpen] = useState(false);
-  const [sitePath, setSitePath] = useState('');
+
   const fileInputRef = useRef(null);
 
   const { t, i18n } = useTranslation('template');
@@ -53,19 +54,17 @@ export default function MenuSettings({ settings, onUpdate }) {
     }
     onUpdate('audioFile', MUSIC_DEMO);
   };
-  const onSubmit = async (values) => {
-    setLoading(true);
-    try {
-      const res = await handleSubmitSettings(values, user, axiosJWT, navigate);
-      if (res?.data) {
-        const path = res.data.slug;
-        setSitePath(path);
-        setModalOpen(true);
-      }
-    } finally {
-      setLoading(false);
-    }
-  };
+
+  // get product information
+  const product = useProductBySlug();
+
+  const { onSubmit, loading, modalOpen, setModalOpen, sitePath, payload } = useSettingsFormHandler({
+    user,
+    product,
+    navigate,
+    axiosJWT,
+    handleSubmitSettings,
+  });
 
   return (
     <>
@@ -103,6 +102,7 @@ export default function MenuSettings({ settings, onUpdate }) {
                   <FormItem
                     label={t('template:title')}
                     name="text"
+                    type="text"
                     value={values.text}
                     maxLength={20}
                     onChange={(e) => {
@@ -207,6 +207,12 @@ export default function MenuSettings({ settings, onUpdate }) {
                     name="slug"
                   />
 
+                  <FormVoucher
+                    label={t('template:voucher')}
+                    name="voucher"
+                    price={product?.price}
+                  />
+
                   <button
                     disabled={loading}
                     type="submit"
@@ -223,6 +229,7 @@ export default function MenuSettings({ settings, onUpdate }) {
                 isOpen={modalOpen}
                 onClose={() => setModalOpen(false)}
                 path={sitePath}
+                payload={payload}
               />
             </Form>
           )}

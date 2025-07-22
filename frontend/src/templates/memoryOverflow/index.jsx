@@ -22,6 +22,9 @@ export default function MemoryOverflow({ data }) {
   const [hideCanvas, setHideCanvas] = useState(false);
   const [showOrientationModal, setShowOrientationModal] = useState(false);
 
+  const isInactive =
+    data?.is_active === false || (data?.expires_at && new Date(data.expires_at) < new Date());
+
   const { t } = useTranslation('template');
 
   useDocumentTitle(t('memory_overflow'));
@@ -122,7 +125,7 @@ export default function MemoryOverflow({ data }) {
     }
   };
 
-  if (data && (!data.is_active || new Date(data.expires_at) < new Date())) {
+  if (isInactive) {
     return <SiteStatusPage type={!data.is_active ? 'not_active' : 'expired'} />;
   }
 

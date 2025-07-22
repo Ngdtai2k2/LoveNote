@@ -12,11 +12,15 @@ import { Formik, Form } from 'formik';
 
 import helperFunctions from '@helpers';
 import ROUTES from '@constants/routes';
+
 import { useAxios } from '@hooks/useAxiosJWT';
 import { useCurrentUser } from '@hooks/useCurrentUser';
+import { useProductBySlug } from '@hooks/useProductBySlug';
+import { useSettingsFormHandler } from '@hooks/useSettingsFormHandler';
 
 import FormArea from '../components/formArea';
 import FormSlug from '../components/formSlug';
+import FormVoucher from '../components/formVoucher';
 import ModalRenderLink from '../modalRenderLink';
 import { handleSubmitSettings } from './handleSubmitSettings';
 
@@ -24,11 +28,8 @@ import IMAGE_DEMO from '../assets/images/image_galaxy_text.jpg';
 import MUSIC_DEMO from '../assets/musics/music_background_005.mp3';
 
 export default function MenuSettings({ settings, onUpdate }) {
-  const [loading, setLoading] = useState(false);
   const [openSettings, setOpenSettings] = useState(false);
   const [audioName, setAudioName] = useState();
-  const [modalOpen, setModalOpen] = useState(false);
-  const [sitePath, setSitePath] = useState('');
   const [previewUrls, setPreviewUrls] = useState(
     Array.isArray(settings.images) ? settings.images : [IMAGE_DEMO]
   );
@@ -79,23 +80,22 @@ export default function MenuSettings({ settings, onUpdate }) {
     onUpdate('heartImages', newUrls);
   };
 
-  const onSubmit = async (values) => {
-    setLoading(true);
-    try {
-      const cleanedValues = {
-        ...values,
-        ringTexts: multilineTextToArray(values.ringTexts),
-      };
-      const res = await handleSubmitSettings(cleanedValues, user, axiosJWT, navigate);
-      if (res?.data) {
-        const path = res.data.slug;
-        setSitePath(path);
-        setModalOpen(true);
-      }
-    } finally {
-      setLoading(false);
-    }
-  };
+  // get product information
+  const product = useProductBySlug();
+
+  const transformValues = (values) => ({
+    ...values,
+    ringTexts: multilineTextToArray(values.ringTexts),
+  });
+
+  const { onSubmit, loading, modalOpen, sitePath, setModalOpen, payload } = useSettingsFormHandler({
+    user,
+    product,
+    navigate,
+    axiosJWT,
+    handleSubmitSettings,
+    transformValues,
+  });
 
   return (
     <>
@@ -239,6 +239,11 @@ export default function MenuSettings({ settings, onUpdate }) {
                     label={`${t('template:slug')} (${t('template:optional')})`}
                     name="slug"
                   />
+                  <FormVoucher
+                    label={t('template:voucher')}
+                    name="voucher"
+                    price={product?.price}
+                  />
                   <button
                     disabled={loading}
                     type="submit"
@@ -255,6 +260,7 @@ export default function MenuSettings({ settings, onUpdate }) {
                 isOpen={modalOpen}
                 onClose={() => setModalOpen(false)}
                 path={sitePath}
+                payload={payload}
               />
             </Form>
           )}

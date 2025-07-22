@@ -14,6 +14,8 @@ import MUSIC_DEMO from '../assets/musics/music_background_005.mp3';
 
 export default function MatrixRainWithWords({ data }) {
   const { t } = useTranslation('template');
+  const isInactive =
+    data?.is_active === false || (data?.expires_at && new Date(data.expires_at) < new Date());
   const audioRef = useRef(null);
   const isPlaying = useRef(false);
 
@@ -46,7 +48,7 @@ export default function MatrixRainWithWords({ data }) {
   useDocumentTitle(debounced.title);
 
   useEffect(() => {
-    if (data?.is_active === false || new Date(data?.expires_at) < new Date()) return;
+    if (isInactive) return;
 
     const audio = audioRef.current;
     if (!audio) return;
@@ -73,9 +75,9 @@ export default function MatrixRainWithWords({ data }) {
 
     window.addEventListener('dblclick', toggleAudio);
     return () => window.removeEventListener('dblclick', toggleAudio);
-  }, [data?.expires_at, data?.is_active, debounced.audioVolume]);
+  }, [debounced.audioVolume, isInactive]);
 
-  if (data && (!data.is_active || new Date(data.expires_at) < new Date())) {
+  if (isInactive) {
     return <SiteStatusPage type={!data.is_active ? 'not_active' : 'expired'} />;
   }
 

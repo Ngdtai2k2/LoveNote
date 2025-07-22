@@ -14,6 +14,8 @@ export default function MatrixLoveRain({ data }) {
   const canvasRef = useRef(null);
   const audioRef = useRef(null);
   const isPlaying = useRef(false);
+  const isInactive =
+    data?.is_active === false || (data?.expires_at && new Date(data.expires_at) < new Date());
 
   const { t } = useTranslation('template');
 
@@ -72,6 +74,8 @@ export default function MatrixLoveRain({ data }) {
   );
 
   useEffect(() => {
+    if (isInactive) return;
+
     const canvas = canvasRef.current;
     if (!canvas) return;
 
@@ -171,9 +175,11 @@ export default function MatrixLoveRain({ data }) {
       canvas.removeEventListener('click', handleClick);
       if (autoBurstInterval) clearInterval(autoBurstInterval);
     };
-  }, [canvasSize, settings, textClick]);
+  }, [canvasSize, isInactive, settings, textClick]);
 
   useEffect(() => {
+    if (isInactive) return;
+
     const audio = audioRef.current;
     if (!audio) return;
 
@@ -199,9 +205,9 @@ export default function MatrixLoveRain({ data }) {
 
     window.addEventListener('dblclick', handleDoubleClick);
     return () => window.removeEventListener('dblclick', handleDoubleClick);
-  }, [settings.audioVolume]);
+  }, [isInactive, settings.audioVolume]);
 
-  if (data && (!data.is_active || new Date(data.expires_at) < new Date())) {
+  if (isInactive) {
     return <SiteStatusPage type={!data.is_active ? 'not_active' : 'expired'} />;
   }
 

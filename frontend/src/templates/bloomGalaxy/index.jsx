@@ -14,6 +14,9 @@ export default function BloomGalaxy({ data }) {
   const containerRef = useRef(null);
   const [musicUrl, setMusicUrl] = useState(null);
 
+  const isInactive =
+    data?.is_active === false || (data?.expires_at && new Date(data.expires_at) < new Date());
+
   const { t } = useTranslation('template');
 
   useDocumentTitle(t('bloom_galaxy'));
@@ -47,7 +50,7 @@ export default function BloomGalaxy({ data }) {
   };
 
   useEffect(() => {
-    if (data?.is_active === false || new Date(data?.expires_at) < new Date()) return;
+    if (isInactive) return;
 
     document.body.style.overflow = 'hidden';
     clearContainer();
@@ -117,9 +120,9 @@ export default function BloomGalaxy({ data }) {
         moduleRef.disposeGalaxy();
       }
     };
-  }, [data?.expires_at, data?.is_active, debouncedSettings]);
+  }, [debouncedSettings, isInactive]);
 
-  if (data && (!data.is_active || new Date(data.expires_at) < new Date())) {
+  if (isInactive) {
     return <SiteStatusPage type={!data.is_active ? 'not_active' : 'expired'} />;
   }
 

@@ -17,6 +17,9 @@ import MenuSettings from './menuSettings';
 import MUSIC_DEMO from '../assets/musics/music_background_005.mp3';
 
 export default function HeartBeatVisualizer({ data }) {
+  const isInactive =
+    data?.is_active === false || (data?.expires_at && new Date(data.expires_at) < new Date());
+
   const canvasRef = useRef();
   const audioBtnRef = useRef();
   const h1Ref = useRef();
@@ -56,7 +59,7 @@ export default function HeartBeatVisualizer({ data }) {
   useDocumentTitle(settings.text);
 
   useEffect(() => {
-    if (data?.is_active === false || new Date(data?.expires_at) < new Date()) return;
+    if (isInactive) return;
 
     const scene = createHeartScene(
       canvasRef.current,
@@ -71,9 +74,9 @@ export default function HeartBeatVisualizer({ data }) {
     return () => {
       scene?.dispose();
     };
-  }, [data?.expires_at, data?.is_active, debouncedSceneSettings]);
+  }, [data.expires_at, data.is_active, debouncedSceneSettings, isInactive]);
 
-  if (data && (!data.is_active || new Date(data.expires_at) < new Date())) {
+  if (isInactive) {
     return <SiteStatusPage type={!data.is_active ? 'not_active' : 'expired'} />;
   }
 

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { Form, Formik } from 'formik';
@@ -7,7 +7,8 @@ import { Cog6ToothIcon } from '@heroicons/react/24/solid';
 
 import { useAxios } from '@hooks/useAxiosJWT';
 import { useCurrentUser } from '@hooks/useCurrentUser';
-import { productAPI } from '@api/product';
+import { useProductBySlug } from '@hooks/useProductBySlug';
+import { useSettingsFormHandler } from '@hooks/useSettingsFormHandler';
 
 import { handleSubmitSettings } from './handleSubmitSettings';
 
@@ -23,14 +24,8 @@ import ModalRenderLink from '../modalRenderLink';
 import MUSIC_BACKGROUND_001 from '../assets/musics/music_background_001.mp3';
 
 export default function MenuSettings({ settings, onUpdate }) {
-  const [loading, setLoading] = useState(false);
   const [openSettings, setOpenSettings] = useState(false);
-  const [modalOpen, setModalOpen] = useState(false);
-  const [sitePath, setSitePath] = useState('');
   const [audioName, setAudioName] = useState();
-
-  const [product, setProduct] = useState();
-  const [payload, setPayload] = useState({});
 
   const fileInputRef = useRef(null);
 
@@ -41,19 +36,7 @@ export default function MenuSettings({ settings, onUpdate }) {
   const { axiosJWT } = useAxios(i18n.language);
 
   // get product information
-  const getProductBySlug = async () => {
-    const path = window.location.pathname;
-    const slug = path.startsWith('/') ? path.slice(1) : path;
-
-    const response = await productAPI.getProductBySlug(slug);
-    if (response?.status === 200) {
-      setProduct(response?.data);
-    }
-  };
-
-  useEffect(() => {
-    getProductBySlug();
-  }, []);
+  const product = useProductBySlug();
 
   const initialValues = {
     textRain: settings.textRain || 'DEMO',
@@ -81,23 +64,13 @@ export default function MenuSettings({ settings, onUpdate }) {
     onUpdate('audioFile', MUSIC_BACKGROUND_001);
   };
 
-  const onSubmit = async (values) => {
-    setLoading(true);
-    try {
-      const res = await handleSubmitSettings(values, user, axiosJWT, navigate);
-      if (res?.data) {
-        const path = res.data.slug;
-        setSitePath(path);
-        setModalOpen(true);
-        setPayload({
-          description: `${user.id}-${product.id}`,
-          transactionId: res.data.transaction_id,
-        });
-      }
-    } finally {
-      setLoading(false);
-    }
-  };
+  const { onSubmit, loading, modalOpen, setModalOpen, sitePath, payload } = useSettingsFormHandler({
+    user,
+    product,
+    navigate,
+    axiosJWT,
+    handleSubmitSettings,
+  });
 
   return (
     <>

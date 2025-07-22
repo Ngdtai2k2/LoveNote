@@ -37,6 +37,8 @@ export default function GalaxyLoveLetter({ data }) {
   const isDragging = useRef(false);
   const lastMouse = useRef({ x: 0, y: 0 });
   const activeParticles = useRef(new Set());
+  const isInactive =
+    data?.is_active === false || (data?.expires_at && new Date(data.expires_at) < new Date());
 
   const { t } = useTranslation('template');
   const [rotation, setRotation] = useState({ x: 0, y: 0 });
@@ -76,7 +78,7 @@ export default function GalaxyLoveLetter({ data }) {
     debouncedSettings.colors[Math.floor(Math.random() * debouncedSettings.colors.length)];
 
   useEffect(() => {
-    if (data?.is_active === false) return;
+    if (isInactive) return;
 
     injectTwinkle();
     const galaxy = galaxyRef.current;
@@ -106,6 +108,8 @@ export default function GalaxyLoveLetter({ data }) {
   }, []);
 
   useEffect(() => {
+    if (isInactive) return;
+
     // set title
     const randomTitle =
       debouncedSettings.messages[Math.floor(Math.random() * debouncedSettings.messages.length)];
@@ -227,7 +231,7 @@ export default function GalaxyLoveLetter({ data }) {
   useDocumentTitle(title);
 
   useEffect(() => {
-    if (data?.is_active === false) return;
+    if (isInactive) return;
 
     const getTouch = (e) => e.touches?.[0] || e.changedTouches?.[0];
 
@@ -272,7 +276,7 @@ export default function GalaxyLoveLetter({ data }) {
   }, []);
 
   useEffect(() => {
-    if (data?.is_active === false || new Date(data?.expires_at) < new Date()) return;
+    if (isInactive) return;
 
     const audio = audioRef.current;
     audio.volume = settings.audioVolume || 0.5;
@@ -297,7 +301,7 @@ export default function GalaxyLoveLetter({ data }) {
     return () => window.removeEventListener('dblclick', handleDoubleClick);
   }, [settings.audioVolume]);
 
-  if (data && (!data.is_active || new Date(data.expires_at) < new Date())) {
+  if (isInactive) {
     return <SiteStatusPage type={!data.is_active ? 'not_active' : 'expired'} />;
   }
 

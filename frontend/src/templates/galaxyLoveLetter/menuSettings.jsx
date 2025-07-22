@@ -9,6 +9,8 @@ import EmojiPicker from 'emoji-picker-react';
 
 import { useAxios } from '@hooks/useAxiosJWT';
 import { useCurrentUser } from '@hooks/useCurrentUser';
+import { useProductBySlug } from '@hooks/useProductBySlug';
+import { useSettingsFormHandler } from '@hooks/useSettingsFormHandler';
 
 import FormArea from '../components/formArea';
 import FormCheckbox from '../components/formCheckbox';
@@ -16,6 +18,7 @@ import FormRange from '../components/formRange';
 import FormSlug from '../components/formSlug';
 import ColorSelector from '../components/colorSelector';
 import TopLeftControl from '../components/topLeftControl';
+import FormVoucher from '../components/formVoucher';
 
 import ModalRenderLink from '../modalRenderLink';
 import { handleSubmitSettings } from './handleSubmitSettings';
@@ -24,12 +27,9 @@ import IMAGE_DEMO from '../assets/images/image_galaxy_text.jpg';
 import MUSIC_DEMO from '../assets/musics/music_background_002.mp3';
 
 export default function MenuSettings({ settings, onUpdate }) {
-  const [loading, setLoading] = useState(false);
   const [openSettings, setOpenSettings] = useState(false);
   const [openMenuIcons, setOpenMenuIcons] = useState(false);
   const [audioName, setAudioName] = useState();
-  const [modalOpen, setModalOpen] = useState(false);
-  const [sitePath, setSitePath] = useState('');
   const [previewUrls, setPreviewUrls] = useState(
     Array.isArray(settings.images) ? settings.images : [IMAGE_DEMO]
   );
@@ -80,24 +80,23 @@ export default function MenuSettings({ settings, onUpdate }) {
     onUpdate('audioFile', MUSIC_DEMO);
   };
 
-  const onSubmit = async (values) => {
-    setLoading(true);
-    try {
-      const cleanedValues = {
-        ...values,
-        messages: multilineTextToArray(values.messages),
-        icons: multilineTextToArray(values.icons),
-      };
-      const res = await handleSubmitSettings(cleanedValues, user, axiosJWT, navigate);
-      if (res?.data) {
-        const path = res.data.slug;
-        setSitePath(path);
-        setModalOpen(true);
-      }
-    } finally {
-      setLoading(false);
-    }
-  };
+  // get product information
+  const product = useProductBySlug();
+
+  const transformValues = (values) => ({
+    ...values,
+    messages: multilineTextToArray(values.messages),
+    icons: multilineTextToArray(values.icons),
+  });
+
+  const { onSubmit, loading, modalOpen, sitePath, setModalOpen, payload } = useSettingsFormHandler({
+    user,
+    product,
+    navigate,
+    axiosJWT,
+    handleSubmitSettings,
+    transformValues,
+  });
 
   return (
     <>
@@ -316,6 +315,12 @@ export default function MenuSettings({ settings, onUpdate }) {
                     name="slug"
                   />
 
+                  <FormVoucher
+                    label={t('template:voucher')}
+                    name="voucher"
+                    price={product?.price}
+                  />
+
                   <button
                     disabled={loading}
                     type="submit"
@@ -332,6 +337,7 @@ export default function MenuSettings({ settings, onUpdate }) {
                 isOpen={modalOpen}
                 onClose={() => setModalOpen(false)}
                 path={sitePath}
+                payload={payload}
               />
             </Form>
           )}

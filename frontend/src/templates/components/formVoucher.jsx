@@ -85,7 +85,7 @@ export default function FormVoucher({ name = 'voucher', label = 'Voucher', price
   };
 
   return (
-    <div className="flex flex-col gap-1">
+    <div className="flex flex-col gap-1 mt-2">
       <label htmlFor={name} className="font-medium text-sm">
         {label}
       </label>

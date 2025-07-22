@@ -15,20 +15,20 @@ import { Form, Formik } from 'formik';
 
 import { useAxios } from '@hooks/useAxiosJWT';
 import { useCurrentUser } from '@hooks/useCurrentUser';
+import { useProductBySlug } from '@hooks/useProductBySlug';
+import { useSettingsFormHandler } from '@hooks/useSettingsFormHandler';
 
 import FormItem from '../components/formItem';
 import FormSlug from '../components/formSlug';
+import FormVoucher from '../components/formVoucher';
 import TopLeftControl from '../components/topLeftControl';
 
 import ModalRenderLink from '../modalRenderLink';
 import { handleSubmitSettings } from './handleSubmitSettings';
 
 export default function MenuSettings({ settings, onUpdate, onOpen }) {
-  const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
   const [demoPreview, setDemoPreview] = useState(settings);
-  const [modalOpen, setModalOpen] = useState(false);
-  const [sitePath, setSitePath] = useState('');
 
   const { t, i18n } = useTranslation('template');
 
@@ -61,20 +61,16 @@ export default function MenuSettings({ settings, onUpdate, onOpen }) {
     slug: '',
   };
 
-  const onSubmit = async (values) => {
-    setLoading(true);
-    try {
-      const res = await handleSubmitSettings(values, user, axiosJWT, navigate);
-      if (res) {
-        const path = res.data.slug;
-        handleOpen();
-        setSitePath(path);
-        setModalOpen(true);
-      }
-    } finally {
-      setLoading(false);
-    }
-  };
+  // get product information
+  const product = useProductBySlug();
+
+  const { onSubmit, loading, modalOpen, setModalOpen, sitePath, payload } = useSettingsFormHandler({
+    user,
+    product,
+    navigate,
+    axiosJWT,
+    handleSubmitSettings,
+  });
 
   return (
     <>
@@ -240,6 +236,7 @@ export default function MenuSettings({ settings, onUpdate, onOpen }) {
                 </div>
 
                 <FormSlug label={`${t('template:slug')} (${t('template:optional')})`} name="slug" />
+                <FormVoucher label={t('template:voucher')} name="voucher" price={product?.price} />
               </DialogBody>
 
               <DialogFooter>
@@ -260,7 +257,12 @@ export default function MenuSettings({ settings, onUpdate, onOpen }) {
           )}
         </Formik>
       </Dialog>
-      <ModalRenderLink isOpen={modalOpen} onClose={() => setModalOpen(false)} path={sitePath} />
+      <ModalRenderLink
+        isOpen={modalOpen}
+        onClose={() => setModalOpen(false)}
+        path={sitePath}
+        payload={payload}
+      />
     </>
   );
 }
