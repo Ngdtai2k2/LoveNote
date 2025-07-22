@@ -236,7 +236,12 @@ export default function MenuSettings({ settings, onUpdate, onOpen }) {
                 </div>
 
                 <FormSlug label={`${t('template:slug')} (${t('template:optional')})`} name="slug" />
-                <FormVoucher label={t('template:voucher')} name="voucher" price={product?.price} />
+                <FormVoucher
+                  label={t('template:voucher')}
+                  name="voucher"
+                  price={product?.price}
+                  slug={product?.slug}
+                />
               </DialogBody>
 
               <DialogFooter>

@@ -235,7 +235,7 @@ const voucherService = {
 
   checkVoucher: async (req) => {
     const code = req.body.voucher || req.params.code;
-
+    const slug = req.query.slug;
     const userId = req.user.id;
 
     const voucher = await Voucher.findOne({
@@ -275,7 +275,7 @@ const voucherService = {
         {
           model: VoucherTemplate,
           as: 'template',
-          attributes: ['discount_type', 'discount_value'],
+          attributes: ['discount_type', 'discount_value', 'templates'],
         },
       ],
     });
@@ -291,6 +291,32 @@ const voucherService = {
       throw {
         code: 400,
         messageKey: 'message:voucher_has_used',
+      };
+    }
+
+    if (!redemption.template) {
+      throw {
+        code: 400,
+        messageKey: 'message:voucher_invalid_template',
+      };
+    }
+
+    const allowedTemplates = redemption.template.templates || [];
+
+    let isSlugAllowed = false;
+
+    if (Array.isArray(allowedTemplates)) {
+      if (allowedTemplates.includes('*')) {
+        isSlugAllowed = true;
+      } else {
+        isSlugAllowed = allowedTemplates.some((item) => item === slug);
+      }
+    }
+
+    if (!isSlugAllowed) {
+      throw {
+        code: 400,
+        messageKey: 'message:voucher_not_applicable',
       };
     }
 

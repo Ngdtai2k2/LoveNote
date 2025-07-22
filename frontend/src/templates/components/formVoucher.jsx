@@ -4,7 +4,7 @@ import { useField, useFormikContext } from 'formik';
 import { vouchersAPI } from '@api/vouchers';
 import { useAxios } from '@hooks/useAxiosJWT';
 
-export default function FormVoucher({ name = 'voucher', label = 'Voucher', price = 0 }) {
+export default function FormVoucher({ name = 'voucher', label = 'Voucher', price = 0, slug }) {
   const [field] = useField(name);
   const { setFieldValue } = useFormikContext();
   const [voucher, setVoucher] = useState(field.value || '');
@@ -31,7 +31,7 @@ export default function FormVoucher({ name = 'voucher', label = 'Voucher', price
     }
 
     debounceTimeout.current = setTimeout(async () => {
-      const res = await vouchersAPI.checkVoucher(axiosJWT, voucher);
+      const res = await vouchersAPI.checkVoucher(axiosJWT, voucher, slug);
       if (res.code !== 200 || !res.data) {
         setMessageError(res?.message || 'Invalid voucher');
         setVoucherInfo(null);

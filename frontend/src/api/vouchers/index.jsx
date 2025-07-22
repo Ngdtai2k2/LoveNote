@@ -44,9 +44,17 @@ export const vouchersAPI = {
     }
   },
 
-  checkVoucher: async (axiosJWT, voucherCode) => {
+  checkVoucher: async (axiosJWT, voucherCode, slug) => {
     try {
-      const response = await axiosJWT.post(API_ENDPOINTS.VOUCHERS.CHECK(voucherCode));
+      const response = await axiosJWT.post(
+        API_ENDPOINTS.VOUCHERS.CHECK(voucherCode),
+        {},
+        {
+          params: {
+            slug: slug,
+          },
+        }
+      );
       return {
         code: response.status,
         data: response.data,

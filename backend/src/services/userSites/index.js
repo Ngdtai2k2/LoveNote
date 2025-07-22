@@ -44,7 +44,7 @@ const userSiteServices = {
     return data;
   },
 
-  create: async (req) => {
+  create: async (req, transactionDB) => {
     const userId = req.user.id;
     const { productId, slug: rawSlug, configs, voucherCode } = req.body;
     let totalAmount = 0;
@@ -60,14 +60,19 @@ const userSiteServices = {
     if (!slug) {
       slug = new ShortUniqueId({ length: 10 }).rnd();
     } else {
-      const exists = await UserSite.findOne({ where: { slug } });
+      const exists = await UserSite.findOne({
+        where: { slug },
+        transaction: transactionDB,
+      });
       if (exists) throw { code: 409, messageKey: 'validate:slug_exists' };
     }
 
-    const user = await User.findByPk(userId);
+    const user = await User.findByPk(userId, { transaction: transactionDB });
     if (!user) throw { code: 404, messageKey: 'notfound:user' };
 
-    const product = await Product.findByPk(productId);
+    const product = await Product.findByPk(productId, {
+      transaction: transactionDB,
+    });
     if (!product) throw { code: 404, messageKey: 'notfound:product' };
 
     let parsedConfigs;
@@ -91,13 +96,13 @@ const userSiteServices = {
 
     let skipTransaction = false;
 
-    // check voucher
     if (voucherCode) {
-      const voucher = await Voucher.findOne({ where: { code: voucherCode } });
+      const voucher = await Voucher.findOne({
+        where: { code: voucherCode },
+        transaction: transactionDB,
+      });
 
-      if (!voucher) {
-        throw { code: 404, messageKey: 'notfound:voucher' };
-      }
+      if (!voucher) throw { code: 404, messageKey: 'notfound:voucher' };
 
       if (voucher.expires_at && new Date(voucher.expires_at) < new Date()) {
         throw { code: 400, messageKey: 'message:voucher_expired' };
@@ -106,8 +111,6 @@ const userSiteServices = {
       if (voucher.used_count >= voucher.max_usage) {
         throw { code: 400, messageKey: 'message:voucher_not_available' };
       }
-
-      await voucher.increment('used_count');
 
       const redemption = await UserVoucherRedemption.findOne({
         where: {
@@ -118,52 +121,71 @@ const userSiteServices = {
           {
             model: VoucherTemplate,
             as: 'template',
-            attributes: ['discount_type', 'discount_value'],
+            attributes: ['discount_type', 'discount_value', 'templates'],
           },
         ],
+        transaction: transactionDB,
       });
 
-      if (redemption && !redemption.is_used) {
-        await redemption.update({ is_used: true });
+      if (!redemption || redemption.is_used) {
+        throw { code: 400, messageKey: 'message:voucher_not_available' };
+      }
 
-        const { discount_type, discount_value } = redemption.template;
+      const allowedTemplates = redemption.template?.templates || [];
+      const isSlugAllowed =
+        allowedTemplates.includes('*') ||
+        allowedTemplates.some((t) =>
+          typeof t === 'string' ? t === product.slug : t?.slug === product.slug
+        );
 
-        if (discount_type === 'day') {
-          // Free number of days of use
-          expiresAt = new Date();
-          expiresAt.setDate(expiresAt.getDate() + discount_value);
-          skipTransaction = true;
-          is_active = true;
-        } else if (discount_type === 'percent') {
-          // Discount by %
-          const rawPrice = parseFloat(product.price || 0);
-          totalAmount = Math.floor(rawPrice * (1 - discount_value / 100));
-        }
+      if (!isSlugAllowed) {
+        throw { code: 400, messageKey: 'message:voucher_not_applicable' };
+      }
+
+      await voucher.increment('used_count', { transaction: transactionDB });
+      await redemption.update(
+        { is_used: true },
+        { transaction: transactionDB }
+      );
+
+      const { discount_type, discount_value } = redemption.template;
+
+      if (discount_type === 'day') {
+        expiresAt = new Date();
+        expiresAt.setDate(expiresAt.getDate() + discount_value);
+        skipTransaction = true;
+        is_active = true;
+      } else if (discount_type === 'percent') {
+        const rawPrice = parseFloat(product.price || 0);
+        totalAmount = Math.floor(rawPrice * (1 - discount_value / 100));
       }
     }
 
-    // If there is no voucher or no % discount, then take the original price.
     if (!totalAmount) {
       totalAmount = parseFloat(product.price || 0);
     }
 
-    // create new site
-    const newSite = await UserSite.create({
-      user_id: userId,
-      product_id: productId,
-      slug,
-      configs: parsedConfigs,
-      expires_at: expiresAt,
-      is_active: is_active,
-    });
-
-    // create transaction
-    if (!skipTransaction) {
-      transaction = await Transaction.create({
+    const newSite = await UserSite.create(
+      {
         user_id: userId,
-        user_sites_id: newSite.id,
-        total_amount: totalAmount,
-      });
+        product_id: productId,
+        slug,
+        configs: parsedConfigs,
+        expires_at: expiresAt,
+        is_active: is_active,
+      },
+      { transaction: transactionDB }
+    );
+
+    if (!skipTransaction) {
+      transaction = await Transaction.create(
+        {
+          user_id: userId,
+          user_sites_id: newSite.id,
+          total_amount: totalAmount,
+        },
+        { transaction: transactionDB }
+      );
     }
 
     return {

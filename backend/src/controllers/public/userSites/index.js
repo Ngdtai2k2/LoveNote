@@ -22,13 +22,16 @@ const userSitesController = {
   },
 
   create: async (req, res) => {
+    const transaction = await sequelize.transaction();
     try {
-      const result = await userSiteServices.create(req);
+      const result = await userSiteServices.create(req, transaction);
+      await transaction.commit();
       return res.status(201).json({
         data: result.data,
         message: req.t(result.messageKey),
       });
     } catch (error) {
+      await transaction.rollback();
       return handleError(res, req, error);
     }
   },

@@ -27,5 +27,7 @@
   "cancel_payment_failed": "Cancel payment failed!",
   "cancel_payment_successful": "Cancel payment successfully!",
   "active_site_success": "Website activation successful, please check!",
-  "site_already_active": "The site has been activated before!"
+  "site_already_active": "The site has been activated before!",
+  "voucher_not_applicable": "This voucher is not valid for this product.",
+  "voucher_template_invalid": "The voucher configuration is invalid."
 }

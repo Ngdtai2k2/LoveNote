@@ -319,6 +319,7 @@ export default function MenuSettings({ settings, onUpdate }) {
                     label={t('template:voucher')}
                     name="voucher"
                     price={product?.price}
+                    slug={product?.slug}
                   />
 
                   <button

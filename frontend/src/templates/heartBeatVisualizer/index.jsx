@@ -74,7 +74,7 @@ export default function HeartBeatVisualizer({ data }) {
     return () => {
       scene?.dispose();
     };
-  }, [data.expires_at, data.is_active, debouncedSceneSettings, isInactive]);
+  }, [debouncedSceneSettings, isInactive]);
 
   if (isInactive) {
     return <SiteStatusPage type={!data.is_active ? 'not_active' : 'expired'} />;
