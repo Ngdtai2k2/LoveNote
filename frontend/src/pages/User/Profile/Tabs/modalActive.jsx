@@ -23,10 +23,13 @@ export default function ModalActive({ isOpen, onCancel, data, onGetData }) {
   const handleActive = async () => {
     if (!options) return;
     setLoading(true);
-    await userSiteAPI.activeSite(axiosJWT, options);
-    setLoading(false);
-    onCancel();
-    onGetData();
+    try {
+      await userSiteAPI.activeSite(axiosJWT, options);
+      onCancel();
+      onGetData();
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleCheckout = async () => {
