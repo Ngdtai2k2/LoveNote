@@ -11,6 +11,7 @@
     "inactive_note": "Unactivated websites mean unpaid.",
     "expired": "Expired",
     "expired_note": "Expired websites are due to expired vouchers, you can activate them using tokens.",
+    "delete_expired": "Expired websites will be deleted after 3 days if not activated.",
     "checkouts": "Checkouts",
     "active": "Active",
     "indefinite": "Indefinite"

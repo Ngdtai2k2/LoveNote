@@ -1,0 +1,4 @@
+[2025-08-09T12:20:00.053Z] Deleted UserSite id=TOX8IEkDlb and related transactions/files
+[2025-08-09T12:14:00.021Z] Error in autoDeleteExpiredUserSites: UserSite is not defined
+[2025-08-09T12:17:00.031Z] Error in autoDeleteExpiredUserSites: Cannot read properties of undefined (reading 'lt')
+[2025-08-09T12:20:00.053Z] Deleted UserSite id=TOX8IEkDlb and related transactions/files

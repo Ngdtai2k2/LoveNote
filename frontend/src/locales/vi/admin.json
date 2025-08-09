@@ -44,5 +44,9 @@
         "page_of": "Trang {{currentPage}} của {{totalPages}}",
         "next": "Tiếp theo",
         "previous": "Trước đó"
+    },
+    "logs": {
+        "auto_delete_sites": "Nhật ký tự động xóa các trang web của người dùng đã hết hạn",
+        "no_logs": "Không có nhật ký nào để hiển thị"
     }
 }

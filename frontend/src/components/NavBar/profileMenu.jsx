@@ -43,7 +43,9 @@ export function ProfileMenu() {
   const user = useCurrentUser();
   const userRole = user?.role || 0;
 
-  const filteredProfileMenu = profileMenu.filter((item) => !item.role || item.role === userRole);
+  const filteredProfileMenu = profileMenu.filter(
+    (item) => !item.role || Boolean(item.role) === userRole
+  );
 
   const handleNavigate = (path) => {
     setIsMenuOpen(false);

@@ -1,6 +1,8 @@
 require('module-alias/register');
 require('dotenv').config();
 
+require('./cronjobs/index');
+
 const app = require('@root/src/app');
 const { connectDB } = require('@config/connectDB');
 

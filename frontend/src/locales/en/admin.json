@@ -44,5 +44,9 @@
         "page_of": "Page {{currentPage}} of {{totalPages}}",
         "next": "Next",
         "previous": "Previous"
+    },
+    "logs": {
+        "auto_delete_sites": "Auto Delete Expired User Sites Log",
+        "no_logs": "No logs to display"
     }
 }

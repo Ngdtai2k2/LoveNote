@@ -5,6 +5,7 @@ import {
   UsersIcon,
   LockClosedIcon,
   ShieldCheckIcon,
+  DocumentTextIcon,
 } from '@heroicons/react/24/solid';
 
 import ROUTES from '../routes';
@@ -24,6 +25,7 @@ export const tabbar = [
     icon: AdjustmentsHorizontalIcon,
   },
   { label: 'users', href: ROUTES.ADMIN.USERS, icon: UsersIcon },
+  { label: 'logs', href: ROUTES.ADMIN.LOGS, icon: DocumentTextIcon },
 ];
 
 export const profileMenu = [

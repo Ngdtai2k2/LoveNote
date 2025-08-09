@@ -84,6 +84,9 @@ const API_ENDPOINTS = {
     USERS: withPrefix('/admin/users', {
       ALL_USERS: '',
     }),
+    LOGS: withPrefix('/admin/logs', {
+      AUTO_DELETE_SITES: '/auto-delete-sites',
+    }),
   },
 };
 

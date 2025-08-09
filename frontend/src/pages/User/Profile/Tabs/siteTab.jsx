@@ -64,14 +64,19 @@ export default function SiteTab() {
 
   return (
     <div className="py-2 px-1">
-      <div className="text-red-500 mb-3">
-        <Typography className="text-xs font-semibold italic">
-          *{t('profile:inactive_note')}
-        </Typography>
-        <Typography className="text-xs font-semibold italic">
-          *{t('profile:expired_note')}
-        </Typography>
-      </div>
+      {sites?.data?.length > 0 && (
+        <div className="text-red-500 mb-3">
+          <Typography className="text-xs font-semibold italic">
+            *{t('profile:inactive_note')}
+          </Typography>
+          <Typography className="text-xs font-semibold italic">
+            *{t('profile:expired_note')}
+          </Typography>
+          <Typography className="text-xs font-semibold italic">
+            *{t('profile:delete_expired')}
+          </Typography>
+        </div>
+      )}
 
       {sites?.data?.length > 0 ? (
         <ul className="list-none">

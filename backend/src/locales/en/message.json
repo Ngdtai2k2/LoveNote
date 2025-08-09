@@ -30,5 +30,6 @@
   "site_already_active": "The site has been activated before!",
   "voucher_not_applicable": "This voucher is not valid for this product.",
   "voucher_template_invalid": "The voucher configuration is invalid.",
-  "user_banned": "Your account has been banned, please contact the administrator for more details."
+  "user_banned": "Your account has been banned, please contact the administrator for more details.",
+  "failed_read_file": "Failed to read log file, please try again later!"
 }

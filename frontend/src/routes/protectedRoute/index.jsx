@@ -1,7 +1,9 @@
 import Dashboard from '@pages/Admin/Dashboard';
+import UsersManager from '@pages/Admin/Users';
+import LogViewer from '@pages/Admin/LogViewer';
+
 import ROUTES from '@constants/routes';
 import CONSTANTS from '@constants';
-import UsersManager from '../../pages/Admin/Users';
 
 const protectedRoutes = [
   {
@@ -17,6 +19,11 @@ const protectedRoutes = [
   {
     path: ROUTES.ADMIN.USERS,
     element: <UsersManager />,
+    requiredRole: CONSTANTS.ADMIN,
+  },
+  {
+    path: ROUTES.ADMIN.LOGS,
+    element: <LogViewer />,
     requiredRole: CONSTANTS.ADMIN,
   },
 ];

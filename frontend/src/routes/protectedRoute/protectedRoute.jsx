@@ -9,7 +9,7 @@ const ProtectedRoute = ({ element, requiredRole }) => {
   const user = useCurrentUser();
 
   try {
-    if (requiredRole === CONSTANTS.ADMIN && user?.role !== CONSTANTS.ADMIN) {
+    if (requiredRole === CONSTANTS.ADMIN && user?.role !== Boolean(CONSTANTS.ADMIN)) {
       return <Navigate to={ROUTES.NOT_FOUND} replace />;
     }
     return element;
