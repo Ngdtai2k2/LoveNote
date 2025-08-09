@@ -27,3 +27,4 @@ yarn-error.log*
 
 /src/assets/avatar
 /src/assets/audio
+logs
