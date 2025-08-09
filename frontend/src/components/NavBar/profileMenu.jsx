@@ -77,7 +77,7 @@ export function ProfileMenu() {
       <MenuList className="bg-white p-1 dark:border-gray-700 dark:bg-gray-900">
         {user ? (
           <div>
-            <MenuItem key="wallet-balance" disabled>
+            <MenuItem key="wallet-balance">
               <div className="flex items-center dark:text-gray-200 text-gray-900 border rounded p-1">
                 <span>
                   Token: {Number(user?.wallet?.token_balance || 0).toLocaleString('vi-VN')}
