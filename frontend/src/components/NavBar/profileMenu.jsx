@@ -18,15 +18,19 @@ import {
   ArrowRightEndOnRectangleIcon,
   PlusIcon,
   CurrencyDollarIcon,
+  ShieldCheckIcon,
+  UserCircleIcon,
+  LockClosedIcon,
+  PowerIcon,
 } from '@heroicons/react/24/solid';
 
-import { profileMenu } from '@constants/navigation';
 import { useCurrentUser } from '@hooks/useCurrentUser';
 import { useAxios } from '@hooks/useAxiosJWT';
 import { authAPI } from '@api/auth';
 
 import ROUTES from '@constants/routes';
 import CONSTANTS from '@constants';
+import { profileMenu } from '@constants/navigation';
 
 export function ProfileMenu() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -37,30 +41,14 @@ export function ProfileMenu() {
   const { axiosJWT } = useAxios(i18n.language);
 
   const user = useCurrentUser();
+  const userRole = user?.role || 0;
+
+  const filteredProfileMenu = profileMenu.filter((item) => !item.role || item.role === userRole);
 
   const handleNavigate = (path) => {
     setIsMenuOpen(false);
     navigate(path);
   };
-
-  const renderMenuItem = (label, Icon, path) => (
-    <MenuItem
-      key={label}
-      onClick={() => handleNavigate(path)}
-      className="flex items-center gap-2 rounded hover:bg-gray-300 
-            focus:bg-gray-300 active:bg-gray-300 dark:hover:bg-gray-700 
-            dark:focus:bg-gray-700 dark:active:bg-gray-700"
-    >
-      <Icon className="h-4 w-4 text-gray-900 dark:text-gray-200" />
-      <Typography
-        as="span"
-        variant="small"
-        className="font-normal text-gray-900 dark:text-gray-200"
-      >
-        {t(label)}
-      </Typography>
-    </MenuItem>
-  );
 
   return (
     <Menu open={isMenuOpen} handler={setIsMenuOpen} placement="bottom-end">
@@ -89,22 +77,24 @@ export function ProfileMenu() {
       <MenuList className="bg-white p-1 dark:border-gray-700 dark:bg-gray-900">
         {user ? (
           <div>
-            <MenuItem key={user.id}>
+            <MenuItem key="wallet-balance" disabled>
               <div className="flex items-center dark:text-gray-200 text-gray-900 border rounded p-1">
                 <span>
                   Token: {Number(user?.wallet?.token_balance || 0).toLocaleString('vi-VN')}
                 </span>
-
-                <CurrencyDollarIcon className="w-4 h-4" />
+                <CurrencyDollarIcon className="w-4 h-4 ml-1" />
               </div>
             </MenuItem>
-            {profileMenu.map(({ label, icon, href }, key) => (
+
+            {filteredProfileMenu.map(({ label, icon, href }, key) => (
               <MenuItem
                 key={key}
                 onClick={() => {
                   setIsMenuOpen(false);
-                  if (key === profileMenu.length - 1) {
+                  if (label === 'logout') {
                     dispatch(authAPI.signOut(axiosJWT, navigate));
+                  } else if (href) {
+                    handleNavigate(href);
                   }
                 }}
                 className="flex items-center gap-2 rounded hover:bg-gray-300 
@@ -115,22 +105,67 @@ export function ProfileMenu() {
                   className: 'h-4 w-4 text-gray-800 dark:text-gray-200',
                   strokeWidth: 2,
                 })}
-                <Link to={href}>
+                {href ? (
+                  <Link to={href} className="flex-1">
+                    <Typography
+                      as="span"
+                      variant="small"
+                      className="font-normal text-gray-800 dark:text-gray-200"
+                    >
+                      {t(label)}
+                    </Typography>
+                  </Link>
+                ) : (
                   <Typography
                     as="span"
                     variant="small"
-                    className="font-normal text-gray-800 dark:text-gray-200"
+                    className="font-normal text-gray-800 dark:text-gray-200 cursor-pointer"
                   >
                     {t(label)}
                   </Typography>
-                </Link>
+                )}
               </MenuItem>
             ))}
           </div>
         ) : (
           <div>
-            {renderMenuItem('login', ArrowRightEndOnRectangleIcon, ROUTES.AUTH.SIGN_IN)}
-            {renderMenuItem('register', PlusIcon, ROUTES.AUTH.SIGN_UP)}
+            <MenuItem
+              onClick={() => {
+                setIsMenuOpen(false);
+                navigate(ROUTES.AUTH.SIGN_IN);
+              }}
+              className="flex items-center gap-2 rounded hover:bg-gray-300 
+              focus:bg-gray-300 active:bg-gray-300 dark:hover:bg-gray-700 
+              dark:focus:bg-gray-700 dark:active:bg-gray-700"
+            >
+              <ArrowRightEndOnRectangleIcon className="h-4 w-4 text-gray-800 dark:text-gray-200" />
+              <Typography
+                as="span"
+                variant="small"
+                className="font-normal text-gray-800 dark:text-gray-200"
+              >
+                {t('login')}
+              </Typography>
+            </MenuItem>
+
+            <MenuItem
+              onClick={() => {
+                setIsMenuOpen(false);
+                navigate(ROUTES.AUTH.SIGN_UP);
+              }}
+              className="flex items-center gap-2 rounded hover:bg-gray-300 
+              focus:bg-gray-300 active:bg-gray-300 dark:hover:bg-gray-700 
+              dark:focus:bg-gray-700 dark:active:bg-gray-700"
+            >
+              <PlusIcon className="h-4 w-4 text-gray-800 dark:text-gray-200" />
+              <Typography
+                as="span"
+                variant="small"
+                className="font-normal text-gray-800 dark:text-gray-200"
+              >
+                {t('register')}
+              </Typography>
+            </MenuItem>
           </div>
         )}
       </MenuList>

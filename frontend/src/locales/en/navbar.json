@@ -17,5 +17,6 @@
   "redeem_voucher": "Redeem voucher",
   "voucher_redeemed": "Voucher redeemed",
   "notifications": "Notifications",
-  "donate": "Donate"
+  "donate": "Donate",
+  "admin_dashboard": "Admin Dashboard"
 }

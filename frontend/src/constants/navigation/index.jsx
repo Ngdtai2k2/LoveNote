@@ -4,6 +4,7 @@ import {
   AdjustmentsHorizontalIcon,
   UsersIcon,
   LockClosedIcon,
+  ShieldCheckIcon,
 } from '@heroicons/react/24/solid';
 
 import ROUTES from '../routes';
@@ -26,6 +27,12 @@ export const tabbar = [
 ];
 
 export const profileMenu = [
+  {
+    label: 'admin_dashboard',
+    icon: ShieldCheckIcon,
+    href: ROUTES.ADMIN.DASHBOARD,
+    role: 1,
+  },
   {
     label: 'profile',
     icon: UserCircleIcon,
