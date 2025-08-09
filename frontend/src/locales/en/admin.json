@@ -46,6 +46,7 @@
         "previous": "Previous"
     },
     "logs": {
+        "title": "System logs",
         "auto_delete_sites": "Auto Delete Expired User Sites Log",
         "no_logs": "No logs to display"
     }
