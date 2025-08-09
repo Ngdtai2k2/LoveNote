@@ -38,7 +38,14 @@ module.exports = (sequelize, DataTypes) => {
       email: DataTypes.STRING,
       password: DataTypes.STRING,
       avatar: DataTypes.STRING,
-      role: DataTypes.TINYINT,
+      role: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+      },
+      is_banned: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+      },
       created_at: {
         type: DataTypes.DATE,
         allowNull: false,

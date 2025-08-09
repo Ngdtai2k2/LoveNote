@@ -8,9 +8,14 @@ export const userAPI = {
     try {
       const res = await axiosJWT.get(API_ENDPOINTS.AUTH.ME);
       dispatch(setUser(res.data.user));
-    } catch {
+    } catch (error) {
       dispatch(removeUser());
       dispatch(signOutSuccess());
+      if (error.response?.status === 403) {
+        toast.error(error.response?.data.message, {
+          position: 'top-right',
+        });
+      }
     }
   },
   updateProfile: async (userId, data, axiosJWT) => {

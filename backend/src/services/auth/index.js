@@ -36,6 +36,10 @@ const authService = {
       throw { code: 404, messageKey: 'notfound:user' };
     }
 
+    if (user.is_banned) {
+      throw { code: 403, messageKey: 'message:user_banned' };
+    }
+
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
       throw { code: 401, messageKey: 'validate:invalid_password' };
@@ -75,6 +79,10 @@ const authService = {
       };
     }
 
+    if (userData.is_banned) {
+      throw { code: 403, messageKey: 'message:user_banned' };
+    }
+
     return userData;
   },
 
@@ -87,6 +95,10 @@ const authService = {
     }
 
     const userData = await User.findByPk(user.id);
+
+    if (userData.is_banned) {
+      throw { code: 403, messageKey: 'message:user_banned' };
+    }
 
     const isPasswordValid = await bcrypt.compare(
       currentPassword,
@@ -133,6 +145,10 @@ const authService = {
 
     if (!user) {
       throw { code: 404, messageKey: 'notfound:user' };
+    }
+
+    if (user.is_banned) {
+      throw { code: 403, messageKey: 'message:user_banned' };
     }
 
     const startOfDay = new Date();
@@ -249,6 +265,10 @@ const authService = {
         code: 404,
         messageKey: 'notfound:user',
       };
+    }
+
+    if (user.is_banned) {
+      throw { code: 403, messageKey: 'message:user_banned' };
     }
 
     const hashedPassword = await bcrypt.hash(newPassword, 12);
