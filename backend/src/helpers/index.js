@@ -59,6 +59,29 @@ const helpers = {
       }
     }
   },
+
+  buildBooleanFilter: (field, value) => {
+    if (value === undefined) return {};
+    const val =
+      value === 'true' || value === '1'
+        ? true
+        : value === 'false' || value === '0'
+          ? false
+          : undefined;
+    return val !== undefined ? { [field]: val } : {};
+  },
+
+  calcChangeStats: (todayValue, yesterdayValue) => {
+    const t = Number(todayValue) || 0;
+    const y = Number(yesterdayValue) || 0;
+
+    if (t === 0) return '+0';
+    if (t === y) return '+1';
+    if (t > y) return `+${t}`;
+
+    const diff = t - y;
+    return `${diff}`;
+  },
 };
 
 module.exports = helpers;

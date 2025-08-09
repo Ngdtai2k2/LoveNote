@@ -37,6 +37,9 @@ import TASKS_EN from '@locales/en/tasks.json';
 import PAYMENT_VI from '@locales/vi/payment.json';
 import PAYMENT_EN from '@locales/en/payment.json';
 
+import ADMIN_VI from '@locales/vi/admin.json';
+import ADMIN_EN from '@locales/en/admin.json';
+
 const resources = {
   vi: {
     navbar: NAVBAR_VI,
@@ -51,6 +54,7 @@ const resources = {
     contact: CONTACT_VI,
     tasks: TASKS_VI,
     payment: PAYMENT_VI,
+    admin: ADMIN_VI,
   },
   en: {
     navbar: NAVBAR_EN,
@@ -65,6 +69,7 @@ const resources = {
     contact: CONTACT_EN,
     tasks: TASKS_EN,
     payment: PAYMENT_EN,
+    admin: ADMIN_EN,
   },
 };
 

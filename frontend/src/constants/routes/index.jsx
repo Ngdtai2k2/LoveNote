@@ -11,6 +11,7 @@ const ROUTES = {
     ME: '/me',
   },
   ADMIN: {
+    HOME: '/admin',
     DASHBOARD: '/admin/dashboard',
     USERS: '/admin/users',
   },

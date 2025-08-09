@@ -1,0 +1,27 @@
+{
+    "welcome": "Chào {{name}}, chào mừng bạn đến với trang quản trị viên!",
+    "dashboard": {
+        "title": "Trang tổng quan",
+        "stats": {
+            "users": "Người dùng",
+            "revenue": "Doanh thu (vnd)",
+            "sites": "Trang web"
+        },
+        "compared": "{{value}} so với ngày hôm qua"
+    },
+    "chart": {
+        "user_site_pie": {
+            "title": "Thống kê website theo danh mục sản phẩm",
+            "description": "Biểu đồ này hiển thị số lượng website được phân bố theo từng danh mục sản phẩm."
+        },
+        "transactions_bar": {
+            "title": "Thống kê giao dịch",
+            "description": "Biểu đồ này hiển thị số lượng giao dịch theo trạng thái.",
+            "total_revenue": "Tổng doanh thu (đã thanh toán): {{total}} VND",
+            "total": "Tổng số giao dịch"
+        },
+        "total": "Tổng cộng",
+        "filter": "Lọc",
+        "no_data": "Không có dữ liệu để hiển thị"
+    }
+}

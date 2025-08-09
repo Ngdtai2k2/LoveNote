@@ -1,0 +1,27 @@
+{
+    "welcome": "Hi {{name}}, welcome to the admin page!",
+    "dashboard": {
+        "title": "Dashboard",
+        "stats": {
+            "users": "Users",
+            "revenue": "Revenue (vnd)",
+            "sites": "Websites"
+        },
+        "compared": "{{value}} compared to yesterday"
+    },
+    "chart": {
+        "user_site_pie": {
+            "title": "Website Statistics by Product Category",
+            "description": "This chart shows the number of websites distributed across different product categories."
+        },
+        "transactions_bar": {
+            "title": "Transaction Statistics",
+            "description": "This chart shows the number of transactions by status.",
+            "total_revenue": "Total Revenue (paid): {{total}} VND",
+            "total": "Total transactions"
+        },
+        "total": "Total",
+        "filter": "Filter",
+        "no_data": "No data to display"
+    }
+}

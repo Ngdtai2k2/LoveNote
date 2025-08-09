@@ -68,6 +68,13 @@ const helperFunctions = {
       hour: '2-digit',
       minute: '2-digit',
     }),
+
+  getDistinctColors: (count) => {
+    return Array.from({ length: count }, (_, i) => {
+      const hue = Math.floor((360 / count) * i);
+      return `hsl(${hue}, 55%, 55%)`;
+    });
+  },
 };
 
 export default helperFunctions;
