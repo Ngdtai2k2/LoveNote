@@ -23,5 +23,26 @@
         "total": "Tổng cộng",
         "filter": "Lọc",
         "no_data": "Không có dữ liệu để hiển thị"
+    },
+    "users": {
+        "title": "Quản lý người dùng",
+        "id": "ID",
+        "full_name": "Họ và tên",
+        "email": "Email",
+        "role": "Vai trò",
+        "status": "Trạng thái",
+        "created_at": "Ngày tạo",
+        "actions": "Hành động",
+        "ban": "Cấm",
+        "unban": "Bỏ cấm",
+        "give_token": "Cấp token",
+        "revoke_token": "Thu hồi token",
+        "banned": "Đã bị cấm",
+        "active": "Đang hoạt động"
+    },
+    "table": {
+        "page_of": "Trang {{currentPage}} của {{totalPages}}",
+        "next": "Tiếp theo",
+        "previous": "Trước đó"
     }
 }

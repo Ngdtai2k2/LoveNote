@@ -81,6 +81,9 @@ const API_ENDPOINTS = {
       USER_SITES: '/user-sites',
       TRANSACTION: '/transaction',
     }),
+    USERS: withPrefix('/admin/users', {
+      ALL_USERS: '',
+    }),
   },
 };
 

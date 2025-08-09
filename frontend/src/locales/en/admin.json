@@ -23,5 +23,26 @@
         "total": "Total",
         "filter": "Filter",
         "no_data": "No data to display"
+    },
+    "users": {
+        "title": "Users Management",
+        "id": "ID",
+        "full_name": "Full Name",
+        "email": "Email",
+        "role": "Role",
+        "status": "Status",
+        "created_at": "Created At",
+        "actions": "Actions",
+        "ban": "Ban",
+        "unban": "Unban",
+        "give_token": "Give Token",
+        "revoke_token": "Revoke Token",
+        "banned": "Banned",
+        "active": "Active"
+    },
+    "table": {
+        "page_of": "Page {{currentPage}} of {{totalPages}}",
+        "next": "Next",
+        "previous": "Previous"
     }
 }
