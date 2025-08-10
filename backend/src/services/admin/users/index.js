@@ -21,6 +21,28 @@ const usersService = {
       data: users,
     };
   },
+
+  banned: async (req) => {
+    const { id } = req.params;
+    const user = await User.findByPk(id);
+
+    if (!user) {
+      throw {
+        code: 404,
+        messageKey: 'notfound:user',
+      };
+    }
+
+    user.is_banned = !user.is_banned;
+    await user.save();
+
+    return {
+      code: 200,
+      messageKey: user.is_banned
+        ? 'message:banned_user_success'
+        : 'message:unbanned_user_success',
+    };
+  },
 };
 
 module.exports = usersService;

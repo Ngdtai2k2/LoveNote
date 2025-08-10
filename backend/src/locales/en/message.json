@@ -31,5 +31,7 @@
   "voucher_not_applicable": "This voucher is not valid for this product.",
   "voucher_template_invalid": "The voucher configuration is invalid.",
   "user_banned": "Your account has been banned, please contact the administrator for more details.",
-  "failed_read_file": "Failed to read log file, please try again later!"
+  "failed_read_file": "Failed to read log file, please try again later!",
+  "banned_user_success": "User banned successfully!",
+  "unbanned_user_success": "User unbanned successfully!"
 }

@@ -10,6 +10,15 @@ const usersController = {
       handleError(res, req, error);
     }
   },
+
+  banned: async (req, res) => {
+    try {
+      const { code, messageKey } = await usersService.banned(req);
+      return res.status(code).json({ message: req.t(messageKey) });
+    } catch (error) {
+      handleError(res, req, error);
+    }
+  },
 };
 
 module.exports = usersController;

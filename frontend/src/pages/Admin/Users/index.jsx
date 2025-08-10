@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-
 import { Typography, Button, Chip } from '@material-tailwind/react';
 
 import { useDocumentTitle } from '@hooks/useDocumentTitle';
 import { usersAPI } from '@api/admin/users';
 import { useAxios } from '@hooks/useAxiosJWT';
-
 import DataTable from '@components/DataTable';
 
 export default function UsersManager() {
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
+  const [loadingId, setLoadingId] = useState(null);
   const [users, setUsers] = useState({
     data: [],
     currentPage: 1,
@@ -44,6 +43,23 @@ export default function UsersManager() {
 
   const handleNext = () => {
     if (users?.hasNextPage) setPage(page + 1);
+  };
+
+  const bannedUser = async (id) => {
+    setLoadingId(id);
+    try {
+      const response = await usersAPI.banned(axiosJWT, id);
+      if (response.status === 200) {
+        setUsers((prev) => ({
+          ...prev,
+          data: prev.data.map((u) => (u.id === id ? { ...u, is_banned: !u.is_banned } : u)),
+        }));
+      }
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoadingId(null);
+    }
   };
 
   const columns = [
@@ -81,11 +97,16 @@ export default function UsersManager() {
             className="w-20"
             size="sm"
             color={user.is_banned ? 'gray' : 'red'}
-            onClick={() =>
-              alert(`${user.is_banned ? t('users.unban') : t('users.ban')} ${user.full_name}`)
-            }
+            onClick={() => bannedUser(user.id)}
+            disabled={loadingId === user.id}
           >
-            {user.is_banned ? t('users.unban') : t('users.ban')}
+            {loadingId === user.id ? (
+              <div className="h-4 w-4 mx-auto animate-spin rounded-full border-2 border-white border-t-transparent" />
+            ) : user.is_banned ? (
+              t('users.unban')
+            ) : (
+              t('users.ban')
+            )}
           </Button>
         </div>
       ),

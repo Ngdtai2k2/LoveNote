@@ -31,5 +31,7 @@
   "voucher_not_applicable": "Mã giảm giá không áp dụng cho sản phẩm này.",
   "voucher_template_invalid": "Mã giảm giá hiện không khả dụng do lỗi cấu hình.",
   "user_banned": "Tài khoản của bạn đã bị cấm, vui lòng liên hệ quản trị viên để biết thêm chi tiết.",
-  "failed_read_file": "Đọc file log không thành công, vui lòng thử lại sau!"
+  "failed_read_file": "Đọc file log không thành công, vui lòng thử lại sau!",
+  "banned_user_success": "Cấm người dùng thành công!",
+  "unbanned_user_success": "Bỏ cấm người dùng thành công!"
 }
