@@ -88,6 +88,10 @@ const API_ENDPOINTS = {
     LOGS: withPrefix('/admin/logs', {
       AUTO_DELETE_SITES: '/auto-delete-sites',
     }),
+    SHORTENER_PROVIDER: withPrefix('/admin/shortener-provider', {
+      GET_ALL: '',
+      UPDATE: (id) => `/${id}`,
+    }),
   },
 };
 

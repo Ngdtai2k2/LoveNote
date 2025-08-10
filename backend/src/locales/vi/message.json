@@ -33,5 +33,7 @@
   "user_banned": "Tài khoản của bạn đã bị cấm, vui lòng liên hệ quản trị viên để biết thêm chi tiết.",
   "failed_read_file": "Đọc file log không thành công, vui lòng thử lại sau!",
   "banned_user_success": "Cấm người dùng thành công!",
-  "unbanned_user_success": "Bỏ cấm người dùng thành công!"
+  "unbanned_user_success": "Bỏ cấm người dùng thành công!",
+  "update_short_link_provider_success": "Cập nhật nhà cung cấp link rút gọn thành công!",
+  "update_short_link_provider_failed": "Cập nhật nhà cung cấp link rút gọn không thành công!"
 }

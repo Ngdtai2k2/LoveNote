@@ -6,6 +6,7 @@ import {
   LockClosedIcon,
   ShieldCheckIcon,
   DocumentTextIcon,
+  LinkIcon,
 } from '@heroicons/react/24/solid';
 
 import ROUTES from '../routes';
@@ -25,6 +26,7 @@ export const tabbar = [
     icon: AdjustmentsHorizontalIcon,
   },
   { label: 'users', href: ROUTES.ADMIN.USERS, icon: UsersIcon },
+  { label: 'shortener_provider', href: ROUTES.ADMIN.SHORTENER_PROVIDER, icon: LinkIcon },
   { label: 'logs', href: ROUTES.ADMIN.LOGS, icon: DocumentTextIcon },
 ];
 

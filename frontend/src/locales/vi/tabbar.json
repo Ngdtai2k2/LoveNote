@@ -3,5 +3,6 @@
   "users": "Người dùng",
   "logs": "Nhật ký",
   "cancel": "Hủy",
-  "confirm": "Xác nhận"
+  "confirm": "Xác nhận",
+  "shortener_provider": "Nhà cung cấp rút gọn link"
 }

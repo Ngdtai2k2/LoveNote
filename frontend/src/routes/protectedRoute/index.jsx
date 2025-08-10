@@ -1,3 +1,4 @@
+import ShortenerProviderManager from '@pages/Admin/ShortenerProvider';
 import Dashboard from '@pages/Admin/Dashboard';
 import UsersManager from '@pages/Admin/Users';
 import LogViewer from '@pages/Admin/LogViewer';
@@ -19,6 +20,11 @@ const protectedRoutes = [
   {
     path: ROUTES.ADMIN.USERS,
     element: <UsersManager />,
+    requiredRole: CONSTANTS.ADMIN,
+  },
+  {
+    path: ROUTES.ADMIN.SHORTENER_PROVIDER,
+    element: <ShortenerProviderManager />,
     requiredRole: CONSTANTS.ADMIN,
   },
   {

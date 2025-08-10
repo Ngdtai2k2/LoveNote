@@ -3,5 +3,6 @@
   "logs": "Logs",
   "users": "Users",
   "cancel": "Cancel",
-  "confirm": "Confirm"
+  "confirm": "Confirm",
+  "shortener_provider": "Shortener Provider"
 }

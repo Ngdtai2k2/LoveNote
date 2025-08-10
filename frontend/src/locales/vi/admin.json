@@ -49,5 +49,15 @@
         "title": "Nhật ký hệ thống",
         "auto_delete_sites": "Nhật ký tự động xóa các trang web của người dùng đã hết hạn",
         "no_logs": "Không có nhật ký nào để hiển thị"
+    },
+    "provider": {
+        "title": "Quản lý nhà cung cấp rút gọn link",
+        "name": "Tên",
+        "base_url": "URL cơ sở",
+        "api_key": "Khóa API",
+        "view_limit_per_day": "Lượt/Ngày",
+        "price": "Giá",
+        "created_at": "Ngày tạo",
+        "actions": "Hành động"
     }
 }

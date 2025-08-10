@@ -49,5 +49,15 @@
         "title": "System logs",
         "auto_delete_sites": "Auto Delete Expired User Sites Log",
         "no_logs": "No logs to display"
+    },
+    "provider": {
+        "title": "Shortener Provider Management",
+        "name": "Name",
+        "base_url": "Base URL",
+        "api_key": "API Key",
+        "view_limit_per_day": "View Limit Per Day",
+        "price": "Price",
+        "created_at": "Created At",
+        "actions": "Actions"
     }
 }

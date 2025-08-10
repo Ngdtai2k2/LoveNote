@@ -33,5 +33,7 @@
   "user_banned": "Your account has been banned, please contact the administrator for more details.",
   "failed_read_file": "Failed to read log file, please try again later!",
   "banned_user_success": "User banned successfully!",
-  "unbanned_user_success": "User unbanned successfully!"
+  "unbanned_user_success": "User unbanned successfully!",
+  "update_short_link_provider_success": "Short link provider updated successfully!",
+  "update_short_link_provider_failed": "Failed to update short link provider!"
 }
