@@ -5,6 +5,7 @@ import { Typography, Button, Chip } from '@material-tailwind/react';
 import { useDocumentTitle } from '@hooks/useDocumentTitle';
 import { useAxios } from '@hooks/useAxiosJWT';
 
+import helperFunctions from '@helpers';
 import { usersAPI } from '@api/admin/users';
 import DataTable from '@components/DataTable';
 
@@ -83,7 +84,7 @@ export default function UsersManager() {
       key: 'created_at',
       render: (user) => (
         <Typography className="font-normal text-blue-gray-900 dark:text-blue-gray-100">
-          {user.created_at && new Date(user.created_at).toLocaleDateString('vi-VN')}
+          {helperFunctions.formatDateTime(user.created_at)}
         </Typography>
       ),
     },
