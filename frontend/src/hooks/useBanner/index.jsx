@@ -1,4 +1,5 @@
-import { useCallback, useEffect, useState, useRef } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
+
 import { bannerAPI } from '@api/banner';
 
 const useBanner = () => {

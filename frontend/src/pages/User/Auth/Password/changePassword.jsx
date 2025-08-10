@@ -1,13 +1,16 @@
+import { useState } from 'react';
+
+import { Form, Formik } from 'formik';
 import { useTranslation } from 'react-i18next';
-import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
 
-import FormField from '@components/FormField';
-import { useDocumentTitle } from '@hooks/useDocumentTitle';
-import { useCurrentUser } from '@hooks/useCurrentUser';
-import { useAxios } from '@hooks/useAxiosJWT';
 import { authAPI } from '@api/auth';
-import { useState } from 'react';
+
+import { useAxios } from '@hooks/useAxiosJWT';
+import { useCurrentUser } from '@hooks/useCurrentUser';
+import { useDocumentTitle } from '@hooks/useDocumentTitle';
+
+import FormField from '@components/FormField';
 
 export default function ChangePassword() {
   const [loading, setLoading] = useState(false);

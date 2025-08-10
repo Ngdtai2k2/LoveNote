@@ -1,16 +1,17 @@
 import { useEffect, useRef, useState } from 'react';
+
 import { useTranslation } from 'react-i18next';
 
-import { useDocumentTitle } from '@hooks/useDocumentTitle';
 import { useDebouncedValue } from '@hooks/useDebouncedValue';
+import { useDocumentTitle } from '@hooks/useDocumentTitle';
+
 import BlinkingHint from '@components/BlinkingHint';
 import SiteStatusPage from '@components/SiteStatusPage';
 
+import MUSIC_DEMO from '../assets/musics/music_background_005.mp3';
+import MenuSettings from './menuSettings';
 import MatrixRain from './renderEffect/matrixRain';
 import WordDisplay from './renderEffect/wordDisplay';
-import MenuSettings from './menuSettings';
-
-import MUSIC_DEMO from '../assets/musics/music_background_005.mp3';
 
 export default function MatrixRainWithWords({ data }) {
   const { t } = useTranslation('template');

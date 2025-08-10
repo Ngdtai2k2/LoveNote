@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react';
+
+import ROUTES from '@constants/routes';
 import { useTranslation } from 'react-i18next';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-import SimpleCaptcha from '@components/simpleCaptcha';
-
-import { useDocumentTitle } from '@hooks/useDocumentTitle';
-import { useAxios } from '@hooks/useAxiosJWT';
-import ROUTES from '@constants/routes';
 import { taskAPI } from '@api/task';
+
+import { useAxios } from '@hooks/useAxiosJWT';
+import { useDocumentTitle } from '@hooks/useDocumentTitle';
+
+import SimpleCaptcha from '@components/simpleCaptcha';
 
 export default function VerifyTokenTask() {
   const { pathname } = useLocation();

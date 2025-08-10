@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
+import React, { useEffect, useState } from 'react';
+
 import i18n from '@i18n';
+import PropTypes from 'prop-types';
+
 import { LanguageContext } from '../createContext';
 
 const LanguageProvider = ({ children }) => {

@@ -1,13 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+
+import { Button, ButtonGroup, Tab, Tabs, TabsHeader, Typography } from '@material-tailwind/react';
 import { useTranslation } from 'react-i18next';
 
-import { Typography, Tabs, TabsHeader, Tab, Button, ButtonGroup } from '@material-tailwind/react';
+import { vouchersAPI } from '@api/vouchers';
+
+import { useAxios } from '@hooks/useAxiosJWT';
+import { useDocumentTitle } from '@hooks/useDocumentTitle';
 
 import ArcMenu from '@components/ArcMenu';
-
-import { useDocumentTitle } from '@hooks/useDocumentTitle';
-import { useAxios } from '@hooks/useAxiosJWT';
-import { vouchersAPI } from '@api/vouchers';
 import VoucherCard from '@components/VoucherCard';
 
 export default function Reward() {

@@ -1,7 +1,7 @@
 {
-    "success": "Payment successful",
-    "cancel": "Payment cancelled",
-    "thanks": "Thank you for using our service, we wish you the best moments with your loved ones.",
-    "home": "Home",
-    "cancel_note": "An error occurred or you canceled your payment. Please try again."
+  "success": "Payment successful",
+  "cancel": "Payment cancelled",
+  "thanks": "Thank you for using our service, we wish you the best moments with your loved ones.",
+  "home": "Home",
+  "cancel_note": "An error occurred or you canceled your payment. Please try again."
 }

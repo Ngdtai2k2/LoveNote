@@ -1,7 +1,7 @@
 {
-    "success": "Thanh toán thành công",
-    "cancel": "Thanh toán bị hủy",
-    "thanks": "Cảm ơn bạn đã dùng dịch vụ của mình, chúc bạn có những khoảnh khắc đẹp nhất với người mình yêu thương.",
-    "home": "Trang chủ",
-    "cancel_note": "Đã có lỗi xảy ra hoặc bạn đã hủy thanh toán. Vui lòng thử lại."
+  "success": "Thanh toán thành công",
+  "cancel": "Thanh toán bị hủy",
+  "thanks": "Cảm ơn bạn đã dùng dịch vụ của mình, chúc bạn có những khoảnh khắc đẹp nhất với người mình yêu thương.",
+  "home": "Trang chủ",
+  "cancel_note": "Đã có lỗi xảy ra hoặc bạn đã hủy thanh toán. Vui lòng thử lại."
 }

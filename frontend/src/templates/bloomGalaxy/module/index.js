@@ -1,17 +1,14 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
-import galaxyVert from '../shaders/galaxy.vert.glsl';
-import galaxyFrag from '../shaders/galaxy.frag.glsl';
-
-import glowVert from '../shaders/glow.vert.glsl';
-import glowFrag from '../shaders/glow.frag.glsl';
-
-import atmosphereVert from '../shaders/atmosphere.vert.glsl';
 import atmosphereFrag from '../shaders/atmosphere.frag.glsl';
-
-import stormVert from '../shaders/storm.vert.glsl';
+import atmosphereVert from '../shaders/atmosphere.vert.glsl';
+import galaxyFrag from '../shaders/galaxy.frag.glsl';
+import galaxyVert from '../shaders/galaxy.vert.glsl';
+import glowFrag from '../shaders/glow.frag.glsl';
+import glowVert from '../shaders/glow.vert.glsl';
 import stormFrag from '../shaders/storm.frag.glsl';
+import stormVert from '../shaders/storm.vert.glsl';
 
 export default function initGalaxy() {
   const scene = new THREE.Scene();

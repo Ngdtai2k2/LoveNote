@@ -1,15 +1,15 @@
-import { toast } from 'react-fox-toast';
-import API_ENDPOINTS from '@utils/api';
 import ROUTES from '@constants/routes';
 import {
   signInError,
   signInStart,
   signInSuccess,
+  signOutError,
   signOutStart,
   signOutSuccess,
-  signOutError,
 } from '@redux/slice/auth';
+import API_ENDPOINTS from '@utils/api';
 import axiosClient from '@utils/axiosClient';
+import { toast } from 'react-fox-toast';
 
 export const authAPI = {
   signUp: async (data, navigate) => {

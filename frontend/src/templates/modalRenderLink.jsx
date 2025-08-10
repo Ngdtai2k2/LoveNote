@@ -1,19 +1,20 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
-import {
-  Button,
-  Dialog,
-  DialogHeader,
-  DialogBody,
-  DialogFooter,
-  Card,
-  Typography,
-  Tooltip,
-} from '@material-tailwind/react';
 
 import helperFunctions from '@helpers';
+import {
+  Button,
+  Card,
+  Dialog,
+  DialogBody,
+  DialogFooter,
+  DialogHeader,
+  Tooltip,
+  Typography,
+} from '@material-tailwind/react';
+import { useTranslation } from 'react-i18next';
+
 import { paymentAPI } from '@api/payment';
+
 import { useAxios } from '@hooks/useAxiosJWT';
 
 export default function ModalRenderLink({ isOpen, onClose, path, payload }) {

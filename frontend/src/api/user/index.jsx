@@ -1,6 +1,6 @@
-import API_ENDPOINTS from '@utils/api';
-import { removeUser, setUser } from '@redux/slice/user';
 import { signOutSuccess } from '@redux/slice/auth';
+import { removeUser, setUser } from '@redux/slice/user';
+import API_ENDPOINTS from '@utils/api';
 import { toast } from 'react-fox-toast';
 
 export const userAPI = {

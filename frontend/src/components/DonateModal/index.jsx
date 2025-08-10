@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
 
+import BUYMEACOFFEE_LOGO from '@assets/svg/buymeacoffeelogo.svg';
+import helperFunctions from '@helpers';
+import { ClipboardIcon } from '@heroicons/react/24/solid';
 import {
   Avatar,
   Dialog,
@@ -10,12 +12,9 @@ import {
   Tooltip,
   Typography,
 } from '@material-tailwind/react';
+import { useTranslation } from 'react-i18next';
 
 import useWebConfig from '@hooks/useWebConfig';
-import helperFunctions from '@helpers';
-import { ClipboardIcon } from '@heroicons/react/24/solid';
-
-import BUYMEACOFFEE_LOGO from '@assets/svg/buymeacoffeelogo.svg';
 
 export default function DonateModal({ open, handleOpen }) {
   const [webData, setWebData] = useState({});

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
+
 import { useTranslation } from 'react-i18next';
-import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-simple-captcha';
+import { LoadCanvasTemplate, loadCaptchaEnginge, validateCaptcha } from 'react-simple-captcha';
 
 export default function SimpleCaptcha({ onCaptchaMatched }) {
   const [errorMessage, setErrorMessage] = useState(false);

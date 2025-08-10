@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+
 import helperFunctions from '@helpers';
 
 export default function MatrixRain({ letters, rainTextColor, rainFontSize, backgroundColor }) {

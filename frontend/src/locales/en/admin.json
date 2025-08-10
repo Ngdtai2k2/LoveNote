@@ -1,63 +1,63 @@
 {
-    "welcome": "Hi {{name}}, welcome to the admin page!",
-    "dashboard": {
-        "title": "Dashboard",
-        "stats": {
-            "users": "Users",
-            "revenue": "Revenue (vnd)",
-            "sites": "Websites"
-        },
-        "compared": "{{value}} compared to yesterday"
+  "welcome": "Hi {{name}}, welcome to the admin page!",
+  "dashboard": {
+    "title": "Dashboard",
+    "stats": {
+      "users": "Users",
+      "revenue": "Revenue (vnd)",
+      "sites": "Websites"
     },
-    "chart": {
-        "user_site_pie": {
-            "title": "Website Statistics by Product Category",
-            "description": "This chart shows the number of websites distributed across different product categories."
-        },
-        "transactions_bar": {
-            "title": "Transaction Statistics",
-            "description": "This chart shows the number of transactions by status.",
-            "total_revenue": "Total Revenue (paid): {{total}} VND",
-            "total": "Total transactions"
-        },
-        "total": "Total",
-        "filter": "Filter",
-        "no_data": "No data to display"
+    "compared": "{{value}} compared to yesterday"
+  },
+  "chart": {
+    "user_site_pie": {
+      "title": "Website Statistics by Product Category",
+      "description": "This chart shows the number of websites distributed across different product categories."
     },
-    "users": {
-        "title": "Users Management",
-        "id": "ID",
-        "full_name": "Full Name",
-        "email": "Email",
-        "role": "Role",
-        "status": "Status",
-        "created_at": "Created At",
-        "actions": "Actions",
-        "ban": "Ban",
-        "unban": "Unban",
-        "give_token": "Give Token",
-        "revoke_token": "Revoke Token",
-        "banned": "Banned",
-        "active": "Active"
+    "transactions_bar": {
+      "title": "Transaction Statistics",
+      "description": "This chart shows the number of transactions by status.",
+      "total_revenue": "Total Revenue (paid): {{total}} VND",
+      "total": "Total transactions"
     },
-    "table": {
-        "page_of": "Page {{currentPage}} of {{totalPages}}",
-        "next": "Next",
-        "previous": "Previous"
-    },
-    "logs": {
-        "title": "System logs",
-        "auto_delete_sites": "Auto Delete Expired User Sites Log",
-        "no_logs": "No logs to display"
-    },
-    "provider": {
-        "title": "Shortener Provider Management",
-        "name": "Name",
-        "base_url": "Base URL",
-        "api_key": "API Key",
-        "view_limit_per_day": "View Limit Per Day",
-        "price": "Price",
-        "created_at": "Created At",
-        "actions": "Actions"
-    }
+    "total": "Total",
+    "filter": "Filter",
+    "no_data": "No data to display"
+  },
+  "users": {
+    "title": "Users Management",
+    "id": "ID",
+    "full_name": "Full Name",
+    "email": "Email",
+    "role": "Role",
+    "status": "Status",
+    "created_at": "Created At",
+    "actions": "Actions",
+    "ban": "Ban",
+    "unban": "Unban",
+    "give_token": "Give Token",
+    "revoke_token": "Revoke Token",
+    "banned": "Banned",
+    "active": "Active"
+  },
+  "table": {
+    "page_of": "Page {{currentPage}} of {{totalPages}}",
+    "next": "Next",
+    "previous": "Previous"
+  },
+  "logs": {
+    "title": "System logs",
+    "auto_delete_sites": "Auto Delete Expired User Sites Log",
+    "no_logs": "No logs to display"
+  },
+  "provider": {
+    "title": "Shortener Provider Management",
+    "name": "Name",
+    "base_url": "Base URL",
+    "api_key": "API Key",
+    "view_limit_per_day": "View Limit Per Day",
+    "price": "Price",
+    "created_at": "Created At",
+    "actions": "Actions"
+  }
 }

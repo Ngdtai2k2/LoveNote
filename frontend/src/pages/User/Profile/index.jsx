@@ -1,31 +1,31 @@
 import React, { useEffect, useState } from 'react';
+
+import CONSTANTS from '@constants';
+import { profileTabMenu } from '@constants/navigation';
 import {
   Avatar,
   Button,
   Card,
   CardBody,
-  Tabs,
-  TabsHeader,
-  TabsBody,
   Tab,
   TabPanel,
+  Tabs,
+  TabsBody,
+  TabsHeader,
   Typography,
 } from '@material-tailwind/react';
-import { useTranslation } from 'react-i18next';
-
 import dayjs from 'dayjs';
-import relativeTime from 'dayjs/plugin/relativeTime';
 import 'dayjs/locale/en';
 import 'dayjs/locale/vi';
+import relativeTime from 'dayjs/plugin/relativeTime';
+import { useTranslation } from 'react-i18next';
 
 import { useCurrentUser } from '@hooks/useCurrentUser';
 import { useDocumentTitle } from '@hooks/useDocumentTitle';
-import { profileTabMenu } from '@constants/navigation';
-import CONSTANTS from '@constants';
 
-import UpdateModal from './updateModal';
 import SiteTab from './Tabs/siteTab';
 import TransactionTab from './Tabs/transactionTab';
+import UpdateModal from './updateModal';
 
 dayjs.extend(relativeTime);
 
@@ -104,10 +104,10 @@ export default function Profile() {
                 ))}
               </TabsHeader>
               <TabsBody>
-                <TabPanel className='px-0' value="0">
+                <TabPanel className="px-0" value="0">
                   <SiteTab />
                 </TabPanel>
-                <TabPanel className='px-0' value="1">
+                <TabPanel className="px-0" value="1">
                   <TransactionTab />
                 </TabPanel>
               </TabsBody>

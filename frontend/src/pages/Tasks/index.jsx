@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from 'react';
+
+import ROUTES from '@constants/routes';
+import { ArrowTopRightOnSquareIcon, CurrencyDollarIcon } from '@heroicons/react/24/outline';
+import { Alert, Spinner, Typography } from '@material-tailwind/react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
-import { Alert, Typography, Spinner } from '@material-tailwind/react';
-import { ArrowTopRightOnSquareIcon, CurrencyDollarIcon } from '@heroicons/react/24/outline';
-
-import ArcMenu from '@components/ArcMenu';
-
 import { shortenerProviderAPI } from '@api/shortenerProvider';
-import { useDocumentTitle } from '@hooks/useDocumentTitle';
-import { useCurrentUser } from '@hooks/useCurrentUser';
-import { useAxios } from '@hooks/useAxiosJWT';
 import { taskAPI } from '@api/task';
 
-import ROUTES from '@constants/routes';
+import { useAxios } from '@hooks/useAxiosJWT';
+import { useCurrentUser } from '@hooks/useCurrentUser';
+import { useDocumentTitle } from '@hooks/useDocumentTitle';
+
+import ArcMenu from '@components/ArcMenu';
 
 export default function Tasks() {
   const [providers, setProviders] = useState([]);

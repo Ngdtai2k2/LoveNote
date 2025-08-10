@@ -1,11 +1,12 @@
-import React, { useEffect, useState, useRef } from 'react';
-import { useTranslation } from 'react-i18next';
+import React, { useEffect, useRef, useState } from 'react';
 
 import { DocumentTextIcon } from '@heroicons/react/24/solid';
+import { useTranslation } from 'react-i18next';
 
-import { useDocumentTitle } from '@hooks/useDocumentTitle';
-import { useAxios } from '@hooks/useAxiosJWT';
 import { logsApi } from '@api/admin/logs';
+
+import { useAxios } from '@hooks/useAxiosJWT';
+import { useDocumentTitle } from '@hooks/useDocumentTitle';
 
 export default function LogViewer() {
   const [logData, setLogData] = useState('');
@@ -42,7 +43,7 @@ export default function LogViewer() {
   return (
     <div className="p-4 md:mx-5">
       <h1 className="flex gap-1 item-center text-xl mb-4 font-semibold text-gray-900 dark:text-gray-100">
-        <DocumentTextIcon className='h-6 w-6'/> {t('logs.title')}
+        <DocumentTextIcon className="h-6 w-6" /> {t('logs.title')}
       </h1>
 
       {loading && (

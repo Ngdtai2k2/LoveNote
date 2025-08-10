@@ -1,14 +1,12 @@
 import ROUTES from '@constants/routes';
-
-import Profile from '@pages/User/Profile';
-import ChangePassword from '@pages/User/Auth/Password/ChangePassword';
-import VerifyTokenTask from '@pages/Tasks/verifyToken';
-import Tasks from '@pages/Tasks';
-import Reward from '@pages/Reward';
-
+import Cancel from '@pages/Payment/Cancel';
 // payment
 import Success from '@pages/Payment/Success';
-import Cancel from '@pages/Payment/Cancel';
+import Reward from '@pages/Reward';
+import Tasks from '@pages/Tasks';
+import VerifyTokenTask from '@pages/Tasks/verifyToken';
+import ChangePassword from '@pages/User/Auth/Password/ChangePassword';
+import Profile from '@pages/User/Profile';
 
 const privateRoutes = [
   {

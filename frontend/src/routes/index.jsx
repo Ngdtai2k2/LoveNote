@@ -1,19 +1,18 @@
-import { Routes, Route, Navigate } from 'react-router-dom';
-
-import NotFound from '@pages/NotFound';
-import publicRoute from './publicRoute';
-import protectedRoutes from './protectedRoute';
-import privateRoutes from './privateRoute';
-import templateRoutes from './templateRoute';
-
-import LayoutUser from '@components/Layout/User';
-import LayoutAdmin from '@components/Layout/Admin';
-
-import ROUTES from '@constants/routes';
 import CONSTANTS from '@constants';
-
+import ROUTES from '@constants/routes';
 import { renderRoutes } from '@helpers/renderRoutes';
+import NotFound from '@pages/NotFound';
+import { Navigate, Route, Routes } from 'react-router-dom';
+
 import { useCurrentUser } from '@hooks/useCurrentUser';
+
+import LayoutAdmin from '@components/Layout/Admin';
+import LayoutUser from '@components/Layout/User';
+
+import privateRoutes from './privateRoute';
+import protectedRoutes from './protectedRoute';
+import publicRoute from './publicRoute';
+import templateRoutes from './templateRoute';
 import UserTemplateRouter from './userTemplateRoute';
 
 const AppRoutes = () => {

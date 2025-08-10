@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
-import { setCachedData } from '@helpers/cacheSession';
+
 import { useSocketContext } from '@contexts/socket/useSocketContext';
+import { setCachedData } from '@helpers/cacheSession';
 
 /**
  * @param {Object} options

@@ -1,7 +1,7 @@
 import React from 'react';
-import { useTranslation } from 'react-i18next';
 
-import { ArrowTrendingUpIcon, ArrowTrendingDownIcon } from '@heroicons/react/24/solid';
+import { ArrowTrendingDownIcon, ArrowTrendingUpIcon } from '@heroicons/react/24/solid';
+import { useTranslation } from 'react-i18next';
 
 export default function StatCard({ title, value, icon, change, loading }) {
   const { t } = useTranslation('admin');

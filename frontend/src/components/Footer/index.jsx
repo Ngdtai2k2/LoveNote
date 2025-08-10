@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
-
-import { MapPinIcon } from '@heroicons/react/24/solid';
 
 import CONSTANTS from '@constants';
 import ROUTES from '@constants/routes';
-import useWebConfig from '@hooks/useWebConfig';
 import { renderWebConfigsToDOM } from '@helpers/renderWebConfigsToDOM';
+import { MapPinIcon } from '@heroicons/react/24/solid';
+import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
+
+import useWebConfig from '@hooks/useWebConfig';
 
 export default function Footer() {
   const { t, i18n } = useTranslation('footer');

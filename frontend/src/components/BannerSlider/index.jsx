@@ -1,6 +1,5 @@
-import { Link } from 'react-router-dom';
-
 import { Carousel } from '@material-tailwind/react';
+import { Link } from 'react-router-dom';
 
 export function BannerSlider({
   banners,

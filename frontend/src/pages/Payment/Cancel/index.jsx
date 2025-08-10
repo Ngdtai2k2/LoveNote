@@ -1,12 +1,13 @@
 import { useEffect } from 'react';
+
+import { XCircleIcon } from '@heroicons/react/24/solid';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
-import { XCircleIcon } from '@heroicons/react/24/solid';
-
-import { useDocumentTitle } from '@hooks/useDocumentTitle';
-import { useAxios } from '@hooks/useAxiosJWT';
 import { paymentAPI } from '@api/payment';
+
+import { useAxios } from '@hooks/useAxiosJWT';
+import { useDocumentTitle } from '@hooks/useDocumentTitle';
 
 export default function Cancel() {
   const { t, i18n } = useTranslation('payment');

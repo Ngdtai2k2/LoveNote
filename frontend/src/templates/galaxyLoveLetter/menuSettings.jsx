@@ -1,30 +1,28 @@
 import React, { useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
 
-import { IconButton, Typography } from '@material-tailwind/react';
 import { Cog6ToothIcon } from '@heroicons/react/24/solid';
-import { Form, Formik } from 'formik';
+import { IconButton, Typography } from '@material-tailwind/react';
 import EmojiPicker from 'emoji-picker-react';
+import { Form, Formik } from 'formik';
+import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 
 import { useAxios } from '@hooks/useAxiosJWT';
 import { useCurrentUser } from '@hooks/useCurrentUser';
 import { useProductBySlug } from '@hooks/useProductBySlug';
 import { useSettingsFormHandler } from '@hooks/useSettingsFormHandler';
 
+import IMAGE_DEMO from '../assets/images/image_galaxy_text.jpg';
+import MUSIC_DEMO from '../assets/musics/music_background_002.mp3';
+import ColorSelector from '../components/colorSelector';
 import FormArea from '../components/formArea';
 import FormCheckbox from '../components/formCheckbox';
 import FormRange from '../components/formRange';
 import FormSlug from '../components/formSlug';
-import ColorSelector from '../components/colorSelector';
-import TopLeftControl from '../components/topLeftControl';
 import FormVoucher from '../components/formVoucher';
-
+import TopLeftControl from '../components/topLeftControl';
 import ModalRenderLink from '../modalRenderLink';
 import { handleSubmitSettings } from './handleSubmitSettings';
-
-import IMAGE_DEMO from '../assets/images/image_galaxy_text.jpg';
-import MUSIC_DEMO from '../assets/musics/music_background_002.mp3';
 
 export default function MenuSettings({ settings, onUpdate }) {
   const [openSettings, setOpenSettings] = useState(false);

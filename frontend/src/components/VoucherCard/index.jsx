@@ -1,14 +1,15 @@
 import { useState } from 'react';
+
+import {
+  CheckCircleIcon,
+  ClipboardIcon,
+  CurrencyDollarIcon,
+  TicketIcon,
+} from '@heroicons/react/24/outline';
+import { Button, Card, IconButton, Tooltip, Typography } from '@material-tailwind/react';
 import { toast } from 'react-fox-toast';
 import { useTranslation } from 'react-i18next';
 
-import { Card, Typography, Button, IconButton, Tooltip } from '@material-tailwind/react';
-import {
-  TicketIcon,
-  CheckCircleIcon,
-  CurrencyDollarIcon,
-  ClipboardIcon,
-} from '@heroicons/react/24/outline';
 import DetailModal from './detailModal';
 
 export default function VoucherCard({ voucher, isRedeemed = false, isLoading = false, onRedeem }) {

@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Bar } from 'react-chartjs-2';
-import dayjs from 'dayjs';
+import React, { useEffect, useState } from 'react';
+
 import 'chart.js/auto';
+import dayjs from 'dayjs';
+import { Bar } from 'react-chartjs-2';
+import { useTranslation } from 'react-i18next';
 
 import { statsAPI } from '@api/admin/stats';
+
 import { useAxios } from '@hooks/useAxiosJWT';
 
 export default function TransactionsBarChart() {

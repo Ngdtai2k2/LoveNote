@@ -1,14 +1,15 @@
 import { useEffect, useRef, useState } from 'react';
+
 import { useTranslation } from 'react-i18next';
 
 import { useDocumentTitle } from '@hooks/useDocumentTitle';
 
 import SiteStatusPage from '@components/SiteStatusPage';
-import Popups from './renderEffect/popups';
-import MenuSettings from './menuSettings';
 
 import MUSIC from '../assets/musics/tran_bo_nho.mp3';
+import MenuSettings from './menuSettings';
 import { animateParticles } from './renderEffect/animateParticles';
+import Popups from './renderEffect/popups';
 
 export default function MemoryOverflow({ data }) {
   const canvasRef = useRef(null);

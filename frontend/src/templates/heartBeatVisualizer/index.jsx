@@ -1,20 +1,21 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
+
 import { useTranslation } from 'react-i18next';
 
-import { createHeartScene } from './createHeartScene';
+import { useDebouncedValue } from '@hooks/useDebouncedValue';
+import { useDocumentTitle } from '@hooks/useDocumentTitle';
+
 import BlinkingHint from '@components/BlinkingHint';
 import SiteStatusPage from '@components/SiteStatusPage';
-import { useDocumentTitle } from '@hooks/useDocumentTitle';
-import { useDebouncedValue } from '@hooks/useDebouncedValue';
-
-// shader file glsl
-import heartVertex from './shaders/heartVertex.glsl';
-import heartFragment from './shaders/heartFragment.glsl';
-import snowVertex from './shaders/snowVertex.glsl';
-import snowFragment from './shaders/snowFragment.glsl';
-import MenuSettings from './menuSettings';
 
 import MUSIC_DEMO from '../assets/musics/music_background_005.mp3';
+import { createHeartScene } from './createHeartScene';
+import MenuSettings from './menuSettings';
+import heartFragment from './shaders/heartFragment.glsl';
+// shader file glsl
+import heartVertex from './shaders/heartVertex.glsl';
+import snowFragment from './shaders/snowFragment.glsl';
+import snowVertex from './shaders/snowVertex.glsl';
 
 export default function HeartBeatVisualizer({ data }) {
   const isInactive =

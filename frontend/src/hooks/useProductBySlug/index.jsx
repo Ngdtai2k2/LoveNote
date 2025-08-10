@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+
 import { productAPI } from '@api/product';
 
 export const useProductBySlug = () => {

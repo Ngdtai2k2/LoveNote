@@ -1,14 +1,16 @@
 import { useEffect, useRef, useState } from 'react';
+
 import { useTranslation } from 'react-i18next';
+
 import { useDebouncedValue } from '@hooks/useDebouncedValue';
 import { useDocumentTitle } from '@hooks/useDocumentTitle';
 
 import BlinkingHint from '@components/BlinkingHint';
 import SiteStatusPage from '@components/SiteStatusPage';
-import MenuSettings from './menuSettings.jsx';
 
 import IMAGE_DEMO from '../assets/images/image_galaxy_text.jpg';
 import MUSIC_DEMO from '../assets/musics/music_background_005.mp3';
+import MenuSettings from './menuSettings.jsx';
 
 export default function BloomGalaxy({ data }) {
   const containerRef = useRef(null);

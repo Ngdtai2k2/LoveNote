@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
+
+import TEMPLATE_ROUTE from '@constants/routes/template';
+import NotFound from '@pages/NotFound';
 import { useParams } from 'react-router-dom';
 
-import NotFound from '@pages/NotFound';
 import { userSiteAPI } from '@api/userSite';
-import TEMPLATE_ROUTE from '@constants/routes/template';
 
 export default function UserTemplateRouter() {
   const { slug } = useParams();

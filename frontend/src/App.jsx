@@ -1,11 +1,14 @@
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+
 import { ToastContainer } from 'react-fox-toast';
 import { useTranslation } from 'react-i18next';
+import { useDispatch } from 'react-redux';
+
+import { userAPI } from '@api/user';
+
+import { useAxios } from '@hooks/useAxiosJWT';
 
 import AppRoutes from './routes';
-import { useAxios } from '@hooks/useAxiosJWT';
-import { userAPI } from '@api/user';
 
 function App() {
   const dispatch = useDispatch();

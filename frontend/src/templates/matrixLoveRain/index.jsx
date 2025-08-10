@@ -1,14 +1,15 @@
-import { useEffect, useRef, useState, useCallback } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
+
+import helperFunctions from '@helpers';
 import { useTranslation } from 'react-i18next';
 
-import MenuSettings from './menuSettings';
-import helperFunctions from '@helpers';
 import { useDocumentTitle } from '@hooks/useDocumentTitle';
 
-import SiteStatusPage from '@components/SiteStatusPage';
 import BlinkingHint from '@components/BlinkingHint';
+import SiteStatusPage from '@components/SiteStatusPage';
 
 import MUSIC_BACKGROUND_001 from '../assets/musics/music_background_001.mp3';
+import MenuSettings from './menuSettings';
 
 export default function MatrixLoveRain({ data }) {
   const canvasRef = useRef(null);

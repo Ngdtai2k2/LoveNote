@@ -1,5 +1,5 @@
-import API_ENDPOINTS from '@utils/api';
 import fetchPaginatedData from '@helpers/fetchPaginatedData';
+import API_ENDPOINTS from '@utils/api';
 import axiosClient from '@utils/axiosClient';
 import { toast } from 'react-fox-toast';
 

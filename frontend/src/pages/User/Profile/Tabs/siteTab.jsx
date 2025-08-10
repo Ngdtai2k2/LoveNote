@@ -1,15 +1,18 @@
 import { useEffect, useState } from 'react';
+
+import helperFunctions from '@helpers';
+import { Typography } from '@material-tailwind/react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
 import { userSiteAPI } from '@api/userSite';
-import { useAxios } from '@hooks/useAxiosJWT';
-import Pagination from '@components/Pagination';
-import helperFunctions from '@helpers';
 
-import ModalConfirm from './modalConfirm';
-import { Typography } from '@material-tailwind/react';
+import { useAxios } from '@hooks/useAxiosJWT';
+
+import Pagination from '@components/Pagination';
+
 import ModalActive from './modalActive';
+import ModalConfirm from './modalConfirm';
 
 export default function SiteTab() {
   const [sites, setSites] = useState([]);

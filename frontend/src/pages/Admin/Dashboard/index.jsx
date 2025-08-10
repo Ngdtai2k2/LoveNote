@@ -1,16 +1,17 @@
-import { useState, useEffect } from 'react';
-import { useTranslation } from 'react-i18next';
-import { BanknotesIcon, UsersIcon, GlobeAltIcon } from '@heroicons/react/24/solid';
+import { useEffect, useState } from 'react';
 
-import { useDocumentTitle } from '@hooks/useDocumentTitle';
-import { useCurrentUser } from '@hooks/useCurrentUser';
-import { useAxios } from '@hooks/useAxiosJWT';
+import { BanknotesIcon, GlobeAltIcon, UsersIcon } from '@heroicons/react/24/solid';
+import { useTranslation } from 'react-i18next';
 
 import { statsAPI } from '@api/admin/stats';
 
-import StatCard from '../StatCard';
-import UserSitesPieChart from '../Chart/UserSitesPieChart';
+import { useAxios } from '@hooks/useAxiosJWT';
+import { useCurrentUser } from '@hooks/useCurrentUser';
+import { useDocumentTitle } from '@hooks/useDocumentTitle';
+
 import TransactionsBarChart from '../Chart/TransactionsBarChart';
+import UserSitesPieChart from '../Chart/UserSitesPieChart';
+import StatCard from '../StatCard';
 
 export default function Admin() {
   const [stats, setStats] = useState(null);

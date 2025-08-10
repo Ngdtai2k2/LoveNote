@@ -1,5 +1,7 @@
 import React from 'react';
+
 import { useSocket } from '@hooks/useSocket';
+
 import { SocketContext } from '../createContext';
 
 export function SocketProvider({ children }) {

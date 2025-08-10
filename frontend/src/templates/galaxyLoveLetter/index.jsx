@@ -1,12 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useRef, useState } from 'react';
-import { useTranslation } from 'react-i18next';
 
-import BlinkingHint from '@components/BlinkingHint';
-import SiteStatusPage from '@components/SiteStatusPage';
+import { useTranslation } from 'react-i18next';
 
 import { useDebouncedValue } from '@hooks/useDebouncedValue';
 import { useDocumentTitle } from '@hooks/useDocumentTitle';
+
+import BlinkingHint from '@components/BlinkingHint';
+import SiteStatusPage from '@components/SiteStatusPage';
 
 import IMAGE_DEMO from '../assets/images/image_galaxy_text.jpg';
 import MUSIC_DEMO from '../assets/musics/music_background_002.mp3';

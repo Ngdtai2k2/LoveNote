@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { Dialog, Typography } from '@material-tailwind/react';
 
 export default function ModalEdit({ data, open, onClose }) {

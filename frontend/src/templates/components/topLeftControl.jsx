@@ -1,10 +1,10 @@
 import React from 'react';
-import { IconButton } from '@material-tailwind/react';
-import { HomeIcon, ArrowsPointingInIcon, ArrowsPointingOutIcon } from '@heroicons/react/24/solid';
-import { useNavigate } from 'react-router-dom';
 
 import ROUTES from '@constants/routes';
 import helperFunctions from '@helpers';
+import { ArrowsPointingInIcon, ArrowsPointingOutIcon, HomeIcon } from '@heroicons/react/24/solid';
+import { IconButton } from '@material-tailwind/react';
+import { useNavigate } from 'react-router-dom';
 
 export default function TopLeftControl() {
   const navigate = useNavigate();

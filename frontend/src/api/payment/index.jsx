@@ -1,5 +1,5 @@
-import { toast } from 'react-fox-toast';
 import API_ENDPOINTS from '@utils/api';
+import { toast } from 'react-fox-toast';
 
 export const paymentAPI = {
   createPaymentLink: async (axiosJWT, payload) => {

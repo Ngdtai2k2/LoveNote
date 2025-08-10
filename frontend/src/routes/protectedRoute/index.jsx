@@ -1,10 +1,9 @@
-import ShortenerProviderManager from '@pages/Admin/ShortenerProvider';
-import Dashboard from '@pages/Admin/Dashboard';
-import UsersManager from '@pages/Admin/Users';
-import LogViewer from '@pages/Admin/LogViewer';
-
-import ROUTES from '@constants/routes';
 import CONSTANTS from '@constants';
+import ROUTES from '@constants/routes';
+import Dashboard from '@pages/Admin/Dashboard';
+import LogViewer from '@pages/Admin/LogViewer';
+import ShortenerProviderManager from '@pages/Admin/ShortenerProvider';
+import UsersManager from '@pages/Admin/Users';
 
 const protectedRoutes = [
   {

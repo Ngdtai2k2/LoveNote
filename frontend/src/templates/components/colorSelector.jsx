@@ -1,5 +1,6 @@
-import { PlusIcon } from '@heroicons/react/24/solid';
 import React, { useState } from 'react';
+
+import { PlusIcon } from '@heroicons/react/24/solid';
 
 export default function ColorSelector({ label, value = [], onChange, max = 10 }) {
   const [currentColor, setCurrentColor] = useState('#ff69b4');

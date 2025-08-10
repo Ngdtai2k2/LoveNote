@@ -1,5 +1,5 @@
 import { StarIcon } from '@heroicons/react/24/solid';
-import { Card, CardHeader, CardBody, Typography, Button } from '@material-tailwind/react';
+import { Button, Card, CardBody, CardHeader, Typography } from '@material-tailwind/react';
 import { useTranslation } from 'react-i18next';
 
 export function ProductCard({ image, title, description, rating, price, onReadMore }) {

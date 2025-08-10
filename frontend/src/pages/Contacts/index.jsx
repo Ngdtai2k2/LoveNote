@@ -1,19 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-
-import { Form, Formik } from 'formik';
-import * as Yup from 'yup';
 
 import { EnvelopeIcon } from '@heroicons/react/24/solid';
-
-import useWebConfig from '@hooks/useWebConfig';
-import { useDocumentTitle } from '@hooks/useDocumentTitle';
-
-import FormField from '@components/FormField';
-import FormTextArea from '@components/FormTextArea';
-import ArcMenu from '@components/ArcMenu';
+import { Form, Formik } from 'formik';
+import { useTranslation } from 'react-i18next';
+import * as Yup from 'yup';
 
 import { contactAPI } from '@api/contact';
+
+import { useDocumentTitle } from '@hooks/useDocumentTitle';
+import useWebConfig from '@hooks/useWebConfig';
+
+import ArcMenu from '@components/ArcMenu';
+import FormField from '@components/FormField';
+import FormTextArea from '@components/FormTextArea';
 
 export default function Contacts() {
   const [webData, setWebData] = useState({});

@@ -1,31 +1,28 @@
 import { useRef, useState } from 'react';
+
+import helperFunctions from '@helpers';
+import { Cog6ToothIcon } from '@heroicons/react/24/solid';
+import { IconButton } from '@material-tailwind/react';
+import { Form, Formik } from 'formik';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
-
-import { Formik, Form } from 'formik';
-import { IconButton } from '@material-tailwind/react';
-import { Cog6ToothIcon } from '@heroicons/react/24/solid';
 
 import { useAxios } from '@hooks/useAxiosJWT';
 import { useCurrentUser } from '@hooks/useCurrentUser';
 import { useProductBySlug } from '@hooks/useProductBySlug';
 import { useSettingsFormHandler } from '@hooks/useSettingsFormHandler';
 
-import helperFunctions from '@helpers';
-
-import FormItem from '../components/formItem';
+import MUSIC_DEMO from '../assets/musics/music_background_005.mp3';
 import FormArea from '../components/formArea';
-import FormSlug from '../components/formSlug';
+import FormCheckbox from '../components/formCheckbox';
+import FormItem from '../components/formItem';
 import FormRange from '../components/formRange';
 import FormSelect from '../components/formSelect';
+import FormSlug from '../components/formSlug';
 import FormVoucher from '../components/formVoucher';
-import FormCheckbox from '../components/formCheckbox';
 import TopLeftControl from '../components/topLeftControl';
-
-import { handleSubmitSettings } from './handleSubmitSettings';
 import ModalRenderLink from '../modalRenderLink';
-
-import MUSIC_DEMO from '../assets/musics/music_background_005.mp3';
+import { handleSubmitSettings } from './handleSubmitSettings';
 
 export default function MenuSettings({ settings, onUpdate }) {
   const [openSettings, setOpenSettings] = useState(false);

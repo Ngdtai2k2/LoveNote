@@ -1,36 +1,35 @@
 import React, { createElement, useState } from 'react';
 
-import { Link, useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { useTranslation } from 'react-i18next';
-
+import CONSTANTS from '@constants';
+import { profileMenu } from '@constants/navigation';
+import ROUTES from '@constants/routes';
 import {
-  Typography,
+  ArrowRightEndOnRectangleIcon,
+  ChevronDownIcon,
+  CurrencyDollarIcon,
+  LockClosedIcon,
+  PlusIcon,
+  PowerIcon,
+  ShieldCheckIcon,
+  UserCircleIcon,
+} from '@heroicons/react/24/solid';
+import {
+  Avatar,
   Button,
   Menu,
   MenuHandler,
-  MenuList,
   MenuItem,
-  Avatar,
+  MenuList,
+  Typography,
 } from '@material-tailwind/react';
-import {
-  ChevronDownIcon,
-  ArrowRightEndOnRectangleIcon,
-  PlusIcon,
-  CurrencyDollarIcon,
-  ShieldCheckIcon,
-  UserCircleIcon,
-  LockClosedIcon,
-  PowerIcon,
-} from '@heroicons/react/24/solid';
+import { useTranslation } from 'react-i18next';
+import { useDispatch } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
 
-import { useCurrentUser } from '@hooks/useCurrentUser';
-import { useAxios } from '@hooks/useAxiosJWT';
 import { authAPI } from '@api/auth';
 
-import ROUTES from '@constants/routes';
-import CONSTANTS from '@constants';
-import { profileMenu } from '@constants/navigation';
+import { useAxios } from '@hooks/useAxiosJWT';
+import { useCurrentUser } from '@hooks/useCurrentUser';
 
 export function ProfileMenu() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);

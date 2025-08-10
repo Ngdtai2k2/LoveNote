@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
-import { Typography } from '@material-tailwind/react';
 
-import { BannerSlider } from '@components/BannerSlider';
-import { ProductCard } from '@components/ProductCard';
-import Pagination from '@components/Pagination';
-import ArcMenu from '@components/ArcMenu';
-import { useDocumentTitle } from '@hooks/useDocumentTitle';
-import useBanner from '@hooks/useBanner';
-import { productAPI } from '@api/product';
 import CONSTANTS from '@constants';
+import { Typography } from '@material-tailwind/react';
+import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
+
+import { productAPI } from '@api/product';
+
+import useBanner from '@hooks/useBanner';
+import { useDocumentTitle } from '@hooks/useDocumentTitle';
+
+import ArcMenu from '@components/ArcMenu';
+import { BannerSlider } from '@components/BannerSlider';
+import Pagination from '@components/Pagination';
+import { ProductCard } from '@components/ProductCard';
 
 export default function Home() {
   const { t } = useTranslation(['product', 'navbar', 'notfound']);

@@ -1,63 +1,63 @@
 {
-    "welcome": "Chào {{name}}, chào mừng bạn đến với trang quản trị viên!",
-    "dashboard": {
-        "title": "Trang tổng quan",
-        "stats": {
-            "users": "Người dùng",
-            "revenue": "Doanh thu (vnd)",
-            "sites": "Trang web"
-        },
-        "compared": "{{value}} so với ngày hôm qua"
+  "welcome": "Chào {{name}}, chào mừng bạn đến với trang quản trị viên!",
+  "dashboard": {
+    "title": "Trang tổng quan",
+    "stats": {
+      "users": "Người dùng",
+      "revenue": "Doanh thu (vnd)",
+      "sites": "Trang web"
     },
-    "chart": {
-        "user_site_pie": {
-            "title": "Thống kê website theo danh mục sản phẩm",
-            "description": "Biểu đồ này hiển thị số lượng website được phân bố theo từng danh mục sản phẩm."
-        },
-        "transactions_bar": {
-            "title": "Thống kê giao dịch",
-            "description": "Biểu đồ này hiển thị số lượng giao dịch theo trạng thái.",
-            "total_revenue": "Tổng doanh thu (đã thanh toán): {{total}} VND",
-            "total": "Tổng số giao dịch"
-        },
-        "total": "Tổng cộng",
-        "filter": "Lọc",
-        "no_data": "Không có dữ liệu để hiển thị"
+    "compared": "{{value}} so với ngày hôm qua"
+  },
+  "chart": {
+    "user_site_pie": {
+      "title": "Thống kê website theo danh mục sản phẩm",
+      "description": "Biểu đồ này hiển thị số lượng website được phân bố theo từng danh mục sản phẩm."
     },
-    "users": {
-        "title": "Quản lý người dùng",
-        "id": "ID",
-        "full_name": "Họ và tên",
-        "email": "Email",
-        "role": "Vai trò",
-        "status": "Trạng thái",
-        "created_at": "Ngày tạo",
-        "actions": "Hành động",
-        "ban": "Cấm",
-        "unban": "Bỏ cấm",
-        "give_token": "Cấp token",
-        "revoke_token": "Thu hồi token",
-        "banned": "Đã bị cấm",
-        "active": "Đang hoạt động"
+    "transactions_bar": {
+      "title": "Thống kê giao dịch",
+      "description": "Biểu đồ này hiển thị số lượng giao dịch theo trạng thái.",
+      "total_revenue": "Tổng doanh thu (đã thanh toán): {{total}} VND",
+      "total": "Tổng số giao dịch"
     },
-    "table": {
-        "page_of": "Trang {{currentPage}} của {{totalPages}}",
-        "next": "Tiếp theo",
-        "previous": "Trước đó"
-    },
-    "logs": {
-        "title": "Nhật ký hệ thống",
-        "auto_delete_sites": "Nhật ký tự động xóa các trang web của người dùng đã hết hạn",
-        "no_logs": "Không có nhật ký nào để hiển thị"
-    },
-    "provider": {
-        "title": "Quản lý nhà cung cấp rút gọn link",
-        "name": "Tên",
-        "base_url": "URL cơ sở",
-        "api_key": "Khóa API",
-        "view_limit_per_day": "Lượt/Ngày",
-        "price": "Giá",
-        "created_at": "Ngày tạo",
-        "actions": "Hành động"
-    }
+    "total": "Tổng cộng",
+    "filter": "Lọc",
+    "no_data": "Không có dữ liệu để hiển thị"
+  },
+  "users": {
+    "title": "Quản lý người dùng",
+    "id": "ID",
+    "full_name": "Họ và tên",
+    "email": "Email",
+    "role": "Vai trò",
+    "status": "Trạng thái",
+    "created_at": "Ngày tạo",
+    "actions": "Hành động",
+    "ban": "Cấm",
+    "unban": "Bỏ cấm",
+    "give_token": "Cấp token",
+    "revoke_token": "Thu hồi token",
+    "banned": "Đã bị cấm",
+    "active": "Đang hoạt động"
+  },
+  "table": {
+    "page_of": "Trang {{currentPage}} của {{totalPages}}",
+    "next": "Tiếp theo",
+    "previous": "Trước đó"
+  },
+  "logs": {
+    "title": "Nhật ký hệ thống",
+    "auto_delete_sites": "Nhật ký tự động xóa các trang web của người dùng đã hết hạn",
+    "no_logs": "Không có nhật ký nào để hiển thị"
+  },
+  "provider": {
+    "title": "Quản lý nhà cung cấp rút gọn link",
+    "name": "Tên",
+    "base_url": "URL cơ sở",
+    "api_key": "Khóa API",
+    "view_limit_per_day": "Lượt/Ngày",
+    "price": "Giá",
+    "created_at": "Ngày tạo",
+    "actions": "Hành động"
+  }
 }

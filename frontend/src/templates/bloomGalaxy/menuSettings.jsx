@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
+
+import ROUTES from '@constants/routes';
+import helperFunctions from '@helpers';
 import {
   ArrowsPointingInIcon,
   ArrowsPointingOutIcon,
@@ -8,24 +9,22 @@ import {
   HomeIcon,
 } from '@heroicons/react/24/solid';
 import { IconButton } from '@material-tailwind/react';
-import { Formik, Form } from 'formik';
-
-import helperFunctions from '@helpers';
-import ROUTES from '@constants/routes';
+import { Form, Formik } from 'formik';
+import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 
 import { useAxios } from '@hooks/useAxiosJWT';
 import { useCurrentUser } from '@hooks/useCurrentUser';
 import { useProductBySlug } from '@hooks/useProductBySlug';
 import { useSettingsFormHandler } from '@hooks/useSettingsFormHandler';
 
+import IMAGE_DEMO from '../assets/images/image_galaxy_text.jpg';
+import MUSIC_DEMO from '../assets/musics/music_background_005.mp3';
 import FormArea from '../components/formArea';
 import FormSlug from '../components/formSlug';
 import FormVoucher from '../components/formVoucher';
 import ModalRenderLink from '../modalRenderLink';
 import { handleSubmitSettings } from './handleSubmitSettings';
-
-import IMAGE_DEMO from '../assets/images/image_galaxy_text.jpg';
-import MUSIC_DEMO from '../assets/musics/music_background_005.mp3';
 
 export default function MenuSettings({ settings, onUpdate }) {
   const [openSettings, setOpenSettings] = useState(false);

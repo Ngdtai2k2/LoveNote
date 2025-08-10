@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Button, Typography } from '@material-tailwind/react';
-import { CheckCircleIcon, CurrencyDollarIcon } from '@heroicons/react/24/solid';
-
-import { useCurrentUser } from '@hooks/useCurrentUser';
-import { userSiteAPI } from '@api/userSite';
-import { paymentAPI } from '@api/payment';
-import { useAxios } from '@hooks/useAxiosJWT';
 
 import CONSTANTS from '@constants';
+import { CheckCircleIcon, CurrencyDollarIcon } from '@heroicons/react/24/solid';
+import { Button, Typography } from '@material-tailwind/react';
+import { useTranslation } from 'react-i18next';
+
+import { paymentAPI } from '@api/payment';
+import { userSiteAPI } from '@api/userSite';
+
+import { useAxios } from '@hooks/useAxiosJWT';
+import { useCurrentUser } from '@hooks/useCurrentUser';
 
 export default function ModalActive({ isOpen, onCancel, data, onGetData }) {
   const [loading, setLoading] = useState(false);

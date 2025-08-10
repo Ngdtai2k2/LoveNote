@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Typography, Button, Chip } from '@material-tailwind/react';
-
-import { useDocumentTitle } from '@hooks/useDocumentTitle';
-import { useAxios } from '@hooks/useAxiosJWT';
+import React, { useEffect, useState } from 'react';
 
 import helperFunctions from '@helpers';
+import { Button, Chip, Typography } from '@material-tailwind/react';
+import { useTranslation } from 'react-i18next';
+
 import { usersAPI } from '@api/admin/users';
+
+import { useAxios } from '@hooks/useAxiosJWT';
+import { useDocumentTitle } from '@hooks/useDocumentTitle';
+
 import DataTable from '@components/DataTable';
 
 export default function UsersManager() {

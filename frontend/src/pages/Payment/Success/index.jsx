@@ -1,8 +1,8 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 import { CheckCircleIcon } from '@heroicons/react/24/solid';
 import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
 
 export default function Success() {
   const { t } = useTranslation('payment');

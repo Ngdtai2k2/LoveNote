@@ -1,19 +1,19 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+
+import ROUTES from '@constants/routes';
+import {
+  BanknotesIcon,
+  BellIcon,
+  ChatBubbleBottomCenterTextIcon,
+  InformationCircleIcon,
+  PlusIcon,
+  XMarkIcon,
+} from '@heroicons/react/24/solid';
+import { Tooltip } from '@material-tailwind/react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
-import {
-  PlusIcon,
-  XMarkIcon,
-  InformationCircleIcon,
-  BellIcon,
-  BanknotesIcon,
-  ChatBubbleBottomCenterTextIcon,
-} from '@heroicons/react/24/solid';
-import { Tooltip } from '@material-tailwind/react';
-
 import DonateModal from '@components/DonateModal';
-import ROUTES from '@constants/routes';
 
 export default function ArcMenu() {
   const [open, setOpen] = useState(false);

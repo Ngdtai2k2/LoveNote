@@ -1,27 +1,25 @@
 import { useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
 
-import { IconButton } from '@material-tailwind/react';
 import { Cog6ToothIcon } from '@heroicons/react/24/solid';
+import { IconButton } from '@material-tailwind/react';
 import { Form, Formik } from 'formik';
+import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 
-import { useCurrentUser } from '@hooks/useCurrentUser';
 import { useAxios } from '@hooks/useAxiosJWT';
+import { useCurrentUser } from '@hooks/useCurrentUser';
 import { useProductBySlug } from '@hooks/useProductBySlug';
 import { useSettingsFormHandler } from '@hooks/useSettingsFormHandler';
 
-import FormSlug from '../components/formSlug';
+import MUSIC_DEMO from '../assets/musics/music_background_005.mp3';
 import ColorSelector from '../components/colorSelector';
 import FormItem from '../components/formItem';
 import FormRange from '../components/formRange';
-import TopLeftControl from '../components/topLeftControl';
+import FormSlug from '../components/formSlug';
 import FormVoucher from '../components/formVoucher';
-
-import handleSubmitSettings from './handleSubmitSettings';
+import TopLeftControl from '../components/topLeftControl';
 import ModalRenderLink from '../modalRenderLink';
-
-import MUSIC_DEMO from '../assets/musics/music_background_005.mp3';
+import handleSubmitSettings from './handleSubmitSettings';
 
 export default function MenuSettings({ settings, onUpdate }) {
   const [openSettings, setOpenSettings] = useState(false);

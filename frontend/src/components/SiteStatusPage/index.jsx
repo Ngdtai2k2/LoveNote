@@ -1,8 +1,8 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
 
 import { ExclamationTriangleIcon, XCircleIcon } from '@heroicons/react/24/outline';
+import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
 
 import { useDocumentTitle } from '@hooks/useDocumentTitle';
 

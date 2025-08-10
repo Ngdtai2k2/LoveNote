@@ -1,5 +1,5 @@
-import VI_FLAG from '@assets/svg/vi-flag.svg';
 import US_FLAG from '@assets/svg/us-flag.svg';
+import VI_FLAG from '@assets/svg/vi-flag.svg';
 
 export const LANG_LIST = [
   {

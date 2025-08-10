@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
+
+import ROUTES from '@constants/routes';
+import { Form, Formik } from 'formik';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
-import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
 
-import FormField from '@components/FormField';
-import ROUTES from '@constants/routes';
-import { useDocumentTitle } from '@hooks/useDocumentTitle';
 import { authAPI } from '@api/auth';
+
+import { useDocumentTitle } from '@hooks/useDocumentTitle';
+
+import FormField from '@components/FormField';
 
 export default function SignUp() {
   const [loading, setLoading] = useState(false);

@@ -1,13 +1,12 @@
+import ROUTES from '@constants/routes';
+import About from '@pages/About';
+import Contacts from '@pages/Contacts';
+import Home from '@pages/Home';
+import ForgotPassword from '@pages/User/Auth/Password/forgotPassword';
+import ResetPassword from '@pages/User/Auth/Password/resetPassword';
+import VerifyCode from '@pages/User/Auth/Password/verifyCode';
 import SignIn from '@pages/User/Auth/SignIn';
 import SignUp from '@pages/User/Auth/SignUp';
-import ForgotPassword from '@pages/User/Auth/Password/forgotPassword';
-import VerifyCode from '@pages/User/Auth/Password/verifyCode';
-import ResetPassword from '@pages/User/Auth/Password/resetPassword';
-import Home from '@pages/Home';
-import Contacts from '@pages/Contacts';
-import About from '@pages/About';
-
-import ROUTES from '@constants/routes';
 
 const publicRoute = [
   {

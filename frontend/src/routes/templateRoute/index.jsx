@@ -1,9 +1,9 @@
-import MatrixLoveRain from '@templates/matrixLoveRain';
-import HeartBeatVisualizer from '@templates/heartBeatVisualizer';
+import BloomGalaxy from '@templates/bloomGalaxy';
 import GalaxyLoveLetter from '@templates/galaxyLoveLetter';
+import HeartBeatVisualizer from '@templates/heartBeatVisualizer';
+import MatrixLoveRain from '@templates/matrixLoveRain';
 import MatrixRainWithParticles from '@templates/matrixRainWithParticles';
 import MemoryOverflow from '@templates/memoryOverflow';
-import BloomGalaxy from '@templates/bloomGalaxy';
 
 const templateRoutes = [
   {

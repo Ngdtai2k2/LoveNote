@@ -1,23 +1,25 @@
 import React, { useMemo, useState } from 'react';
+
+import { ArrowUpTrayIcon } from '@heroicons/react/24/solid';
+import {
+  Avatar,
+  Button,
+  Dialog,
+  DialogBody,
+  DialogFooter,
+  DialogHeader,
+} from '@material-tailwind/react';
+import { Form, Formik } from 'formik';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import * as Yup from 'yup';
-import { Formik, Form } from 'formik';
 
-import {
-  Button,
-  Dialog,
-  DialogHeader,
-  DialogBody,
-  DialogFooter,
-  Avatar,
-} from '@material-tailwind/react';
-import { ArrowUpTrayIcon } from '@heroicons/react/24/solid';
+import { userAPI } from '@api/user';
+
+import { useAxios } from '@hooks/useAxiosJWT';
+import { useCurrentUser } from '@hooks/useCurrentUser';
 
 import FormField from '@components/FormField';
-import { useCurrentUser } from '@hooks/useCurrentUser';
-import { useAxios } from '@hooks/useAxiosJWT';
-import { userAPI } from '@api/user';
 
 export default function UpdateModal() {
   const [open, setOpen] = useState(false);

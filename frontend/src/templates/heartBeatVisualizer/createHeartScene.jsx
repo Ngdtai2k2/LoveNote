@@ -1,10 +1,10 @@
+import { gsap } from 'gsap';
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
-import { gsap } from 'gsap';
 
 import HEART_GLB from '../assets/glb/heart.glb';
-import HEART from '../assets/images/heart.png';
 import BALL from '../assets/images/ball.png';
+import HEART from '../assets/images/heart.png';
 
 export function createHeartScene(
   canvas,

@@ -1,15 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import { useTranslation } from 'react-i18next';
-
-import { Typography, Button, Tooltip, IconButton } from '@material-tailwind/react';
-import { PencilIcon, TrashIcon } from '@heroicons/react/24/solid';
-
-import { useDocumentTitle } from '@hooks/useDocumentTitle';
-import { useAxios } from '@hooks/useAxiosJWT';
+import React, { useEffect, useState } from 'react';
 
 import helperFunctions from '@helpers';
+import { PencilIcon, TrashIcon } from '@heroicons/react/24/solid';
+import { Button, IconButton, Tooltip, Typography } from '@material-tailwind/react';
+import { useTranslation } from 'react-i18next';
+
 import { shortenerProvider } from '@api/admin/shortenerProvider';
+
+import { useAxios } from '@hooks/useAxiosJWT';
+import { useDocumentTitle } from '@hooks/useDocumentTitle';
+
 import DataTable from '@components/DataTable';
+
 import ModalEdit from './modalEdit';
 
 export default function ShortenerProviderManager() {

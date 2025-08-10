@@ -1,7 +1,7 @@
 import React from 'react';
-import { Menu, MenuHandler, MenuList, MenuItem, Button, Avatar } from '@material-tailwind/react';
 
 import useLanguage from '@contexts/language/useLanguage';
+import { Avatar, Button, Menu, MenuHandler, MenuItem, MenuList } from '@material-tailwind/react';
 
 export default function ChangeLang({ langList }) {
   const { language, changeLanguage } = useLanguage();

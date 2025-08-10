@@ -1,15 +1,17 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 
-import { useTranslation } from 'react-i18next';
+import ROUTES from '@constants/routes';
 import { Form, Formik } from 'formik';
+import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 
-import { useDocumentTitle } from '@hooks/useDocumentTitle';
-import FormField from '@components/FormField';
 import { authAPI } from '@api/auth';
-import ROUTES from '@constants/routes';
-import { useState } from 'react';
+
+import { useDocumentTitle } from '@hooks/useDocumentTitle';
+
+import FormField from '@components/FormField';
 
 export default function ResetPassword() {
   const [loading, setLoading] = useState(false);

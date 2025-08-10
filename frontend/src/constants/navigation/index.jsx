@@ -1,12 +1,12 @@
 import {
-  UserCircleIcon,
-  PowerIcon,
   AdjustmentsHorizontalIcon,
-  UsersIcon,
-  LockClosedIcon,
-  ShieldCheckIcon,
   DocumentTextIcon,
   LinkIcon,
+  LockClosedIcon,
+  PowerIcon,
+  ShieldCheckIcon,
+  UserCircleIcon,
+  UsersIcon,
 } from '@heroicons/react/24/solid';
 
 import ROUTES from '../routes';

@@ -1,8 +1,8 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
 
-import ProtectedRoute from '@routes/protectedRoute/protectedRoute';
 import PrivateRoute from '@routes/privateRoute/privateRoute';
+import ProtectedRoute from '@routes/protectedRoute/protectedRoute';
+import { Route } from 'react-router-dom';
 
 export const renderRoutes = (routes, LayoutComponent = React.Fragment, isAuthenticated = false) =>
   routes.map(({ path, element, isPrivate, requiredRole, hideLayout }, index) => {

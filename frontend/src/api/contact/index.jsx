@@ -1,7 +1,6 @@
-import { toast } from 'react-fox-toast';
-
-import axiosClient from '@utils/axiosClient';
 import API_ENDPOINTS from '@utils/api';
+import axiosClient from '@utils/axiosClient';
+import { toast } from 'react-fox-toast';
 
 export const contactAPI = {
   create: async (data) => {

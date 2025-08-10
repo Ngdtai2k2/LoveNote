@@ -1,7 +1,7 @@
 import React from 'react';
 
-import NavBar from '@components/NavBar';
 import Footer from '@components/Footer';
+import NavBar from '@components/NavBar';
 
 export default function LayoutUser({ children, className }) {
   return (
@@ -14,4 +14,3 @@ export default function LayoutUser({ children, className }) {
     </div>
   );
 }
-

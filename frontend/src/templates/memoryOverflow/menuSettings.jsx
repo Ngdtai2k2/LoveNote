@@ -1,17 +1,17 @@
 import { useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
 
+import { Cog6ToothIcon } from '@heroicons/react/24/solid';
 import {
   Button,
   Dialog,
-  DialogHeader,
   DialogBody,
   DialogFooter,
+  DialogHeader,
   IconButton,
 } from '@material-tailwind/react';
-import { Cog6ToothIcon } from '@heroicons/react/24/solid';
 import { Form, Formik } from 'formik';
+import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 
 import { useAxios } from '@hooks/useAxiosJWT';
 import { useCurrentUser } from '@hooks/useCurrentUser';
@@ -22,7 +22,6 @@ import FormItem from '../components/formItem';
 import FormSlug from '../components/formSlug';
 import FormVoucher from '../components/formVoucher';
 import TopLeftControl from '../components/topLeftControl';
-
 import ModalRenderLink from '../modalRenderLink';
 import { handleSubmitSettings } from './handleSubmitSettings';
 
