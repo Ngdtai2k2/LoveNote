@@ -3,8 +3,9 @@ import { useTranslation } from 'react-i18next';
 import { Typography, Button, Chip } from '@material-tailwind/react';
 
 import { useDocumentTitle } from '@hooks/useDocumentTitle';
-import { usersAPI } from '@api/admin/users';
 import { useAxios } from '@hooks/useAxiosJWT';
+
+import { usersAPI } from '@api/admin/users';
 import DataTable from '@components/DataTable';
 
 export default function UsersManager() {
@@ -55,8 +56,6 @@ export default function UsersManager() {
           data: prev.data.map((u) => (u.id === id ? { ...u, is_banned: !u.is_banned } : u)),
         }));
       }
-    } catch (error) {
-      console.error(error);
     } finally {
       setLoadingId(null);
     }
