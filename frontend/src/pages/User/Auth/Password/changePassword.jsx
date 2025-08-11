@@ -10,6 +10,7 @@ import { useAxios } from '@hooks/useAxiosJWT';
 import { useCurrentUser } from '@hooks/useCurrentUser';
 import { useDocumentTitle } from '@hooks/useDocumentTitle';
 
+import ArcMenu from '@components/ArcMenu';
 import FormField from '@components/FormField';
 
 export default function ChangePassword() {
@@ -126,6 +127,7 @@ export default function ChangePassword() {
             </Form>
           )}
         </Formik>
+        <ArcMenu />
       </div>
     </div>
   );

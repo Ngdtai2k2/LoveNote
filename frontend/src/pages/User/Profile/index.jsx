@@ -4,7 +4,6 @@ import CONSTANTS from '@constants';
 import { profileTabMenu } from '@constants/navigation';
 import {
   Avatar,
-  Button,
   Card,
   CardBody,
   Tab,
@@ -22,6 +21,8 @@ import { useTranslation } from 'react-i18next';
 
 import { useCurrentUser } from '@hooks/useCurrentUser';
 import { useDocumentTitle } from '@hooks/useDocumentTitle';
+
+import ArcMenu from '@components/ArcMenu';
 
 import SiteTab from './Tabs/siteTab';
 import TransactionTab from './Tabs/transactionTab';
@@ -115,6 +116,7 @@ export default function Profile() {
           </div>
         </div>
       </CardBody>
+      <ArcMenu />
     </Card>
   );
 }
