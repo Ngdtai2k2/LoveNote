@@ -33,6 +33,7 @@
     "react-dom": "^19.1.0",
     "react-fox-toast": "^1.10.20",
     "react-i18next": "^15.5.3",
+    "react-infinite-scroll-component": "^6.1.0",
     "react-redux": "^9.2.0",
     "react-router-dom": "^7.6.2",
     "react-simple-captcha": "^9.3.1",

@@ -9,19 +9,28 @@ import {
   PlusIcon,
   XMarkIcon,
 } from '@heroicons/react/24/solid';
-import { Tooltip } from '@material-tailwind/react';
+import { Badge, Tooltip } from '@material-tailwind/react';
+import { toast } from 'react-fox-toast';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
+import { useCurrentUser } from '@hooks/useCurrentUser';
+
 import DonateModal from '@components/DonateModal';
+
+import Notifications from '../Notifications';
 
 export default function ArcMenu() {
   const [open, setOpen] = useState(false);
   const [openDonate, setOpenDonate] = useState(false);
+  const [openNotifications, setOpenNotifications] = useState(false);
+
   const menuRef = useRef(null);
 
   const { t } = useTranslation('navbar');
+
   const navigate = useNavigate();
+  const user = useCurrentUser();
 
   const buttons = [
     {
@@ -31,10 +40,22 @@ export default function ArcMenu() {
       onClick: () => {},
     },
     {
-      icon: <BellIcon className="w-5 h-5" />,
+      icon: (
+        <Badge
+          content={user.unread_notifications}
+          withBorder
+          className="!absolute !-top-1 !-right-[0.5px]"
+        >
+          <BellIcon className="w-5 h-5" />
+        </Badge>
+      ),
       color: 'bg-yellow-400',
       label: 'notifications',
-      onClick: () => {},
+      onClick: () => {
+        user
+          ? setOpenNotifications(!openNotifications)
+          : toast.warning(t('sign_in_use'), { position: 'top-right' });
+      },
     },
     {
       icon: <BanknotesIcon className="w-5 h-5" />,
@@ -97,13 +118,24 @@ export default function ArcMenu() {
           );
         })}
 
-        <button
-          onClick={() => setOpen(!open)}
-          className="absolute bottom-0 right-0 w-[45px] h-[45px] bg-gray-800 dark:bg-gray-600 text-gray-200 rounded-full shadow-lg flex items-center justify-center transition-transform duration-300 hover:rotate-90"
-        >
-          {open ? <XMarkIcon className="w-6 h-6" /> : <PlusIcon className="w-6 h-6" />}
-        </button>
+        <div className="absolute bottom-0 right-0">
+          <div className="relative w-[45px] h-[45px]">
+            {user.unread_notifications > 0 && (
+              <span className="absolute -top-[0.5px] -right-[0.5px] w-3 h-3 bg-red-500 rounded-full z-10"></span>
+            )}
+            <button
+              onClick={() => setOpen(!open)}
+              className="absolute inset-0 bg-gray-800 dark:bg-gray-600 text-gray-200 rounded-full shadow-lg flex items-center justify-center transition-transform duration-300 hover:rotate-90"
+            >
+              {open ? <XMarkIcon className="w-6 h-6" /> : <PlusIcon className="w-6 h-6" />}
+            </button>
+          </div>
+        </div>
+
         <DonateModal open={openDonate} handleOpen={handleOpenDonate} />
+        {user && (
+          <Notifications open={openNotifications} onClose={() => setOpenNotifications(false)} />
+        )}
       </div>
     </div>
   );

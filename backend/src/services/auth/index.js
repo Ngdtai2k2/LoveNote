@@ -4,7 +4,7 @@ const { v4: uuidv4 } = require('uuid');
 const crypto = require('crypto');
 
 const jwtService = require('@services/jwt');
-const { User, PasswordResetCode, Wallet } = require('@models');
+const { User, PasswordResetCode, Wallet, Notification } = require('@models');
 const emailTemplates = require('@config/emailTemplates');
 
 const transporter = require('@config/mailTransporter');
@@ -83,7 +83,17 @@ const authService = {
       throw { code: 403, messageKey: 'message:user_banned' };
     }
 
-    return userData;
+    const unreadCount = await Notification.count({
+      where: {
+        user_id: user.id,
+        is_read: false,
+      },
+    });
+
+    return {
+      ...userData.toJSON(),
+      unread_notifications: unreadCount,
+    };
   },
 
   changePassword: async (req) => {

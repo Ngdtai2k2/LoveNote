@@ -72,6 +72,11 @@ const API_ENDPOINTS = {
   TRANSACTION: withPrefix('/transaction', {
     GET_BY_USER: '/me',
   }),
+  NOTIFICATION: withPrefix('/notification', {
+    GET_BY_USER: '/me',
+    MARK_READ: (id) => `/read/${id}`,
+    MARK_READ_ALL: '/read-all',
+  }),
   ADMIN: {
     STATS: withPrefix('/admin/stats', {
       USERS: '/users',

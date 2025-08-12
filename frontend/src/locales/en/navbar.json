@@ -18,5 +18,9 @@
   "voucher_redeemed": "Voucher redeemed",
   "notifications": "Notifications",
   "donate": "Donate",
-  "admin_dashboard": "Admin Dashboard"
+  "admin_dashboard": "Admin Dashboard",
+  "sign_in_use": "Please log in to use this feature",
+  "no_more_data": "No more data!",
+  "loading_more_notifications": "Loading more notifications...",
+  "mark_as_read": "Mark as read"
 }

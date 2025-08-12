@@ -18,5 +18,9 @@
   "voucher_redeemed": "Voucher đã đổi",
   "notifications": "Thông báo",
   "donate": "Ủng hộ",
-  "admin_dashboard": "Quản trị viên"
+  "admin_dashboard": "Quản trị viên",
+  "sign_in_use": "Vui lòng đăng nhập để sử dụng tính năng này",
+  "no_more_data": "Không còn dữ liệu!",
+  "loading_more_notifications": "Đang tải thêm thông báo...",
+  "mark_as_read": "Đánh dấu là đã đọc"
 }
