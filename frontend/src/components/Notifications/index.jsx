@@ -66,7 +66,7 @@ export default function Notifications({ open, onClose }) {
       getNotifications();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [open]);
+  }, [open, i18n.language]);
 
   return (
     <Dialog open={open} handler={onClose} size="xs" className="dark:bg-gray-800 dark:text-gray-200">
@@ -74,8 +74,8 @@ export default function Notifications({ open, onClose }) {
         <div className="flex justify-between items-center">
           <Typography variant="h5" className="flex items-center gap-2 font-semibold">
             {t('notifications')}
-            {user.unread_notifications > 0 && (
-              <span className="font-semibold">({user.unread_notifications})</span>
+            {user?.unread_notifications > 0 && (
+              <span className="font-semibold">({user?.unread_notifications})</span>
             )}
           </Typography>
           <IconButton onClick={onClose} size="sm" variant="text" className="rounded-full">

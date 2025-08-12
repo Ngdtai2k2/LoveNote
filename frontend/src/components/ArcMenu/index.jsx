@@ -42,7 +42,7 @@ export default function ArcMenu() {
     {
       icon: (
         <Badge
-          content={user.unread_notifications}
+          content={user?.unread_notifications}
           withBorder
           className="!absolute !-top-1 !-right-[0.5px]"
         >
@@ -120,7 +120,7 @@ export default function ArcMenu() {
 
         <div className="absolute bottom-0 right-0">
           <div className="relative w-[45px] h-[45px]">
-            {user.unread_notifications > 0 && (
+            {user?.unread_notifications > 0 && (
               <span className="absolute -top-[0.5px] -right-[0.5px] w-3 h-3 bg-red-500 rounded-full z-10"></span>
             )}
             <button
