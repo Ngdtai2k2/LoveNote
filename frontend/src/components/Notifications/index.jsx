@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 
+import helperFunctions from '@helpers';
 import {
-  ChatBubbleBottomCenterIcon,
+  ChatBubbleBottomCenterTextIcon,
   GiftIcon,
   ShoppingCartIcon,
   XMarkIcon,
@@ -109,18 +110,28 @@ export default function Notifications({ open, onClose }) {
               >
                 <div className="flex gap-2 items-center">
                   {item.type === 'system' ? (
-                    <ChatBubbleBottomCenterIcon className="h-8 w-8" />
+                    <ChatBubbleBottomCenterTextIcon className="h-8 w-8 text-blue-400" />
                   ) : item.type === 'order' ? (
-                    <ShoppingCartIcon className="h-8 w-8" />
+                    <ShoppingCartIcon className="h-8 w-8 text-green-500" />
                   ) : (
-                    <GiftIcon className="h-8 w-8" />
+                    <GiftIcon className="h-8 w-8 text-yellow-500" />
                   )}
-                  <div>
+                  <div className="gap-2">
                     <Typography variant="h6" className="font-semibold">
                       {item.title}
                     </Typography>
                     <Typography variant="body2" className="text-sm font-light">
                       {item.message}
+                    </Typography>
+                    <Typography
+                      variant="body2"
+                      className={`text-xs font-semibold mt-1 ${
+                        item.is_read
+                          ? 'text-gray-500 dark:text-gray-400'
+                          : 'text-blue-700 dark:text-blue-400'
+                      }`}
+                    >
+                      {helperFunctions.formatDateTime(item.created_at)}
                     </Typography>
                   </div>
                 </div>
