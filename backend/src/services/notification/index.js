@@ -66,6 +66,28 @@ const notificationService = {
       data: updatedCount,
     };
   },
+
+  pushNotification: async ({
+    user_id,
+    title,
+    message,
+    type = 'system',
+    data = null,
+  }) => {
+    const notification = await Notification.create({
+      user_id,
+      title,
+      message,
+      type,
+      data,
+    });
+
+    if (global._io) {
+      global._io.to(`user_${user_id}`).emit('notification', notification);
+    }
+
+    return notification;
+  },
 };
 
 module.exports = notificationService;
