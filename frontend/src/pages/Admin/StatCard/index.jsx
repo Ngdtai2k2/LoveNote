@@ -18,7 +18,7 @@ export default function StatCard({ title, value, icon, change, loading }) {
   }
 
   return (
-    <div className="bg-white dark:bg-gray-900 rounded-2xl shadow p-6 flex flex-col gap-2 justify-between">
+    <div className="bg-white dark:bg-gray-900 rounded-2xl shadow p-6 flex flex-col gap-2 justify-between hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 cursor-pointer">
       <div className="flex items-center justify-between">
         <div>
           <h4 className="text-gray-500 dark:text-gray-200 text-sm">{title}</h4>
