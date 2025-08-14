@@ -4,6 +4,7 @@ import {
   LinkIcon,
   LockClosedIcon,
   PowerIcon,
+  ReceiptPercentIcon,
   ShieldCheckIcon,
   UserCircleIcon,
   UsersIcon,
@@ -26,6 +27,7 @@ export const tabbar = [
     icon: AdjustmentsHorizontalIcon,
   },
   { label: 'users', href: ROUTES.ADMIN.USERS, icon: UsersIcon },
+  { label: 'voucher', href: ROUTES.ADMIN.VOUCHER, icon: ReceiptPercentIcon },
   { label: 'shortener_provider', href: ROUTES.ADMIN.SHORTENER_PROVIDER, icon: LinkIcon },
   { label: 'logs', href: ROUTES.ADMIN.LOGS, icon: DocumentTextIcon },
 ];

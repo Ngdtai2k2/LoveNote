@@ -4,6 +4,7 @@ import Dashboard from '@pages/Admin/Dashboard';
 import LogViewer from '@pages/Admin/LogViewer';
 import ShortenerProviderManager from '@pages/Admin/ShortenerProvider';
 import UsersManager from '@pages/Admin/Users';
+import VoucherManager from '@pages/Admin/Voucher';
 
 const protectedRoutes = [
   {
@@ -29,6 +30,11 @@ const protectedRoutes = [
   {
     path: ROUTES.ADMIN.LOGS,
     element: <LogViewer />,
+    requiredRole: CONSTANTS.ADMIN,
+  },
+  {
+    path: ROUTES.ADMIN.VOUCHER,
+    element: <VoucherManager />,
     requiredRole: CONSTANTS.ADMIN,
   },
 ];

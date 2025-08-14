@@ -75,6 +75,21 @@ const helperFunctions = {
       return `hsl(${hue}, 55%, 55%)`;
     });
   },
+
+  langObjToString: (val) => {
+    if (typeof val === 'object' && val !== null) {
+      return `${val.en || ''};${val.vi || ''}`;
+    }
+    return val || '';
+  },
+
+  stringToLangObj: (val) => {
+    const parts = val.split(';');
+    return {
+      en: parts[0]?.trim() || '',
+      vi: parts[1]?.trim() || '',
+    };
+  },
 };
 
 export default helperFunctions;

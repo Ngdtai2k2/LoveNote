@@ -15,6 +15,7 @@ const ROUTES = {
     DASHBOARD: '/admin/dashboard',
     USERS: '/admin/users',
     LOGS: '/admin/logs',
+    VOUCHER: '/admin/voucher',
     SHORTENER_PROVIDER: '/admin/shortener-provider',
   },
   TASKS: '/tasks',

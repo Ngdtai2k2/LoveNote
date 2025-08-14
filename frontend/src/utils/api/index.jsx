@@ -97,6 +97,11 @@ const API_ENDPOINTS = {
       GET_ALL: '',
       UPDATE: (id) => `/${id}`,
     }),
+    VOUCHERS: withPrefix('/admin/voucher', {
+      GET_TEMPLATE: '/template',
+      CREATE_TEMPLATE: '/template/create',
+      ASSIGN: '/assign',
+    }),
   },
 };
 
