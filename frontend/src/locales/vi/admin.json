@@ -43,7 +43,10 @@
   "table": {
     "page_of": "Trang {{currentPage}} của {{totalPages}}",
     "next": "Tiếp theo",
-    "previous": "Trước đó"
+    "previous": "Trước đó",
+    "no_data": "Không có dữ liệu hiển thị",
+    "save": "Lưu",
+    "cancel": "Hủy"
   },
   "logs": {
     "title": "Nhật ký hệ thống",
@@ -59,5 +62,43 @@
     "price": "Giá",
     "created_at": "Ngày tạo",
     "actions": "Hành động"
+  },
+  "voucher": {
+    "title": "Quản lý Voucher",
+    "name": "Tên",
+    "description": "Mô tả",
+    "discount_type": "Loại giảm",
+    "discount_value": "Mức giảm",
+    "templates": "Mẫu",
+    "redeem_token_cost": "Token đổi",
+    "site_lifespan_days": "Hạn ngày (web)",
+    "max_usage_per_user": "Tối đa/người",
+    "total_redeem_limit": "Giới hạn đổi",
+    "type": "Loại",
+    "created_at": "Ngày tạo",
+    "day": "Ngày",
+    "percent": "Phần trăm",
+    "amount": "Số lượng",
+    "create_template": "Tạo mẫu",
+    "create_voucher": "Tạo Voucher",
+    "expires_at": "Hết hạn",
+    "all_templates": "Tất cả",
+    "validate": {
+      "name_required": "Tên là bắt buộc",
+      "discount_type_required": "Loại giảm giá là bắt buộc",
+      "must_be_positive": "Phải là số dương",
+      "discount_value_required": "Giá trị giảm giá là bắt buộc",
+      "template_required": "Mẫu voucher là bắt buộc",
+      "user_or_email_required": "Người dùng hoặc email là bắt buộc"
+    },
+    "enter_user_ids": "Nhập id",
+    "enter_emails": "Nhập email",
+    "user_ids": "Danh sách id",
+    "emails": "Danh sách email",
+    "comma_separated": "Ngăn cách bằng dấu phẩy",
+    "redeemable": "Đổi thưởng",
+    "global": "Toàn bộ",
+    "personal": "Cá nhân",
+    "assign": "Gán voucher"
   }
 }

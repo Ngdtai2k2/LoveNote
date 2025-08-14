@@ -35,5 +35,7 @@
   "banned_user_success": "Cấm người dùng thành công!",
   "unbanned_user_success": "Bỏ cấm người dùng thành công!",
   "update_short_link_provider_success": "Cập nhật nhà cung cấp link rút gọn thành công!",
-  "update_short_link_provider_failed": "Cập nhật nhà cung cấp link rút gọn không thành công!"
+  "update_short_link_provider_failed": "Cập nhật nhà cung cấp link rút gọn không thành công!",
+  "create_voucher_template_success": "Tạo mẫu voucher thành công!",
+  "gift_voucher_success": "Gửi tặng voucher thành công!"
 }

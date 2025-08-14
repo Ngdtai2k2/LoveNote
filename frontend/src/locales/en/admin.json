@@ -43,7 +43,10 @@
   "table": {
     "page_of": "Page {{currentPage}} of {{totalPages}}",
     "next": "Next",
-    "previous": "Previous"
+    "previous": "Previous",
+    "no_data": "No data to display",
+    "save": "Save",
+    "cancel": "Cancel"
   },
   "logs": {
     "title": "System logs",
@@ -59,5 +62,43 @@
     "price": "Price",
     "created_at": "Created At",
     "actions": "Actions"
+  },
+  "voucher": {
+    "title": "Voucher manager",
+    "name": "Name",
+    "description": "Desc",
+    "discount_type": "Type",
+    "discount_value": "Value",
+    "templates": "Templates",
+    "redeem_token_cost": "Tokens",
+    "site_lifespan_days": "Lifespan (site)",
+    "max_usage_per_user": "Per User",
+    "total_redeem_limit": "Total Limit",
+    "type": "Type",
+    "created_at": "Created",
+    "day": "Day",
+    "percent": "Percent",
+    "amount": "Amount",
+    "create_template": "Create Template",
+    "create_voucher": "Create Voucher",
+    "expires_at": "Expired At",
+    "all_templates": "All",
+    "validate": {
+      "name_required": "Name is required",
+      "discount_type_required": "Discount type is required",
+      "must_be_positive": "Must be positive",
+      "discount_value_required": "Discount value is required",
+      "template_required": "The voucher template is mandatory",
+      "user_or_email_required": "User or email is required"
+    },
+    "enter_user_ids": "Enter user IDs",
+    "enter_emails": "Enter emails",
+    "user_ids": "List of ids",
+    "emails": "Email list",
+    "comma_separated": "comma-separated",
+    "redeemable": "Redeemable",
+    "global": "Global",
+    "personal": "Personal",
+    "assign": "Assign voucher"
   }
 }

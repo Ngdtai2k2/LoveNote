@@ -35,5 +35,7 @@
   "banned_user_success": "User banned successfully!",
   "unbanned_user_success": "User unbanned successfully!",
   "update_short_link_provider_success": "Short link provider updated successfully!",
-  "update_short_link_provider_failed": "Failed to update short link provider!"
+  "update_short_link_provider_failed": "Failed to update short link provider!",
+  "create_voucher_template_success": "Successfully created the voucher!",
+  "gift_voucher_success": "Gift voucher sent successfully!" 
 }

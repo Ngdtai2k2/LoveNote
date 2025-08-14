@@ -4,5 +4,6 @@
   "logs": "Nhật ký",
   "cancel": "Hủy",
   "confirm": "Xác nhận",
-  "shortener_provider": "Nhà cung cấp rút gọn link"
+  "shortener_provider": "Nhà cung cấp rút gọn link",
+  "voucher": "Mã giảm giá"
 }

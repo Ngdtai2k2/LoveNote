@@ -73,5 +73,5 @@
   "used": "Used",
   "not_used": "Not used",
   "note_voucher_del": "Note*: Used vouchers will be automatically deleted after 3 days.",
-  "note_voucher_redeem": "Chú ý*: Voucher sau khi đổi chỉ dùng 1 lần và sẽ tự động xóa sau 7 ngày."
+  "note_voucher_redeem": "Note*: The voucher after being exchanged can only be used once and will be automatically deleted after 7 days."
 }
