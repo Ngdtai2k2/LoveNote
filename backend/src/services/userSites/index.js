@@ -108,7 +108,10 @@ const userSiteServices = {
         throw { code: 400, messageKey: 'message:voucher_expired' };
       }
 
-      if (voucher.used_count >= voucher.max_usage) {
+      if (
+        voucher.max_usage !== null &&
+        voucher.used_count >= voucher.max_usage
+      ) {
         throw { code: 400, messageKey: 'message:voucher_not_available' };
       }
 

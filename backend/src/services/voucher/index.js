@@ -266,6 +266,10 @@ const voucherService = {
       };
     }
 
+    if (voucher.max_usage !== null && voucher.used_count >= voucher.max_usage) {
+      throw { code: 400, messageKey: 'message:voucher_not_available' };
+    }
+
     const redemption = await UserVoucherRedemption.findOne({
       where: {
         user_id: userId,

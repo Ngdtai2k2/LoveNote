@@ -15,7 +15,10 @@ module.exports = (sequelize, DataTypes) => {
     {
       name: DataTypes.JSON,
       description: DataTypes.JSON,
-      discount_type: DataTypes.STRING,
+      discount_type: {
+        type: DataTypes.ENUM('percent', 'amount', 'day'),
+        allowNull: false,
+      },
       discount_value: DataTypes.INTEGER,
       templates: DataTypes.JSON,
       expires_at: DataTypes.DATE,

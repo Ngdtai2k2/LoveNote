@@ -4,8 +4,8 @@ const handleError = require('@utils/handleError');
 const productController = {
   getAll: async (req, res) => {
     try {
-      const result = await productServices.getAll(req);
-      return res.status(200).json(result);
+      const { code, data } = await productServices.getAll(req);
+      return res.status(code).json(data);
     } catch (error) {
       handleError(res, req, error);
     }
