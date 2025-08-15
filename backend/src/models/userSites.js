@@ -21,6 +21,10 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'user_sites_id',
         as: 'transactions',
       });
+      UserSite.belongsTo(models.Music, {
+        foreignKey: 'music_id',
+        as: 'music',
+      });
     }
   }
 
@@ -56,6 +60,9 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.BOOLEAN,
         allowNull: false,
         defaultValue: false,
+      },
+      music_id: {
+        type: DataTypes.INTEGER,
       },
       created_at: {
         type: DataTypes.DATE,

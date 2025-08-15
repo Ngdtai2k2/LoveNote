@@ -9,6 +9,7 @@ const {
   Voucher,
   UserVoucherRedemption,
   VoucherTemplate,
+  Music,
 } = require('@models');
 const ShortUniqueId = require('short-unique-id');
 const paginate = require('@helpers/paginate');
@@ -37,6 +38,12 @@ const userSiteServices = {
           attributes: ['slug'],
           required: false,
         },
+        {
+          model: Music,
+          as: 'music',
+          attributes: ['url'],
+          required: false,
+        },
       ],
     });
 
@@ -46,13 +53,20 @@ const userSiteServices = {
 
   create: async (req, transactionDB) => {
     const userId = req.user.id;
-    const { productId, slug: rawSlug, configs, voucherCode } = req.body;
+    const {
+      productId,
+      slug: rawSlug,
+      configs,
+      voucherCode,
+      musicId,
+    } = req.body;
+
     let totalAmount = 0;
     let expiresAt = null;
     let transaction = null;
     let is_active = false;
 
-    if (!userId || !productId || !configs) {
+    if (!userId || !productId || !configs || !musicId) {
       throw { code: 400, messageKey: 'validate:no_data' };
     }
 
@@ -75,6 +89,12 @@ const userSiteServices = {
     });
     if (!product) throw { code: 404, messageKey: 'notfound:product' };
 
+    const music = await Music.findByPk(musicId, {
+      transaction: transactionDB,
+    });
+
+    if (!music) throw { code: 404, messageKey: 'notfound:music' };
+
     let parsedConfigs;
     try {
       parsedConfigs =
@@ -88,10 +108,6 @@ const userSiteServices = {
         (file) =>
           `${process.env.SERVER_URL}/assets/web/${userId}/${file.filename}`
       );
-    }
-
-    if (req.files?.audio?.[0]) {
-      parsedConfigs.audioFile = `${process.env.SERVER_URL}/assets/audio/${userId}/${req.files.audio[0].filename}`;
     }
 
     let skipTransaction = false;
@@ -164,8 +180,13 @@ const userSiteServices = {
       }
     }
 
-    if (!totalAmount) {
+    if (totalAmount === null || totalAmount === undefined) {
       totalAmount = parseFloat(product.price || 0);
+    }
+
+    if (totalAmount == 0) {
+      is_active = true;
+      skipTransaction = true;
     }
 
     const newSite = await UserSite.create(
@@ -176,6 +197,7 @@ const userSiteServices = {
         configs: parsedConfigs,
         expires_at: expiresAt,
         is_active: is_active,
+        music_id: musicId,
       },
       { transaction: transactionDB }
     );

@@ -14,6 +14,7 @@ const voucherRoute = require('./voucher');
 const payosRoute = require('./payos');
 const transactionRoute = require('./transaction');
 const notificationRoute = require('./notification');
+const musicRoute = require('./music');
 
 router.use('/auth', authRoutes);
 router.use('/user', userRoutes);
@@ -28,5 +29,6 @@ router.use('/voucher', voucherRoute);
 router.use('/payos', payosRoute);
 router.use('/transaction', transactionRoute);
 router.use('/notification', notificationRoute);
+router.use('/music', musicRoute);
 
 module.exports = router;

@@ -8,5 +8,6 @@
   "task": "Task not found!",
   "voucher": "Voucher not found!",
   "transaction": "No transaction found!",
-  "notification": "Notification not found!"
+  "notification": "Notification not found!",
+  "music": "Song not found!"
 }

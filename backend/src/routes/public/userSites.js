@@ -11,10 +11,7 @@ router.get('/me', verifyMiddleware.token, userSitesController.getSitesByUser);
 router.post(
   '/configs',
   verifyMiddleware.token,
-  upload.fields([
-    { name: 'audio', maxCount: 1 },
-    { name: 'images', maxCount: 5 },
-  ]),
+  upload.fields([{ name: 'images', maxCount: 5 }]),
   userSitesController.create
 );
 router.delete(

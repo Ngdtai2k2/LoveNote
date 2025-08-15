@@ -38,6 +38,12 @@ module.exports = {
         allowNull: false,
         defaultValue: false,
       },
+      music_id: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+        references: { model: 'musics', key: 'id' },
+        onDelete: 'SET NULL',
+      },
       created_at: {
         type: Sequelize.DATE,
         allowNull: false,
