@@ -99,6 +99,8 @@
     "redeemable": "Đổi thưởng",
     "global": "Toàn bộ",
     "personal": "Cá nhân",
-    "assign": "Gán voucher"
+    "assign": "Gán voucher",
+    "all_users": "Toàn bộ người dùng",
+    "expired": "Hết hạn"
   }
 }

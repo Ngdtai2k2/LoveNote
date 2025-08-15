@@ -30,5 +30,6 @@
   "no_id": "Vui lòng cung cấp ID!",
   "new_password_same_as_old": "Mật khẩu mới không được giống mật khẩu cũ!",
   "invalid_num_days": "Giá trị ngày không hợp lệ!",
-  "already_read": "Thông báo này đã được đọc!"
+  "already_read": "Thông báo này đã được đọc!",
+  "expires_at_must_be_future": "Ngày hết hạn phải là một ngày trong tương lai!"
 }

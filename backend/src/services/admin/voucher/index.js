@@ -69,6 +69,7 @@ const voucherService = {
       },
     };
   },
+
   createTemplate: async (req) => {
     let {
       name,
@@ -99,6 +100,33 @@ const voucherService = {
     maxUsagePerUser = maxUsagePerUser === '' ? null : maxUsagePerUser;
     totalRedeemLimit = totalRedeemLimit === '' ? null : totalRedeemLimit;
 
+    if (expiresAt) {
+      const now = new Date();
+      const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+
+      const expiresDateInput = new Date(expiresAt);
+      const expiresDay = new Date(
+        expiresDateInput.getFullYear(),
+        expiresDateInput.getMonth(),
+        expiresDateInput.getDate(),
+        now.getHours(),
+        now.getMinutes(),
+        now.getSeconds()
+      );
+
+      const minDate = new Date(today.getTime() + 24 * 60 * 60 * 1000);
+      minDate.setHours(now.getHours(), now.getMinutes(), now.getSeconds());
+
+      if (expiresDay < minDate) {
+        throw {
+          code: 400,
+          messageKey: 'validate:expires_at_must_be_future',
+        };
+      }
+
+      expiresAt = expiresDay;
+    }
+
     await VoucherTemplate.create({
       name,
       description,
@@ -123,16 +151,17 @@ const voucherService = {
     const { voucherTemplateId, userIds, emails } = req.body;
 
     if (!voucherTemplateId) {
-      throw {
-        code: 400,
-        messageKey: 'validate:no_data',
-      };
+      throw { code: 400, messageKey: 'validate:no_data' };
     }
 
     const template = await VoucherTemplate.findByPk(voucherTemplateId);
 
     if (!template) {
       throw { code: 404, messageKey: 'notfound:voucher' };
+    }
+
+    if (template.expires_at && new Date(template.expires_at) < new Date()) {
+      throw { code: 400, messageKey: 'message:voucher_template_expired' };
     }
 
     let users;
@@ -148,22 +177,23 @@ const voucherService = {
       if (Array.isArray(emails) && emails.length > 0) {
         whereCondition.email = emails;
       }
+      whereCondition.role = 0;
 
       users = await User.findAll({ where: whereCondition });
     } else {
-      users = await User.findAll();
+      users = await User.findAll({
+        where: {
+          role: 0,
+        },
+      });
     }
 
     if (!users || users.length === 0) {
-      throw {
-        code: 404,
-        messageKey: 'notfound:user',
-      };
+      throw { code: 404, messageKey: 'notfound:user' };
     }
 
-    let vouchers = [];
-
     const uuid = new ShortUniqueId({ length: 10, dictionary: DICTIONARY_CAP });
+    let vouchers = [];
 
     if (template.type === 'global') {
       const code = uuid.rnd();
@@ -209,10 +239,7 @@ const voucherService = {
       }
     }
 
-    return {
-      code: 200,
-      messageKey: 'message:gift_voucher_success',
-    };
+    return { code: 200, messageKey: 'message:gift_voucher_success' };
   },
 };
 

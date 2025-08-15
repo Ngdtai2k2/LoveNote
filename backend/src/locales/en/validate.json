@@ -30,5 +30,6 @@
   "no_id": "Please provide the ID!",
   "new_password_same_as_old": "The new password must not be the same as the old password!",
   "invalid_num_days": "Invalid date value!",
-  "already_read": "This notice has been read!"
+  "already_read": "This notice has been read!",
+  "expires_at_must_be_future": "Expires at must be a future date!"
 }

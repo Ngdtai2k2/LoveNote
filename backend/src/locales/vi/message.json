@@ -37,5 +37,6 @@
   "update_short_link_provider_success": "Cập nhật nhà cung cấp link rút gọn thành công!",
   "update_short_link_provider_failed": "Cập nhật nhà cung cấp link rút gọn không thành công!",
   "create_voucher_template_success": "Tạo mẫu voucher thành công!",
-  "gift_voucher_success": "Gửi tặng voucher thành công!"
+  "gift_voucher_success": "Gửi tặng voucher thành công!",
+  "voucher_template_expired": "Mẫu voucher đã hết hạn!"
 }

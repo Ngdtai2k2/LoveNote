@@ -21,40 +21,36 @@ export default function AssignVoucherModal({ open, onClose, data }) {
     voucherTemplateId: data?.id || '',
     userIds: [],
     emails: [],
+    allUsers: false,
   };
 
-  const validationSchema = Yup.object().shape({
-    voucherTemplateId: Yup.number().required(t('voucher.validate.template_required')),
-
-    userIds: Yup.array().test(
-      'one-of-two',
+  const validationSchema = Yup.object()
+    .shape({
+      voucherTemplateId: Yup.number().required(t('voucher.validate.template_required')),
+      allUsers: Yup.boolean(),
+      userIds: Yup.array(),
+      emails: Yup.array(),
+    })
+    .test(
+      'user-or-email-required',
       t('voucher.validate.user_or_email_required'),
-      function (value) {
-        const { emails } = this.parent;
-        if (value.length > 0 && emails.length > 0) return false;
-        if (value.length === 0 && emails.length === 0) return false;
+      function (values) {
+        if (values.allUsers) return true; // Bỏ qua validation nếu all users
+        const userIdsLength = Array.isArray(values.userIds) ? values.userIds.length : 0;
+        const emailsLength = Array.isArray(values.emails) ? values.emails.length : 0;
+
+        if (userIdsLength === 0 && emailsLength === 0) return this.createError({ path: 'userIds' });
+        if (userIdsLength > 0 && emailsLength > 0) return this.createError({ path: 'userIds' });
         return true;
       }
-    ),
-
-    emails: Yup.array().test(
-      'one-of-two',
-      t('voucher.validate.user_or_email_required'),
-      function (value) {
-        const { userIds } = this.parent;
-        if (value.length > 0 && userIds.length > 0) return false;
-        if (value.length === 0 && userIds.length === 0) return false;
-        return true;
-      }
-    ),
-  });
+    );
 
   const handleSubmit = async (values) => {
     setSubmitting(true);
     const payload = {
       voucherTemplateId: values.voucherTemplateId,
-      userIds: values.userIds,
-      emails: values.emails,
+      userIds: values.allUsers ? undefined : values.userIds,
+      emails: values.allUsers ? undefined : values.emails,
     };
 
     await vouchersAPI.assignVoucher(axiosJWT, payload);
@@ -117,22 +113,47 @@ export default function AssignVoucherModal({ open, onClose, data }) {
         >
           {({ values, setFieldValue }) => (
             <Form className="space-y-4">
+              {/* Checkbox All Users */}
+              <div className="flex items-center gap-2 mb-2">
+                <input
+                  type="checkbox"
+                  id="allUsers"
+                  checked={values.allUsers || false}
+                  onChange={(e) => {
+                    const checked = e.target.checked;
+                    setFieldValue('allUsers', checked);
+                    if (checked) {
+                      setFieldValue('userIds', []);
+                      setFieldValue('emails', []);
+                    }
+                  }}
+                  className="w-4 h-4"
+                />
+                <label htmlFor="allUsers" className="text-sm font-medium">
+                  {t('voucher.all_users')}
+                </label>
+              </div>
+
+              {/* User IDs */}
               <div>
                 <label className="block text-sm font-medium mb-1">{t('voucher.user_ids')}</label>
                 <TagInput
                   value={values.userIds}
                   onChange={(val) => setFieldValue('userIds', val)}
                   placeholder={t('voucher.enter_user_ids')}
+                  disabled={values.allUsers}
                 />
                 <ErrorMessage name="userIds" component="div" className="text-red-500 text-sm" />
               </div>
 
+              {/* Emails */}
               <div>
                 <label className="block text-sm font-medium mb-1">{t('voucher.emails')}</label>
                 <TagInput
                   value={values.emails}
                   onChange={(val) => setFieldValue('emails', val)}
                   placeholder={t('voucher.enter_emails')}
+                  disabled={values.allUsers}
                 />
                 <ErrorMessage name="emails" component="div" className="text-red-500 text-sm" />
               </div>

@@ -99,6 +99,8 @@
     "redeemable": "Redeemable",
     "global": "Global",
     "personal": "Personal",
-    "assign": "Assign voucher"
+    "assign": "Assign voucher",
+    "all_users": "All users",
+    "expired": "Expired"
   }
 }

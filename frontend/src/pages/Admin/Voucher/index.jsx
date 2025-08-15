@@ -112,101 +112,120 @@ export default function VoucherManager() {
         <div className="h-6 w-6 animate-spin rounded-full border-4 border-gray-300 border-t-gray-800 dark:border-gray-600 dark:border-t-gray-200 mx-auto" />
       ) : voucherTemplates?.data?.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {voucherTemplates.data.map((voucher) => (
-            <Card
-              key={voucher.id}
-              className="overflow-hidden cursor-pointer rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 hover:-translate-y-1"
-            >
-              <CardBody className="space-y-2">
-                <Typography variant="h6" className="font-bold text-gray-900 dark:text-white">
-                  {voucher.name?.[i18n.language] || '--'}
-                </Typography>
-                <Typography className="text-sm text-gray-600 dark:text-gray-300 line-clamp-2">
-                  {voucher.description?.[i18n.language] || '--'}
-                </Typography>
-                <div className="space-y-2 text-sm">
-                  <div className="flex items-center gap-2">
-                    <TagIcon className="w-4 h-4 text-blue-500" />
-                    <span className="font-medium text-gray-800 dark:text-gray-200">
-                      {t('voucher.discount_type')}:
-                    </span>
-                    <span className="text-gray-700 dark:text-gray-300">
-                      {t(`voucher.${voucher.discount_type}`) || '--'}
-                    </span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <TicketIcon className="w-4 h-4 text-purple-500" />
-                    <span className="font-medium text-gray-800 dark:text-gray-200">
-                      {t('voucher.discount_value')}:
-                    </span>
-                    <span className="text-gray-700 dark:text-gray-300">
-                      {voucher.discount_value || '--'}
-                    </span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CurrencyDollarIcon className="w-4 h-4 text-yellow-500" />
-                    <span className="font-medium text-gray-800 dark:text-gray-200">
-                      {t('voucher.redeem_token_cost')}:
-                    </span>
-                    <span className="text-gray-700 dark:text-gray-300">
-                      {voucher.redeem_token_cost || '--'}
-                    </span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <ClockIcon className="w-4 h-4 text-orange-500" />
-                    <span className="font-medium text-gray-800 dark:text-gray-200">
-                      {t('voucher.site_lifespan_days')}:
-                    </span>
-                    <span className="text-gray-700 dark:text-gray-300">
-                      {voucher.site_lifespan_days || '--'}
-                    </span>
-                  </div>
-                </div>
-              </CardBody>
+          {voucherTemplates.data.map((voucher) => {
+            const isExpired = voucher.expires_at && new Date(voucher.expires_at) < new Date();
 
-              {/* Action Buttons */}
-              <div className="flex justify-end gap-1 p-2 border-t border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-900">
-                <button
-                  onClick={() => handleView(voucher.id)}
-                  className="p-2 rounded-lg hover:bg-blue-100 dark:hover:bg-blue-900 transition"
-                  title="View"
-                >
-                  <EyeIcon className="w-5 h-5 text-blue-500" />
-                </button>
-                <button
-                  onClick={() => handleEdit(voucher.id)}
-                  className="p-2 rounded-lg hover:bg-green-100 dark:hover:bg-green-900 transition"
-                  title="Edit"
-                >
-                  <PencilSquareIcon className="w-5 h-5 text-green-500" />
-                </button>
-                {voucher.type !== 'redeemable' && (
-                  <button
-                    onClick={() => {
-                      setAssignModal(true);
-                      setTemplateChoose(voucher);
-                    }}
-                    className="p-2 rounded-lg hover:bg-purple-100 dark:hover:bg-purple-900 transition"
-                    title="Create voucher"
-                  >
-                    <ReceiptPercentIcon className="w-5 h-5 text-purple-500" />
-                  </button>
+            return (
+              <Card
+                key={voucher.id}
+                className="relative overflow-hidden cursor-pointer rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 hover:-translate-y-1"
+              >
+                {/* Expired Tag */}
+                {isExpired && (
+                  <div className="absolute top-2 right-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full z-10">
+                    {t('voucher.expired')}
+                  </div>
                 )}
-              </div>
-            </Card>
-          ))}
+
+                <CardBody className="space-y-2">
+                  <Typography variant="h6" className="font-bold text-gray-900 dark:text-white">
+                    {voucher.name?.[i18n.language] || '--'}
+                  </Typography>
+                  <Typography className="text-sm text-gray-600 dark:text-gray-300 line-clamp-2">
+                    {voucher.description?.[i18n.language] || '--'}
+                  </Typography>
+                  <div className="space-y-2 text-sm">
+                    <div className="flex items-center gap-2">
+                      <TagIcon className="w-4 h-4 text-blue-500" />
+                      <span className="font-medium text-gray-800 dark:text-gray-200">
+                        {t('voucher.discount_type')}:
+                      </span>
+                      <span className="text-gray-700 dark:text-gray-300">
+                        {t(`voucher.${voucher.discount_type}`) || '--'}
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <TicketIcon className="w-4 h-4 text-purple-500" />
+                      <span className="font-medium text-gray-800 dark:text-gray-200">
+                        {t('voucher.discount_value')}:
+                      </span>
+                      <span className="text-gray-700 dark:text-gray-300">
+                        {voucher.discount_value || '--'}
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <CurrencyDollarIcon className="w-4 h-4 text-yellow-500" />
+                      <span className="font-medium text-gray-800 dark:text-gray-200">
+                        {t('voucher.redeem_token_cost')}:
+                      </span>
+                      <span className="text-gray-700 dark:text-gray-300">
+                        {voucher.redeem_token_cost || '--'}
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <ClockIcon className="w-4 h-4 text-orange-500" />
+                      <span className="font-medium text-gray-800 dark:text-gray-200">
+                        {t('voucher.site_lifespan_days')}:
+                      </span>
+                      <span className="text-gray-700 dark:text-gray-300">
+                        {voucher.site_lifespan_days || '--'}
+                      </span>
+                    </div>
+                  </div>
+                </CardBody>
+
+                {/* Action Buttons */}
+                <div className="flex justify-end gap-1 p-2 border-t border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-900">
+                  <button
+                    onClick={() => handleView(voucher.id)}
+                    className="p-2 rounded-lg hover:bg-blue-100 dark:hover:bg-blue-900 transition"
+                    title="View"
+                  >
+                    <EyeIcon className="w-5 h-5 text-blue-500" />
+                  </button>
+                  <button
+                    onClick={() => handleEdit(voucher.id)}
+                    className="p-2 rounded-lg hover:bg-green-100 dark:hover:bg-green-900 transition"
+                    title="Edit"
+                  >
+                    <PencilSquareIcon className="w-5 h-5 text-green-500" />
+                  </button>
+                  {voucher.type !== 'redeemable' && (
+                    <button
+                      onClick={() => {
+                        setAssignModal(true);
+                        setTemplateChoose(voucher);
+                      }}
+                      className={`p-2 rounded-lg transition ${
+                        isExpired
+                          ? 'bg-gray-300 dark:bg-gray-700 cursor-not-allowed'
+                          : 'hover:bg-purple-100 dark:hover:bg-purple-900'
+                      }`}
+                      title={isExpired ? t('voucher.expired') : 'Create voucher'}
+                      disabled={isExpired}
+                    >
+                      <ReceiptPercentIcon
+                        className={`w-5 h-5 text-purple-500 ${isExpired ? 'text-gray-400' : ''}`}
+                      />
+                    </button>
+                  )}
+                </div>
+              </Card>
+            );
+          })}
           <AssignVoucherModal
             open={openAssignModal}
             onClose={() => setAssignModal(false)}
             data={templateChoose}
           />
-          <VoucherTemplateModal open={openModalCreate} onClose={() => setOpenModalCreate(false)} />
         </div>
       ) : (
         <Typography className="text-center text-gray-500 dark:text-gray-400">
           {t('table.no_data')}
         </Typography>
       )}
+
+      <VoucherTemplateModal open={openModalCreate} onClose={() => setOpenModalCreate(false)} />
 
       <div className="flex justify-center gap-2">
         <button
