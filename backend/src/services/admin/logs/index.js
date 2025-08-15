@@ -5,7 +5,7 @@ const rootDir = path.resolve(__dirname, '../../../../');
 const logFilePath = path.join(
   rootDir,
   'logs',
-  'autoDeleteExpiredUserSites.log'
+  'auto.log'
 );
 
 const logsService = {
