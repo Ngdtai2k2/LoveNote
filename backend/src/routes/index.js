@@ -12,7 +12,7 @@ const logFilePath = path.resolve(
   '..',
   '..',
   'logs',
-  'autoDeleteExpiredUserSites.log'
+  'auto.log'
 );
 
 router.get('/logs/auto-delete', async (req, res) => {

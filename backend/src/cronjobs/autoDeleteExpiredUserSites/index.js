@@ -6,7 +6,7 @@ const { UserSite, Transaction } = require('@models');
 const helpers = require('@helpers');
 
 const logDir = path.resolve('logs');
-const logFilePath = path.join(logDir, 'autoDeleteExpiredUserSites.log');
+const logFilePath = path.join(logDir, 'auto.log');
 
 async function appendLog(message) {
   const timeStamp = new Date().toISOString();
