@@ -24,7 +24,7 @@ export default function BloomGalaxy({ data }) {
   useDocumentTitle(t('bloom_galaxy'));
 
   const defaultSettings = {
-    ringTexts: ['LOVENOTE', 'BLOOM GALAXY', 'LOVE NOTE', '2025'],
+    ringTexts: ['HEARTIFY', 'BLOOM GALAXY', 'HEARTIFY SITE', '2025'],
     heartAudio: MUSIC_DEMO,
     heartImages: [IMAGE_DEMO],
   };

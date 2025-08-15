@@ -1,7 +1,7 @@
 import DEFAULT_AVATAR from '@assets/svg/avatar-default.svg';
 
 const CONSTANTS = {
-  SITE_NAME: 'LoveNote',
+  SITE_NAME: 'Heartify',
   DEFAULT_AVATAR: DEFAULT_AVATAR,
   ADMIN: 1,
   USER: 0,

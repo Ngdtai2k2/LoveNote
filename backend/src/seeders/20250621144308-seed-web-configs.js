@@ -8,15 +8,15 @@ module.exports = {
     await queryInterface.bulkInsert('web_configs', [
       {
         key: 'site_name',
-        value: JSON.stringify({ vi: 'LoveNote', en: 'LoveNote' }),
+        value: JSON.stringify({ vi: 'Heartify', en: 'Heartify' }),
         created_at: new Date(),
         updated_at: new Date(),
       },
       {
         key: 'description_site',
         value: JSON.stringify({
-          vi: 'LoveNote là nền tảng giúp bạn dễ dàng tạo những trang web nhỏ xinh để gửi thông điệp yêu thương, lời chúc ngọt ngào hoặc món quà tinh tế đến người đặc biệt của bạn. Chỉ với vài bước đơn giản, bạn có thể chọn mẫu, viết lời nhắn và chia sẻ đến người thân, bạn bè hoặc người yêu — tạo nên những khoảnh khắc ý nghĩa và đáng nhớ.',
-          en: 'LoveNote is a platform that lets you easily create personalized mini websites to send heartfelt messages, sweet wishes, or thoughtful gifts to your loved ones. With just a few simple steps, you can choose a template, write your message, and share it with your partner, family, or friends — turning everyday moments into meaningful memories.',
+          vi: 'Heartify là nền tảng giúp bạn dễ dàng tạo những trang web nhỏ xinh để gửi thông điệp yêu thương, lời chúc ngọt ngào hoặc món quà tinh tế đến người đặc biệt của bạn. Chỉ với vài bước đơn giản, bạn có thể chọn mẫu, viết lời nhắn và chia sẻ đến người thân, bạn bè hoặc người yêu — tạo nên những khoảnh khắc ý nghĩa và đáng nhớ.',
+          en: 'Heartify is a platform that lets you easily create personalized mini websites to send heartfelt messages, sweet wishes, or thoughtful gifts to your loved ones. With just a few simple steps, you can choose a template, write your message, and share it with your partner, family, or friends — turning everyday moments into meaningful memories.',
         }),
         created_at: new Date(),
         updated_at: new Date(),

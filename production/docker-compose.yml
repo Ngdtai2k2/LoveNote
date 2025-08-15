@@ -7,7 +7,7 @@ services:
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: "123456"
-      MYSQL_DATABASE: "lovenote"
+      MYSQL_DATABASE: "heartify"
     ports:
       - "3306:3306"
     volumes:
@@ -48,7 +48,7 @@ volumes:
 
 networks:
   lovenet:
-# docker compose -p lovenote-sern up -d
-# docker compose -p lovenote-sern down -v
-# docker restart lovenote-sern-backend-1
-# docker exec -it lovenote-sern-backend-1 npm run fresh:db
+# docker compose -p heartify-sern up -d
+# docker compose -p heartify-sern down -v
+# docker restart heartify-sern-backend-1
+# docker exec -it heartify-sern-backend-1 npm run fresh:db

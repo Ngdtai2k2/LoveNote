@@ -10,7 +10,7 @@ module.exports = {
 
     await queryInterface.bulkInsert('banners', [
       {
-        title: 'Write a special note to someone you love',
+        title: '',
         image: `${SERVER_URL}/assets/images/banner-1.PNG`,
         link: '#',
         is_active: true,
@@ -18,7 +18,7 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        title: 'Send a special message to a loved one',
+        title: '',
         image: `${SERVER_URL}/assets/images/banner-2.PNG`,
         link: '#',
         is_active: true,
@@ -26,8 +26,8 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        title: 'Create a love note and share it',
-        image: `${SERVER_URL}/assets/images/banner-1.PNG`,
+        title: '',
+        image: `${SERVER_URL}/assets/images/banner-3.PNG`,
         link: '#',
         is_active: true,
         created_at: new Date(),
