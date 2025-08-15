@@ -51,7 +51,10 @@ export default function GalaxyLoveLetter({ data }) {
     icons: ['💖', '❤️', '💕', '💘'],
     colors: ['#ff6b9d', '#4ecdc4', '#ff69b4'],
     images: [IMAGE_DEMO],
-    audioFile: MUSIC_DEMO,
+    musicId: data?.music_id || 2,
+    audioFile: data?.music?.url
+      ? `${import.meta.env.VITE_SERVER_URL}${data.music.url}`
+      : MUSIC_DEMO,
     cropToHeart: true,
     audioVolume: 0.5,
   };

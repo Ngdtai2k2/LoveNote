@@ -16,6 +16,5 @@ export default function handleSubmitSettings(values, user, axiosJWT, navigate) {
       buttonColor: v.buttonColor,
       audioVolume: typeof v.audioVolume === 'number' ? v.audioVolume : 1,
     }),
-    audioField: 'audioFile',
   });
 }

@@ -23,17 +23,16 @@ import MUSIC_DEMO from '../assets/musics/music_background_005.mp3';
 import FormArea from '../components/formArea';
 import FormSlug from '../components/formSlug';
 import FormVoucher from '../components/formVoucher';
+import SelectMusic from '../components/selectMusic';
 import ModalRenderLink from '../modalRenderLink';
 import { handleSubmitSettings } from './handleSubmitSettings';
 
 export default function MenuSettings({ settings, onUpdate }) {
   const [openSettings, setOpenSettings] = useState(false);
-  const [audioName, setAudioName] = useState();
   const [previewUrls, setPreviewUrls] = useState(
     Array.isArray(settings.images) ? settings.images : [IMAGE_DEMO]
   );
 
-  const fileInputRef = useRef(null);
   const imagesInputRef = useRef(null);
 
   const { t, i18n } = useTranslation(['template', 'form']);
@@ -51,17 +50,9 @@ export default function MenuSettings({ settings, onUpdate }) {
   const initialValues = {
     ringTexts: arrayToMultilineText(settings.ringTexts),
     heartImages: [],
-    heartAudio: '',
+    musicId: settings.musicId || 4,
+    heartAudio: settings.audioFile || '',
     slug: '',
-  };
-
-  const clearAudioFile = (setFieldValue) => {
-    setAudioName('');
-    setFieldValue('audioFile', null);
-    if (fileInputRef.current) {
-      fileInputRef.current.value = '';
-    }
-    onUpdate('audioFile', MUSIC_DEMO);
   };
 
   const clearImagesFile = (setFieldValue, heartImages, idx) => {
@@ -203,37 +194,16 @@ export default function MenuSettings({ settings, onUpdate }) {
                     </div>
                   </div>
 
-                  <div>
-                    <label className="block mt-2 text-sm text-white">
-                      {t('template:upload_audio')}
-                    </label>
-                    <div className="mt-2 flex items-center text-sm text-white">
-                      <input
-                        name="heartAudio"
-                        type="file"
-                        ref={fileInputRef}
-                        accept="audio/mpeg"
-                        onChange={(e) => {
-                          const file = e.target.files?.[0];
-                          setFieldValue('heartAudio', file || null);
-                          onUpdate('heartAudio', file ? URL.createObjectURL(file) : null);
-                          onUpdate('playAudio', !!file);
-                          setAudioName(file?.name);
-                        }}
-                        className="mt-1 text-white"
-                      />
-                      {audioName && (
-                        <p className="mt-2 text-xs text-gray-500 dark:text-gray-400 flex items-center">
-                          <span
-                            className="cursor-pointer hover:text-red-800 text-red-600 ms-1 text-xl text-bold"
-                            onClick={() => clearAudioFile(setFieldValue)}
-                          >
-                            ✕
-                          </span>
-                        </p>
-                      )}
-                    </div>
-                  </div>
+                  <SelectMusic
+                    value={values.musicId}
+                    onChange={(id) => {
+                      handleChange({ target: { name: 'musicId', value: id } });
+                      onUpdate('musicId', id);
+                    }}
+                    onUpdate={(url) => onUpdate('heartAudio', url || MUSIC_DEMO)}
+                    required
+                  />
+
                   <FormSlug
                     label={`${t('template:slug')} (${t('template:optional')})`}
                     name="slug"

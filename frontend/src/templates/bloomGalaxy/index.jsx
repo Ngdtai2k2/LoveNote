@@ -27,12 +27,15 @@ export default function BloomGalaxy({ data }) {
     ringTexts: ['HEARTIFY', 'BLOOM GALAXY', 'HEARTIFY SITE', '2025'],
     heartAudio: MUSIC_DEMO,
     heartImages: [IMAGE_DEMO],
+    musicId: data?.music_id || 4,
   };
 
   const [settings, setSettings] = useState(() => ({
     ...defaultSettings,
     ...data?.configs,
-    heartAudio: data?.configs?.audioFile || MUSIC_DEMO,
+    heartAudio: data?.music?.url
+      ? `${import.meta.env.VITE_SERVER_URL}${data.music.url}`
+      : MUSIC_DEMO,
     heartImages: data?.configs?.images || [IMAGE_DEMO],
   }));
 

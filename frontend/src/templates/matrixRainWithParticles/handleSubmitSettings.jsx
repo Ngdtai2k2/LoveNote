@@ -19,6 +19,5 @@ export const handleSubmitSettings = (values, user, axiosJWT, navigate) => {
       backgroundColor: v.backgroundColor,
       audioVolume: typeof v.audioVolume === 'number' ? v.audioVolume : 1,
     }),
-    audioField: 'audioFile',
   });
 };

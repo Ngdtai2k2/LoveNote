@@ -21,6 +21,5 @@ export const handleSubmitSettings = (values, user, axiosJWT, navigate) => {
       autoBurst: v.autoBurst,
       audioVolume: typeof v.audioVolume === 'number' ? v.audioVolume : 1,
     }),
-    audioField: 'audioFile',
   });
 };

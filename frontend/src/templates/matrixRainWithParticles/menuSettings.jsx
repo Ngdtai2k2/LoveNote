@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 
 import helperFunctions from '@helpers';
 import { Cog6ToothIcon } from '@heroicons/react/24/solid';
@@ -20,14 +20,13 @@ import FormRange from '../components/formRange';
 import FormSelect from '../components/formSelect';
 import FormSlug from '../components/formSlug';
 import FormVoucher from '../components/formVoucher';
+import SelectMusic from '../components/selectMusic';
 import TopLeftControl from '../components/topLeftControl';
 import ModalRenderLink from '../modalRenderLink';
 import { handleSubmitSettings } from './handleSubmitSettings';
 
 export default function MenuSettings({ settings, onUpdate }) {
   const [openSettings, setOpenSettings] = useState(false);
-  const [audioName, setAudioName] = useState();
-  const fileInputRef = useRef(null);
 
   const { t, i18n } = useTranslation('template');
   const navigate = useNavigate();
@@ -46,17 +45,9 @@ export default function MenuSettings({ settings, onUpdate }) {
     rainTextColor: settings.rainTextColor,
     fontFamily: settings.fontFamily,
     audioVolume: settings.audioVolume,
-    audioFile: '',
+    musicId: settings.musicId || 4,
+    audioFile: settings.audioFile || MUSIC_DEMO,
     slug: '',
-  };
-
-  const clearAudioFile = (setFieldValue) => {
-    setAudioName('');
-    setFieldValue('audioFile', null);
-    if (fileInputRef.current) {
-      fileInputRef.current.value = '';
-    }
-    onUpdate('audioFile', MUSIC_DEMO);
   };
 
   // get product information
@@ -90,7 +81,7 @@ export default function MenuSettings({ settings, onUpdate }) {
 
       {openSettings && (
         <Formik initialValues={initialValues} onSubmit={onSubmit}>
-          {({ values, handleChange, setFieldValue }) => (
+          {({ values, handleChange }) => (
             <Form className="p-4 space-y-4">
               <div className="menu-settings fixed right-0 top-0 z-30 h-full w-[350px] bg-black bg-opacity-90 text-white shadow-lg border-l border-white/20 overflow-scroll">
                 <div className="flex items-center justify-between p-4 border-b border-white/10">
@@ -217,37 +208,15 @@ export default function MenuSettings({ settings, onUpdate }) {
                     ]}
                   />
 
-                  {/* Upload Audio File */}
-                  <div>
-                    <label className="block mt-2 text-sm text-white">
-                      {t('template:upload_audio')}
-                    </label>
-                    <div className="mt-2 flex items-center text-sm text-white">
-                      <input
-                        name="audioFile"
-                        type="file"
-                        ref={fileInputRef}
-                        accept="audio/mpeg"
-                        onChange={(e) => {
-                          const file = e.target.files?.[0];
-                          setFieldValue('audioFile', file || null);
-                          onUpdate('audioFile', file ? URL.createObjectURL(file) : null);
-                          setAudioName(file?.name);
-                        }}
-                        className="mt-1 text-white"
-                      />
-                      {audioName && (
-                        <p className="mt-2 text-xs text-gray-500 dark:text-gray-400 flex items-center">
-                          <span
-                            className="cursor-pointer hover:text-red-800 text-red-600 ms-1 text-xl text-bold"
-                            onClick={() => clearAudioFile(setFieldValue)}
-                          >
-                            ✕
-                          </span>
-                        </p>
-                      )}
-                    </div>
-                  </div>
+                  <SelectMusic
+                    value={values.musicId}
+                    onChange={(id) => {
+                      handleChange({ target: { name: 'musicId', value: id } });
+                      onUpdate('musicId', id);
+                    }}
+                    onUpdate={(url) => onUpdate('audioFile', url || MUSIC_DEMO)}
+                    required
+                  />
 
                   <FormRange
                     label={t('template:volume')}

@@ -15,6 +15,5 @@ export const handleSubmitSettings = (values, user, axiosJWT, navigate) => {
       audioVolume: typeof v.audioVolume === 'number' ? v.audioVolume : 1,
     }),
     imageFields: ['images'],
-    audioField: 'audioFile',
   });
 };

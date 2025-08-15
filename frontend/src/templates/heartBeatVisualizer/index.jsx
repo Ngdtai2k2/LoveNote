@@ -34,7 +34,10 @@ export default function HeartBeatVisualizer({ data }) {
     snowColor: ['#ff66cc', '#ff99ff', '#ffccff', '#ffffff'],
     modelColor: '#ff3366',
     buttonColor: '#ff99cc',
-    audioFile: MUSIC_DEMO,
+    musicId: data?.music_id || 4,
+    audioFile: data?.music?.url
+      ? `${import.meta.env.VITE_SERVER_URL}${data.music.url}`
+      : MUSIC_DEMO,
     audioVolume: 0.5,
   };
 

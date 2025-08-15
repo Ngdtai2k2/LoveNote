@@ -22,17 +22,17 @@ export async function submitSiteConfig({
   productId,
   buildConfig,
   imageFields = [],
-  audioField = 'audioFile',
 }) {
   if (!user?.id) {
     navigate(ROUTES.AUTH.SIGN_IN);
     return;
   }
 
-  const { slug, voucher } = values;
+  const { slug, voucher, musicId } = values;
   const config = buildConfig(values);
 
   const formData = new FormData();
+  formData.append('musicId', musicId);
   formData.append('productId', productId);
   if (slug) formData.append('slug', slug);
   if (voucher) formData.append('voucherCode', voucher);
@@ -48,11 +48,6 @@ export async function submitSiteConfig({
       });
     }
   });
-
-  const audioFile = values[audioField];
-  if (audioFile instanceof File) {
-    formData.append('audio', audioFile);
-  }
 
   try {
     const res = await userSiteAPI.createSiteConfig(axiosJWT, formData);

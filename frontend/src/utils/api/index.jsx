@@ -77,6 +77,9 @@ const API_ENDPOINTS = {
     MARK_READ: (id) => `/read/${id}`,
     MARK_READ_ALL: '/read-all',
   }),
+  MUSIC: withPrefix('/music', {
+    GET_ALL: '',
+  }),
   ADMIN: {
     STATS: withPrefix('/admin/stats', {
       USERS: '/users',

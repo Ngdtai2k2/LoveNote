@@ -36,7 +36,7 @@ export default function FormVoucher({ name = 'voucher', label = 'Voucher', price
     debounceTimeout.current = setTimeout(async () => {
       const res = await vouchersAPI.checkVoucher(axiosJWT, voucher, slug);
       if (res.code !== 200 || !res.data) {
-        setMessageError(res?.message || 'Invalid voucher');
+        setMessageError(res?.message || t('voucher_invalid'));
         setVoucherInfo(null);
         setFinalPrice(price);
         setDiscountText('');

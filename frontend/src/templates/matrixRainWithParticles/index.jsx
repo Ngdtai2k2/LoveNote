@@ -34,7 +34,10 @@ export default function MatrixRainWithWords({ data }) {
     rainTextColor: '#00ff00',
     rainFontSize: 14,
     fontFamily: 'Tektur',
-    audioFile: MUSIC_DEMO,
+    audioFile: data?.music?.url
+      ? `${import.meta.env.VITE_SERVER_URL}${data.music.url}`
+      : MUSIC_DEMO,
+    musicId: data?.music_id || 4,
     audioVolume: 0.5,
   };
 

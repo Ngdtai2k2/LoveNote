@@ -39,12 +39,15 @@ export default function MatrixLoveRain({ data }) {
     autoBurst: false,
     audioVolume: 0.5,
     audioFile: MUSIC_BACKGROUND_001,
+    musicId: data?.music_id || 4,
   };
 
   const [settings, setSettings] = useState(() => ({
     ...defaultSettings,
     ...(data?.configs || {}),
-    audioFile: data?.configs?.audioFile || MUSIC_BACKGROUND_001,
+    audioFile: data?.music?.url
+      ? `${import.meta.env.VITE_SERVER_URL}${data.music.url}`
+      : MUSIC_BACKGROUND_001,
   }));
 
   useDocumentTitle(settings?.title);
