@@ -7,7 +7,7 @@ export function useSocket(eventHandlers = {}) {
   const [isConnected, setIsConnected] = useState(false);
 
   useEffect(() => {
-    socketRef.current = io(import.meta.env.VITE_SOCKET_URL, {
+    socketRef.current = io(import.meta.env.VITE_SERVER_URL, {
       transports: ['websocket'],
       reconnection: true,
     });
