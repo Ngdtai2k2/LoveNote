@@ -28,6 +28,7 @@ async function autoDeleteExpiredVouchers() {
   try {
     const now = new Date();
 
+    // --- 1. Delete expired vouchers ---
     const expiredVouchers = await Voucher.findAll({
       where: { expires_at: { [Op.lt]: now } },
       transaction: t,
@@ -43,15 +44,16 @@ async function autoDeleteExpiredVouchers() {
         await voucher.destroy({ transaction: t });
 
         await appendLog(
-          `Deleted Voucher id=${voucher.id} and related redemptions`
+          `Deleted expired Voucher id=${voucher.id} and related redemptions`
         );
       } catch (err) {
         await appendLog(
-          `Failed to delete Voucher id=${voucher.id}: ${err.message || err}`
+          `Failed to delete expired Voucher id=${voucher.id}: ${err.message || err}`
         );
       }
     }
 
+    // --- 2. Delete expired VoucherTemplate ---
     const expiredTemplates = await VoucherTemplate.findAll({
       where: { expires_at: { [Op.lt]: now } },
       transaction: t,
@@ -67,11 +69,45 @@ async function autoDeleteExpiredVouchers() {
         await template.destroy({ transaction: t });
 
         await appendLog(
-          `Deleted VoucherTemplate id=${template.id} and related redemptions`
+          `Deleted expired VoucherTemplate id=${template.id} and related redemptions`
         );
       } catch (err) {
         await appendLog(
-          `Failed to delete VoucherTemplate id=${template.id}: ${err.message || err}`
+          `Failed to delete expired VoucherTemplate id=${template.id}: ${err.message || err}`
+        );
+      }
+    }
+
+    // --- 3. Delete vouchers that have been used for more than 3 days ---
+    const threeDaysAgo = new Date();
+    threeDaysAgo.setDate(threeDaysAgo.getDate() - 3);
+
+    // find the redemptions that have been used for more than 3 days
+    const oldRedemptions = await UserVoucherRedemption.findAll({
+      where: {
+        is_used: 1,
+        updated_at: { [Op.lt]: threeDaysAgo },
+      },
+      transaction: t,
+    });
+
+    for (const redemption of oldRedemptions) {
+      try {
+        if (redemption.voucher_id) {
+          await Voucher.destroy({
+            where: { id: redemption.voucher_id },
+            transaction: t,
+          });
+        }
+
+        await redemption.destroy({ transaction: t });
+
+        await appendLog(
+          `Deleted used Voucher id=${redemption.voucher_id} and redemption id=${redemption.id} (older than 3 days)`
+        );
+      } catch (err) {
+        await appendLog(
+          `Failed to delete redemption id=${redemption.id}: ${err.message || err}`
         );
       }
     }
