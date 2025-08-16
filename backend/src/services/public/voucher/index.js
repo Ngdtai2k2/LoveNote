@@ -180,7 +180,7 @@ const voucherService = {
         {
           model: Voucher,
           as: 'voucher',
-          attributes: ['code'],
+          attributes: ['code', 'expires_at'],
         },
         {
           model: VoucherTemplate,
@@ -219,6 +219,7 @@ const voucherService = {
 
         return {
           code: voucher?.code,
+          expires_at: voucher?.expires_at,
           is_used,
           name: template?.name || {},
           description: template?.description || {},

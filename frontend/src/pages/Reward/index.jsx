@@ -101,13 +101,13 @@ export default function Reward() {
               onClick={() => setIsUsed(0)}
               className="font-semibold bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-gray-200"
             >
-              {t('form:used')}
+              {t('form:not_used')}
             </Button>
             <Button
               onClick={() => setIsUsed(1)}
               className="font-semibold bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-gray-200"
             >
-              {t('form:not_used')}
+              {t('form:used')}
             </Button>
           </ButtonGroup>
           <Typography className="text-red-600 text-sm italic font-semibold">

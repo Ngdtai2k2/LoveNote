@@ -10,12 +10,16 @@ import { Button, Card, IconButton, Tooltip, Typography } from '@material-tailwin
 import { toast } from 'react-fox-toast';
 import { useTranslation } from 'react-i18next';
 
+import useCountdown from '@hooks/useCountdown';
+
 import DetailModal from './detailModal';
 
 export default function VoucherCard({ voucher, isRedeemed = false, isLoading = false, onRedeem }) {
   const [openDetail, setOpenDetail] = useState(false);
 
   const { t, i18n } = useTranslation(['form', 'template']);
+
+  const timeLeft = useCountdown(voucher?.expires_at, t('form:expired'));
 
   const handleCopy = async (code) => {
     try {
@@ -66,6 +70,22 @@ export default function VoucherCard({ voucher, isRedeemed = false, isLoading = f
               >
                 {t('form:details')}
               </span>
+            </Typography>
+
+            <Typography
+              variant="body2"
+              className="text-sm font-semibold text-gray-900 dark:text-gray-200 mb-2"
+            >
+              {t('form:expired_after')}:{' '}
+              {timeLeft ? (
+                timeLeft
+              ) : (
+                <span className="inline-flex items-center gap-1 align-middle">
+                  <span className="w-1.5 h-1.5 rounded-full bg-current animate-bounce [animation-delay:0ms]" />
+                  <span className="w-1.5 h-1.5 rounded-full bg-current animate-bounce [animation-delay:150ms]" />
+                  <span className="w-1.5 h-1.5 rounded-full bg-current animate-bounce [animation-delay:300ms]" />
+                </span>
+              )}
             </Typography>
 
             {isRedeemed && voucher.code && (

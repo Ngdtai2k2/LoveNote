@@ -75,5 +75,7 @@
   "used": "Đã dùng",
   "not_used": "Chưa dùng",
   "note_voucher_del": "Chú ý*: Voucher đã dùng sẽ tự động xóa sau 3 ngày.",
-  "note_voucher_redeem": "Chú ý*: Voucher sau khi đổi chỉ dùng 1 lần và sẽ tự động xóa sau 7 ngày."
+  "note_voucher_redeem": "Chú ý*: Voucher sau khi đổi chỉ dùng 1 lần và sẽ hết hạn sau 7 ngày.",
+  "expired": "Hết hạn",
+  "expired_after": "Hết hạn sau"
 }
