@@ -72,7 +72,7 @@ export default function VoucherCard({ voucher, isRedeemed = false, isLoading = f
               </span>
             </Typography>
 
-            {voucher?.expires_at && (
+            {voucher?.expires_at && !voucher.is_used && (
               <Typography
                 variant="body2"
                 className="text-sm font-semibold text-gray-900 dark:text-gray-200 mb-2"
