@@ -4,8 +4,8 @@ const handleError = require('@utils/handleError');
 const bannerController = {
   getAll: async (req, res) => {
     try {
-      const result = await bannerServices.getAll(req);
-      res.status(200).json(result);
+      const { code, data } = await bannerServices.getAll(req);
+      res.status(code).json(data);
     } catch (error) {
       handleError(res, req, error);
     }

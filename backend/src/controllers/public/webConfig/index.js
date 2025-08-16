@@ -6,9 +6,9 @@ const webConfigController = {
   getAll: async (req, res) => {
     try {
       const raw = parseBoolean(req.query.raw);
-      const data = await webConfigServices.getAll({ raw });
+      const { code, data } = await webConfigServices.getAll({ raw });
 
-      return res.status(200).json(data);
+      return res.status(code).json(data);
     } catch (error) {
       handleError(res, req, error);
     }

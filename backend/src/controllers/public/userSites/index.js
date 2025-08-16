@@ -14,8 +14,8 @@ const userSitesController = {
 
   getConfigSite: async (req, res) => {
     try {
-      const data = await userSiteServices.getConfigSite(req);
-      return res.status(200).json(data);
+      const { code, data } = await userSiteServices.getConfigSite(req);
+      return res.status(code).json(data);
     } catch (error) {
       handleError(res, req, error);
     }

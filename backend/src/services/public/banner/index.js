@@ -13,11 +13,10 @@ const bannerController = {
 
     const banners = await Banner.findAll({ where });
 
-    if (!banners || banners.length === 0) {
-      throw { code: 404, messageKey: 'notfound:banner' };
-    }
-
-    return banners;
+    return {
+      code: 200,
+      data: banners,
+    };
   },
 };
 

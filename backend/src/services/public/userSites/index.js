@@ -20,14 +20,17 @@ const userSiteServices = {
     const { slug } = req.query;
     if (!slug) throw { code: 400, messageKey: 'validate:slug' };
     const data = await UserSite.findOne({ where: { slug } });
+
     return !!data;
   },
 
   getConfigSite: async (req) => {
     const { slug, id } = req.query;
+
     if (!slug && !id) throw { code: 400, messageKey: 'validate:slug_or_id' };
 
     const whereClause = slug ? { slug } : { id };
+
     const data = await UserSite.findOne({
       where: whereClause,
       include: [
@@ -48,7 +51,11 @@ const userSiteServices = {
     });
 
     if (!data) throw { code: 404, messageKey: 'notfound:data' };
-    return data;
+
+    return {
+      code: 200,
+      data,
+    };
   },
 
   create: async (req, transactionDB) => {
