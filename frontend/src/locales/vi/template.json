@@ -63,5 +63,8 @@
   "status": "Trạng thái",
   "cancelled": "Hủy",
   "pending": "Đang chờ",
-  "paid": "Đã thanh toán"
+  "paid": "Đã thanh toán",
+  "choose_music": "Chọn nhạc",
+  "no_choose": "-- Không chọn --",
+  "pls_choose_music": "Vui lòng chọn một bài hát."
 }

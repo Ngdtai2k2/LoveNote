@@ -63,5 +63,8 @@
   "status": "Status",
   "cancelled": "Cancelled",
   "pending": "Pending",
-  "paid": "Paid"
+  "paid": "Paid",
+  "choose_music": "Choose music",
+  "no_choose": "-- Not selected --",
+  "pls_choose_music": "Please choose a song."
 }
