@@ -92,7 +92,7 @@ export default function SiteTab() {
                   <div className="flex items-center gap-1">
                     <div className="relative w-24 h-24">
                       <img
-                        src={site.product.thumbnail_url}
+                        src={helperFunctions.renderUrlServer(site.product.thumbnail_url)}
                         alt={site.product.name}
                         className={`w-full h-full rounded object-cover ${
                           !site.is_active || isExpired ? 'grayscale opacity-70' : ''

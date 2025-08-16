@@ -1,5 +1,6 @@
 import React from 'react';
 
+import helperFunctions from '@helpers';
 import { Avatar, Dialog, DialogBody, DialogHeader, Typography } from '@material-tailwind/react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
@@ -19,7 +20,11 @@ export default function DetailModal({ open, handleOpen, data }) {
           <>
             {data.products.map((product, idx) => (
               <div key={idx} className="flex gap-2 mb-2 items-center ml-2">
-                <Avatar src={product.thumbnail_url} className="h-12 w-12" variant="rounded" />
+                <Avatar
+                  src={helperFunctions.renderUrlServer(product.thumbnail_url)}
+                  className="h-12 w-12"
+                  variant="rounded"
+                />
                 <Link
                   to={`/${product.slug}`}
                   className="hover:underline outline-none focus:outline-none"
