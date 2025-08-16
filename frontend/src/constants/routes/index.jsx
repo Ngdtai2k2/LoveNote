@@ -17,6 +17,7 @@ const ROUTES = {
     LOGS: '/admin/logs',
     VOUCHER: '/admin/voucher',
     SHORTENER_PROVIDER: '/admin/shortener-provider',
+    CONTACTS: '/admin/contacts',
   },
   TASKS: '/tasks',
   VERIFY_TOKEN_TASK: '/verify-token/:token',

@@ -3,13 +3,15 @@ const router = require('express').Router();
 const statsRoutes = require('./stats');
 const usersRoutes = require('./users');
 const logsRoutes = require('./logs');
-const shortLinkProviderRoutes = require('./shortLinkProvider');
 const voucherRoutes = require('./voucher');
+const contactRoutes = require('./contact');
+const shortLinkProviderRoutes = require('./shortLinkProvider');
 
 router.use('/stats', statsRoutes);
 router.use('/users', usersRoutes);
 router.use('/logs', logsRoutes);
-router.use('/shortener-provider', shortLinkProviderRoutes);
 router.use('/voucher', voucherRoutes);
+router.use('/contact', contactRoutes);
+router.use('/shortener-provider', shortLinkProviderRoutes);
 
 module.exports = router;

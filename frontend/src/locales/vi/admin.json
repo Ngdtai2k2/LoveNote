@@ -102,5 +102,17 @@
     "assign": "Gán voucher",
     "all_users": "Toàn bộ người dùng",
     "expired": "Hết hạn"
+  },
+  "contact": {
+    "title": "Quản lý liên hệ",
+    "id": "ID",
+    "name": "Tên",
+    "email": "Email",
+    "message": "Tin nhắn",
+    "created_at": "Ngày tạo",
+    "actions": "Hành động",
+    "delete": "Xóa",
+    "confirm_title": "Xác nhận xóa",
+    "confirm_message": "Bạn có chắc chắn muốn xóa lời nhắn này không?"
   }
 }

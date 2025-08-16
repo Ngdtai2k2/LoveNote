@@ -105,6 +105,10 @@ const API_ENDPOINTS = {
       CREATE_TEMPLATE: '/template/create',
       ASSIGN: '/assign',
     }),
+    CONTACT: withPrefix('/admin/contact', {
+      GET_ALL: '',
+      DELETE: (id) => `/${id}`,
+    }),
   },
 };
 

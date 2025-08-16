@@ -1,5 +1,6 @@
 import {
   AdjustmentsHorizontalIcon,
+  ChatBubbleLeftRightIcon,
   DocumentTextIcon,
   LinkIcon,
   LockClosedIcon,
@@ -29,6 +30,7 @@ export const tabbar = [
   { label: 'users', href: ROUTES.ADMIN.USERS, icon: UsersIcon },
   { label: 'voucher', href: ROUTES.ADMIN.VOUCHER, icon: ReceiptPercentIcon },
   { label: 'shortener_provider', href: ROUTES.ADMIN.SHORTENER_PROVIDER, icon: LinkIcon },
+  { label: 'feedbacks', href: ROUTES.ADMIN.CONTACTS, icon: ChatBubbleLeftRightIcon },
   { label: 'logs', href: ROUTES.ADMIN.LOGS, icon: DocumentTextIcon },
 ];
 

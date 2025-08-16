@@ -38,5 +38,6 @@
   "update_short_link_provider_failed": "Failed to update short link provider!",
   "create_voucher_template_success": "Successfully created the voucher!",
   "gift_voucher_success": "Gift voucher sent successfully!",
-  "voucher_template_expired": "The voucher template has expired!"
+  "voucher_template_expired": "The voucher template has expired!",
+  "delete_success": "Successfully deleted!"
 }

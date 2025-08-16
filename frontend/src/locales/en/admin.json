@@ -102,5 +102,17 @@
     "assign": "Assign voucher",
     "all_users": "All users",
     "expired": "Expired"
+  },
+  "contact": {
+    "title": "Contact management",
+    "id": "ID",
+    "name": "Name",
+    "email": "Email",
+    "message": "Message",
+    "created_at": "Created At",
+    "actions": "Actions",
+    "delete": "Delete",
+    "confirm_title": "Confirm Delete",
+    "confirm_message": "Are you sure you want to delete this message?"
   }
 }

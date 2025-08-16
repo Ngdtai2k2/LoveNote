@@ -1,5 +1,6 @@
 import CONSTANTS from '@constants';
 import ROUTES from '@constants/routes';
+import ContactManager from '@pages/Admin/Contact';
 import Dashboard from '@pages/Admin/Dashboard';
 import LogViewer from '@pages/Admin/LogViewer';
 import ShortenerProviderManager from '@pages/Admin/ShortenerProvider';
@@ -35,6 +36,11 @@ const protectedRoutes = [
   {
     path: ROUTES.ADMIN.VOUCHER,
     element: <VoucherManager />,
+    requiredRole: CONSTANTS.ADMIN,
+  },
+  {
+    path: ROUTES.ADMIN.CONTACTS,
+    element: <ContactManager />,
     requiredRole: CONSTANTS.ADMIN,
   },
 ];
