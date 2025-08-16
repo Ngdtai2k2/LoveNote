@@ -11,7 +11,7 @@ module.exports = {
     await queryInterface.bulkInsert('banners', [
       {
         title: '',
-        image: `${SERVER_URL}/assets/images/banner-1.PNG`,
+        image: '/assets/images/banner-1.PNG',
         link: '#',
         is_active: true,
         created_at: new Date(),
@@ -19,7 +19,7 @@ module.exports = {
       },
       {
         title: '',
-        image: `${SERVER_URL}/assets/images/banner-2.PNG`,
+        image: '/assets/images/banner-2.PNG',
         link: '#',
         is_active: true,
         created_at: new Date(),
@@ -27,7 +27,7 @@ module.exports = {
       },
       {
         title: '',
-        image: `${SERVER_URL}/assets/images/banner-3.PNG`,
+        image: '/assets/images/banner-3.PNG',
         link: '#',
         is_active: true,
         created_at: new Date(),

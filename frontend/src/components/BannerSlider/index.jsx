@@ -1,3 +1,4 @@
+import helperFunctions from '@helpers';
 import { Carousel } from '@material-tailwind/react';
 import { Link } from 'react-router-dom';
 
@@ -19,7 +20,7 @@ export function BannerSlider({
           const imageElement = (
             <img
               key={banner.id}
-              src={banner.image}
+              src={helperFunctions.renderUrlServer(banner.image)}
               alt={banner.title || `banner-${banner.id}`}
               className={imgStyles}
             />
