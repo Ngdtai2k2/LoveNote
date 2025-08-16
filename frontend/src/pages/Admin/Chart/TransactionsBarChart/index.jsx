@@ -27,8 +27,17 @@ export default function TransactionsBarChart() {
     setLoading(true);
     try {
       const params = {};
-      if (startDate) params.start = startDate;
-      if (endDate) params.end = endDate;
+
+      if (startDate) {
+        params.start = dayjs(startDate).startOf('day').format('YYYY-MM-DD HH:mm:ss'); // từ 00:00:00 ngày start
+      }
+
+      if (endDate) {
+        const isToday = dayjs(endDate).isSame(dayjs(), 'day');
+        params.end = isToday
+          ? dayjs().format('YYYY-MM-DD HH:mm:ss')
+          : dayjs(endDate).endOf('day').format('YYYY-MM-DD HH:mm:ss');
+      }
 
       const res = await statsAPI.transaction(axiosJWT, params);
       setStats(res.stats || []);

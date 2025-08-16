@@ -27,11 +27,20 @@ export default function UserSitesPieChart() {
     setLoading(true);
     try {
       const params = {};
-      if (startDate) params.start = startDate;
-      if (endDate) params.end = endDate;
 
-      const data = await statsAPI.userSites(axiosJWT, params);
-      setStats(Array.isArray(data) ? data : []);
+      if (startDate) {
+        params.start = dayjs(startDate).startOf('day').format('YYYY-MM-DD HH:mm:ss');
+      }
+
+      if (endDate) {
+        const isToday = dayjs(endDate).isSame(dayjs(), 'day');
+        params.end = isToday
+          ? dayjs().format('YYYY-MM-DD HH:mm:ss')
+          : dayjs(endDate).endOf('day').format('YYYY-MM-DD HH:mm:ss');
+      }
+
+      const res = await statsAPI.userSites(axiosJWT, params);
+      setStats(Array.isArray(res) ? res : []);
     } finally {
       setLoading(false);
     }
