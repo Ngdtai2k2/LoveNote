@@ -21,7 +21,7 @@ const userServices = {
 
     if (req.files?.avatar?.[0]) {
       const file = req.files.avatar[0];
-      const fileUrl = `${process.env.SERVER_URL}/assets/avatars/${userId}/${file.filename}`;
+      const fileUrl = `/assets/avatars/${userId}/${file.filename}`;
 
       if (user.avatar) {
         try {

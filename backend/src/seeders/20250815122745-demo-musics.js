@@ -33,6 +33,13 @@ module.exports = {
           created_at: new Date(),
           updated_at: new Date(),
         },
+        {
+          title: 'Tràn bộ nhớ',
+          artist: 'Dương Domic',
+          url: '/assets/musics/tran_bo_nho.mp3',
+          created_at: new Date(),
+          updated_at: new Date(),
+        },
       ],
       {}
     );

@@ -66,7 +66,12 @@ const userSiteServices = {
     let transaction = null;
     let is_active = false;
 
-    if (!userId || !productId || !configs || !musicId) {
+    if (
+      !userId ||
+      !productId ||
+      !configs ||
+      (productId !== 'love-005' && !musicId)
+    ) {
       throw { code: 400, messageKey: 'validate:no_data' };
     }
 
@@ -89,11 +94,11 @@ const userSiteServices = {
     });
     if (!product) throw { code: 404, messageKey: 'notfound:product' };
 
-    const music = await Music.findByPk(musicId, {
-      transaction: transactionDB,
-    });
+    const music = musicId
+      ? await Music.findByPk(musicId, { transaction: transactionDB })
+      : null;
 
-    if (!music) throw { code: 404, messageKey: 'notfound:music' };
+    if (musicId && !music) throw { code: 404, messageKey: 'notfound:music' };
 
     let parsedConfigs;
     try {
@@ -105,8 +110,7 @@ const userSiteServices = {
 
     if (req.files?.images && Array.isArray(req.files.images)) {
       parsedConfigs.images = req.files.images.map(
-        (file) =>
-          `${process.env.SERVER_URL}/assets/web/${userId}/${file.filename}`
+        (file) => `/assets/web/${userId}/${file.filename}`
       );
     }
 
@@ -197,7 +201,7 @@ const userSiteServices = {
         configs: parsedConfigs,
         expires_at: expiresAt,
         is_active: is_active,
-        music_id: musicId,
+        music_id: musicId || (productId == 'love-005' ? 5 : null),
       },
       { transaction: transactionDB }
     );

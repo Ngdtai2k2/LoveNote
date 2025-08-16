@@ -7,7 +7,7 @@ router.get('/me', verifyMiddleware.token, authController.getCurrentUser);
 router.post('/sign-out', verifyMiddleware.token, authController.signOut);
 router.post('/sign-up', authController.signUp);
 router.post('/sign-in', authController.signIn);
-router.post('/refresh-token', authController.requestRefreshToken);
+router.post('/extend', authController.requestRefreshToken);
 router.post('/forgot-password', authController.forgotPassword);
 router.post('/verify-code', authController.verifyCode);
 router.post('/reset-password', authController.resetPassword);

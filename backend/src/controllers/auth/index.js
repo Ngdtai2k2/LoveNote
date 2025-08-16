@@ -22,7 +22,7 @@ const authController = {
         req.body
       );
 
-      res.cookie('rf', refreshToken, {
+      res.cookie('skey', refreshToken, {
         httpOnly: true,
         secure: true,
         sameSite: 'none',
@@ -42,7 +42,7 @@ const authController = {
 
   requestRefreshToken: async (req, res) => {
     try {
-      const refreshToken = req.cookies.rf;
+      const refreshToken = req.cookies.skey;
 
       if (!refreshToken) {
         return res
@@ -68,7 +68,7 @@ const authController = {
             device_id
           );
 
-          res.cookie('rf', newRefreshToken, {
+          res.cookie('skey', newRefreshToken, {
             httpOnly: true,
             secure: true,
             sameSite: 'none',
@@ -86,7 +86,7 @@ const authController = {
 
   signOut: async (req, res) => {
     try {
-      const refreshToken = req.cookies.rf;
+      const refreshToken = req.cookies.skey;
 
       if (!refreshToken) {
         return res
@@ -94,7 +94,7 @@ const authController = {
           .json({ message: req.t('auth:sign_out_success') });
       }
 
-      res.clearCookie('rf', {
+      res.clearCookie('skey', {
         httpOnly: true,
         secure: true,
         sameSite: 'none',
