@@ -4,7 +4,7 @@ import TEMPLATE_ROUTE from '@constants/routes/template';
 import NotFound from '@pages/NotFound';
 import { useParams } from 'react-router-dom';
 
-import { userSiteAPI } from '@api/userSite';
+import { userSiteAPI } from '@api/public/userSite';
 
 export default function UserTemplateRouter() {
   const { slug } = useParams();

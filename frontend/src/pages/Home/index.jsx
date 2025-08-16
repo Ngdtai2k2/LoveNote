@@ -5,7 +5,7 @@ import { Typography } from '@material-tailwind/react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
-import { productAPI } from '@api/product';
+import { productAPI } from '@api/public/product';
 
 import useBanner from '@hooks/useBanner';
 import { useDocumentTitle } from '@hooks/useDocumentTitle';

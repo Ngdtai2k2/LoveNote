@@ -5,7 +5,7 @@ import { Form, Formik } from 'formik';
 import { useTranslation } from 'react-i18next';
 import * as Yup from 'yup';
 
-import { contactAPI } from '@api/contact';
+import { contactAPI } from '@api/public/contact';
 
 import { useDocumentTitle } from '@hooks/useDocumentTitle';
 import useWebConfig from '@hooks/useWebConfig';

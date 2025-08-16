@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { productAPI } from '@api/product';
+import { productAPI } from '@api/public/product';
 
 export const useProductBySlug = () => {
   const [product, setProduct] = useState();

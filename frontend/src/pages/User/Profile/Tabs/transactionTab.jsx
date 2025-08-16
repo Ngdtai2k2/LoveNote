@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react';
 
-import { Button } from '@material-tailwind/react';
 import { useTranslation } from 'react-i18next';
 
-import { transactionAPI } from '@api/transaction';
+import { transactionAPI } from '@api/public/transaction';
 
 import { useAxios } from '@hooks/useAxiosJWT';
 

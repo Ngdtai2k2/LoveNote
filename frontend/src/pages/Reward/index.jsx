@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { Button, ButtonGroup, Tab, Tabs, TabsHeader, Typography } from '@material-tailwind/react';
 import { useTranslation } from 'react-i18next';
 
-import { vouchersAPI } from '@api/vouchers';
+import { vouchersAPI } from '@api/public/vouchers';
 
 import { useAxios } from '@hooks/useAxiosJWT';
 import { useDocumentTitle } from '@hooks/useDocumentTitle';

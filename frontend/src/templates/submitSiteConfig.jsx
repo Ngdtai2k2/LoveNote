@@ -1,6 +1,6 @@
 import ROUTES from '@constants/routes';
 
-import { userSiteAPI } from '@api/userSite';
+import { userSiteAPI } from '@api/public/userSite';
 
 /**
  * @param {Object} options

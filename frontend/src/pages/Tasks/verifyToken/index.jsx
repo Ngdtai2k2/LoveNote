@@ -4,7 +4,7 @@ import ROUTES from '@constants/routes';
 import { useTranslation } from 'react-i18next';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-import { taskAPI } from '@api/task';
+import { taskAPI } from '@api/public/task';
 
 import { useAxios } from '@hooks/useAxiosJWT';
 import { useDocumentTitle } from '@hooks/useDocumentTitle';

@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 
-import { bannerAPI } from '@api/banner';
+import { bannerAPI } from '@api/public/banner';
 
 const useBanner = () => {
   const [banners, setBanners] = useState([]);

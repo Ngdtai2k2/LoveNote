@@ -6,8 +6,8 @@ import { Alert, Spinner, Typography } from '@material-tailwind/react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
-import { shortenerProviderAPI } from '@api/shortenerProvider';
-import { taskAPI } from '@api/task';
+import { shortenerProviderAPI } from '@api/public/shortenerProvider';
+import { taskAPI } from '@api/public/task';
 
 import { useAxios } from '@hooks/useAxiosJWT';
 import { useCurrentUser } from '@hooks/useCurrentUser';

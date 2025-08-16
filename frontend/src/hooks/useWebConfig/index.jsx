@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 
-import { webConfigAPI } from '@api/webConfig';
+import { webConfigAPI } from '@api/public/webConfig';
 
 const useWebConfig = () => {
   const [webConfigs, setWebConfigs] = useState([]);

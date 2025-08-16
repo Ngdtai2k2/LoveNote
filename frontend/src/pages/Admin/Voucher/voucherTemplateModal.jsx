@@ -8,7 +8,7 @@ import { useTranslation } from 'react-i18next';
 import * as Yup from 'yup';
 
 import { vouchersAPI } from '@api/admin/vouchers';
-import { productAPI } from '@api/product';
+import { productAPI } from '@api/public/product';
 
 import { useAxios } from '@hooks/useAxiosJWT';
 

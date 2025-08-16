@@ -14,7 +14,7 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import * as Yup from 'yup';
 
-import { userAPI } from '@api/user';
+import { userAPI } from '@api/public/user';
 
 import { useAxios } from '@hooks/useAxiosJWT';
 import { useCurrentUser } from '@hooks/useCurrentUser';

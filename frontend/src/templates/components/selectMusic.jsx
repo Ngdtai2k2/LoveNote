@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 import { useTranslation } from 'react-i18next';
 
-import { musicAPI } from '@api/music';
+import { musicAPI } from '@api/public/music';
 
 let cachedMusics = null;
 

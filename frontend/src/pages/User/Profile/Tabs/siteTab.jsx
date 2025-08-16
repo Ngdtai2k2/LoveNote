@@ -5,7 +5,7 @@ import { Typography } from '@material-tailwind/react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
-import { userSiteAPI } from '@api/userSite';
+import { userSiteAPI } from '@api/public/userSite';
 
 import { useAxios } from '@hooks/useAxiosJWT';
 

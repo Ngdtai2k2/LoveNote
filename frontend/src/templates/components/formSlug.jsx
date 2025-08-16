@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useField, useFormikContext } from 'formik';
 import { useTranslation } from 'react-i18next';
 
-import { userSiteAPI } from '@api/userSite';
+import { userSiteAPI } from '@api/public/userSite';
 
 export default function FormSlug({ name = 'slug', label = 'Slug' }) {
   const [field] = useField(name);

@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useField, useFormikContext } from 'formik';
 import { useTranslation } from 'react-i18next';
 
-import { vouchersAPI } from '@api/vouchers';
+import { vouchersAPI } from '@api/public/vouchers';
 
 import { useAxios } from '@hooks/useAxiosJWT';
 

@@ -11,7 +11,7 @@ import { Dialog, IconButton, Typography } from '@material-tailwind/react';
 import { useTranslation } from 'react-i18next';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
-import { notificationAPI } from '@api/notification';
+import { notificationAPI } from '@api/public/notification';
 
 import { useAxios } from '@hooks/useAxiosJWT';
 import { useCurrentUser } from '@hooks/useCurrentUser';

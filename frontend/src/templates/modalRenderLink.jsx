@@ -13,7 +13,7 @@ import {
 } from '@material-tailwind/react';
 import { useTranslation } from 'react-i18next';
 
-import { paymentAPI } from '@api/payment';
+import { paymentAPI } from '@api/public/payment';
 
 import { useAxios } from '@hooks/useAxiosJWT';
 

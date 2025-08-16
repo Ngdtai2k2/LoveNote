@@ -5,8 +5,8 @@ import { CheckCircleIcon, CurrencyDollarIcon } from '@heroicons/react/24/solid';
 import { Button, Typography } from '@material-tailwind/react';
 import { useTranslation } from 'react-i18next';
 
-import { paymentAPI } from '@api/payment';
-import { userSiteAPI } from '@api/userSite';
+import { paymentAPI } from '@api/public/payment';
+import { userSiteAPI } from '@api/public/userSite';
 
 import { useAxios } from '@hooks/useAxiosJWT';
 import { useCurrentUser } from '@hooks/useCurrentUser';

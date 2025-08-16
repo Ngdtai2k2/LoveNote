@@ -4,7 +4,7 @@ import { XCircleIcon } from '@heroicons/react/24/solid';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
-import { paymentAPI } from '@api/payment';
+import { paymentAPI } from '@api/public/payment';
 
 import { useAxios } from '@hooks/useAxiosJWT';
 import { useDocumentTitle } from '@hooks/useDocumentTitle';
