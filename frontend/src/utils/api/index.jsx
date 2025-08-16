@@ -109,6 +109,10 @@ const API_ENDPOINTS = {
       GET_ALL: '',
       DELETE: (id) => `/${id}`,
     }),
+    BANNER: withPrefix('/admin/banner', {
+      GET_ALL: '',
+      ACTIVATED: (id) => `/${id}/activated`,
+    }),
   },
 };
 

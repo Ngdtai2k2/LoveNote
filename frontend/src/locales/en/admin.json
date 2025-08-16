@@ -41,6 +41,7 @@
     "active": "Active"
   },
   "table": {
+    "actions": "Actions",
     "page_of": "Page {{currentPage}} of {{totalPages}}",
     "next": "Next",
     "previous": "Previous",
@@ -114,5 +115,16 @@
     "delete": "Delete",
     "confirm_title": "Confirm Delete",
     "confirm_message": "Are you sure you want to delete this message?"
+  },
+  "banner": {
+    "title": "Banners management",
+    "id": "ID",
+    "b_title": "Title",
+    "image": "Image",
+    "link": "Link",
+    "active": "Active",
+    "deactivate": "Deactivate",
+    "not_activated": "Not activated",
+    "created_at": "Created At"
   }
 }

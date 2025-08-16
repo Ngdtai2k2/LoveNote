@@ -41,6 +41,7 @@
     "active": "Đang hoạt động"
   },
   "table": {
+    "actions": "Hành động",
     "page_of": "Trang {{currentPage}} của {{totalPages}}",
     "next": "Tiếp theo",
     "previous": "Trước đó",
@@ -114,5 +115,16 @@
     "delete": "Xóa",
     "confirm_title": "Xác nhận xóa",
     "confirm_message": "Bạn có chắc chắn muốn xóa lời nhắn này không?"
+  },
+  "banner": {
+    "title": "Quản lý banner",
+    "id": "ID",
+    "b_title": "Tiêu đề",
+    "image": "Ảnh",
+    "link": "Đường dẫn",
+    "active": "Kích hoạt",
+    "deactivate": "Hủy kích hoạt",
+    "not_activated": "Chưa kích hoạt",
+    "created_at": "Ngày tạo"
   }
 }

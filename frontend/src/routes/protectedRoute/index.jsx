@@ -1,5 +1,6 @@
 import CONSTANTS from '@constants';
 import ROUTES from '@constants/routes';
+import BannerManager from '@pages/Admin/Banner';
 import ContactManager from '@pages/Admin/Contact';
 import Dashboard from '@pages/Admin/Dashboard';
 import LogViewer from '@pages/Admin/LogViewer';
@@ -41,6 +42,11 @@ const protectedRoutes = [
   {
     path: ROUTES.ADMIN.CONTACTS,
     element: <ContactManager />,
+    requiredRole: CONSTANTS.ADMIN,
+  },
+  {
+    path: ROUTES.ADMIN.BANNER,
+    element: <BannerManager />,
     requiredRole: CONSTANTS.ADMIN,
   },
 ];

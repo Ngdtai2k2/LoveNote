@@ -18,6 +18,7 @@ const ROUTES = {
     VOUCHER: '/admin/voucher',
     SHORTENER_PROVIDER: '/admin/shortener-provider',
     CONTACTS: '/admin/contacts',
+    BANNER: '/admin/banner',
   },
   TASKS: '/tasks',
   VERIFY_TOKEN_TASK: '/verify-token/:token',
