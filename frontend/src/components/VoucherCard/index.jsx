@@ -72,21 +72,23 @@ export default function VoucherCard({ voucher, isRedeemed = false, isLoading = f
               </span>
             </Typography>
 
-            <Typography
-              variant="body2"
-              className="text-sm font-semibold text-gray-900 dark:text-gray-200 mb-2"
-            >
-              {t('form:expired_after')}:{' '}
-              {timeLeft ? (
-                timeLeft
-              ) : (
-                <span className="inline-flex items-center gap-1 align-middle">
-                  <span className="w-1.5 h-1.5 rounded-full bg-current animate-bounce [animation-delay:0ms]" />
-                  <span className="w-1.5 h-1.5 rounded-full bg-current animate-bounce [animation-delay:150ms]" />
-                  <span className="w-1.5 h-1.5 rounded-full bg-current animate-bounce [animation-delay:300ms]" />
-                </span>
-              )}
-            </Typography>
+            {voucher?.expires_at && (
+              <Typography
+                variant="body2"
+                className="text-sm font-semibold text-gray-900 dark:text-gray-200 mb-2"
+              >
+                {t('form:expired_after')}:{' '}
+                {timeLeft ? (
+                  timeLeft
+                ) : (
+                  <span className="inline-flex items-center gap-1 align-middle">
+                    <span className="w-1.5 h-1.5 rounded-full bg-current animate-bounce [animation-delay:0ms]" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-current animate-bounce [animation-delay:150ms]" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-current animate-bounce [animation-delay:300ms]" />
+                  </span>
+                )}
+              </Typography>
+            )}
 
             {isRedeemed && voucher.code && (
               <div className="flex items-center gap-2 bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded-md w-fit">
