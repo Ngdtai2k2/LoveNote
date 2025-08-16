@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 
+import helperFunctions from '@helpers';
 import { useTranslation } from 'react-i18next';
 
 import { useDebouncedValue } from '@hooks/useDebouncedValue';
@@ -35,9 +36,7 @@ export default function HeartBeatVisualizer({ data }) {
     modelColor: '#ff3366',
     buttonColor: '#ff99cc',
     musicId: data?.music_id || 4,
-    audioFile: data?.music?.url
-      ? `${import.meta.env.VITE_SERVER_URL}${data.music.url}`
-      : MUSIC_DEMO,
+    audioFile: helperFunctions.renderUrlServer(data?.music?.url) || MUSIC_DEMO,
     audioVolume: 0.5,
   };
 

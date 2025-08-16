@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 import CONSTANTS from '@constants';
 import { profileTabMenu } from '@constants/navigation';
+import helperFunctions from '@helpers';
 import {
   Avatar,
   Card,
@@ -51,7 +52,7 @@ export default function Profile() {
         <div className="grid grid-cols-12 gap-4">
           <div className="md:col-span-4 col-span-12 pr-2">
             <Avatar
-              src={user?.avatar || CONSTANTS.DEFAULT_AVATAR}
+              src={helperFunctions.renderUrlServer(user?.avatar) || CONSTANTS.DEFAULT_AVATAR}
               alt={user?.full_name}
               variant="rounded"
               className="h-56 w-full object-contain"

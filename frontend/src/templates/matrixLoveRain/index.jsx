@@ -45,9 +45,7 @@ export default function MatrixLoveRain({ data }) {
   const [settings, setSettings] = useState(() => ({
     ...defaultSettings,
     ...(data?.configs || {}),
-    audioFile: data?.music?.url
-      ? `${import.meta.env.VITE_SERVER_URL}${data.music.url}`
-      : MUSIC_BACKGROUND_001,
+    audioFile: helperFunctions.renderUrlServer(data?.music?.url) || MUSIC_BACKGROUND_001,
   }));
 
   useDocumentTitle(settings?.title);

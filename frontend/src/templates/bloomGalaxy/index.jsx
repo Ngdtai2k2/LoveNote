@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 
+import helperFunctions from '@helpers';
 import { useTranslation } from 'react-i18next';
 
 import { useDebouncedValue } from '@hooks/useDebouncedValue';
@@ -33,9 +34,7 @@ export default function BloomGalaxy({ data }) {
   const [settings, setSettings] = useState(() => ({
     ...defaultSettings,
     ...data?.configs,
-    heartAudio: data?.music?.url
-      ? `${import.meta.env.VITE_SERVER_URL}${data.music.url}`
-      : MUSIC_DEMO,
+    heartAudio: helperFunctions.renderUrlServer(data?.music?.url) || MUSIC_DEMO,
     heartImages: data?.configs?.images || [IMAGE_DEMO],
   }));
 

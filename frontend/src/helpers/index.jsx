@@ -90,6 +90,11 @@ const helperFunctions = {
       vi: parts[1]?.trim() || '',
     };
   },
+
+  renderUrlServer: (path) => {
+    if (!path) return '';
+    return `${import.meta.env.VITE_SERVER_URL}${path}`;
+  },
 };
 
 export default helperFunctions;

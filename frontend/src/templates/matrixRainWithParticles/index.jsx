@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 
+import helperFunctions from '@helpers';
 import { useTranslation } from 'react-i18next';
 
 import { useDebouncedValue } from '@hooks/useDebouncedValue';
@@ -34,9 +35,7 @@ export default function MatrixRainWithWords({ data }) {
     rainTextColor: '#00ff00',
     rainFontSize: 14,
     fontFamily: 'Tektur',
-    audioFile: data?.music?.url
-      ? `${import.meta.env.VITE_SERVER_URL}${data.music.url}`
-      : MUSIC_DEMO,
+    audioFile: helperFunctions.renderUrlServer(data?.music?.url) || MUSIC_DEMO,
     musicId: data?.music_id || 4,
     audioVolume: 0.5,
   };

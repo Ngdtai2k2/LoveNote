@@ -3,15 +3,12 @@ import React, { createElement, useState } from 'react';
 import CONSTANTS from '@constants';
 import { profileMenu } from '@constants/navigation';
 import ROUTES from '@constants/routes';
+import helperFunctions from '@helpers';
 import {
   ArrowRightEndOnRectangleIcon,
   ChevronDownIcon,
   CurrencyDollarIcon,
-  LockClosedIcon,
   PlusIcon,
-  PowerIcon,
-  ShieldCheckIcon,
-  UserCircleIcon,
 } from '@heroicons/react/24/solid';
 import {
   Avatar,
@@ -64,7 +61,7 @@ export function ProfileMenu() {
             size="sm"
             alt="User Avatar"
             className="border border-gray-300 p-0.5"
-            src={user?.avatar ? user.avatar : CONSTANTS.DEFAULT_AVATAR}
+            src={helperFunctions.renderUrlServer(user?.avatar) || CONSTANTS.DEFAULT_AVATAR}
           />
           <ChevronDownIcon
             strokeWidth={2.5}

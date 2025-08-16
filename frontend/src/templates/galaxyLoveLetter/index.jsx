@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useRef, useState } from 'react';
 
+import helperFunctions from '@helpers';
 import { useTranslation } from 'react-i18next';
 
 import { useDebouncedValue } from '@hooks/useDebouncedValue';
@@ -52,9 +53,7 @@ export default function GalaxyLoveLetter({ data }) {
     colors: ['#ff6b9d', '#4ecdc4', '#ff69b4'],
     images: [IMAGE_DEMO],
     musicId: data?.music_id || 2,
-    audioFile: data?.music?.url
-      ? `${import.meta.env.VITE_SERVER_URL}${data.music.url}`
-      : MUSIC_DEMO,
+    audioFile: helperFunctions.renderUrlServer(data?.music?.url) || MUSIC_DEMO,
     cropToHeart: true,
     audioVolume: 0.5,
   };

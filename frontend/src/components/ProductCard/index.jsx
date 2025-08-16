@@ -1,3 +1,4 @@
+import helperFunctions from '@helpers';
 import { StarIcon } from '@heroicons/react/24/solid';
 import { Button, Card, CardBody, CardHeader, Typography } from '@material-tailwind/react';
 import { useTranslation } from 'react-i18next';
@@ -8,7 +9,11 @@ export function ProductCard({ image, title, description, rating, price, onReadMo
   return (
     <Card className="flex h-full w-full max-w-[20rem] flex-col bg-white shadow-lg dark:bg-gray-900">
       <CardHeader floated={false} color="blue-gray" className="relative">
-        <img src={image} alt={title} className="h-60 w-full object-cover object-center" />
+        <img
+          src={helperFunctions.renderUrlServer(image)}
+          alt={title}
+          className="h-60 w-full object-cover object-center"
+        />
         <div className="to-bg-black-10 absolute inset-0 h-full w-full bg-gradient-to-tr from-transparent via-transparent to-black/60" />
       </CardHeader>
 
@@ -36,7 +41,7 @@ export function ProductCard({ image, title, description, rating, price, onReadMo
             size="lg"
             fullWidth
             onClick={onReadMore}
-            className="rounded bg-gray-600 text-white transition duration-200 hover:bg-gray-800 
+            className="rounded-lg bg-gray-600 text-white transition duration-200 hover:bg-gray-800 
           focus:bg-gray-800 active:bg-gray-800 dark:bg-gray-600 dark:hover:bg-gray-800 
           dark:focus:bg-gray-800 dark:active:bg-gray-800"
           >
