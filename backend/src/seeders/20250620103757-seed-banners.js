@@ -6,8 +6,6 @@ module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.bulkDelete('banners', null, {});
 
-    const SERVER_URL = process.env.SERVER_URL;
-
     await queryInterface.bulkInsert('banners', [
       {
         title: '',
