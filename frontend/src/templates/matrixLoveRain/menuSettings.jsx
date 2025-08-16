@@ -11,7 +11,7 @@ import { useCurrentUser } from '@hooks/useCurrentUser';
 import { useProductBySlug } from '@hooks/useProductBySlug';
 import { useSettingsFormHandler } from '@hooks/useSettingsFormHandler';
 
-import MUSIC_BACKGROUND_001 from '../assets/musics/music_background_001.mp3';
+import MUSIC_DEMO from '../assets/musics/music_background.mp3';
 import FormCheckbox from '../components/formCheckbox';
 import FormItem from '../components/formItem';
 import FormRange from '../components/formRange';
@@ -48,8 +48,8 @@ export default function MenuSettings({ settings, onUpdate }) {
     autoBurst: settings.autoBurst || false,
     audioVolume: settings.audioVolume || 1,
     slug: '',
-    musicId: settings.musicId || 4,
-    audioFile: settings.audioFile || MUSIC_BACKGROUND_001,
+    musicId: settings.musicId || 1,
+    audioFile: settings.audioFile || MUSIC_DEMO,
   };
 
   const { onSubmit, loading, modalOpen, setModalOpen, sitePath, payload } = useSettingsFormHandler({
@@ -239,7 +239,7 @@ export default function MenuSettings({ settings, onUpdate }) {
                       handleChange({ target: { name: 'musicId', value: id } });
                       onUpdate('musicId', id);
                     }}
-                    onUpdate={(url) => onUpdate('audioFile', url || MUSIC_BACKGROUND_001)}
+                    onUpdate={(url) => onUpdate('audioFile', url || MUSIC_DEMO)}
                     required
                   />
 

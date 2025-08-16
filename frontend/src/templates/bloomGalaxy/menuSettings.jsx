@@ -19,7 +19,7 @@ import { useProductBySlug } from '@hooks/useProductBySlug';
 import { useSettingsFormHandler } from '@hooks/useSettingsFormHandler';
 
 import IMAGE_DEMO from '../assets/images/image_galaxy_text.jpg';
-import MUSIC_DEMO from '../assets/musics/music_background_005.mp3';
+import MUSIC_DEMO from '../assets/musics/music_background.mp3';
 import FormArea from '../components/formArea';
 import FormSlug from '../components/formSlug';
 import FormVoucher from '../components/formVoucher';
@@ -50,7 +50,7 @@ export default function MenuSettings({ settings, onUpdate }) {
   const initialValues = {
     ringTexts: arrayToMultilineText(settings.ringTexts),
     heartImages: [],
-    musicId: settings.musicId || 4,
+    musicId: settings.musicId || 1,
     heartAudio: settings.audioFile || '',
     slug: '',
   };

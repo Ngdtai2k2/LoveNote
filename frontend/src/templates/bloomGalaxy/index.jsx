@@ -10,7 +10,7 @@ import BlinkingHint from '@components/BlinkingHint';
 import SiteStatusPage from '@components/SiteStatusPage';
 
 import IMAGE_DEMO from '../assets/images/image_galaxy_text.jpg';
-import MUSIC_DEMO from '../assets/musics/music_background_005.mp3';
+import MUSIC_DEMO from '../assets/musics/music_background.mp3';
 import MenuSettings from './menuSettings.jsx';
 
 export default function BloomGalaxy({ data }) {
@@ -28,7 +28,7 @@ export default function BloomGalaxy({ data }) {
     ringTexts: ['HEARTIFY', 'BLOOM GALAXY', 'HEARTIFY SITE', '2025'],
     heartAudio: MUSIC_DEMO,
     heartImages: [IMAGE_DEMO],
-    musicId: data?.music_id || 4,
+    musicId: data?.music_id || 1,
   };
 
   const [settings, setSettings] = useState(() => ({

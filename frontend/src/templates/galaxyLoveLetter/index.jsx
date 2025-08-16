@@ -11,7 +11,7 @@ import BlinkingHint from '@components/BlinkingHint';
 import SiteStatusPage from '@components/SiteStatusPage';
 
 import IMAGE_DEMO from '../assets/images/image_galaxy_text.jpg';
-import MUSIC_DEMO from '../assets/musics/music_background_002.mp3';
+import MUSIC_DEMO from '../assets/musics/music_background.mp3';
 import MenuSettings from './menuSettings';
 
 const injectTwinkle = () => {
@@ -52,7 +52,7 @@ export default function GalaxyLoveLetter({ data }) {
     icons: ['💖', '❤️', '💕', '💘'],
     colors: ['#ff6b9d', '#4ecdc4', '#ff69b4'],
     images: [IMAGE_DEMO],
-    musicId: data?.music_id || 2,
+    musicId: data?.music_id || 1,
     audioFile: helperFunctions.renderUrlServer(data?.music?.url) || MUSIC_DEMO,
     cropToHeart: true,
     audioVolume: 0.5,

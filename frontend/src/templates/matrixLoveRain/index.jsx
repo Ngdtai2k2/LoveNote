@@ -8,7 +8,7 @@ import { useDocumentTitle } from '@hooks/useDocumentTitle';
 import BlinkingHint from '@components/BlinkingHint';
 import SiteStatusPage from '@components/SiteStatusPage';
 
-import MUSIC_BACKGROUND_001 from '../assets/musics/music_background_001.mp3';
+import MUSIC_DEMO from '../assets/musics/music_background.mp3';
 import MenuSettings from './menuSettings';
 
 export default function MatrixLoveRain({ data }) {
@@ -38,14 +38,14 @@ export default function MatrixLoveRain({ data }) {
     textPerClick: 8,
     autoBurst: false,
     audioVolume: 0.5,
-    audioFile: MUSIC_BACKGROUND_001,
-    musicId: data?.music_id || 4,
+    audioFile: MUSIC_DEMO,
+    musicId: data?.music_id || 1,
   };
 
   const [settings, setSettings] = useState(() => ({
     ...defaultSettings,
     ...(data?.configs || {}),
-    audioFile: helperFunctions.renderUrlServer(data?.music?.url) || MUSIC_BACKGROUND_001,
+    audioFile: helperFunctions.renderUrlServer(data?.music?.url) || MUSIC_DEMO,
   }));
 
   useDocumentTitle(settings?.title);
@@ -221,7 +221,7 @@ export default function MatrixLoveRain({ data }) {
         height={canvasSize.height}
         className="absolute left-0 top-0 z-0"
       />
-      <audio ref={audioRef} src={settings.audioFile || MUSIC_BACKGROUND_001} loop hidden />
+      <audio ref={audioRef} src={settings.audioFile || MUSIC_DEMO} loop hidden />
       <div className="pointer-events-none absolute left-0 top-0 z-10 flex h-full w-full items-center justify-center">
         <h1
           className="font-mono opacity-80"

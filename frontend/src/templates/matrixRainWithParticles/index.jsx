@@ -9,7 +9,7 @@ import { useDocumentTitle } from '@hooks/useDocumentTitle';
 import BlinkingHint from '@components/BlinkingHint';
 import SiteStatusPage from '@components/SiteStatusPage';
 
-import MUSIC_DEMO from '../assets/musics/music_background_005.mp3';
+import MUSIC_DEMO from '../assets/musics/music_background.mp3';
 import MenuSettings from './menuSettings';
 import MatrixRain from './renderEffect/matrixRain';
 import WordDisplay from './renderEffect/wordDisplay';
@@ -36,7 +36,7 @@ export default function MatrixRainWithWords({ data }) {
     rainFontSize: 14,
     fontFamily: 'Tektur',
     audioFile: helperFunctions.renderUrlServer(data?.music?.url) || MUSIC_DEMO,
-    musicId: data?.music_id || 4,
+    musicId: data?.music_id || 1,
     audioVolume: 0.5,
   };
 

@@ -9,7 +9,7 @@ import { useDocumentTitle } from '@hooks/useDocumentTitle';
 import BlinkingHint from '@components/BlinkingHint';
 import SiteStatusPage from '@components/SiteStatusPage';
 
-import MUSIC_DEMO from '../assets/musics/music_background_005.mp3';
+import MUSIC_DEMO from '../assets/musics/music_background.mp3';
 import { createHeartScene } from './createHeartScene';
 import MenuSettings from './menuSettings';
 import heartFragment from './shaders/heartFragment.glsl';
@@ -35,7 +35,7 @@ export default function HeartBeatVisualizer({ data }) {
     snowColor: ['#ff66cc', '#ff99ff', '#ffccff', '#ffffff'],
     modelColor: '#ff3366',
     buttonColor: '#ff99cc',
-    musicId: data?.music_id || 4,
+    musicId: data?.music_id || 1,
     audioFile: helperFunctions.renderUrlServer(data?.music?.url) || MUSIC_DEMO,
     audioVolume: 0.5,
   };

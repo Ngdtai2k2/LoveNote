@@ -12,7 +12,7 @@ import { useCurrentUser } from '@hooks/useCurrentUser';
 import { useProductBySlug } from '@hooks/useProductBySlug';
 import { useSettingsFormHandler } from '@hooks/useSettingsFormHandler';
 
-import MUSIC_DEMO from '../assets/musics/music_background_005.mp3';
+import MUSIC_DEMO from '../assets/musics/music_background.mp3';
 import FormArea from '../components/formArea';
 import FormCheckbox from '../components/formCheckbox';
 import FormItem from '../components/formItem';
@@ -45,7 +45,7 @@ export default function MenuSettings({ settings, onUpdate }) {
     rainTextColor: settings.rainTextColor,
     fontFamily: settings.fontFamily,
     audioVolume: settings.audioVolume,
-    musicId: settings.musicId || 4,
+    musicId: settings.musicId || 1,
     audioFile: settings.audioFile || MUSIC_DEMO,
     slug: '',
   };

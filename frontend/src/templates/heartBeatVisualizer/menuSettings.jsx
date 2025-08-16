@@ -11,7 +11,7 @@ import { useCurrentUser } from '@hooks/useCurrentUser';
 import { useProductBySlug } from '@hooks/useProductBySlug';
 import { useSettingsFormHandler } from '@hooks/useSettingsFormHandler';
 
-import MUSIC_DEMO from '../assets/musics/music_background_005.mp3';
+import MUSIC_DEMO from '../assets/musics/music_background.mp3';
 import ColorSelector from '../components/colorSelector';
 import FormItem from '../components/formItem';
 import FormRange from '../components/formRange';
@@ -36,7 +36,7 @@ export default function MenuSettings({ settings, onUpdate }) {
     heartColor: settings.heartColor,
     snowColor: settings.snowColor,
     modelColor: settings.modelColor,
-    musicId: settings.musicId || 4,
+    musicId: settings.musicId || 1,
     audioFile: settings.audioFile || '',
     buttonColor: settings.buttonColor,
     audioVolume: settings.audioVolume,
