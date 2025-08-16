@@ -40,15 +40,18 @@ export default function ArcMenu() {
       onClick: () => {},
     },
     {
-      icon: (
-        <Badge
-          content={user?.unread_notifications}
-          withBorder
-          className="!absolute !-top-1 !-right-[0.5px]"
-        >
+      icon:
+        !user || user?.unread_notifications === 0 ? (
           <BellIcon className="w-5 h-5" />
-        </Badge>
-      ),
+        ) : (
+          <Badge
+            content={user?.unread_notifications}
+            withBorder
+            className="!absolute !-top-1 !-right-[0.5px]"
+          >
+            <BellIcon className="w-5 h-5" />
+          </Badge>
+        ),
       color: 'bg-yellow-400',
       label: 'notifications',
       onClick: () => {
