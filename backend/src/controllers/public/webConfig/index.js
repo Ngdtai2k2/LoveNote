@@ -1,4 +1,4 @@
-const webConfigServices = require('@services/webConfig');
+const webConfigServices = require('@services/public/webConfig');
 const handleError = require('@utils/handleError');
 const { parseBoolean } = require('@helpers');
 

@@ -3,7 +3,7 @@ require('dotenv').config();
 const jwt = require('jsonwebtoken');
 
 const authService = require('@services/auth');
-const jwtService = require('@services/jwt');
+const jwtService = require('@services/public/jwt');
 const handleError = require('@utils/handleError');
 
 const authController = {

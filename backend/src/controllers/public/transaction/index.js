@@ -1,5 +1,5 @@
 const handleError = require('@utils/handleError');
-const transactionService = require('@services/transaction');
+const transactionService = require('@services/public/transaction');
 
 const transactionController = {
   getByUser: async (req, res) => {

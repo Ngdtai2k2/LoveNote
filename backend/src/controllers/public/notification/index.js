@@ -1,5 +1,5 @@
 const handleError = require('@utils/handleError');
-const notificationService = require('@services/notification');
+const notificationService = require('@services/public/notification');
 
 const notificationController = {
   getByUser: async (req, res) => {

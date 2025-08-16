@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt');
 const { v4: uuidv4 } = require('uuid');
 const crypto = require('crypto');
 
-const jwtService = require('@services/jwt');
+const jwtService = require('@services/public/jwt');
 const { User, PasswordResetCode, Wallet, Notification } = require('@models');
 const emailTemplates = require('@config/emailTemplates');
 

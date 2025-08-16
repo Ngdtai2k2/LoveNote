@@ -1,4 +1,4 @@
-const ShortLinkProviderService = require('@services/shortLinkProvider');
+const ShortLinkProviderService = require('@services/public/shortLinkProvider');
 
 const ShortLinkProviderController = {
   getAllForUser: async (req, res) => {

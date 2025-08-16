@@ -1,4 +1,4 @@
-const userServices = require('@services/user');
+const userServices = require('@services/public/user');
 const handleError = require('@utils/handleError');
 
 const userController = {

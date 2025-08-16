@@ -1,4 +1,4 @@
-const musicService = require('@services/music');
+const musicService = require('@services/public/music');
 const handleError = require('@utils/handleError');
 
 const musicController = {

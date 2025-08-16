@@ -1,5 +1,5 @@
 const handleError = require('@utils/handleError');
-const userSiteServices = require('@services/userSites');
+const userSiteServices = require('@services/public/userSites');
 const { sequelize } = require('@config/connectDB');
 
 const userSitesController = {

@@ -1,4 +1,4 @@
-const productServices = require('@services/product');
+const productServices = require('@services/public/product');
 const handleError = require('@utils/handleError');
 
 const productController = {

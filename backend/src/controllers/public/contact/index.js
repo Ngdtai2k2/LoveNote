@@ -1,5 +1,5 @@
 const handleError = require('@utils/handleError');
-const ContactServices = require('@services/contact');
+const ContactServices = require('@services/public/contact');
 
 const contactController = {
   create: async (req, res) => {

@@ -1,4 +1,4 @@
-const taskService = require('@services/task');
+const taskService = require('@services/public/task');
 const handleError = require('@utils/handleError');
 
 const taskController = {

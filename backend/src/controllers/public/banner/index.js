@@ -1,4 +1,4 @@
-const bannerServices = require('@services/banner');
+const bannerServices = require('@services/public/banner');
 const handleError = require('@utils/handleError');
 
 const bannerController = {

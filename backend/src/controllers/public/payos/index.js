@@ -1,5 +1,5 @@
 const handleError = require('@utils/handleError');
-const payosService = require('@services/payos');
+const payosService = require('@services/public/payos');
 
 const payosController = {
   createPaymentLink: async (req, res) => {

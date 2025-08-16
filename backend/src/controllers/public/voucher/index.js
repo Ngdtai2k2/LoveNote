@@ -1,4 +1,4 @@
-const userService = require('@services/voucher');
+const userService = require('@services/public/voucher');
 const { sequelize } = require('@config/connectDB');
 const handleError = require('@utils/handleError');
 
